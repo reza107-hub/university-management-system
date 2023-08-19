@@ -22,14 +22,14 @@ const Profile = ({ Menu, Transition, Fragment }) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-primary text-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item>
               {({ active }) => (
                 <a
                   href="#"
                   className={`${
-                    active ? "bg-gray-100" : ""
-                  } block px-4 py-2 text-sm text-gray-700`}
+                    active ? "bg-gray-100 text-primary" : ""
+                  } block px-4 py-2 text-sm`}
                 >
                   Your Profile
                 </a>
@@ -40,8 +40,8 @@ const Profile = ({ Menu, Transition, Fragment }) => {
                 <a
                   href="#"
                   className={`${
-                    active ? "bg-gray-100" : ""
-                  } block px-4 py-2 text-sm text-gray-700`}
+                    active ? "bg-gray-100 text-primary" : ""
+                  } block px-4 py-2 text-sm`}
                 >
                   Settings
                 </a>
@@ -52,8 +52,8 @@ const Profile = ({ Menu, Transition, Fragment }) => {
                 <a
                   href="#"
                   className={`${
-                    active ? "bg-gray-100" : ""
-                  } block px-4 py-2 text-sm text-gray-700`}
+                    active ? "bg-gray-100 text-primary" : ""
+                  } block px-4 py-2 text-sm`}
                 >
                   Sign out
                 </a>

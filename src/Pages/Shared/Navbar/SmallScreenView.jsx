@@ -6,7 +6,7 @@ const SmallScreenView = ({ navigation, Disclosure }) => {
           key={item.name}
           as="a"
           href={item.href}
-          className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+          className="text-primary hover:bg-primary hover:text-white block rounded-md px-3 py-2 text-base font-bold"
         >
           {item.name}
         </Disclosure.Button>
