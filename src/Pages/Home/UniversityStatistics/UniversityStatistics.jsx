@@ -24,7 +24,7 @@ const AnimatedNumber = ({ value }) => {
 
 const UniversityStatistics = () => {
   return (
-    <div className="flex items-center justify-center h-screen my-10 bg-primary">
+    <div className="flex items-center justify-center h-[500px] my-10 bg-primary">
       <div className="flex flex-col items-center text-white">
         <CiBank className="h-[50px] w-[50px]" />
         <div className="text-center">
