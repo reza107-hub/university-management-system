@@ -1,54 +1,9 @@
-/* 
-.swiper {
-    width: 100%;
-    height: 100%;
+.slide-content {
+    opacity: 0; /* Start with opacity 0 */
+    transition: opacity 1.8s ease-in-out; /* Define the transition */
   }
   
-  /* .swiper-slide {
-    position: relative; /* Add this */
-    /* text-align: center;
-    font-size: 18px;
-    background: #fff; */
-  
-    /* Center slide text vertically */
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-  
-  /* .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  } */ 
-  
-  /* Add styles for slide content */
-  /* .slide-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  } */
-  
-  /* .slide-text {
-    font-size: 24px;
-    font-weight: bold;
-  } */
-/*   
-  .slide-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  .slide-content.active {
+    opacity: 1; /* When active, change opacity to 1 */
   }
-   */
-
+  
