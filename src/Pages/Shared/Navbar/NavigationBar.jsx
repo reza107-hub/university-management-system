@@ -10,7 +10,7 @@ import Profile from "./Profile";
 
 const NavigationBar = () => {
   return (
-    <Disclosure as="nav" className="bg-primary">
+    <Disclosure as="nav" className="bg-gray-200">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
