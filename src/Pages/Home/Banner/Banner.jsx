@@ -1,16 +1,30 @@
 // import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/mousewheel';
-import 'swiper/css/keyboard';
-import './BannerStyle.css';
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Keyboard,
+  Autoplay,
+} from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/mousewheel";
+import "swiper/css/keyboard";
+import "./BannerStyle.css";
+import { useEffect } from "react";
 
 const Banner = () => {
+  useEffect(() => {
+    // Add the 'active' class to the content container of the first slide when the component mounts
+    const firstSlideContent = document.querySelector('.slide-content');
+    if (firstSlideContent) {
+      firstSlideContent.classList.add('active');
+    }
+  }, []);
   return (
-    <div className='h-screen'>
+    <div className="h-screen">
       <Swiper
         cssMode={true}
         navigation={true}
@@ -18,11 +32,21 @@ const Banner = () => {
         mousewheel={true}
         keyboard={true}
         autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard ,Autoplay]}
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
         className="mySwiper"
+        onSlideChange={(swiper) => {
+          // Remove the 'active' class from all content containers
+          document.querySelectorAll(".slide-content").forEach((content) => {
+            content.classList.remove("active");
+          });
+
+          // Add the 'active' class to the content container of the current slide
+          const currentSlide = swiper.slides[swiper.activeIndex];
+          currentSlide.querySelector(".slide-content").classList.add("active");
+        }}
       >
         <SwiperSlide>
           <div className="relative h-screen">
@@ -31,14 +55,18 @@ const Banner = () => {
               alt=""
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
-              <h2 className="md:text-5xl text-2xl font-black font-raleway">
-              Welcome to Sylhet Metropolitan University!
-              </h2>
-              <p className="md:text-lg mt-4 font-sans">
-              Empowering Minds, Building Futures
-              </p>
-              <button className='m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm'>Get Admission</button>
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center  text-white">
+              <div className="slide-content transition-opacity text-center ">
+                <h2 className="md:text-5xl text-2xl font-black font-raleway">
+                  Welcome to Sylhet Metropolitan University!
+                </h2>
+                <p className="md:text-lg mt-4 font-sans">
+                  Empowering Minds, Building Futures
+                </p>
+                <button className="m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm">
+                  Get Admission
+                </button>
+              </div>
             </div>
           </div>
         </SwiperSlide>
@@ -50,13 +78,17 @@ const Banner = () => {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
-              <h2 className="md:text-5xl text-2xl font-black font-raleway">
-              Join a Community of Learning
-              </h2>
-              <p className="md:text-lg mt-4 font-sans">
-              Transforming Dreams into Reality
-              </p>
-              <button className='m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm'>Get Admission</button>
+              <div className="slide-content transition-opacity text-center">
+                <h2 className="md:text-5xl text-2xl font-black font-raleway">
+                  Join a Community of Learning
+                </h2>
+                <p className="md:text-lg mt-4 font-sans">
+                  Transforming Dreams into Reality
+                </p>
+                <button className="m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm">
+                  Get Admission
+                </button>
+              </div>
             </div>
           </div>
         </SwiperSlide>
@@ -68,13 +100,17 @@ const Banner = () => {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
-              <h2 className="md:text-5xl text-2xl font-black font-raleway">
-              Explore a World of Opportunities
-              </h2>
-              <p className="md:text-lg mt-4 font-sans">
-              Choose Sylhet Metropolitan University
-              </p>
-              <button className='m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm'>Get Admission</button>
+              <div className="slide-content transition-opacity text-center">
+                <h2 className="md:text-5xl text-2xl font-black font-raleway">
+                  Explore a World of Opportunities
+                </h2>
+                <p className="md:text-lg mt-4 font-sans">
+                  Choose Sylhet Metropolitan University
+                </p>
+                <button className="m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm">
+                  Get Admission
+                </button>
+              </div>
             </div>
           </div>
         </SwiperSlide>
@@ -86,18 +122,20 @@ const Banner = () => {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
-              <h2 className="md:text-5xl text-2xl font-black font-raleway">
-              Discover Your Opportunities
-              </h2>
-              <p className="md:text-lg mt-4 font-sans">
-              Admission Season is Here
-              </p>
-              <button className='m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm'>Get Admission</button>
+              <div className="slide-content transition-opacity text-center">
+                <h2 className="md:text-5xl text-2xl font-black font-raleway">
+                  Discover Your Opportunities
+                </h2>
+                <p className="md:text-lg mt-4 font-sans">
+                  Admission Season is Here
+                </p>
+                <button className="m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm">
+                  Get Admission
+                </button>
+              </div>
             </div>
           </div>
         </SwiperSlide>
-       
-       
       </Swiper>
     </div>
   );
