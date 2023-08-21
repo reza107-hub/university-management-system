@@ -1,9 +1,43 @@
-.slide-content {
-    opacity: 0; /* Start with opacity 0 */
-    transition: opacity 1.8s ease-in-out; /* Define the transition */
+.slide-animation {
+  animation-duration: 1.8s;
+  animation-fill-mode: both;
+}
+
+.slide-animation-left {
+  animation-name: slideFromLeft;
+}
+
+.slide-animation-right {
+  animation-name: slideFromRight;
+}
+
+.slide-animation-down {
+  animation-name: slideFromBottom;
+}
+
+@keyframes slideFromLeft {
+  from {
+    transform: translateX(-150%);
   }
-  
-  .slide-content.active {
-    opacity: 1; /* When active, change opacity to 1 */
+  to {
+    transform: translateX(0);
   }
-  
+}
+
+@keyframes slideFromRight {
+  from {
+    transform: translateX(150%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromBottom {
+  from {
+    transform: translateY(150%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
