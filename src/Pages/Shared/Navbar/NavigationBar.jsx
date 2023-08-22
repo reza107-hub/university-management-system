@@ -44,7 +44,7 @@ const NavigationBar = () => {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="sm:hidden bg-primary">
             {/* responsive view */}
             <SmallScreenView navigation={navigation} Disclosure={Disclosure} />
           </Disclosure.Panel>
