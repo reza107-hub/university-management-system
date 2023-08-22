@@ -1,11 +1,8 @@
+import metro_logo from '../../../assets/metro logo.png'
 const NavIcon = () => {
   return (
     <div className="flex flex-shrink-0 items-center">
-      <img
-        className="h-8 w-auto"
-        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-        alt="Your Company"
-      />
+      <img className="h-10" src={metro_logo} alt="Your Company" />
     </div>
   );
 };

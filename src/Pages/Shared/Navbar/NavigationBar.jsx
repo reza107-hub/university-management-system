@@ -7,10 +7,11 @@ import BigScreenView from "./BigScreenView";
 import SmallScreenView from "./SmallScreenView";
 import MenuIcon from "./MenuIcon";
 import Profile from "./Profile";
+import { Link } from "react-router-dom";
 
 const NavigationBar = () => {
   return (
-    <Disclosure as="nav" className="bg-primary">
+    <Disclosure as="nav" className="fixed z-50 w-full">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -24,7 +25,9 @@ const NavigationBar = () => {
               />
               <div className="flex flex-1 sm:flex-initial items-center justify-center sm:items-stretch sm:justify-start">
                 {/* Nav icon image*/}
-                <NavIcon />
+                <Link to={"/"}>
+                  <NavIcon />
+                </Link>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 {/* for big screen view */}
@@ -41,7 +44,7 @@ const NavigationBar = () => {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="sm:hidden bg-primary">
             {/* responsive view */}
             <SmallScreenView navigation={navigation} Disclosure={Disclosure} />
           </Disclosure.Panel>
