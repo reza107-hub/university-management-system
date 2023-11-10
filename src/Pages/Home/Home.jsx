@@ -1,5 +1,4 @@
 import Banner from "./Banner/Banner";
-import Test from "./Test/Test";
 import UniversityStatistics from "./UniversityStatistics/UniversityStatistics";
 
 const Home = () => {
@@ -7,7 +6,6 @@ const Home = () => {
     <>
       <Banner />
       <UniversityStatistics />
-      <Test />
     </>
   );
 };
