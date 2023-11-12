@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "./Login.css";
+import "./Register.css";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import GoogleSignIn from "../Shared/GoogleSignIn/GoogleSignIn";
 import Swal from "sweetalert2";
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
   const { signIn } = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -22,7 +22,7 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
-        navigate('/')
+        navigate("/");
       })
       .catch((err) => {
         Swal.fire({
@@ -84,13 +84,13 @@ const Login = () => {
         </div>
         <GoogleSignIn />
         <p className="text-center text-xs text-red-600">
-          Do not have an account?
+          Already have an account?
           <Link
             rel="noopener noreferrer"
-            to={"/register"}
+            to={"/login"}
             className="hover:underline pl-4"
           >
-            Sign up
+            Log In
           </Link>
         </p>
       </div>
@@ -98,4 +98,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
