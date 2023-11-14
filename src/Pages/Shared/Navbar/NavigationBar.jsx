@@ -8,9 +8,11 @@ import SmallScreenView from "./SmallScreenView";
 import MenuIcon from "./MenuIcon";
 import Profile from "./Profile";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
 const NavigationBar = () => {
-  const isLogin = false;
+
+  const {user} = useAuth()
 
   return (
     <Disclosure as="nav" className="fixed z-50 w-full">
@@ -37,15 +39,21 @@ const NavigationBar = () => {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
-                {isLogin ? (
+                {user?.email ? (
                   <Profile
                     Menu={Menu}
                     Transition={Transition}
                     Fragment={Fragment}
+                    user={user}
                   />
                 ) : (
                   <>
-                    <Link to={"/login"} className="px-4 py-2 text-center hover:bg-gray-100 hover:text-primary cursor-pointer text-white font-bold rounded-md">Login</Link>
+                    <Link
+                      to={"/login"}
+                      className="px-4 py-2 text-center hover:bg-gray-100 hover:text-primary cursor-pointer text-white font-bold rounded-md"
+                    >
+                      Login
+                    </Link>
                   </>
                 )}
               </div>
