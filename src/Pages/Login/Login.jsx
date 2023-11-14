@@ -87,7 +87,7 @@ const Login = () => {
           Do not have an account?
           <Link
             rel="noopener noreferrer"
-            to={"/signup"}
+            to={"/register"}
             className="hover:underline pl-4"
           >
             Sign up

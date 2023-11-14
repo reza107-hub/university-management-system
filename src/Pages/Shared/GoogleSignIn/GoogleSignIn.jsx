@@ -15,20 +15,15 @@ const GoogleSignIn = () => {
           email: result.user?.email,
           image: result.user?.photoURL,
         };
-        axios
-          .post(
-            "",
-            saveUser
-          )
-          .then((res) => {
-            if (res.data.insertedId) {
-              Swal.fire({
-                title: "Login Successful",
-                icon: "success",
-                confirmButtonText: "OK",
-              });
-            }
-          });
+        axios.post("http://localhost:5000/users", saveUser).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              title: "Login Successful",
+              icon: "success",
+              confirmButtonText: "OK",
+            });
+          }
+        });
           navigate('/')
       })
       .catch((err) => {

@@ -9,7 +9,7 @@ const useAdmin = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        ` https://summer-camp-school-server-roan.vercel.app/users/admin/${user?.email}`
+        `http://localhost:5000/users/admin/${user?.email}`
       );
       return res.json();
     },
