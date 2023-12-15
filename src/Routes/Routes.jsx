@@ -5,6 +5,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Regester/Register";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import GetAdmission from "../Pages/GetAdmission/GetAdmission";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,12 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      
     ],
+  },
+  {
+    path: "/getAdmission",
+    element: <GetAdmission />,
   },
   {
     path: "/login",

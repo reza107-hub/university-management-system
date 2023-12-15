@@ -13,6 +13,7 @@ import "swiper/css/mousewheel";
 import "swiper/css/keyboard";
 import "./BannerStyle.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
@@ -98,6 +99,7 @@ const Banner = () => {
                   >
                     {c?.sub_title}
                   </p>
+                  <Link to='/getAdmission'>
                   <button
                     className={`m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm ${
                       activeSlideIndex === i
@@ -107,6 +109,7 @@ const Banner = () => {
                   >
                     Get Admission
                   </button>
+                  </Link>
                 </div>
               </div>
             </div>
