@@ -1,10 +1,14 @@
+import AdmissionBanner from "./AdmissionBanner";
+import ScholarshipsAndAid from "./ScholarshipsAndAid";
 
 
 const GetAdmission = () => {
     return (
-        <div>
-            hellow bhai
-        </div>
+        <>
+            <AdmissionBanner/>
+            <ScholarshipsAndAid />
+
+        </>
     );
 };
 
