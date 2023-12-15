@@ -55,9 +55,11 @@ const AdmissionBanner = () => {
               </button>
             </Link>
             <span className="font-bold w-4 text-white h-full">|</span>
-            <button className="hover:text-slate-400 text-white font-bold py-2 px-4 rounded">
-              Get Admission
+           <Link to='/getAdmission/admission-form'>
+           <button className="hover:text-slate-400 text-white font-bold py-2 px-4 rounded">
+              Admission Form
             </button>
+           </Link>
           </div>
         </div>
       </div>

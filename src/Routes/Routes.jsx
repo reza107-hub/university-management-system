@@ -6,6 +6,7 @@ import Register from "../Pages/Regester/Register";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import GetAdmission from "../Pages/GetAdmission/GetAdmission";
+import AdmissionForm from "../Pages/GetAdmission/AdmissionForm";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,10 @@ const router = createBrowserRouter([
       },
     ],
   },
-  
+  {
+    path: "/getAdmission/admission-form",
+    element: <AdmissionForm />,
+  },
   {
     path: "/login",
     element: <Login />,
