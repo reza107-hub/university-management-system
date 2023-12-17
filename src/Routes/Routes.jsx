@@ -7,6 +7,11 @@ import Dashboard from "../Layout/Dashboard/Dashboard";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import GetAdmission from "../Pages/GetAdmission/GetAdmission";
 import AdmissionForm from "../Pages/GetAdmission/AdmissionForm";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoutes from "./AdminRoute";
+import UserProfile from "../Pages/Dashboard/Profile/UserProfile";
+import AdmissionRequests from "../Pages/AdmissionRequests/AdmissionRequests";
+import AdmissionDetails from "../Pages/AdmissionDetails/AdmissionDetails";
 
 const router = createBrowserRouter([
   {
@@ -19,13 +24,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/getAdmission",
-        element: <GetAdmission />,
+        element: (
+          <PrivateRoute>
+            <GetAdmission />
+          </PrivateRoute>
+        ),
       },
     ],
   },
   {
     path: "/getAdmission/admission-form",
-    element: <AdmissionForm />,
+    element: (
+      <PrivateRoute>
+        <AdmissionForm />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/login",
@@ -37,11 +50,49 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/users",
-        element: <ManageUsers />,
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <ManageUsers />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/admission-requests-lists",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <AdmissionRequests />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/admission-requests-lists/details/:email",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <AdmissionDetails />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/profile",
+        element: (
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        ),
       },
     ],
   },

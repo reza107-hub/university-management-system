@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./admissionBanner.css";
 import { Tab } from "@headlessui/react";
 import { FaCogs } from "react-icons/fa";
@@ -12,7 +11,7 @@ const programData = [
       { type: "Co-curricular Activities Fee (Per Semester)", amount: 500 },
       { type: "Campus Activities Fee (Per Month)", amount: 1000 },
       { type: "Monthly Installment of Credit fees", amount: 5000 },
-     
+
     ],
   },
   {
@@ -37,30 +36,17 @@ const programData = [
       { type: "Monthly Installment of Credit fees", amount: 6000 },
     ],
   },
- 
+
 ]
 
 const AdmissionBanner = () => {
   return (
     <>
       <div className="banner-container">
-        <div className="items-center text-center bg-slate-600 bg-opacity-50 p-9 rounded-md space-y-2">
-          <h2 className="text-3xl text-white font-bold">
+        <div className="z-50 items-center text-center bg-primary bg-opacity-70 p-9 rounded-md space-y-2">
+          <h2 className="text-3xl text-white font-bold text-opacity-100">
             Academic Information
           </h2>
-          <div className="button-container">
-            <Link to="/">
-              <button className="hover:text-slate-400 text-white font-bold py-2 px-4">
-                Home
-              </button>
-            </Link>
-            <span className="font-bold w-4 text-white h-full">|</span>
-           <Link to='/getAdmission/admission-form'>
-           <button className="hover:text-slate-400 text-white font-bold py-2 px-4 rounded">
-              Admission Form
-            </button>
-           </Link>
-          </div>
         </div>
       </div>
       <div className="mx-auto w-[70%] mt-8">
