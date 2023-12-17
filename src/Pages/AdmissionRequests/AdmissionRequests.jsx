@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import AdmissionRequestsLists from "../../Components/AdmissionRequestsLists/AdmissionRequestsLists";
 
 const AdmissionRequests = () => {
-  const [lists, refetch] = AdmissionRequestsLists();
+  const [lists] = AdmissionRequestsLists();
   return (
     <div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
