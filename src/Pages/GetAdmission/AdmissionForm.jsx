@@ -2,17 +2,81 @@
 
 import { useForm } from "react-hook-form";
 import "./AdmissionForm.css";
+import GetHostUrl from "../../Components/GetHostUrl/GetHostUrl";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const AdmissionForm = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  let batchNumber;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // Handle form submission logic here
-    console.log(data);
+  const onSubmit = async (data) => {
+    const imageUrl = await GetHostUrl(data.profileImage[0]);
+    const sscCertificateUrl = await GetHostUrl(data.sscCertificate[0]);
+    const hscCertificateUrl = await GetHostUrl(data.hscCertificate[0]);
+
+    if (data?.department === "CSE") {
+      batchNumber = 61;
+    } else if (data?.department === "SE") {
+      batchNumber = 11;
+    }
+
+    const admissionRequestData = {
+      name: {
+        firstName: data.firstName,
+        lastName: data.lastName,
+      },
+      fatherName: data.fatherName,
+      fatherOccupation: data.fatherOccupation,
+      motherName: data.motherName,
+      motherOccupation: data.motherOccupation,
+      presentGuardianName: data.presentGuardianName,
+      presentGuardianContact: data.presentGuardianContact,
+      dateOfBirth: data.dateOfBirth,
+      gender: data.gender,
+      contactNumber: data.contactNumber,
+      email: data.email,
+      presentAddress: data.presentAddress,
+      permanentAddress: data.permanentAddress,
+      bloodGroup: data.bloodGroup,
+      age: data.age,
+      department: data.department,
+      batchNumber,
+      nationality: data.nationality,
+      yearOfRegistration: data?.yearOfRegistration,
+      image: imageUrl,
+      sscCertificate: sscCertificateUrl,
+      hscCertificate: hscCertificateUrl,
+    };
+
+    axios
+      .post("http://localhost:5000/admission-request", admissionRequestData)
+      .then((res) => {
+        console.log(res);
+        if (res.data) {
+          Swal.fire({
+            title: res.data.message,
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: `${err.message}`,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      });
   };
 
   return (
@@ -31,11 +95,11 @@ const AdmissionForm = () => {
                 <input
                   {...register("firstName", { required: true })}
                   type="text"
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="firstName"
                 />
                 {errors.firstName && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -48,11 +112,11 @@ const AdmissionForm = () => {
                 <input
                   {...register("lastName", { required: true })}
                   type="text"
-                  className="form-control rounded-md w-full"
+                  className="form-control rounded-md w-full text-black"
                   id="lastName"
                 />
                 {errors.lastName && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -67,11 +131,11 @@ const AdmissionForm = () => {
                 <input
                   {...register("fatherName", { required: true })}
                   type="text"
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="fatherName"
                 />
                 {errors.fatherName && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -87,11 +151,11 @@ const AdmissionForm = () => {
                 <input
                   {...register("fatherOccupation", { required: true })}
                   type="text"
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="fatherOccupation"
                 />
                 {errors.fatherOccupation && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -106,11 +170,11 @@ const AdmissionForm = () => {
                 <input
                   {...register("motherName", { required: true })}
                   type="text"
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="motherName"
                 />
                 {errors.motherName && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -126,11 +190,11 @@ const AdmissionForm = () => {
                 <input
                   {...register("motherOccupation", { required: true })}
                   type="text"
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="motherOccupation"
                 />
                 {errors.motherOccupation && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -148,11 +212,11 @@ const AdmissionForm = () => {
                 <input
                   {...register("presentGuardianName", { required: true })}
                   type="text"
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="presentGuardianName"
                 />
                 {errors.presentGuardianName && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -166,13 +230,16 @@ const AdmissionForm = () => {
               </label>
               <div className="">
                 <input
-                  {...register("presentGuardianContact", { required: true })}
-                  type="text"
-                  className="form-control w-full rounded-md"
+                  {...register("presentGuardianContact", {
+                    required: true,
+                    pattern: /^[0-9]*$/,
+                  })}
+                  type="tel"
+                  className="form-control w-full rounded-md text-black"
                   id="presentGuardianContact"
                 />
                 {errors.presentGuardianContact && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -186,11 +253,11 @@ const AdmissionForm = () => {
                 <input
                   {...register("dateOfBirth", { required: true })}
                   type="date"
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="dateOfBirth"
                 />
                 {errors.dateOfBirth && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -201,15 +268,14 @@ const AdmissionForm = () => {
               <div className="">
                 <select
                   {...register("gender", { required: true })}
-                  className="form-select w-full"
+                  className="form-select w-full text-black"
                   id="gender"
                 >
                   <option value="male">Male</option>
                   <option value="female">Female</option>
-                  <option value="other">Other</option>
                 </select>
                 {errors.gender && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -225,13 +291,16 @@ const AdmissionForm = () => {
               </label>
               <div className="">
                 <input
-                  {...register("contactNumber", { required: true })}
+                  {...register("contactNumber", {
+                    required: true,
+                    pattern: /^[0-9]*$/,
+                  })}
                   type="tel"
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="contactNumber"
                 />
                 {errors.contactNumber && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -246,12 +315,14 @@ const AdmissionForm = () => {
                     required: true,
                     pattern: /^\S+@\S+$/i,
                   })}
+                  readOnly
+                  defaultValue={user?.email}
                   type="email"
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="email"
                 />
                 {errors.email && (
-                  <span className="text-danger">Invalid email address</span>
+                  <span className="text-red-700">Invalid email address</span>
                 )}
               </div>
             </div>
@@ -268,11 +339,11 @@ const AdmissionForm = () => {
               <div className="">
                 <textarea
                   {...register("presentAddress", { required: true })}
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="presentAddress"
                 ></textarea>
                 {errors.presentAddress && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -287,11 +358,11 @@ const AdmissionForm = () => {
               <div className="">
                 <textarea
                   {...register("permanentAddress", { required: true })}
-                  className="form-control w-full rounded-md"
+                  className="form-control w-full rounded-md text-black"
                   id="permanentAddress"
                 ></textarea>
                 {errors.permanentAddress && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -305,7 +376,7 @@ const AdmissionForm = () => {
               <div className="">
                 <select
                   {...register("bloodGroup", { required: true })}
-                  className="form-select w-full"
+                  className="form-select w-full text-black"
                   id="bloodGroup"
                 >
                   <option value="A+">A+</option>
@@ -318,7 +389,7 @@ const AdmissionForm = () => {
                   <option value="AB-">AB-</option>
                 </select>
                 {errors.bloodGroup && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -331,11 +402,11 @@ const AdmissionForm = () => {
                 <input
                   {...register("age", { required: true })}
                   type="number"
-                  className="form-control w-full  rounded-md"
+                  className="form-control w-full  rounded-md text-black"
                   id="age"
                 />
                 {errors.age && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -349,15 +420,15 @@ const AdmissionForm = () => {
               <div className="">
                 <select
                   {...register("department", { required: true })}
-                  className="form-select w-full"
+                  className="form-select w-full text-black"
                   id="department"
                 >
-                  <option value="computerScience">Computer Science</option>
-                  <option value="biology">Biology</option>
+                  <option value="CSE">CSE</option>
+                  <option value="SE">SE</option>
                   {/* Add more options as needed */}
                 </select>
                 {errors.department && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
@@ -372,58 +443,53 @@ const AdmissionForm = () => {
               <div className="">
                 <select
                   {...register("yearOfRegistration", { required: true })}
-                  className="form-select w-full"
+                  className="form-select w-full text-black"
                   id="yearOfRegistration"
                 >
-                  <option value="2022">2022</option>
-                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
                   {/* Add more options as needed */}
                 </select>
                 {errors.yearOfRegistration && (
-                  <span className="text-danger">This field is required</span>
+                  <span className="text-red-700">This field is required</span>
                 )}
               </div>
             </div>
           </div>
           {/* --------------------- */}
           <div className="flex justify-center gap-7">
-          <div className="mb-3 row w-[20%]">
-            <label htmlFor="nationality" className="col-sm-2 col-form-label">
-              Nationality
-            </label>
-            <div className="col-sm-10">
-              <select
-                {...register("nationality", { required: true })}
-                className="form-select w-full"
-                id="nationality"
-              >
-                <option value="us">United States</option>
-                <option value="ca">Bangladesh</option>
-                <option value="uk">United Kingdom</option>
-                
-              </select>
-              {errors.nationality && (
-                <span className="text-danger">This field is required</span>
-              )}
+            <div className="mb-3 row w-[20%]">
+              <label htmlFor="nationality" className="col-sm-2 col-form-label">
+                Nationality
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  {...register("nationality", { required: true })}
+                  className="form-select w-full text-black"
+                  id="nationality"
+                ></input>
+                {errors.nationality && (
+                  <span className="text-red-700">This field is required</span>
+                )}
+              </div>
             </div>
-          </div>
 
-          <div className="mb-3 row w-[20%]">
-            <label htmlFor="profileImage" className="col-sm-2 col-form-label">
-              Profile Image
-            </label>
-            <div className="col-sm-10">
-              <input
-                {...register("profileImage", { required: true })}
-                type="file"
-                className="form-control w-full"
-                id="profileImage"
-              />
-              {errors.profileImage && (
-                <span className="text-danger">This field is required</span>
-              )}
+            <div className="mb-3 row w-[20%]">
+              <label htmlFor="profileImage" className="col-sm-2 col-form-label">
+                Profile Image
+              </label>
+              <div className="col-sm-10">
+                <input
+                  {...register("profileImage", { required: true })}
+                  type="file"
+                  className="form-control w-full"
+                  id="profileImage"
+                />
+                {errors.profileImage && (
+                  <span className="text-red-700">This field is required</span>
+                )}
+              </div>
             </div>
-          </div>
           </div>
 
           {/* ------------ */}
