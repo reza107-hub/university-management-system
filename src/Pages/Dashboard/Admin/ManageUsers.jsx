@@ -28,6 +28,24 @@ const ManageUsers = () => {
         }
       });
   };
+  const handleDeleteAdmin = (user) => {
+    fetch(`http://localhost:5000/users/remove/admin/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.name} is remove from Admin!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
 
   return (
     <div>
@@ -73,7 +91,10 @@ const ManageUsers = () => {
                 Role
               </th>
               <th scope="col" className="px-6 py-3">
-                Action
+                makeAdmin
+              </th>
+              <th scope="col" className="px-6 py-3">
+                deleteAdmin
               </th>
             </tr>
           </thead>
@@ -102,6 +123,7 @@ const ManageUsers = () => {
                   {user?.role === "admin" ? (
                     "admin"
                   ) : (
+                
                     <button
                       disabled={user?.role}
                       onClick={() => handleMakeAdmin(user)}
@@ -109,6 +131,23 @@ const ManageUsers = () => {
                     >
                       Make Admin
                     </button>
+                    
+                 
+                  )}
+                </td>
+                <td className="px-6 py-4">
+                  {user?.role === "admin" ? (
+                     <button
+                     onClick={() => handleDeleteAdmin(user)}
+                     className={`btn-primary`}
+                   >
+                     Delete Admin
+                   </button>
+                  ) : (
+                
+                   ""
+                    
+                 
                   )}
                 </td>
               </tr>
