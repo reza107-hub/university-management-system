@@ -15,7 +15,7 @@ const NavigationBar = () => {
   const {user} = useAuth()
 
   return (
-    <Disclosure as="nav" className="fixed z-50 w-full">
+    <Disclosure as="nav" className="fixed bg-primary bg-opacity-40 z-50 w-full">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

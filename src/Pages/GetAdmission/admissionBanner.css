@@ -8,8 +8,19 @@
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
+
+.banner-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity (0 to 1) for darkness */
+}
+
 
 .banner-button {
     margin: 0 10px; /* Adjust spacing between buttons */
