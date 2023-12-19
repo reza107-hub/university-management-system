@@ -13,6 +13,8 @@ import UserProfile from "../Pages/Dashboard/Profile/UserProfile";
 import AdmissionRequests from "../Pages/AdmissionRequests/AdmissionRequests";
 import AdmissionDetails from "../Pages/AdmissionDetails/AdmissionDetails";
 
+import AdminList from "../Pages/Dashboard/Admin/AdminList";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -72,6 +74,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <AdmissionRequests />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/admins",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <AdminList />
             </AdminRoutes>
           </PrivateRoute>
         ),

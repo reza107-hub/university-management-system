@@ -47,6 +47,7 @@ const Register = () => {
             name: data.name,
             email: data.email,
             image: imageUrl,
+            isDeleted:false
           };
           axios.post("http://localhost:5000/users", saveUser).then((res) => {
             if (res.data.insertedId) {

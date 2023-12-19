@@ -14,6 +14,7 @@ const GoogleSignIn = () => {
           name: result.user?.displayName,
           email: result.user?.email,
           image: result.user?.photoURL,
+          isDeleted:false
         };
         axios.post("http://localhost:5000/users", saveUser).then((res) => {
           if (res.data.insertedId) {
