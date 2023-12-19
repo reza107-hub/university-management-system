@@ -3,6 +3,7 @@ import useAuth from "../../../Hooks/useAuth";
 import "./GoogleSignIn.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import SaveUser from "../../../Components/SaveUser/SaveUser";
 
 const GoogleSignIn = () => {
   const navigate = useNavigate()
@@ -10,12 +11,8 @@ const GoogleSignIn = () => {
   const handleGoogleLogin = () => {
     googleSignIn()
       .then((result) => {
-        const saveUser = {
-          name: result.user?.displayName,
-          email: result.user?.email,
-          image: result.user?.photoURL,
-          isDeleted:false
-        };
+        console.log(result?.user);
+        const saveUser = SaveUser(result?.user)
         axios.post("http://localhost:5000/users", saveUser).then((res) => {
           if (res.data.insertedId) {
             Swal.fire({
