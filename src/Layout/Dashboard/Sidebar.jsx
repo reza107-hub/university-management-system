@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import useAdmin from "../../Hooks/useAdmin";
+// import useAdmin from "../../Hooks/useAdmin";
 import { FaHome, FaRegUser } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 
 const Sidebar = () => {
-  const [isAdmin] = useAdmin();
+  const isAdmin = true
   const { logOut } = useAuth();
 
   const handleLogOut = () => {
@@ -33,7 +33,7 @@ const Sidebar = () => {
         </li>
 
         <li>
-          {isAdmin?.admin ? (
+          {isAdmin? (
             <Link
               to={"/dashboard/users"}
               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"

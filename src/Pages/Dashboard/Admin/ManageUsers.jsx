@@ -1,32 +1,55 @@
-import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import UserList from "../../../Components/UserList/UserList";
+import useUsersAdditionalInformation from "../../../Hooks/useUsersAdditionalInformation";
+import useAxios from "../../../Hooks/useAxios";
 
 const ManageUsers = () => {
-  const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users");
-      return res.json();
-    },
+  const [axiosCreate] = useAxios();
+  const [users, refetch] = UserList();
+  const [userInfoData] = useUsersAdditionalInformation();
+
+  let finalUserListWithIfo = [];
+
+  const date = new Date();
+
+  users?.forEach((element) => {
+    // console.log(element);
+    const infoData = {};
+    userInfoData?.map((userInfo) => {
+      if (element._id === userInfo.userId) {
+        infoData.userId = userInfo.userId;
+        infoData.image = userInfo?.image;
+        infoData.name = userInfo?.name;
+        infoData.email = element?.email;
+        infoData.role = element?.role;
+        infoData.gender = userInfo?.gender;
+        infoData.dateOfBirth = userInfo?.dateOfBirth;
+        infoData.contactNumber = userInfo?.contactNumber;
+        infoData.presentAddress = userInfo?.presentAddress;
+        infoData.permanentAddress = userInfo?.permanentAddress;
+        infoData.isDeleted = false;
+        infoData.createdAt = date;
+        infoData.updatedAt = date;
+
+        finalUserListWithIfo.push(infoData);
+      }
+    });
   });
 
   const handleMakeAdmin = (user) => {
-    fetch(`http://localhost:5000/users/admin/${user._id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `${user.name} is an Admin Now!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+    console.log(user);
+    axiosCreate.patch(`/users/admin/${user.userId}`,user).then((response) => {
+      if (response.data) {
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user.name} is an Admin Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
   const handleDeleteAdmin = (user) => {
     fetch(`http://localhost:5000/users/remove/admin/${user._id}`, {
@@ -99,7 +122,7 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((user) => (
+            {finalUserListWithIfo?.map((user) => (
               <tr
                 key={user?._id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -123,31 +146,25 @@ const ManageUsers = () => {
                   {user?.role === "admin" ? (
                     "admin"
                   ) : (
-                
                     <button
-                      disabled={user?.role}
+                      // disabled={user?.role}
                       onClick={() => handleMakeAdmin(user)}
                       className={`btn-primary`}
                     >
                       Make Admin
                     </button>
-                    
-                 
                   )}
                 </td>
                 <td className="px-6 py-4">
                   {user?.role === "admin" ? (
-                     <button
-                     onClick={() => handleDeleteAdmin(user)}
-                     className={`btn-primary`}
-                   >
-                     Delete Admin
-                   </button>
+                    <button
+                      onClick={() => handleDeleteAdmin(user)}
+                      className={`btn-primary`}
+                    >
+                      Delete Admin
+                    </button>
                   ) : (
-                
-                   ""
-                    
-                 
+                    ""
                   )}
                 </td>
               </tr>
