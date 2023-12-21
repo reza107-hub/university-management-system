@@ -11,7 +11,6 @@ const GoogleSignIn = () => {
   const handleGoogleLogin = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result?.user);
         const saveUser = SaveUser(result?.user)
         axios.post("http://localhost:5000/users", saveUser).then((res) => {
           if (res.data.insertedId) {

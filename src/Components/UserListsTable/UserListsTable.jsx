@@ -1,57 +1,4 @@
-import Swal from "sweetalert2";
-import UserList from "../../../Components/UserList/UserList";
-import useUsersAdditionalInformation from "../../../Hooks/useUsersAdditionalInformation";
-import useAxios from "../../../Hooks/useAxios";
-
-const ManageUsers = () => {
-  const [axiosCreate] = useAxios();
-  const [users, refetch] = UserList();
-  const [userInfoData] = useUsersAdditionalInformation();
-
-  const finalUserListWithIfo = [];
-
-  const date = new Date();
-
-  users?.forEach((element) => {
-    const infoData = {};
-    userInfoData?.map((userInfo) => {
-      if (element._id === userInfo.userId) {
-        infoData.userId = userInfo.userId;
-        infoData.image = userInfo?.image;
-        infoData.name = userInfo?.name;
-        infoData.email = element?.email;
-        infoData.role = element?.role;
-        infoData.gender = userInfo?.gender;
-        infoData.dateOfBirth = userInfo?.dateOfBirth;
-        infoData.contactNumber = userInfo?.contactNumber;
-        infoData.presentAddress = userInfo?.presentAddress;
-        infoData.permanentAddress = userInfo?.permanentAddress;
-        infoData.isDeleted = false;
-        infoData.createdAt = date;
-        infoData.updatedAt = date;
-
-        finalUserListWithIfo.push(infoData);
-      }
-    });
-  });
-
-  const handleMakeAdmin = (user) => {
-    user.role = 'admin';
-    axiosCreate.patch(`/users/admin/${user.userId}`, user).then((response) => {
-      if (response.data) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${user.name} is an Admin Now!`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
-  };
-
-
+const UserListsTable = ({ finalUserListWithIfo, handleUser, givenRole }) => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
@@ -101,7 +48,7 @@ const ManageUsers = () => {
         </thead>
         <tbody>
           {finalUserListWithIfo?.map((user) =>
-            user?.role === `admin` || `student` ? (
+            user?.role === `${givenRole}` ? (
               <></>
             ) : (
               <>
@@ -128,10 +75,15 @@ const ManageUsers = () => {
                   <td className="px-6 py-4">{user?.role}</td>
                   <td className="px-6 py-4">
                     {user?.role === "admin" ? (
-                      <></>
+                      <button
+                        onClick={() => handleUser(user)}
+                        className={`btn-primary`}
+                      >
+                        Remove Admin
+                      </button>
                     ) : (
                       <button
-                        onClick={() => handleMakeAdmin(user)}
+                        onClick={() => handleUser(user)}
                         className={`btn-primary`}
                       >
                         Make Admin
@@ -148,4 +100,4 @@ const ManageUsers = () => {
   );
 };
 
-export default ManageUsers;
+export default UserListsTable;

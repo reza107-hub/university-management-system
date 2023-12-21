@@ -1,16 +1,19 @@
-import { Link, useParams } from "react-router-dom";
-import AdmissionRequestsLists from "../../Components/AdmissionRequestsLists/AdmissionRequestsLists";
-import UserList from "../../Components/UserList/UserList";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import AdmissionRequestsLists from "../../../../Components/AdmissionRequestsLists/AdmissionRequestsLists";
+import UserList from "../../../../Components/UserList/UserList";
 import Swal from "sweetalert2";
-import axios from "axios";
+import { useState } from "react";
+import useAxios from "../../../../Hooks/useAxios";
 
 const AdmissionDetails = () => {
+  const navigate = useNavigate();
+  const [waiverNumber, setWaiverNumber] = useState();
+  const [axiosCreate] = useAxios();
   const { email } = useParams();
   const [users, refetch] = UserList();
   const [lists] = AdmissionRequestsLists();
   const details = lists.find((list) => list?.email === email);
   const user = users.find((user) => user.email === details.email);
-  console.log(user);
 
   const downloadImage = () => {
     const link = document.createElement("a");
@@ -20,22 +23,42 @@ const AdmissionDetails = () => {
     link.click();
   };
 
-  const handleMakeStudent = () => {
-    axios
-      .patch(`http://localhost:5000/users/${user?._id}`, details)
-      .then((res) => {
-        if (res?.data) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `${user.name} is an Student Now!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+  const assignWaiver = () => {
+    Swal.fire({
+      title: "Enter Waiver Number:",
+      input: "number",
+      showCancelButton: true,
+      confirmButtonText: "Approve",
+      cancelButtonText: "Cancel",
+      preConfirm: (number) => {
+        // Set the entered number to the state
+        setWaiverNumber(number);
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const updatedDetails = { ...details, waiverNumber, userId: user?._id };
 
+        axiosCreate
+          .patch(`/users/${updatedDetails.userId}`)
+          .then((response) => {
+            if (response.data.matchedCount > 0) {
+              axiosCreate.post(`/students`, updatedDetails).then((response) => {
+                if (response.data.insertedId) {
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${updatedDetails.name.firstName} is an Student Now!`,
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  refetch();
+                  navigate("/dashboard/admission-requests-lists");
+                }
+              });
+            }
+          });
+      }
+    });
   };
 
   return (
@@ -53,7 +76,7 @@ const AdmissionDetails = () => {
           )}
         </div>
         <div>
-          <button onClick={handleMakeStudent} className="btn-primary">
+          <button onClick={assignWaiver} className="btn-primary">
             Approve
           </button>
         </div>
