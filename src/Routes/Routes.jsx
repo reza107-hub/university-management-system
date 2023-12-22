@@ -10,10 +10,11 @@ import AdmissionForm from "../Pages/GetAdmission/AdmissionForm";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoutes from "./AdminRoute";
 import UserProfile from "../Pages/Dashboard/Profile/UserProfile";
-import AdmissionRequests from "../Pages/AdmissionRequests/AdmissionRequests";
-import AdmissionDetails from "../Pages/AdmissionDetails/AdmissionDetails";
+import AdmissionRequests from "../Pages/Dashboard/Admin/AdmissionRequests/AdmissionRequests";
+import AdmissionDetails from "../Pages/Dashboard/Admin/AdmissionDetails/AdmissionDetails";
 
 import AdminList from "../Pages/Dashboard/Admin/AdminList";
+import StudentsLists from "../Pages/Dashboard/Admin/StudentsLists/StudentsLists";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <AdminList />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/students",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <StudentsLists />
             </AdminRoutes>
           </PrivateRoute>
         ),

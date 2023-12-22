@@ -26,7 +26,6 @@ const AdditionalInfoForm = () => {
     data.isDeleted = false;
     data.createdAt = date;
     data.updatedAt = date;
-    console.log(data);
     axiosCreate
       .post("/users-additional-information", data)
       .then((response) => {
