@@ -7,9 +7,25 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import UserList from "../../Components/UserList/UserList";
+import useUsersAdditionalInformation from "../../Hooks/useUsersAdditionalInformation";
 
 const AdmissionForm = () => {
   const { user } = useAuth();
+  const [users] = UserList();
+  const [userInfoData] = useUsersAdditionalInformation();
+
+  const presentUser = users?.find((data) => data?.email === user?.email);
+
+  const presentUserWithInfo = userInfoData?.find(
+    (data) => data?.email === presentUser?.email
+  );
+
+  const mergedUserInfo = {
+    ...presentUser,
+    ...presentUserWithInfo,
+  };
+
   const navigate = useNavigate();
   let batchNumber;
   const {
@@ -34,12 +50,18 @@ const AdmissionForm = () => {
         firstName: data.firstName,
         lastName: data.lastName,
       },
-      fatherName: data.fatherName,
-      fatherOccupation: data.fatherOccupation,
-      motherName: data.motherName,
-      motherOccupation: data.motherOccupation,
-      presentGuardianName: data.presentGuardianName,
-      presentGuardianContact: data.presentGuardianContact,
+      father :{
+        name: data.fatherName,
+        occupation: data.fatherOccupation,
+      },
+      mother:{
+        name: data.motherName,
+        occupation: data.motherOccupation,
+      },
+      presentGuardian:{
+        name: data.presentGuardianName,
+        contact: data.presentGuardianContact,
+      },
       dateOfBirth: data.dateOfBirth,
       gender: data.gender,
       contactNumber: data.contactNumber,
@@ -48,6 +70,7 @@ const AdmissionForm = () => {
       permanentAddress: data.permanentAddress,
       bloodGroup: data.bloodGroup,
       age: data.age,
+      programme: data.programme,
       department: data.department,
       batchNumber,
       nationality: data.nationality,
@@ -60,7 +83,6 @@ const AdmissionForm = () => {
     axios
       .post("http://localhost:5000/admission-request", admissionRequestData)
       .then((res) => {
-        console.log(res);
         if (res.data) {
           Swal.fire({
             title: res.data.message,
@@ -252,6 +274,7 @@ const AdmissionForm = () => {
               <div className="">
                 <input
                   {...register("dateOfBirth", { required: true })}
+                  defaultValue={mergedUserInfo?.dateOfBirth}
                   type="date"
                   className="form-control w-full rounded-md text-black"
                   id="dateOfBirth"
@@ -271,6 +294,9 @@ const AdmissionForm = () => {
                   className="form-select w-full text-black"
                   id="gender"
                 >
+                  <option value={mergedUserInfo?.gender}>
+                    {mergedUserInfo?.gender}
+                  </option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
@@ -293,8 +319,8 @@ const AdmissionForm = () => {
                 <input
                   {...register("contactNumber", {
                     required: true,
-                    pattern: /^[0-9]*$/,
                   })}
+                  defaultValue={mergedUserInfo?.contactNumber}
                   type="tel"
                   className="form-control w-full rounded-md text-black"
                   id="contactNumber"
@@ -339,6 +365,7 @@ const AdmissionForm = () => {
               <div className="">
                 <textarea
                   {...register("presentAddress", { required: true })}
+                  defaultValue={mergedUserInfo?.presentAddress}
                   className="form-control w-full rounded-md text-black"
                   id="presentAddress"
                 ></textarea>
@@ -358,6 +385,7 @@ const AdmissionForm = () => {
               <div className="">
                 <textarea
                   {...register("permanentAddress", { required: true })}
+                  defaultValue={mergedUserInfo?.permanentAddress}
                   className="form-control w-full rounded-md text-black"
                   id="permanentAddress"
                 ></textarea>
@@ -379,6 +407,9 @@ const AdmissionForm = () => {
                   className="form-select w-full text-black"
                   id="bloodGroup"
                 >
+                  <option value={mergedUserInfo?.bloodGroup}>
+                    {mergedUserInfo?.bloodGroup}
+                  </option>
                   <option value="A+">A+</option>
                   <option value="A-">A-</option>
                   <option value="B+">B+</option>
@@ -406,6 +437,27 @@ const AdmissionForm = () => {
                   id="age"
                 />
                 {errors.age && (
+                  <span className="text-red-700">This field is required</span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center gap-7">
+            <div className="mb-3 w-[20%]">
+              <label htmlFor="Programme" className="col-sm-2 col-form-label">
+                Programme
+              </label>
+              <div className="">
+                <select
+                  {...register("programme", { required: true })}
+                  className="form-select w-full text-black"
+                  id="programme"
+                >
+                  <option value="BSC">BSC</option>
+                  {/* Add more options as needed */}
+                </select>
+                {errors.programme && (
                   <span className="text-red-700">This field is required</span>
                 )}
               </div>

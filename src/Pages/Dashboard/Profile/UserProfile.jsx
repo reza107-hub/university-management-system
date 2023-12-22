@@ -8,7 +8,6 @@ const UserProfile = () => {
   const { user } = useAuth();
   const [users] = UserList();
   const [userInfoData] = useUsersAdditionalInformation();
-  console.log(userInfoData);
 
   const presentUser = users.find(
     (userFromDb) => userFromDb?.email === user?.email

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import AdmissionRequestsLists from "../../Components/AdmissionRequestsLists/AdmissionRequestsLists";
+import AdmissionRequestsLists from "../../../../Components/AdmissionRequestsLists/AdmissionRequestsLists";
 
 const AdmissionRequests = () => {
   const [lists] = AdmissionRequestsLists();

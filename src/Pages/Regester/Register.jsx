@@ -47,10 +47,10 @@ const Register = () => {
               });
             }
           });
-          console.log(result.user);
           updateUserProfile(data.name, imageUrl).then(() => {
             navigate("/");
           });
+          return result
         })
         .catch((err) => {
           Swal.fire({
