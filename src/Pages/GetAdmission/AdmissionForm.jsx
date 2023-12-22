@@ -11,6 +11,7 @@ import UserList from "../../Components/UserList/UserList";
 import useUsersAdditionalInformation from "../../Hooks/useUsersAdditionalInformation";
 
 const AdmissionForm = () => {
+  const date = new Date()
   const { user } = useAuth();
   const [users] = UserList();
   const [userInfoData] = useUsersAdditionalInformation();
@@ -78,6 +79,8 @@ const AdmissionForm = () => {
       image: imageUrl,
       sscCertificate: sscCertificateUrl,
       hscCertificate: hscCertificateUrl,
+      createdAt:date,
+      updatedAt:date
     };
 
     axios
