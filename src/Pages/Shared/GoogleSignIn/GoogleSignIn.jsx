@@ -6,22 +6,22 @@ import { useNavigate } from "react-router-dom";
 import SaveUser from "../../../Components/SaveUser/SaveUser";
 
 const GoogleSignIn = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { googleSignIn } = useAuth();
   const handleGoogleLogin = () => {
     googleSignIn()
       .then((result) => {
-        const saveUser = SaveUser(result?.user)
-        axios.post("http://localhost:5000/users", saveUser).then((res) => {
-          if (res.data.insertedId) {
+        const saveUser = SaveUser(result?.user);
+        axios.post("http://localhost:5000/api/users", saveUser).then((res) => {
+          if (res.data.success === true) {
             Swal.fire({
-              title: "Login Successful",
+              title: "SignUp Successful",
               icon: "success",
               confirmButtonText: "OK",
             });
           }
         });
-          navigate('/')
+        navigate("/");
       })
       .catch((err) => {
         Swal.fire({

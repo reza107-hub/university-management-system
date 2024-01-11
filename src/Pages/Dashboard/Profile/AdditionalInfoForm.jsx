@@ -18,18 +18,13 @@ const AdditionalInfoForm = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const date = new Date();
-    data.userId = presentUser._id;
+    data.userId = presentUser?._id;
     data.name = user?.displayName;
-    data.email = presentUser.email;
+    data.email = presentUser?.email;
     data.image = user?.photoURL;
-    data.isDeleted = false;
-    data.createdAt = date;
-    data.updatedAt = date;
-    axiosCreate
-      .post("/users-additional-information", data)
+    axiosCreate.post("/userAdditionalInfo/create", data)
       .then((response) => {
-        if (response.data) {
+        if (response.data.success === true) {
           Swal.fire({
             icon: "success",
             title: "Success",

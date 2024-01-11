@@ -7,6 +7,7 @@ import UserInfo from "./UserInfo";
 const UserProfile = () => {
   const { user } = useAuth();
   const [users] = UserList();
+
   const [userInfoData] = useUsersAdditionalInformation();
 
   const presentUser = users.find(
