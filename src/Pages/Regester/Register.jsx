@@ -31,34 +31,33 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-
     // Get image URL (assuming images are stored in 'images' folder)
     const imageUrl = await GetHostUrl(data.photo[0]);
 
-      createUser(data.email, data.password)
-        .then((result) => {
-          const saveUser = SaveUser(data)
-          axios.post("http://localhost:5000/users", saveUser).then((res) => {
-            if (res.data.insertedId) {
-              Swal.fire({
-                title: "Signup Successful",
-                icon: "success",
-                confirmButtonText: "OK",
-              });
-            }
-          });
-          updateUserProfile(data.name, imageUrl).then(() => {
-            navigate("/");
-          });
-          return result
-        })
-        .catch((err) => {
-          Swal.fire({
-            title: `${err.message}`,
-            icon: "error",
-            confirmButtonText: "OK",
-          });
+    createUser(data.email, data.password)
+      .then((result) => {
+        const saveUser = SaveUser(data);
+        axios.post("http://localhost:5000/api/users", saveUser).then((res) => {
+          if (res.data.success === true) {
+            Swal.fire({
+              title: "SignUp Successful",
+              icon: "success",
+              confirmButtonText: "OK",
+            });
+          }
         });
+        updateUserProfile(data.name, imageUrl).then(() => {
+          navigate("/");
+        });
+        return result;
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: `${err.message}`,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      });
   };
 
   const password = watch("password");
