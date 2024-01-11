@@ -1,44 +1,14 @@
 import Swal from "sweetalert2";
-import UserList from "../../../Components/UserList/UserList";
 import useUsersAdditionalInformation from "../../../Hooks/useUsersAdditionalInformation";
 import useAxios from "../../../Hooks/useAxios";
 
 const ManageUsers = () => {
   const [axiosCreate] = useAxios();
-  const [users, refetch] = UserList();
-  const [userInfoData] = useUsersAdditionalInformation();
-
-  const finalUserListWithIfo = [];
-
-  const date = new Date();
-
-  users?.forEach((element) => {
-    const infoData = {};
-    userInfoData?.map((userInfo) => {
-      if (element._id === userInfo.userId) {
-        infoData.userId = userInfo.userId;
-        infoData.image = userInfo?.image;
-        infoData.name = userInfo?.name;
-        infoData.email = element?.email;
-        infoData.role = element?.role;
-        infoData.gender = userInfo?.gender;
-        infoData.dateOfBirth = userInfo?.dateOfBirth;
-        infoData.contactNumber = userInfo?.contactNumber;
-        infoData.presentAddress = userInfo?.presentAddress;
-        infoData.permanentAddress = userInfo?.permanentAddress;
-        infoData.isDeleted = false;
-        infoData.createdAt = date;
-        infoData.updatedAt = date;
-
-        finalUserListWithIfo.push(infoData);
-      }
-    });
-  });
+  const [userInfoData, refetch] = useUsersAdditionalInformation();
 
   const handleMakeAdmin = (user) => {
-    user.role = 'admin';
-    axiosCreate.patch(`/users/admin/${user.userId}`, user).then((response) => {
-      if (response.data) {
+    axiosCreate.post(`/admin/createAdmin`, user).then((response) => {
+      if (response.data.success === true) {
         refetch();
         Swal.fire({
           position: "top-end",
@@ -47,10 +17,17 @@ const ManageUsers = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+      } else {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: `${response.data.message}. ${response.data.errorMessage}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     });
   };
-
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -100,46 +77,42 @@ const ManageUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {finalUserListWithIfo?.map((user) =>
-            user?.role === `admin` || `student` ? (
-              <></>
-            ) : (
-              <>
-                <tr
-                  key={user?._id}
-                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+          {userInfoData?.map((user) =>
+            user?.userId?.role === "user" ? (
+              <tr
+                key={user?._id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
+                <th
+                  scope="row"
+                  className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  <th
-                    scope="row"
-                    className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    <img
-                      className="w-10 h-10 rounded-full"
-                      src={user?.image}
-                      alt={`Profile of ${user?.name}`}
-                    />
-                    <div className="ps-3">
-                      <div className="text-base font-semibold">
-                        {user?.name}
-                      </div>
-                    </div>
-                  </th>
-                  <td className="px-6 py-4">{user?.email}</td>
-                  <td className="px-6 py-4">{user?.role}</td>
-                  <td className="px-6 py-4">
-                    {user?.role === "admin" ? (
-                      <></>
-                    ) : (
-                      <button
-                        onClick={() => handleMakeAdmin(user)}
-                        className={`btn-primary`}
-                      >
-                        Make Admin
-                      </button>
-                    )}
-                  </td>
-                </tr>
-              </>
+                  <img
+                    className="w-10 h-10 rounded-full"
+                    src={user?.image}
+                    alt={`Profile of ${user?.name}`}
+                  />
+                  <div className="ps-3">
+                    <div className="text-base font-semibold">{user?.name}</div>
+                  </div>
+                </th>
+                <td className="px-6 py-4">{user?.email}</td>
+                <td className="px-6 py-4">{user?.userId?.role}</td>
+                <td className="px-6 py-4">
+                  {user?.role === "admin" ? (
+                    <></>
+                  ) : (
+                    <button
+                      onClick={() => handleMakeAdmin(user)}
+                      className={`btn-primary`}
+                    >
+                      Make Admin
+                    </button>
+                  )}
+                </td>
+              </tr>
+            ) : (
+              <tr key={user?._id}></tr>
             )
           )}
         </tbody>

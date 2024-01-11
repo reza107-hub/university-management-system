@@ -4,7 +4,7 @@ const AdmissionRequestsLists = () => {
   const { data: lists = [], refetch } = useQuery({
     queryKey: ["lists"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/admission-request");
+      const res = await fetch("http://localhost:5000/api/admission-request");
       return res.json();
     },
   });

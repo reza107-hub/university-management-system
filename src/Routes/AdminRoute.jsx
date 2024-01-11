@@ -12,7 +12,7 @@ const AdminRoutes = ({ children }) => {
     return <Loader />;
   }
 
-  if (user && isAdmin) {
+  if (user && isAdmin?.data=== true) {
     return children;
   }
   return <Navigate to="/login" state={{ from: location }} replace></Navigate>;

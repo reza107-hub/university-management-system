@@ -1,1 +1,1 @@
-export const fetchUrl = "http://localhost:5000"
+export const fetchUrl = "http://localhost:5000/api"

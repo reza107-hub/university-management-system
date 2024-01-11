@@ -50,15 +50,15 @@ const AdmissionForm = () => {
         firstName: data.firstName,
         lastName: data.lastName,
       },
-      father :{
+      father: {
         name: data.fatherName,
         occupation: data.fatherOccupation,
       },
-      mother:{
+      mother: {
         name: data.motherName,
         occupation: data.motherOccupation,
       },
-      presentGuardian:{
+      presentGuardian: {
         name: data.presentGuardianName,
         contact: data.presentGuardianContact,
       },
@@ -81,7 +81,7 @@ const AdmissionForm = () => {
     };
 
     axios
-      .post("http://localhost:5000/admission-request", admissionRequestData)
+      .post("http://localhost:5000/api/admission-request", admissionRequestData)
       .then((res) => {
         if (res.data) {
           Swal.fire({
