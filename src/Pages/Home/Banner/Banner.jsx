@@ -14,11 +14,20 @@ import "swiper/css/keyboard";
 import "./BannerStyle.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import usePresentUser from "../../../Hooks/usePresentUser";
+import useAuth from "../../../Hooks/useAuth";
+import { useGetPresentUserWithAdditionalInfoQuery } from "../../../Redux/api";
+import Loader from "../../../Components/Loader/Loader";
 
 const Banner = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const [presentUser] = usePresentUser();
+  const { user, loading } = useAuth();
+
+  const { data: userData, isLoading: isUserDetailsLoading } =
+    useGetPresentUserWithAdditionalInfoQuery(user?.email);
+
+  if (loading || isUserDetailsLoading) {
+    return <Loader />;
+  }
 
   const content = [
     {
@@ -105,7 +114,9 @@ const Banner = () => {
                   </p>
                   <Link to="/getAdmission">
                     <button
-                      disabled={presentUser?.role === "admin" | "student"}
+                      disabled={
+                        (userData?.data?.userId?.role === "admin") | "student"
+                      }
                       className={`m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm ${
                         activeSlideIndex === i
                           ? "slide-animation slide-animation-down"
@@ -113,7 +124,7 @@ const Banner = () => {
                       }
                       ${
                         // eslint-disable-next-line no-constant-condition
-                        presentUser?.role === "admin" | "student"
+                        (userData?.data?.userId?.role === "admin") | "student"
                           ? "disabled:opacity-25"
                           : ""
                       }
