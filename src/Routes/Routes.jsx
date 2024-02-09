@@ -20,6 +20,7 @@ import Department from "../Pages/Dashboard/Admin/Department/Department";
 import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/AcademicSemester";
 import Batch from "../Pages/Dashboard/Admin/Batch/Batch";
 import AdditionalInfoRequireRoutes from "./AdditionalInfoRequireRoutes";
+import FacultyList from "../Pages/Dashboard/Admin/FacultyList";
 
 const router = createBrowserRouter([
   {
@@ -92,6 +93,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <AdminList />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/faculties",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <FacultyList />
             </AdminRoutes>
           </PrivateRoute>
         ),

@@ -1,13 +1,15 @@
 import Swal from "sweetalert2";
-import { useGetUserWithAdditionalInfoQuery } from "../../../Redux/features/User/UserApi";
-import { useCreateAdminMutation } from "../../../Redux/features/admin/admin.api";
-import { useCreateFacultyMutation } from "../../../Redux/features/faculty/FacultyApi";
+import SearchSvg from "../../../Components/SearchSvg/SearchSvg";
 
-const ManageUsers = () => {
-  const { data: userInfoData } = useGetUserWithAdditionalInfoQuery(undefined);
-  const [createAdmin] = useCreateAdminMutation();
-const [crateFaculty] = useCreateFacultyMutation()
-  const handleMakeAdmin = async (user) => {
+import { useDeleteFacultyMutation, useGetFacultyListQuery } from "../../../Redux/features/faculty/FacultyApi";
+
+const FacultyList = () => {
+  const { data: facultyListData } = useGetFacultyListQuery(undefined);
+  const [deleteFaculty] = useDeleteFacultyMutation();
+
+  const data = facultyListData?.data;
+console.log(data)
+  const handleDeleteFaculty = async (user) => {
     try {
       Swal.fire({
         title: "wait...",
@@ -17,7 +19,7 @@ const [crateFaculty] = useCreateFacultyMutation()
           Swal.showLoading();
         },
       });
-      const res = await createAdmin(user).unwrap();
+      const res = await deleteFaculty(user).unwrap();
       Swal.fire({
         title: res.message,
         icon: "success",
@@ -31,51 +33,14 @@ const [crateFaculty] = useCreateFacultyMutation()
       });
     }
   };
-  const handleMakeFaculty = async (user) => {
-    try {
-      Swal.fire({
-        title: "wait...",
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
-      const res = await crateFaculty(user).unwrap();
-      Swal.fire({
-        title: res.message,
-        icon: "success",
-        timer: 1500,
-      });
-    } catch (error) {
-      Swal.fire({
-        title: error?.data?.message,
-        text: error?.data?.errorMessage,
-        icon: "error",
-      });
-    }
-  };
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
         <div className="relative">
           <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
+            <SearchSvg />
           </div>
           <input
             type="text"
@@ -103,8 +68,8 @@ const [crateFaculty] = useCreateFacultyMutation()
           </tr>
         </thead>
         <tbody>
-          {userInfoData?.data?.map((user) =>
-            user?.userId?.role === "user" ? (
+          {data?.map((user) =>
+            user?.userId?.role === "faculty" ? (
               <tr
                 key={user?._id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -125,24 +90,12 @@ const [crateFaculty] = useCreateFacultyMutation()
                 <td className="px-6 py-4">{user?.email}</td>
                 <td className="px-6 py-4">{user?.userId?.role}</td>
                 <td className="px-6 py-4">
-                  {user?.role === "admin" ? (
-                    <></>
-                  ) : (
-                    <>
-                    <button
-                      onClick={() => handleMakeAdmin(user)}
-                      className={`btn-primary`}
-                    >
-                      Make Admin
-                    </button>
-                    <button
-                      onClick={() => handleMakeFaculty(user)}
-                      className={`btn-primary`}
-                    >
-                      Make faculty
-                    </button>
-                    </>
-                  )}
+                  <button
+                    onClick={() => handleDeleteFaculty(user)}
+                    className={`btn-primary`}
+                  >
+                    Remove Faculty
+                  </button>
                 </td>
               </tr>
             ) : (
@@ -155,4 +108,4 @@ const [crateFaculty] = useCreateFacultyMutation()
   );
 };
 
-export default ManageUsers;
+export default FacultyList;
