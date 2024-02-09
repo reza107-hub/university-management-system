@@ -31,26 +31,25 @@ const Profile = ({ Menu, Transition, Fragment, user }) => {
             <Link to={"/dashboard/profile"}>
               <Menu.Item>
                 {({ active }) => (
-                  <a
+                  <div
                     className={`${
                       active ? "bg-gray-100 text-primary" : ""
                     } block px-4 py-2 text-sm`}
                   >
                     Dashboard
-                  </a>
+                  </div>
                 )}
               </Menu.Item>
             </Link>
             <Menu.Item onClick={handleLogOut}>
               {({ active }) => (
-                <a
-                  href="#"
+                <div
                   className={`${
                     active ? "bg-gray-100 text-primary" : ""
                   } block px-4 py-2 text-sm`}
                 >
                   Sign out
-                </a>
+                </div>
               )}
             </Menu.Item>
           </Menu.Items>

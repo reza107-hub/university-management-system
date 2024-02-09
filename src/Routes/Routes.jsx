@@ -15,6 +15,9 @@ import AdmissionDetails from "../Pages/Dashboard/Admin/AdmissionDetails/Admissio
 
 import AdminList from "../Pages/Dashboard/Admin/AdminList";
 import StudentsLists from "../Pages/Dashboard/Admin/StudentsLists/StudentsLists";
+import Programs from "../Pages/Dashboard/Admin/Programs/Programs";
+import Department from "../Pages/Dashboard/Admin/Department/Department";
+import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/AcademicSemester";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +88,36 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <AdminList />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/programs",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <Programs />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/department",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <Department />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/academic-semesters",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <AcademicSemester />
             </AdminRoutes>
           </PrivateRoute>
         ),
