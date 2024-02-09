@@ -53,16 +53,9 @@ export const baseApi = createApi({
             }),
             invalidatesTags: ['Department']
         }),
-        // ----------------------------------------------------------------
-        // user endpoints
-        getPresentUserWithAdditionalInfo: build.query({
-            query: (email) => ({
-                url: `/userAdditionalInfo/${email}`,
-                method: 'GET',
-            }),
-        }),
+
     }),
 })
 
 // providesTags: ['user']
-export const { useAddProgrammeMutation, useGetProgrammeQuery, useDeleteProgramMutation, useAddDepartmentMutation, useGetDepartmentQuery, useGetPresentUserWithAdditionalInfoQuery } = baseApi
+export const { useAddProgrammeMutation, useGetProgrammeQuery, useDeleteProgramMutation, useAddDepartmentMutation, useGetDepartmentQuery } = baseApi

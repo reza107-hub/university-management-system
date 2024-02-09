@@ -18,7 +18,11 @@ import StudentsLists from "../Pages/Dashboard/Admin/StudentsLists/StudentsLists"
 import Programs from "../Pages/Dashboard/Admin/Programs/Programs";
 import Department from "../Pages/Dashboard/Admin/Department/Department";
 import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/AcademicSemester";
+<<<<<<< HEAD
 import Batch from "../Pages/Dashboard/Admin/Batch/Batch";
+=======
+import AdditionalInfoRequireRoutes from "./AdditionalInfoRequireRoutes";
+>>>>>>> 5ab366f0e277e0748715a6f8f5b2adcdad8ee674
 
 const router = createBrowserRouter([
   {
@@ -43,7 +47,9 @@ const router = createBrowserRouter([
     path: "/getAdmission/admission-form",
     element: (
       <PrivateRoute>
-        <AdmissionForm />
+        <AdditionalInfoRequireRoutes>
+          <AdmissionForm />
+        </AdditionalInfoRequireRoutes>
       </PrivateRoute>
     ),
   },
