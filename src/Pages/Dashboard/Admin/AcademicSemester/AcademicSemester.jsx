@@ -3,11 +3,12 @@ import ReUsable from "../../../../Components/Dialog/ReUsableModaal";
 import { academicSemesterContent } from "./AcademicSemester.constant";
 import SearchSvg from "../../../../Components/SearchSvg/SearchSvg";
 import Table from "../../../../Components/Table/Table";
+
+import Swal from "sweetalert2";
 import {
   useAddAcademicSemesterMutation,
   useGetAcademicSemesterQuery,
-} from "../../../../Redux/AcademicSemester/AcademicSemester.api";
-import Swal from "sweetalert2";
+} from "../../../../Redux/features/AcademicSemester/AcademicSemester.api";
 
 const AcademicSemester = () => {
   const [
