@@ -10,23 +10,7 @@ const userApi = baseApi.injectEndpoints({
             }),
             providesTags: ['user']
         }),
-        // admin list get
-        getAdminList: build.query({
-            query: () => ({
-                url: `/admin/admin-list`,
-                method: 'GET',
-            }),
-            providesTags: ['admin-list', 'user']
-        }),
-        // admin delete
-        deleteAnAdmin: build.mutation({
-            query: (body) => ({
-                url: `/admin/delete`,
-                method: 'PATCH',
-                body
-            }),
-            invalidatesTags: ['admin-list', 'user']
-        }),
+
         getPresentUserWithAdditionalInfo: build.query({
             query: (email) => ({
                 url: `/userAdditionalInfo/${email}`,
@@ -34,7 +18,14 @@ const userApi = baseApi.injectEndpoints({
             }),
             providesTags: ['user']
         }),
+        getUserWithAdditionalInfo: build.query({
+            query: () => ({
+                url: `/userAdditionalInfo`,
+                method: 'GET',
+            }),
+            providesTags: ['user']
+        }),
     })
 })
 
-export const { useGetUserQuery, useGetAdminListQuery, useDeleteAnAdminMutation, useGetPresentUserWithAdditionalInfoQuery } = userApi
+export const { useGetUserQuery, useGetPresentUserWithAdditionalInfoQuery, useGetUserWithAdditionalInfoQuery } = userApi

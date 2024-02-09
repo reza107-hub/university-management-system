@@ -1,11 +1,7 @@
-import useStudentsLists from "../../../../Hooks/useStudentsLists";
-
 const StudentsLists = () => {
-  const [students] = useStudentsLists();
-
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
+      {/* <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
         <div className="relative">
           <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -77,7 +73,7 @@ const StudentsLists = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };

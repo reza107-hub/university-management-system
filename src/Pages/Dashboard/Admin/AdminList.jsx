@@ -1,35 +1,39 @@
 import Swal from "sweetalert2";
+import SearchSvg from "../../../Components/SearchSvg/SearchSvg";
 import {
   useDeleteAnAdminMutation,
   useGetAdminListQuery,
-} from "../../../Redux/features/User/UserApi";
-import { useEffect } from "react";
-import SearchSvg from "../../../Components/SearchSvg/SearchSvg";
+} from "../../../Redux/features/admin/admin.api";
 
 const AdminList = () => {
   const { data: adminListData } = useGetAdminListQuery(undefined);
-  const [deleteAdmin, { data: deleteAdminData, error: deleteAdminError }] =
-    useDeleteAnAdminMutation();
+  const [deleteAdmin] = useDeleteAnAdminMutation();
 
   const data = adminListData?.data;
 
-  useEffect(() => {
-    if (deleteAdminData?.success === true) {
+  const handleDeleteAdmin = async (user) => {
+    try {
       Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await deleteAdmin(user).unwrap();
+      Swal.fire({
+        title: res.message,
         icon: "success",
-        title: deleteAdminData?.message,
+        timer: 1500,
       });
-    }
-    if (deleteAdminError?.data?.success === false) {
+    } catch (error) {
       Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
         icon: "error",
-        title: deleteAdminError?.data?.message,
       });
     }
-  }, [deleteAdminData, deleteAdminError]);
-
-  const handleDeleteAdmin = (user) => {
-    deleteAdmin(user);
   };
 
   return (
