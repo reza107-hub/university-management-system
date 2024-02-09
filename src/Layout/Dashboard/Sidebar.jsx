@@ -3,7 +3,7 @@ import { FaHome, FaRegUser } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
 import AcademicCap from "../../Components/AcademicCap/AcademicCap";
 import UserSvg from "../../Components/UserSvg/UserSvg";
-import { useGetPresentUserWithAdditionalInfoQuery } from "../../Redux/api";
+import { useGetPresentUserWithAdditionalInfoQuery } from "../../Redux/User/UserApi";
 
 const Sidebar = () => {
   const { user, logOut } = useAuth();
