@@ -15,8 +15,9 @@ import "./BannerStyle.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
-import { useGetPresentUserWithAdditionalInfoQuery } from "../../../Redux/api";
+
 import Loader from "../../../Components/Loader/Loader";
+import { useGetPresentUserWithAdditionalInfoQuery } from "../../../Redux/User/UserApi";
 
 const Banner = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);

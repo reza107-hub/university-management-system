@@ -2,13 +2,13 @@ import { baseApi } from "../api";
 
 const userApi = baseApi.injectEndpoints({
     endpoints: build => ({
-        // getPresentUserWithAdditionalInfo is in base api
         // user list collection
         getUser: build.query({
             query: () => ({
                 url: `/users`,
                 method: 'GET',
             }),
+            providesTags: ['user']
         }),
         // admin list get
         getAdminList: build.query({
@@ -16,7 +16,7 @@ const userApi = baseApi.injectEndpoints({
                 url: `/admin/admin-list`,
                 method: 'GET',
             }),
-            providesTags: ['admin-list']
+            providesTags: ['admin-list', 'user']
         }),
         // admin delete
         deleteAnAdmin: build.mutation({
@@ -25,9 +25,16 @@ const userApi = baseApi.injectEndpoints({
                 method: 'PATCH',
                 body
             }),
-            invalidatesTags: ['admin-list']
+            invalidatesTags: ['admin-list', 'user']
+        }),
+        getPresentUserWithAdditionalInfo: build.query({
+            query: (email) => ({
+                url: `/userAdditionalInfo/${email}`,
+                method: 'GET',
+            }),
+            providesTags: ['user']
         }),
     })
 })
 
-export const { useGetUserQuery, useGetAdminListQuery, useDeleteAnAdminMutation } = userApi
+export const { useGetUserQuery, useGetAdminListQuery, useDeleteAnAdminMutation, useGetPresentUserWithAdditionalInfoQuery } = userApi
