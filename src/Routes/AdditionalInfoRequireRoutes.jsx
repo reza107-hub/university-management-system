@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
-import { useGetPresentUserWithAdditionalInfoQuery } from "../Redux/User/UserApi";
+import { useGetPresentUserWithAdditionalInfoQuery } from "../Redux/features/User/UserApi";
 import Loader from "../Components/Loader/Loader";
 
 const AdditionalInfoRequireRoutes = ({ children }) => {

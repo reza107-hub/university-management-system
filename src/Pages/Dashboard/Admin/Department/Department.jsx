@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import DepartmentModel from "../../../../Components/Dialog/DepartmentModel";
 import SearchSvg from "../../../../Components/SearchSvg/SearchSvg";
+
+import Swal from "sweetalert2";
+import { useGetProgrammeQuery } from "../../../../Redux/features/Programme/Programme.api";
 import {
   useAddDepartmentMutation,
   useGetDepartmentQuery,
-  useGetProgrammeQuery,
-} from "../../../../Redux/api";
-import Swal from "sweetalert2";
+} from "../../../../Redux/features/Department/department.api";
 
 const Department = () => {
   let [isOpen, setIsOpen] = useState(false);

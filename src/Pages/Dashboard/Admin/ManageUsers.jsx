@@ -1,32 +1,34 @@
 import Swal from "sweetalert2";
-import useUsersAdditionalInformation from "../../../Hooks/useUsersAdditionalInformation";
-import useAxios from "../../../Hooks/useAxios";
+import { useGetUserWithAdditionalInfoQuery } from "../../../Redux/features/User/UserApi";
+import { useCreateAdminMutation } from "../../../Redux/features/admin/admin.api";
 
 const ManageUsers = () => {
-  const [axiosCreate] = useAxios();
-  const [userInfoData, refetch] = useUsersAdditionalInformation();
+  const { data: userInfoData } = useGetUserWithAdditionalInfoQuery(undefined);
+  const [createAdmin] = useCreateAdminMutation();
 
-  const handleMakeAdmin = (user) => {
-    axiosCreate.post(`/admin/createAdmin`, user).then((response) => {
-      if (response.data.success === true) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${user.name} is an Admin Now!`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      } else {
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: `${response.data.message}. ${response.data.errorMessage}`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
+  const handleMakeAdmin = async (user) => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await createAdmin(user).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
   };
 
   return (
@@ -77,7 +79,7 @@ const ManageUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {userInfoData?.map((user) =>
+          {userInfoData?.data?.map((user) =>
             user?.userId?.role === "user" ? (
               <tr
                 key={user?._id}

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import SearchSvg from "../../../../Components/SearchSvg/SearchSvg";
 import Modal from "../../../../Components/Dialog/Modal";
+
+import Swal from "sweetalert2";
 import {
   useAddProgrammeMutation,
   useDeleteProgramMutation,
   useGetProgrammeQuery,
-} from "../../../../Redux/api";
-import Swal from "sweetalert2";
+} from "../../../../Redux/features/Programme/Programme.api";
 
 const Programs = () => {
   const [programmeName, setProgrammeName] = useState("");

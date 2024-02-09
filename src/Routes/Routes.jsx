@@ -18,10 +18,9 @@ import StudentsLists from "../Pages/Dashboard/Admin/StudentsLists/StudentsLists"
 import Programs from "../Pages/Dashboard/Admin/Programs/Programs";
 import Department from "../Pages/Dashboard/Admin/Department/Department";
 import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/AcademicSemester";
-
-import AdditionalInfoRequireRoutes from "./AdditionalInfoRequireRoutes";
 import Batch from "../Pages/Dashboard/Admin/Batch/Batch";
-     
+import AdditionalInfoRequireRoutes from "./AdditionalInfoRequireRoutes";
+
 const router = createBrowserRouter([
   {
     path: "/",
