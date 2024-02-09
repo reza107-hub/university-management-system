@@ -42,6 +42,12 @@ export const sidebarItems = [
     role: "admin",
   },
   {
+    to: "/dashboard/faculties",
+    label: "Faculty List",
+    icon: <UserSvg />,
+    role: "admin",
+  },
+  {
     to: "/dashboard/students",
     label: "Students List",
     icon: <UserSvg />,
