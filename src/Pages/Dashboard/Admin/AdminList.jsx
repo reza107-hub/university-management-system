@@ -1,33 +1,35 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchUrl } from "../../../Components/BaseUrl/fetchUrl";
-import useAxios from "../../../Hooks/useAxios";
 import Swal from "sweetalert2";
+import {
+  useDeleteAnAdminMutation,
+  useGetAdminListQuery,
+} from "../../../Redux/User/UserApi";
+import { useEffect } from "react";
+import SearchSvg from "../../../Components/SearchSvg/SearchSvg";
 
 const AdminList = () => {
-  const [axiosCreate] = useAxios();
-  const { data: adminList = [], refetch } = useQuery({
-    queryKey: ["adminList"],
-    queryFn: async () => {
-      const res = await fetch(fetchUrl + "/admin/admin-list");
-      return await res.json();
-    },
-  });
+  const { data: adminListData } = useGetAdminListQuery(undefined);
+  const [deleteAdmin, { data: deleteAdminData, error: deleteAdminError }] =
+    useDeleteAnAdminMutation();
 
-  const data = adminList?.data;
+  const data = adminListData?.data;
+
+  useEffect(() => {
+    if (deleteAdminData?.success === true) {
+      Swal.fire({
+        icon: "success",
+        title: deleteAdminData?.message,
+      });
+    }
+    if (deleteAdminError?.data?.success === false) {
+      Swal.fire({
+        icon: "error",
+        title: deleteAdminError?.data?.message,
+      });
+    }
+  }, [deleteAdminData, deleteAdminError]);
 
   const handleDeleteAdmin = (user) => {
-    axiosCreate.patch('/admin/delete', user).then((response) => {
-      if (response.data.success === true) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: `${user.name} is removed from admin!`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
-    refetch();
+    deleteAdmin(user);
   };
 
   return (
@@ -36,21 +38,7 @@ const AdminList = () => {
         <label className="sr-only">Search</label>
         <div className="relative">
           <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
+            <SearchSvg />
           </div>
           <input
             type="text"

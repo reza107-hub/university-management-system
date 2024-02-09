@@ -47,14 +47,14 @@ const NavigationBar = () => {
                     user={user}
                   />
                 ) : (
-                  <>
+                  <div>
                     <Link
                       to={"/login"}
                       className="px-4 py-2 text-center hover:bg-gray-100 hover:text-primary cursor-pointer text-white font-bold rounded-md"
                     >
                       Login
                     </Link>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
@@ -62,7 +62,12 @@ const NavigationBar = () => {
 
           <Disclosure.Panel className="sm:hidden bg-primary">
             {/* responsive view */}
-            <SmallScreenView navigation={navigation} Disclosure={Disclosure} />
+            <div>
+              <SmallScreenView
+                navigation={navigation}
+                Disclosure={Disclosure}
+              />
+            </div>
           </Disclosure.Panel>
         </>
       )}
