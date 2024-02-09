@@ -1,4 +1,4 @@
-import { baseApi } from "../api"
+import { baseApi } from "../../api"
 
 const AcademicSemesterApi = baseApi.injectEndpoints({
     endpoints: build => ({

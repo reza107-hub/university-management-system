@@ -2,10 +2,11 @@ import { useForm } from "react-hook-form";
 import "./AdmissionForm.css";
 import useAuth from "../../Hooks/useAuth";
 import Loader from "../../Components/Loader/Loader";
-import { useGetDepartmentQuery, useGetProgrammeQuery } from "../../Redux/api";
 import Form from "./Form";
 import GetHostUrl from "../../Components/GetHostUrl/GetHostUrl";
-import { useGetPresentUserWithAdditionalInfoQuery } from "../../Redux/User/UserApi";
+import { useGetPresentUserWithAdditionalInfoQuery } from "../../Redux/features/User/UserApi";
+import { useGetProgrammeQuery } from "../../Redux/features/Programme/Programme.api";
+import { useGetDepartmentQuery } from "../../Redux/features/Department/department.api";
 
 const AdmissionForm = () => {
   const {
