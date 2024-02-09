@@ -33,7 +33,7 @@ export default function ReUsable({ isOpen, closeModal, onSubmit, Content }) {
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    {Content.map((item, i) =>
+                    {Content?.map((item, i) =>
                       !item.select ? (
                         <div className="space-y-3" key={i}>
                           <Dialog.Title
