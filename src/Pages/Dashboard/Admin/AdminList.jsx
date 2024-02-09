@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import {
   useDeleteAnAdminMutation,
   useGetAdminListQuery,
-} from "../../../Redux/User/UserApi";
+} from "../../../Redux/features/User/UserApi";
 import { useEffect } from "react";
 import SearchSvg from "../../../Components/SearchSvg/SearchSvg";
 
