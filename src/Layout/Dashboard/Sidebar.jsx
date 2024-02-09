@@ -31,6 +31,12 @@ const Sidebar = () => {
       role: "admin",
     },
     {
+      to: "/dashboard/faculties",
+      label: "Faculty List",
+      icon: <UserSvg />,
+      role: "admin",
+    },
+    {
       to: "/dashboard/programs",
       label: "Programs",
       icon: <AcademicCap />,
