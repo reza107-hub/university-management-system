@@ -24,6 +24,12 @@ export const sidebarItems = [
     role: "admin",
   },
   {
+    to: "/dashboard/batch",
+    label: "Batch",
+    icon: <AcademicCap />,
+    role: "admin",
+  },
+  {
     to: "/dashboard/admission-requests-lists",
     label: "Admission Requests",
     icon: <UserSvg />,

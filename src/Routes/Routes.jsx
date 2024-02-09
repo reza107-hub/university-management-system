@@ -18,6 +18,7 @@ import StudentsLists from "../Pages/Dashboard/Admin/StudentsLists/StudentsLists"
 import Programs from "../Pages/Dashboard/Admin/Programs/Programs";
 import Department from "../Pages/Dashboard/Admin/Department/Department";
 import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/AcademicSemester";
+import Batch from "../Pages/Dashboard/Admin/Batch/Batch";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +109,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <Department />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/batch",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <Batch />
             </AdminRoutes>
           </PrivateRoute>
         ),

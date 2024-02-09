@@ -29,10 +29,10 @@ const AdmissionForm = () => {
     return <Loader />;
   }
 
-  const name = userData?.data?.name?.split(" ");
-  const lastName = name[name?.length - 1];
-  name.pop();
-  const firstName = name?.join(" ");
+  // const name = userData?.data?.name?.split(" ");
+  // const lastName = name[name?.length - 1];
+  // name.pop();
+  // const firstName = name?.join(" ");
 
   const onSubmit = async (data) => {
     const imageUrl = await GetHostUrl(data.profileImage[0]);
@@ -55,8 +55,8 @@ const AdmissionForm = () => {
           onSubmit={onSubmit}
           register={register}
           errors={errors}
-          firstName={firstName}
-          lastName={lastName}
+          // firstName={firstName}
+          // lastName={lastName}
           userData={userData}
           programData={programData}
           getDepartmentData={getDepartmentData}

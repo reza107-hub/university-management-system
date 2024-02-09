@@ -43,6 +43,12 @@ const Sidebar = () => {
       role: "admin",
     },
     {
+      to: "/dashboard/batch",
+      label: "Batch",
+      icon: <AcademicCap />,
+      role: "admin",
+    },
+    {
       to: "/dashboard/academic-semesters",
       label: "Academic Semesters",
       icon: <AcademicCap />,
