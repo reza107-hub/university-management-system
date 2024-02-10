@@ -19,9 +19,10 @@ const adminApi = baseApi.injectEndpoints({
         }),
         // admin list get
         getAdminList: build.query({
-            query: () => ({
+            query: (params) => ({
                 url: `/admin/admin-list`,
                 method: 'GET',
+                params
             }),
             providesTags: ['admin-list', 'user', 'admin']
         }),
