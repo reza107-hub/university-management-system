@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import SearchSvg from "../../../../Components/SearchSvg/SearchSvg";
+import { useState } from "react";
 import Modal from "../../../../Components/Dialog/Modal";
 
 import Swal from "sweetalert2";
@@ -8,30 +7,15 @@ import {
   useDeleteProgramMutation,
   useGetProgrammeQuery,
 } from "../../../../Redux/features/Programme/Programme.api";
+import SearchSvg from "../../../../Components/svg/SearchSvg/SearchSvg";
 
 const Programs = () => {
   const [programmeName, setProgrammeName] = useState("");
   const [programmeShortName, setProgrammeShortName] = useState("");
   let [isOpen, setIsOpen] = useState(false);
   const { data } = useGetProgrammeQuery(undefined);
-  const [
-    addProgramme,
-    {
-      isLoading,
-      isError: isAddProgError,
-      isSuccess: isAddProgSuccess,
-      error: addProgrammeError,
-    },
-  ] = useAddProgrammeMutation();
-  const [
-    deleteProgramme,
-    {
-      isLoading: isDeleteProgrammeLoading,
-      isSuccess: isDeleteProgrammeSuccess,
-      isError: isDeleteProgrammeError,
-      error: deleteProgrammeError,
-    },
-  ] = useDeleteProgramMutation();
+  const [addProgramme] = useAddProgrammeMutation();
+  const [deleteProgramme] = useDeleteProgramMutation();
 
   const postData = { name: programmeName, shortName: programmeShortName };
 
@@ -42,57 +26,55 @@ const Programs = () => {
     setIsOpen(false);
   };
 
-  const addProgButton = () => {
-    addProgramme(postData);
+  const addProgButton = async () => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await addProgramme(postData).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
     setIsOpen(false);
   };
-  const handleDeleteProgram = (id) => {
-    deleteProgramme(id);
+  const handleDeleteProgram = async (id) => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await deleteProgramme(id).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
   };
-
-  useEffect(() => {
-    if (isAddProgSuccess) {
-      Swal.fire({
-        icon: "success",
-        title: `Programmed Added Successfully`,
-        showConfirmButton: true,
-      });
-    }
-    if (isAddProgError) {
-      Swal.fire({
-        icon: "error",
-        title: `${addProgrammeError.data.message}`,
-        text: `${addProgrammeError.data.errorMessage}`,
-        showConfirmButton: true,
-      });
-    }
-
-    if (isDeleteProgrammeError) {
-      Swal.fire({
-        icon: "error",
-        title: `${deleteProgrammeError.data.message}`,
-        text: `${deleteProgrammeError.data.errorMessage}`,
-        showConfirmButton: true,
-      });
-    }
-
-    if (isDeleteProgrammeSuccess) {
-      Swal.fire({
-        icon: "success",
-        title: `Programmed Deleted Successfully`,
-        showConfirmButton: true,
-      });
-    }
-  }, [
-    isAddProgSuccess,
-    isAddProgError,
-    addProgrammeError,
-    isDeleteProgrammeError,
-    isDeleteProgrammeSuccess,
-    isLoading,
-    isDeleteProgrammeLoading,
-    deleteProgrammeError,
-  ]);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

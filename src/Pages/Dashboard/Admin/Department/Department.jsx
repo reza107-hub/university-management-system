@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DepartmentModel from "../../../../Components/Dialog/DepartmentModel";
-import SearchSvg from "../../../../Components/SearchSvg/SearchSvg";
 
 import Swal from "sweetalert2";
 import { useGetProgrammeQuery } from "../../../../Redux/features/Programme/Programme.api";
 import {
   useAddDepartmentMutation,
+  useDeleteDepartmentMutation,
   useGetDepartmentQuery,
 } from "../../../../Redux/features/Department/department.api";
+import SearchSvg from "../../../../Components/svg/SearchSvg/SearchSvg";
 
 const Department = () => {
   let [isOpen, setIsOpen] = useState(false);
@@ -20,14 +21,8 @@ const Department = () => {
 
   const { data: getDepartmentData } = useGetDepartmentQuery(undefined);
 
-  const [
-    addDepartment,
-    {
-      isError: isAddDeptError,
-      isSuccess: isAddDeptSuccess,
-      error: AddDeptError,
-    },
-  ] = useAddDepartmentMutation();
+  const [addDepartment] = useAddDepartmentMutation();
+  const [deleteDepartment] = useDeleteDepartmentMutation();
 
   const openModal = () => {
     setIsOpen(true);
@@ -42,29 +37,57 @@ const Department = () => {
     shortForm: deptShortName,
     program: deptProgramme,
   };
-  const addDeptButton = () => {
-    addDepartment(departmentData);
+  const addDeptButton = async () => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await addDepartment(departmentData).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
+    setIsOpen(false);
+  };
+  const handleDeleteProgram = async (id) => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await deleteDepartment(id).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    if (isAddDeptSuccess) {
-      Swal.fire({
-        icon: "success",
-        title: `Programmed Added Successfully`,
-        showConfirmButton: true,
-      });
-    }
-
-    if (isAddDeptError) {
-      Swal.fire({
-        icon: "error",
-        title: `${AddDeptError.data.message}`,
-        text: `${AddDeptError.data.errorMessage}`,
-        showConfirmButton: true,
-      });
-    }
-  }, [isAddDeptSuccess, isAddDeptError, AddDeptError]);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <DepartmentModel
@@ -132,7 +155,7 @@ const Department = () => {
                 </td>
                 <td className="px-6 py-4">
                   <button
-                    // onClick={() => handleDeleteProgram(result?._id)}
+                    onClick={() => handleDeleteProgram(result?._id)}
                     className={`btn-primary`}
                   >
                     Delete This Department

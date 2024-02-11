@@ -1,9 +1,9 @@
 import Swal from "sweetalert2";
-import SearchSvg from "../../../Components/SearchSvg/SearchSvg";
 import {
   useDeleteAnAdminMutation,
   useGetAdminListQuery,
 } from "../../../Redux/features/admin/admin.api";
+import SearchSvg from "../../../Components/svg/SearchSvg/SearchSvg";
 
 const AdminList = () => {
   const { data: adminListData } = useGetAdminListQuery(undefined);

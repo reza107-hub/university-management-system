@@ -18,7 +18,15 @@ const departmentApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['Department']
         }),
+
+        deleteDepartment: build.mutation({
+            query: (id) => ({
+                url: `/department/delete-dept/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Department']
+        }),
     })
 })
 
-export const { useAddDepartmentMutation, useGetDepartmentQuery } = departmentApi
+export const { useAddDepartmentMutation, useGetDepartmentQuery, useDeleteDepartmentMutation } = departmentApi

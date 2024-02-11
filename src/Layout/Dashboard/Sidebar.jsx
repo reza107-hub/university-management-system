@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { FaHome, FaRegUser } from "react-icons/fa";
 import useAuth from "../../Hooks/useAuth";
-import AcademicCap from "../../Components/AcademicCap/AcademicCap";
-import UserSvg from "../../Components/UserSvg/UserSvg";
+import UserSvg from "../../Components/svg/UserSvg/UserSvg";
 import { useGetPresentUserWithAdditionalInfoQuery } from "../../Redux/features/User/UserApi";
+import AcademicCap from "../../Components/svg/AcademicCap/AcademicCap";
 
 const Sidebar = () => {
   const { user, logOut } = useAuth();

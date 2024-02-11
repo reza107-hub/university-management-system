@@ -1,14 +1,17 @@
 import Swal from "sweetalert2";
-import SearchSvg from "../../../Components/SearchSvg/SearchSvg";
 
-import { useDeleteFacultyMutation, useGetFacultyListQuery } from "../../../Redux/features/faculty/FacultyApi";
+import {
+  useDeleteFacultyMutation,
+  useGetFacultyListQuery,
+} from "../../../Redux/features/faculty/FacultyApi";
+import SearchSvg from "../../../Components/svg/SearchSvg/SearchSvg";
 
 const FacultyList = () => {
   const { data: facultyListData } = useGetFacultyListQuery(undefined);
   const [deleteFaculty] = useDeleteFacultyMutation();
 
   const data = facultyListData?.data;
-console.log(data)
+  console.log(data);
   const handleDeleteFaculty = async (user) => {
     try {
       Swal.fire({

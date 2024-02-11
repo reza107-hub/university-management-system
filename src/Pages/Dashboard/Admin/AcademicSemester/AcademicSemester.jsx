@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReUsable from "../../../../Components/Dialog/ReUsableModaal";
 import { academicSemesterContent } from "./AcademicSemester.constant";
-import SearchSvg from "../../../../Components/SearchSvg/SearchSvg";
+import SearchSvg from "../../../../Components/svg/SearchSvg/SearchSvg";
 import Table from "../../../../Components/Table/Table";
 
 import Swal from "sweetalert2";
@@ -9,12 +9,10 @@ import {
   useAddAcademicSemesterMutation,
   useGetAcademicSemesterQuery,
 } from "../../../../Redux/features/AcademicSemester/AcademicSemester.api";
+import { useForm } from "react-hook-form";
 
 const AcademicSemester = () => {
-  const [
-    addAcademicSemester,
-    { data: academicSemesterData, error: academicSemesterError },
-  ] = useAddAcademicSemesterMutation();
+  const [addAcademicSemester] = useAddAcademicSemesterMutation();
 
   const { data: getAcademicSemesterData } =
     useGetAcademicSemesterQuery(undefined);
@@ -29,9 +27,32 @@ const AcademicSemester = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+  const { handleSubmit, register, reset } = useForm();
 
-  const onSubmit = (data) => {
-    addAcademicSemester(data);
+  const onSubmit = async (data) => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await addAcademicSemester(data).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
+    reset();
     closeModal();
   };
 
@@ -45,22 +66,9 @@ const AcademicSemester = () => {
   // pending
   const onSubmitForUpdate = (data) => {
     console.log(data);
+    reset();
     closeModalForUpdate();
   };
-  useEffect(() => {
-    if (academicSemesterData?.success === true) {
-      Swal.fire({
-        icon: "success",
-        title: academicSemesterData?.message,
-      });
-    }
-    if (academicSemesterError?.data?.success === false) {
-      Swal.fire({
-        icon: "error",
-        title: academicSemesterError?.data?.message,
-      });
-    }
-  }, [academicSemesterData, academicSemesterError]);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -69,6 +77,8 @@ const AcademicSemester = () => {
         closeModal={closeModal}
         onSubmit={onSubmit}
         Content={academicSemesterContent}
+        handleSubmit={handleSubmit}
+        register={register}
       />
       {/* this is for update */}
       <ReUsable
@@ -76,6 +86,8 @@ const AcademicSemester = () => {
         closeModal={closeModalForUpdate}
         onSubmit={onSubmitForUpdate}
         Content={academicSemesterContent}
+        handleSubmit={handleSubmit}
+        register={register}
       />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>

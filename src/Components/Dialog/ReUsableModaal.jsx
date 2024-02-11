@@ -1,9 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { useForm } from "react-hook-form";
 
-export default function ReUsable({ isOpen, closeModal, onSubmit, Content }) {
-  const { handleSubmit, register } = useForm();
+export default function ReUsable({
+  isOpen,
+  closeModal,
+  onSubmit,
+  Content,
+  handleSubmit,
+  register,
+}) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -59,8 +64,8 @@ export default function ReUsable({ isOpen, closeModal, onSubmit, Content }) {
                           </Dialog.Title>
                           <select {...register(item.id)}>
                             {item.select.map((Option) => (
-                              <option key={Option} value={Option}>
-                                {Option}
+                              <option key={Option?._id} value={Option?._id}>
+                                {Option?.value}
                               </option>
                             ))}
                           </select>

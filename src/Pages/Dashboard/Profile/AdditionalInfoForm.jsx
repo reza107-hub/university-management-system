@@ -1,45 +1,49 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
-import UserList from "../../../Components/UserList/UserList";
-import useAxios from "../../../Hooks/useAxios";
 import Swal from "sweetalert2";
+import {
+  useCreateUserAdditionalInfoMutation,
+  useGetPresentUserQuery,
+} from "../../../Redux/features/User/UserApi";
 
 const AdditionalInfoForm = () => {
-  const [axiosCreate] = useAxios();
   const { user } = useAuth();
-  const [users, refetch] = UserList();
-  const presentUser = users.find(
-    (userFromDb) => userFromDb.email === user.email
-  );
+  const { data: presentUser } = useGetPresentUserQuery(user?.email);
+  const [createUserAdditionalInfo] = useCreateUserAdditionalInfoMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    data.userId = presentUser?._id;
+  const onSubmit = async (data) => {
+    data.userId = presentUser?.data?._id;
     data.name = user?.displayName;
-    data.email = presentUser?.email;
+    data.email = presentUser?.data?.email;
     data.image = user?.photoURL;
-    axiosCreate.post("/userAdditionalInfo/create", data)
-      .then((response) => {
-        if (response.data.success === true) {
-          Swal.fire({
-            icon: "success",
-            title: "Success",
-            text: response.data.message,
-          });
-          refetch();
-        }
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: `${error.message}`,
-        });
+
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
       });
+      const res = await createUserAdditionalInfo(data).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
   };
   return (
     <div>

@@ -11,7 +11,6 @@ import {
 } from "firebase/auth";
 import app from "../firebase/firebasee.init";
 
-
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
