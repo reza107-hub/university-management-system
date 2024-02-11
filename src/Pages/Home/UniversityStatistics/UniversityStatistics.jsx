@@ -17,7 +17,7 @@ const AnimatedNumber = ({ value }) => {
 
   return (
     <animated.span ref={inViewRef}>
-      {animatedValue.value.interpolate((val) => Math.floor(val))}
+      {animatedValue.value.to((val) => Math.floor(val))}
     </animated.span>
   );
 };

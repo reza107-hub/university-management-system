@@ -6,7 +6,8 @@ import useAuth from "../../Hooks/useAuth";
 import axios from "axios";
 import GoogleSignIn from "../Shared/GoogleSignIn/GoogleSignIn";
 import Swal from "sweetalert2";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import GetHostUrl from "../../Components/GetHostUrl/GetHostUrl";
+import SaveUser from "../../Components/SaveUser/SaveUser";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -30,45 +31,33 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const imageFile = data.photo[0];
-
-    const storage = getStorage();
-    const storageRef = ref(storage, `images/${imageFile.name}`);
-    await uploadBytes(storageRef, imageFile);
-
     // Get image URL (assuming images are stored in 'images' folder)
-    const imageUrl = `https://firebasestorage.googleapis.com/v0/b/${
-      import.meta.env.VITE_projectId
-    }.appspot.com/o/images%2F${imageFile.name}?alt=media`;
+    const imageUrl = await GetHostUrl(data.photo[0]);
 
-      createUser(data.email, data.password)
-        .then((result) => {
-          const saveUser = {
-            name: data.name,
-            email: data.email,
-            image: imageUrl,
-          };
-          axios.post("http://localhost:5000/users", saveUser).then((res) => {
-            if (res.data.insertedId) {
-              Swal.fire({
-                title: "Signup Successful",
-                icon: "success",
-                confirmButtonText: "OK",
-              });
-            }
-          });
-          console.log(result.user);
-          updateUserProfile(data.name, imageUrl).then(() => {
-            navigate("/");
-          });
-        })
-        .catch((err) => {
-          Swal.fire({
-            title: `${err.message}`,
-            icon: "error",
-            confirmButtonText: "OK",
-          });
+    createUser(data.email, data.password)
+      .then((result) => {
+        const saveUser = SaveUser(data);
+        axios.post("http://localhost:5000/api/users", saveUser).then((res) => {
+          if (res.data.success === true) {
+            Swal.fire({
+              title: "SignUp Successful",
+              icon: "success",
+              confirmButtonText: "OK",
+            });
+          }
         });
+        updateUserProfile(data.name, imageUrl).then(() => {
+          navigate("/");
+        });
+        return result;
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: `${err.message}`,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      });
   };
 
   const password = watch("password");

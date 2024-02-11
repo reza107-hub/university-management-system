@@ -14,9 +14,21 @@ import "swiper/css/keyboard";
 import "./BannerStyle.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
+
+import Loader from "../../../Components/Loader/Loader";
+import { useGetPresentUserWithAdditionalInfoQuery } from "../../../Redux/features/User/UserApi";
 
 const Banner = () => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const { user, loading } = useAuth();
+
+  const { data: userData, isLoading: isUserDetailsLoading } =
+    useGetPresentUserWithAdditionalInfoQuery(user?.email);
+
+  if (loading || isUserDetailsLoading) {
+    return <Loader />;
+  }
 
   const content = [
     {
@@ -27,12 +39,14 @@ const Banner = () => {
     {
       title: "Join a Community of Learning",
       sub_title: "Transforming Dreams into Reality",
-      image: "https://i.ibb.co/dgQYzGS/Whats-App-Image-2023-08-18-at-7-35-41-PM.jpg",
+      image:
+        "https://i.ibb.co/dgQYzGS/Whats-App-Image-2023-08-18-at-7-35-41-PM.jpg",
     },
     {
       title: "Explore a World of Opportunities",
       sub_title: "Choose Sylhet Metropolitan University",
-      image: "https://i.ibb.co/MDyN5XL/323113454-1325448301586663-5004010928649462078-n.jpg",
+      image:
+        "https://i.ibb.co/MDyN5XL/323113454-1325448301586663-5004010928649462078-n.jpg",
     },
     {
       title: "Discover Your Opportunities",
@@ -99,16 +113,26 @@ const Banner = () => {
                   >
                     {c?.sub_title}
                   </p>
-                  <Link to='/getAdmission'>
-                  <button
-                    className={`m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm ${
-                      activeSlideIndex === i
-                        ? "slide-animation slide-animation-down"
-                        : ""
-                    }`}
-                  >
-                    Get Admission
-                  </button>
+                  <Link to="/getAdmission">
+                    <button
+                      disabled={
+                        (userData?.data?.userId?.role === "admin") | "student"
+                      }
+                      className={`m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm ${
+                        activeSlideIndex === i
+                          ? "slide-animation slide-animation-down"
+                          : ""
+                      }
+                      ${
+                        // eslint-disable-next-line no-constant-condition
+                        (userData?.data?.userId?.role === "admin") | "student"
+                          ? "disabled:opacity-25"
+                          : ""
+                      }
+                      `}
+                    >
+                      Get Admission
+                    </button>
                   </Link>
                 </div>
               </div>
