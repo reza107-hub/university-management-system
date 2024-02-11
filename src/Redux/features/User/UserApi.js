@@ -4,9 +4,10 @@ const userApi = baseApi.injectEndpoints({
     endpoints: build => ({
         // user list collection
         getUser: build.query({
-            query: () => ({
+            query: (params) => ({
                 url: `/users`,
                 method: 'GET',
+                params
             }),
             providesTags: ['user']
         }),
@@ -43,9 +44,10 @@ const userApi = baseApi.injectEndpoints({
             invalidatesTags: ['user']
         }),
         getUserWithAdditionalInfo: build.query({
-            query: () => ({
+            query: (params) => ({
                 url: `/userAdditionalInfo`,
                 method: 'GET',
+                params
             }),
             providesTags: ['user']
         }),

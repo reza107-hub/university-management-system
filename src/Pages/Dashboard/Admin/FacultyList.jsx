@@ -4,14 +4,16 @@ import {
   useDeleteFacultyMutation,
   useGetFacultyListQuery,
 } from "../../../Redux/features/faculty/FacultyApi";
-import SearchSvg from "../../../Components/svg/SearchSvg/SearchSvg";
+import { useState } from "react";
+import SearchName from "../../../Components/Search/SearchName";
 
 const FacultyList = () => {
-  const { data: facultyListData } = useGetFacultyListQuery(undefined);
+  const [params, setParams] = useState("");
+  const { data: facultyListData } = useGetFacultyListQuery(params);
   const [deleteFaculty] = useDeleteFacultyMutation();
-
+  const SearchPlaceHolderName = "Faculty";
   const data = facultyListData?.data;
-  console.log(data);
+  // console.log(data)
   const handleDeleteFaculty = async (user) => {
     try {
       Swal.fire({
@@ -41,17 +43,10 @@ const FacultyList = () => {
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
-        <div className="relative">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <SearchSvg />
-          </div>
-          <input
-            type="text"
-            id="table-search-users"
-            className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search for users"
-          />
-        </div>
+        <SearchName
+          setParams={setParams}
+          SearchPlaceHolderName={SearchPlaceHolderName}
+        />
       </div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

@@ -14,9 +14,10 @@ const AcademicSemesterApi = baseApi.injectEndpoints({
 
         // get academic-semester endpoint
         getAcademicSemester: build.query({
-            query: () => ({
+            query: (params) => ({
                 url: '/academic-semesters',
                 method: 'GET',
+                params
             }),
             providesTags: ['academic-semester']
         })
