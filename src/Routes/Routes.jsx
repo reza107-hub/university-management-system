@@ -21,6 +21,20 @@ import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/Academic
 import Batch from "../Pages/Dashboard/Admin/Batch/Batch";
 import AdditionalInfoRequireRoutes from "./AdditionalInfoRequireRoutes";
 import FacultyList from "../Pages/Dashboard/Admin/FacultyList";
+import Overview from "../Pages/Home/overview/Overview";
+import HistoryOfMu from "../Pages/Home/HistoryOfMu/HistoryOfMu";
+import VisionAndMission from "../Pages/Home/VissionAndMission/VisionAndMission";
+import CSEProgramUi from "../Pages/Home/CSEProgram/CSEProgramUi";
+import SEProgramUi from "../Pages/Home/SEProgramUi/SEProgramUi";
+import OneStopServiceUi from "../Pages/Home/OneStopServiceUi/OneStopServiceUi";
+import LibraryOfMuUi from "../Pages/Home/LibraryOfMuUi/LibraryOfMuUi";
+import LaboratoryUi from "../Pages/Home/Laboratory/LaboratoryUi";
+import Cafeteria from "../Pages/Home/Cafeteria/Cafeteria";
+import MuSportsClub from "../Pages/Home/Club&Organization/MuSportsClub/MuSportsClub";
+import MuSocialServiceClub from "../Pages/Home/Club&Organization/muSocialServiceClub/muSocialServiceClub";
+import MuCulturalClub from "../Pages/Home/Club&Organization/MuCulturalClab/MuCulturalClub";
+import MuPhotographicSociety from "../Pages/Home/Club&Organization/MuPhotographicSociety/MuPhotographicSociety";
+import MuRoboticsClub from "../Pages/Home/Club&Organization/MuRoboticsClub/MuRoboticsClub";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +44,62 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/overview",
+        element: <Overview />
+      },
+      {
+        path: "/history",
+        element: <HistoryOfMu />
+      },
+      {
+        path: "/vision-mission",
+        element: <VisionAndMission />
+      },
+      {
+        path: "/cse",
+        element: <CSEProgramUi />
+      },
+      {
+        path: "/software-engineering",
+        element: <SEProgramUi />
+      },
+      {
+        path: "/one-stop",
+        element: <OneStopServiceUi />
+      },
+      {
+        path: "/library",
+        element: <LibraryOfMuUi />
+      },
+      {
+        path: "/laboratory",
+        element: <LaboratoryUi />
+      },
+      {
+        path: "/cafeteria",
+        element: <Cafeteria />
+      },
+      {
+        path: "/mu-sports-club",
+        element: <MuSportsClub />
+      },
+      {
+        path: "/mu-social-service",
+        element: <MuSocialServiceClub />
+      },
+      {
+        path: "/mu-cultural-club",
+        element: <MuCulturalClub />
+      },
+      {
+        path: "/mu-photographic-society",
+        element: <MuPhotographicSociety />
+      },
+      {
+        path: "/mu-robotics-club",
+        element: <MuRoboticsClub />
       },
       {
         path: "/getAdmission",

@@ -19,9 +19,10 @@ const facultyApi = baseApi.injectEndpoints({
         }),
         // faculty list get
         getFacultyList: build.query({
-            query: () => ({
+            query: (params) => ({
                 url: `/faculty/faculty-list`,
                 method: 'GET',
+                params
             }),
             providesTags: ['admin-list', 'user','faculty', 'admin']
         }),

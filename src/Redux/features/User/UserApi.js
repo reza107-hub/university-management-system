@@ -4,9 +4,10 @@ const userApi = baseApi.injectEndpoints({
     endpoints: build => ({
         // user list collection
         getUser: build.query({
-            query: () => ({
+            query: (params) => ({
                 url: `/users`,
                 method: 'GET',
+                params
             }),
             providesTags: ['user']
         }),
@@ -19,13 +20,21 @@ const userApi = baseApi.injectEndpoints({
             providesTags: ['user']
         }),
         getUserWithAdditionalInfo: build.query({
-            query: () => ({
+            query: (params) => ({
                 url: `/userAdditionalInfo`,
                 method: 'GET',
+                params
             }),
             providesTags: ['user']
+        }),
+        contactByEmail: build.mutation({
+            query: (data) => ({
+                url: '/users/contact-us',
+                method: 'POST',
+                body: data,
+            }),
         }),
     })
 })
 
-export const { useGetUserQuery, useGetPresentUserWithAdditionalInfoQuery, useGetUserWithAdditionalInfoQuery } = userApi
+export const { useGetUserQuery, useGetPresentUserWithAdditionalInfoQuery, useGetUserWithAdditionalInfoQuery ,useContactByEmailMutation } = userApi

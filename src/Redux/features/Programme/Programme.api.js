@@ -11,9 +11,10 @@ const programApi = baseApi.injectEndpoints({
             invalidatesTags: ['Programme']
         }),
         getProgramme: build.query({
-            query: () => ({
+            query: (params) => ({
                 url: '/program/get-all-program',
                 method: 'GET',
+                params
             }),
             providesTags: ['Programme']
         }),
