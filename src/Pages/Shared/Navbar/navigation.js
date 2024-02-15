@@ -30,11 +30,11 @@ export const navigation = [
         name: "Club & Organization",
         nested_links: [
             { name: 'MU Sports Club', to: '/mu-sports-club' },
-            { name: 'MU Debating Club', to: '/mu-debating-club' },
             { name: 'MU Social Service', to: '/mu-social-service' },
             { name: 'MU Cultural Club', to: '/mu-cultural-club' },
-            { name: 'MU Photographic Society', to: '/mu-photographic-society' }
+            { name: 'MU Photographic Society', to: '/mu-photographic-society' },
+            {name:' MU Robotics Club',to:'/mu-robotics-club'}
         ]
     },
-    { name: "Contacts", to: "/contacts" },
+    { name: "Contacts", to: "#contact" },
 ];
