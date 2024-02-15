@@ -48,9 +48,11 @@ export default function ReUsable({
                             {item.name}
                           </Dialog.Title>
                           <input
+                            className="w-full rounded-md"
                             type={item.type}
                             name={item.inputName}
                             id={item.id}
+                            step={item?.step}
                             {...register(item.id)}
                           />
                         </div>
@@ -62,7 +64,10 @@ export default function ReUsable({
                           >
                             {item.name}
                           </Dialog.Title>
-                          <select {...register(item.id)}>
+                          <select
+                            {...register(item.id)}
+                            className="w-full rounded-md"
+                          >
                             {item.select.map((Option) => (
                               <option key={Option?._id} value={Option?._id}>
                                 {Option?.value}

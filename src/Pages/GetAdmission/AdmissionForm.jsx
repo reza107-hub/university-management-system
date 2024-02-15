@@ -12,8 +12,11 @@ import { useGetBatchQuery } from "../../Redux/features/BatchApi/BatchApi";
 import { useCreateAdmissionRequestMutation } from "../../Redux/features/Admission/Admission.api";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useGetSemesterRegistrationQuery } from "../../Redux/features/SemesterrRegistration/SemesterrRegistration.api";
 
 const AdmissionForm = () => {
+  const { data } = useGetSemesterRegistrationQuery();
+  const semester = data?.data?.find((result) => result?.status === "UPCOMING");
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const [createAdmissionRequest] = useCreateAdmissionRequestMutation();
@@ -44,7 +47,7 @@ const AdmissionForm = () => {
     presentAddress: userData?.data?.presentAddress,
     permanentAddress: userData?.data?.permanentAddress,
     bloodGroup: userData?.data?.bloodGroup,
-    programme: "65a3bfbc890269eafebddd7e",
+    program: "65a3bfbc890269eafebddd7e",
     department: "65a4025728dca38bae466a4a",
   };
 
@@ -68,6 +71,7 @@ const AdmissionForm = () => {
         firstName: data.firstName,
         lastName: data.lastName,
       };
+      data.userId = userData?.data?.userId?._id;
       data.profileImage = await GetHostUrl(data.profileImage[0]);
       data.sscCertificate = await GetHostUrl(data.sscCertificate[0]);
       data.hscCertificate = await GetHostUrl(data.hscCertificate[0]);
@@ -80,6 +84,7 @@ const AdmissionForm = () => {
       if (batch) {
         data.batch = batch?.batchNumber;
       }
+      data.semester = semester._id;
 
       const { firstName, lastName, ...postData } = data;
 
@@ -87,7 +92,7 @@ const AdmissionForm = () => {
       Swal.fire({
         title: res.message,
         icon: "success",
-        timer: 1500,
+        timer: 2000,
       });
       navigate("/");
     } catch (error) {

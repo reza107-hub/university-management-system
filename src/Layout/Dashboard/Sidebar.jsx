@@ -61,6 +61,12 @@ const Sidebar = () => {
       role: "admin",
     },
     {
+      to: "/dashboard/semester-registration",
+      label: "Semester Registration",
+      icon: <AcademicCap />,
+      role: "admin",
+    },
+    {
       to: "/dashboard/admission-requests-lists",
       label: "Admission Requests",
       icon: <UserSvg />,

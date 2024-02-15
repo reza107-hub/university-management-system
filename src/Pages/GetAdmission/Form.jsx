@@ -301,12 +301,12 @@ const Form = ({
         </div>
 
         <div className="mb-3 w-[20%]">
-          <label htmlFor="Programme" className="col-sm-2 col-form-label">
-            Programme
+          <label htmlFor="Program" className="col-sm-2 col-form-label">
+            Program
           </label>
           <div className="">
             <select
-              {...register("programme", { required: true })}
+              {...register("program", { required: true })}
               className="form-select w-full text-black"
             >
               {programData?.data.map((program) => (
@@ -316,7 +316,7 @@ const Form = ({
               ))}
               {/* Add more options as needed */}
             </select>
-            {errors.programme && (
+            {errors.program && (
               <span className="text-red-700">This field is required</span>
             )}
           </div>

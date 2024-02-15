@@ -11,6 +11,14 @@ const AcademicSemesterApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['academic-semester']
         }),
+        updateAcademicSemester: build.mutation({
+            query: ({ courseId, body }) => ({
+                url: `/academic-semesters/${courseId}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: ['academic-semester']
+        }),
 
         // get academic-semester endpoint
         getAcademicSemester: build.query({
@@ -20,8 +28,16 @@ const AcademicSemesterApi = baseApi.injectEndpoints({
                 params
             }),
             providesTags: ['academic-semester']
+        }),
+
+        getSingleAcademicSemester: build.query({
+            query: (courseId) => ({
+                url: `/academic-semesters/${courseId}`,
+                method: 'GET',
+            }),
+            providesTags: ['academic-semester']
         })
     })
 })
 
-export const { useAddAcademicSemesterMutation, useGetAcademicSemesterQuery } = AcademicSemesterApi
+export const { useAddAcademicSemesterMutation, useGetAcademicSemesterQuery, useGetSingleAcademicSemesterQuery, useUpdateAcademicSemesterMutation } = AcademicSemesterApi

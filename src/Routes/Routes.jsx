@@ -21,6 +21,7 @@ import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/Academic
 import Batch from "../Pages/Dashboard/Admin/Batch/Batch";
 import AdditionalInfoRequireRoutes from "./AdditionalInfoRequireRoutes";
 import FacultyList from "../Pages/Dashboard/Admin/FacultyList";
+import SemesterRegistration from "../Pages/Dashboard/Admin/SemesterRegistration/SemesterRegistration";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <AdminList />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/semester-registration",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <SemesterRegistration />
             </AdminRoutes>
           </PrivateRoute>
         ),

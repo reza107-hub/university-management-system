@@ -7,13 +7,22 @@ const admissionApi = baseApi.injectEndpoints({
                 url: `/admission-request`,
                 method: 'POST',
                 body
-            })
+            }),
+            invalidatesTags: ['admission']
         }),
         getAdmissionRequest: build.query({
-            query: () => ({
-                url: `/admission-request`,
-                method: 'GET',
-            })
+            query: (email) => {
+                const params = new URLSearchParams()
+                if (email) {
+                    params.append('email', email)
+                }
+                return {
+                    url: `/admission-request`,
+                    method: 'GET',
+                    params,
+                }
+            },
+            providesTags: ['admission']
         }),
     })
 })

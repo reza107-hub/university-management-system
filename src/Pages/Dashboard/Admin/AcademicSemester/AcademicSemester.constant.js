@@ -54,3 +54,35 @@ export const academicSemesterContent = [
         select: transformedMonth,
     },
 ];
+
+export const updateAcademicSemesterContent = [
+    {
+        name: "Semester Name",
+        type: "text",
+        inputName: "name",
+        id: "name",
+    },
+    {
+        name: "Semester code",
+        type: "text",
+        inputName: "code",
+        id: "code",
+    },
+    {
+        name: "Year",
+        id: "year",
+        select: date,
+    },
+    {
+        name: "Semester Start Month",
+        id: "startMonth",
+        type: "text",
+        inputName: "startMonth",
+    },
+    {
+        name: "Semester End Month",
+        id: "endMonth",
+        type: "text",
+        inputName: "endMonth",
+    },
+];
