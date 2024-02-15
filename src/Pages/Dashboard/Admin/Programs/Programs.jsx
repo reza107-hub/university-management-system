@@ -1,4 +1,6 @@
+
 import { useState } from "react";
+
 import Modal from "../../../../Components/Dialog/Modal";
 
 import Swal from "sweetalert2";
@@ -12,12 +14,14 @@ import SearchName from "../../../../Components/Search/SearchName";
 const Programs = () => {
   const [programmeName, setProgrammeName] = useState("");
   const [programmeShortName, setProgrammeShortName] = useState("");
+
   const [params, setParams] = useState("");
   let [isOpen, setIsOpen] = useState(false);
   const { data } = useGetProgrammeQuery(params);
   const SearchPlaceHolderName = "program";
   const [addProgramme] = useAddProgrammeMutation();
   const [deleteProgramme] = useDeleteProgramMutation();
+
 
   const postData = { name: programmeName, shortName: programmeShortName };
 
@@ -89,10 +93,12 @@ const Programs = () => {
       />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
+
         <SearchName
           setParams={setParams}
           SearchPlaceHolderName={SearchPlaceHolderName}
         />
+
         <div>
           <button type="button" onClick={openModal} className="btn-primary">
             Add Program

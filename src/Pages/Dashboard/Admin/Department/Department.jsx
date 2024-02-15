@@ -12,6 +12,7 @@ import SearchName from "../../../../Components/Search/SearchName";
 
 const Department = () => {
   let [isOpen, setIsOpen] = useState(false);
+
   const [params, setParams] = useState("");
   const [deptCode, setDeptCode] = useState("");
   const [deptName, setDeptName] = useState("");
@@ -22,8 +23,10 @@ const Department = () => {
   const [deleteDepartment] = useDeleteDepartmentMutation();
 
   const { data: getDepartmentData } = useGetDepartmentQuery(params);
+
   const SearchPlaceHolderName = "Department";
   const [addDepartment] = useAddDepartmentMutation();
+
 
   const openModal = () => {
     setIsOpen(true);
@@ -103,10 +106,12 @@ const Department = () => {
       />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
+
         <SearchName
           setParams={setParams}
           SearchPlaceHolderName={SearchPlaceHolderName}
         />
+
         <div>
           <button type="button" onClick={openModal} className="btn-primary">
             Add Department

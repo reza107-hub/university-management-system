@@ -51,6 +51,17 @@ const userApi = baseApi.injectEndpoints({
             }),
             providesTags: ['user']
         }),
+
+        contactByEmail: build.mutation({
+            query: (data) => ({
+                url: '/users/contact-us',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+    })
+})
+
         UpdateUserWithAdditionalInfo: build.mutation({
             query: ({ id, data }) => ({
                 url: `/userAdditionalInfo/${id}`,
@@ -62,4 +73,5 @@ const userApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetUserQuery, useGetPresentUserWithAdditionalInfoQuery, useGetUserWithAdditionalInfoQuery, useGetPresentUserQuery, useCreateUserAdditionalInfoMutation, useCreateUserMutation, useUpdateUserWithAdditionalInfoMutation } = userApi
+export const { useGetUserQuery, useGetPresentUserWithAdditionalInfoQuery, useGetUserWithAdditionalInfoQuery, useGetPresentUserQuery, useCreateUserAdditionalInfoMutation, useCreateUserMutation, useUpdateUserWithAdditionalInfoMutation,useContactByEmailMutation } = userApi
+

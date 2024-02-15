@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ReUsable from "../../../../Components/Dialog/ReUsableModaal";
+
 import {
   academicSemesterContent,
   updateAcademicSemesterContent,
@@ -14,10 +15,12 @@ import {
   useGetSingleAcademicSemesterQuery,
   useUpdateAcademicSemesterMutation,
 } from "../../../../Redux/features/AcademicSemester/AcademicSemester.api";
+import SearchName from "../../../../Components/Search/SearchName";
 
 import SearchName from "../../../../Components/Search/SearchName";
 import { useForm } from "react-hook-form";
 const AcademicSemester = () => {
+
   const [updateId, setUpdateId] = useState("");
   const [params, setParams] = useState("");
 
@@ -143,6 +146,7 @@ const AcademicSemester = () => {
       />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
+
         <SearchName
           setParams={setParams}
           SearchPlaceHolderName={SearchPlaceHolderName}
