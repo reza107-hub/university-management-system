@@ -1,17 +1,23 @@
 import Swal from "sweetalert2";
 
 
-import { useDeleteFacultyMutation, useGetFacultyListQuery } from "../../../Redux/features/faculty/FacultyApi";
+import {
+  useDeleteFacultyMutation,
+  useGetFacultyListQuery,
+} from "../../../Redux/features/faculty/FacultyApi";
+
 import { useState } from "react";
 import SearchName from "../../../Components/Search/SearchName";
 
 const FacultyList = () => {
-  const [params, setParams] = useState('')
+
+  const [params, setParams] = useState("");
   const { data: facultyListData } = useGetFacultyListQuery(params);
   const [deleteFaculty] = useDeleteFacultyMutation();
-  const SearchPlaceHolderName = 'Faculty'
+  const SearchPlaceHolderName = "Faculty";
   const data = facultyListData?.data;
-// console.log(data)
+  // console.log(data)
+
   const handleDeleteFaculty = async (user) => {
     try {
       Swal.fire({
@@ -41,7 +47,13 @@ const FacultyList = () => {
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
-        <SearchName setParams={setParams} SearchPlaceHolderName={SearchPlaceHolderName}/>
+
+
+        <SearchName
+          setParams={setParams}
+          SearchPlaceHolderName={SearchPlaceHolderName}
+        />
+
       </div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

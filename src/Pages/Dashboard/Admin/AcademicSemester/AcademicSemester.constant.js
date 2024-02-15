@@ -13,7 +13,18 @@ const month = [
     "December",
 ];
 
-const date = new Date().getFullYear();
+const transformedMonth = month.map((monthName) => ({
+    _id: monthName,
+    value: monthName,
+}));
+
+const year = new Date().getFullYear();
+const date = [
+    {
+        _id: year,
+        value: year
+    }
+]
 export const academicSemesterContent = [
     {
         name: "Semester Name",
@@ -30,16 +41,48 @@ export const academicSemesterContent = [
     {
         name: "Year",
         id: "year",
-        select: [date],
+        select: date,
     },
     {
         name: "Semester Start Month",
         id: "startMonth",
-        select: month,
+        select: transformedMonth,
     },
     {
         name: "Semester End Month",
         id: "endMonth",
-        select: month,
+        select: transformedMonth,
+    },
+];
+
+export const updateAcademicSemesterContent = [
+    {
+        name: "Semester Name",
+        type: "text",
+        inputName: "name",
+        id: "name",
+    },
+    {
+        name: "Semester code",
+        type: "text",
+        inputName: "code",
+        id: "code",
+    },
+    {
+        name: "Year",
+        id: "year",
+        select: date,
+    },
+    {
+        name: "Semester Start Month",
+        id: "startMonth",
+        type: "text",
+        inputName: "startMonth",
+    },
+    {
+        name: "Semester End Month",
+        id: "endMonth",
+        type: "text",
+        inputName: "endMonth",
     },
 ];

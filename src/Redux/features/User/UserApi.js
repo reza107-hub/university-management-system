@@ -11,13 +11,37 @@ const userApi = baseApi.injectEndpoints({
             }),
             providesTags: ['user']
         }),
+        createUser: build.mutation({
+            query: (body) => ({
+                url: `/users`,
+                method: 'POST',
+                body
+            }),
+            providesTags: ['user']
+        }),
+        getPresentUser: build.query({
+            query: (email) => ({
+                url: `/users/${email}`,
+                method: 'GET',
+            }),
+            providesTags: ['user']
+        }),
 
         getPresentUserWithAdditionalInfo: build.query({
             query: (email) => ({
                 url: `/userAdditionalInfo/${email}`,
                 method: 'GET',
             }),
-            providesTags: ['user']
+            providesTags: ['user', 'admin-list', 'admin', 'faculty']
+        }),
+
+        createUserAdditionalInfo: build.mutation({
+            query: (body) => ({
+                url: `/userAdditionalInfo/create`,
+                method: 'POST',
+                body
+            }),
+            invalidatesTags: ['user']
         }),
         getUserWithAdditionalInfo: build.query({
             query: (params) => ({
@@ -27,6 +51,7 @@ const userApi = baseApi.injectEndpoints({
             }),
             providesTags: ['user']
         }),
+
         contactByEmail: build.mutation({
             query: (data) => ({
                 url: '/users/contact-us',
@@ -37,4 +62,16 @@ const userApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetUserQuery, useGetPresentUserWithAdditionalInfoQuery, useGetUserWithAdditionalInfoQuery ,useContactByEmailMutation } = userApi
+        UpdateUserWithAdditionalInfo: build.mutation({
+            query: ({ id, data }) => ({
+                url: `/userAdditionalInfo/${id}`,
+                method: 'PATCH',
+                body: data
+            }),
+            invalidatesTags: ['user', 'admin-list', 'admin', 'faculty']
+        }),
+    })
+})
+
+export const { useGetUserQuery, useGetPresentUserWithAdditionalInfoQuery, useGetUserWithAdditionalInfoQuery, useGetPresentUserQuery, useCreateUserAdditionalInfoMutation, useCreateUserMutation, useUpdateUserWithAdditionalInfoMutation,useContactByEmailMutation } = userApi
+

@@ -21,6 +21,7 @@ import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/Academic
 import Batch from "../Pages/Dashboard/Admin/Batch/Batch";
 import AdditionalInfoRequireRoutes from "./AdditionalInfoRequireRoutes";
 import FacultyList from "../Pages/Dashboard/Admin/FacultyList";
+
 import Overview from "../Pages/Home/overview/Overview";
 import HistoryOfMu from "../Pages/Home/HistoryOfMu/HistoryOfMu";
 import VisionAndMission from "../Pages/Home/VissionAndMission/VisionAndMission";
@@ -35,6 +36,9 @@ import MuSocialServiceClub from "../Pages/Home/Club&Organization/muSocialService
 import MuCulturalClub from "../Pages/Home/Club&Organization/MuCulturalClab/MuCulturalClub";
 import MuPhotographicSociety from "../Pages/Home/Club&Organization/MuPhotographicSociety/MuPhotographicSociety";
 import MuRoboticsClub from "../Pages/Home/Club&Organization/MuRoboticsClub/MuRoboticsClub";
+
+import SemesterRegistration from "../Pages/Dashboard/Admin/SemesterRegistration/SemesterRegistration";
+
 
 const router = createBrowserRouter([
   {
@@ -163,6 +167,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <AdminList />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/semester-registration",
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <SemesterRegistration />
             </AdminRoutes>
           </PrivateRoute>
         ),

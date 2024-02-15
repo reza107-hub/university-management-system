@@ -11,7 +11,6 @@ const programData = [
       { type: "Co-curricular Activities Fee (Per Semester)", amount: 500 },
       { type: "Campus Activities Fee (Per Month)", amount: 1000 },
       { type: "Monthly Installment of Credit fees", amount: 5000 },
-
     ],
   },
   {
@@ -25,19 +24,7 @@ const programData = [
       { type: "Monthly Installment of Credit fees", amount: 6000 },
     ],
   },
-  {
-    id: 3,
-    name: "B.Sc. in EEE",
-    fees: [
-      { type: "Admission Fee (One time)", amount: 20000 },
-      { type: "Registration Fee (Per Semester)", amount: 15000 },
-      { type: "Co-curricular Activities Fee (Per Semester)", amount: 500 },
-      { type: "Campus Activities Fee (Per Month)", amount: 1000 },
-      { type: "Monthly Installment of Credit fees", amount: 6000 },
-    ],
-  },
-
-]
+];
 
 const AdmissionBanner = () => {
   return (
