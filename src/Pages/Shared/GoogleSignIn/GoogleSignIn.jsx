@@ -1,35 +1,52 @@
-import axios from "axios";
 import useAuth from "../../../Hooks/useAuth";
 import "./GoogleSignIn.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import SaveUser from "../../../Components/SaveUser/SaveUser";
+import { useCreateUserMutation } from "../../../Redux/features/User/UserApi";
+// import SaveUser from "../../../Components/SaveUser/SaveUser";
 
 const GoogleSignIn = () => {
+  const [createUserToDB] = useCreateUserMutation();
   const navigate = useNavigate();
   const { googleSignIn } = useAuth();
-  const handleGoogleLogin = () => {
-    googleSignIn()
-      .then((result) => {
-        const saveUser = SaveUser(result?.user);
-        axios.post("http://localhost:5000/api/users", saveUser).then((res) => {
-          if (res.data.success === true) {
-            Swal.fire({
-              title: "SignUp Successful",
-              icon: "success",
-              confirmButtonText: "OK",
-            });
-          }
+  const handleGoogleLogin = async () => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const resFromFirebase = await googleSignIn();
+      if (resFromFirebase) {
+        await createUserToDB({
+          email: resFromFirebase.user.email,
+        }).unwrap();
+        Swal.fire({
+          title: "Logged in... Successfully",
+          icon: "success",
+          timer: 1500,
         });
         navigate("/");
-      })
-      .catch((err) => {
+      }
+    } catch (error) {
+      if (error?.data?.message === "User Already exists") {
         Swal.fire({
-          title: `${err.message}`,
-          icon: "error",
-          confirmButtonText: "OK",
+          title: "Logged in... Successfully",
+          icon: "success",
+          timer: 1500,
         });
+        navigate("/");
+        return;
+      }
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
       });
+    }
   };
   return (
     <div className="my-8 flex justify-center">

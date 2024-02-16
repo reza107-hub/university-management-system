@@ -3,17 +3,17 @@ import "./Register.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
-import axios from "axios";
 import GoogleSignIn from "../Shared/GoogleSignIn/GoogleSignIn";
 import Swal from "sweetalert2";
 import GetHostUrl from "../../Components/GetHostUrl/GetHostUrl";
-import SaveUser from "../../Components/SaveUser/SaveUser";
+import { useCreateUserMutation } from "../../Redux/features/User/UserApi";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const navigate = useNavigate();
+  const [createUserToDB] = useCreateUserMutation();
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -31,33 +31,34 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // Get image URL (assuming images are stored in 'images' folder)
-    const imageUrl = await GetHostUrl(data.photo[0]);
-
-    createUser(data.email, data.password)
-      .then((result) => {
-        const saveUser = SaveUser(data);
-        axios.post("http://localhost:5000/api/users", saveUser).then((res) => {
-          if (res.data.success === true) {
-            Swal.fire({
-              title: "SignUp Successful",
-              icon: "success",
-              confirmButtonText: "OK",
-            });
-          }
-        });
-        updateUserProfile(data.name, imageUrl).then(() => {
-          navigate("/");
-        });
-        return result;
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: `${err.message}`,
-          icon: "error",
-          confirmButtonText: "OK",
-        });
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
       });
+      const imageUrl = await GetHostUrl(data.photo[0]);
+      const resFromFirebase = await createUser(data.email, data.password);
+      if (resFromFirebase) {
+        updateUserProfile(data.name, imageUrl);
+        const res = await createUserToDB({ email: data.email }).unwrap();
+        Swal.fire({
+          title: res.message,
+          icon: "success",
+          timer: 1500,
+        });
+        navigate("/");
+      }
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
   };
 
   const password = watch("password");

@@ -1,10 +1,10 @@
 // import React from 'react';
 
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 import { Disclosure } from "@headlessui/react";
 import { FaUserTimes } from "react-icons/fa";
 import { CiHashtag } from "react-icons/ci";
+import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 
 const LaboratoryUi = () => {
   const laboratory = [

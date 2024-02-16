@@ -1,4 +1,4 @@
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 
 const HistoryOfMu = () => {
   return (
@@ -33,7 +33,7 @@ const HistoryOfMu = () => {
             <p>⚖️<span className="font-semibold">“2005”</span>Opening of Faculty of Humanities & Social Sciences and Law.</p>
             <p>🧵<span className="font-semibold">“2004”</span>Opening of most modern and facilitated campus with high-speed campus backbone network.</p>
             <p>🔓<span className="font-semibold">“2003”</span>Establishment of the University, approved by the UGC & Government of the People’s Republic of Bangladesh.</p>
-          
+
         </div>
       </div>
     </div>

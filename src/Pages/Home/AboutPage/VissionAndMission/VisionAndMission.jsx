@@ -1,8 +1,8 @@
 // import React from 'react';
 
 import { FaEye, FaPaperPlane } from "react-icons/fa";
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 import { TbArrowsShuffle } from "react-icons/tb";
+import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 
 const VisionAndMission = () => {
   return (

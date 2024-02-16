@@ -18,10 +18,16 @@ import useAuth from "../../../Hooks/useAuth";
 
 import Loader from "../../../Components/Loader/Loader";
 import { useGetPresentUserWithAdditionalInfoQuery } from "../../../Redux/features/User/UserApi";
+import { useGetAdmissionRequestQuery } from "../../../Redux/features/Admission/Admission.api";
 
 const Banner = () => {
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   const { user, loading } = useAuth();
+  const { data } = useGetAdmissionRequestQuery(undefined);
+  const isUserAppliedForAdmission = data?.data?.some(
+    (d) => d?.email === user?.email
+  );
+
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   const { data: userData, isLoading: isUserDetailsLoading } =
     useGetPresentUserWithAdditionalInfoQuery(user?.email);
@@ -116,7 +122,9 @@ const Banner = () => {
                   <Link to="/getAdmission">
                     <button
                       disabled={
-                        (userData?.data?.userId?.role === "admin") | "student"
+                        (userData?.data?.userId?.role === "admin") |
+                        "student" |
+                        isUserAppliedForAdmission
                       }
                       className={`m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm ${
                         activeSlideIndex === i
@@ -125,7 +133,9 @@ const Banner = () => {
                       }
                       ${
                         // eslint-disable-next-line no-constant-condition
-                        (userData?.data?.userId?.role === "admin") | "student"
+                        (userData?.data?.userId?.role === "admin") |
+                        "student" |
+                        isUserAppliedForAdmission
                           ? "disabled:opacity-25"
                           : ""
                       }

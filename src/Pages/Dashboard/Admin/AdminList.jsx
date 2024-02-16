@@ -8,11 +8,13 @@ import { useState } from "react";
 import SearchName from "../../../Components/Search/SearchName";
 
 const AdminList = () => {
-  const [params, setParams] = useState('')
+
+  const [params, setParams] = useState("");
 
   const { data: adminListData } = useGetAdminListQuery(params);
   const [deleteAdmin] = useDeleteAnAdminMutation();
-  const SearchPlaceHolderName = 'Admin'
+  const SearchPlaceHolderName = "Admin";
+
   const data = adminListData?.data;
 
   const handleDeleteAdmin = async (user) => {
@@ -44,7 +46,13 @@ const AdminList = () => {
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
-        <SearchName setParams={setParams} SearchPlaceHolderName={SearchPlaceHolderName}/>
+
+
+        <SearchName
+          setParams={setParams}
+          SearchPlaceHolderName={SearchPlaceHolderName}
+        />
+
       </div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

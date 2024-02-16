@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
+
 import Modal from "../../../../Components/Dialog/Modal";
 
 import Swal from "sweetalert2";
@@ -12,28 +14,14 @@ import SearchName from "../../../../Components/Search/SearchName";
 const Programs = () => {
   const [programmeName, setProgrammeName] = useState("");
   const [programmeShortName, setProgrammeShortName] = useState("");
-  const [params, setParams] = useState('')
+
+  const [params, setParams] = useState("");
   let [isOpen, setIsOpen] = useState(false);
   const { data } = useGetProgrammeQuery(params);
-  const SearchPlaceHolderName = 'program'
-  const [
-    addProgramme,
-    {
-      isLoading,
-      isError: isAddProgError,
-      isSuccess: isAddProgSuccess,
-      error: addProgrammeError,
-    },
-  ] = useAddProgrammeMutation();
-  const [
-    deleteProgramme,
-    {
-      isLoading: isDeleteProgrammeLoading,
-      isSuccess: isDeleteProgrammeSuccess,
-      isError: isDeleteProgrammeError,
-      error: deleteProgrammeError,
-    },
-  ] = useDeleteProgramMutation();
+  const SearchPlaceHolderName = "program";
+  const [addProgramme] = useAddProgrammeMutation();
+  const [deleteProgramme] = useDeleteProgramMutation();
+
 
   const postData = { name: programmeName, shortName: programmeShortName };
 
@@ -44,57 +32,55 @@ const Programs = () => {
     setIsOpen(false);
   };
 
-  const addProgButton = () => {
-    addProgramme(postData);
+  const addProgButton = async () => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await addProgramme(postData).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
     setIsOpen(false);
   };
-  const handleDeleteProgram = (id) => {
-    deleteProgramme(id);
+  const handleDeleteProgram = async (id) => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await deleteProgramme(id).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
   };
-
-  useEffect(() => {
-    if (isAddProgSuccess) {
-      Swal.fire({
-        icon: "success",
-        title: `Programmed Added Successfully`,
-        showConfirmButton: true,
-      });
-    }
-    if (isAddProgError) {
-      Swal.fire({
-        icon: "error",
-        title: `${addProgrammeError.data.message}`,
-        text: `${addProgrammeError.data.errorMessage}`,
-        showConfirmButton: true,
-      });
-    }
-
-    if (isDeleteProgrammeError) {
-      Swal.fire({
-        icon: "error",
-        title: `${deleteProgrammeError.data.message}`,
-        text: `${deleteProgrammeError.data.errorMessage}`,
-        showConfirmButton: true,
-      });
-    }
-
-    if (isDeleteProgrammeSuccess) {
-      Swal.fire({
-        icon: "success",
-        title: `Programmed Deleted Successfully`,
-        showConfirmButton: true,
-      });
-    }
-  }, [
-    isAddProgSuccess,
-    isAddProgError,
-    addProgrammeError,
-    isDeleteProgrammeError,
-    isDeleteProgrammeSuccess,
-    isLoading,
-    isDeleteProgrammeLoading,
-    deleteProgrammeError,
-  ]);
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -107,7 +93,12 @@ const Programs = () => {
       />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
-        <SearchName setParams={setParams} SearchPlaceHolderName={SearchPlaceHolderName}/>
+
+        <SearchName
+          setParams={setParams}
+          SearchPlaceHolderName={SearchPlaceHolderName}
+        />
+
         <div>
           <button type="button" onClick={openModal} className="btn-primary">
             Add Program

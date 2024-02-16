@@ -1,5 +1,3 @@
-// import React from 'react';
-
 import { CiHashtag } from "react-icons/ci";
 import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 

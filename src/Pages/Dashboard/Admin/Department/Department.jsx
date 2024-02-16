@@ -1,34 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DepartmentModel from "../../../../Components/Dialog/DepartmentModel";
 
 import Swal from "sweetalert2";
 import { useGetProgrammeQuery } from "../../../../Redux/features/Programme/Programme.api";
 import {
   useAddDepartmentMutation,
+  useDeleteDepartmentMutation,
   useGetDepartmentQuery,
 } from "../../../../Redux/features/Department/department.api";
 import SearchName from "../../../../Components/Search/SearchName";
 
 const Department = () => {
   let [isOpen, setIsOpen] = useState(false);
-  const [params, setParams] = useState('')
+
+  const [params, setParams] = useState("");
   const [deptCode, setDeptCode] = useState("");
   const [deptName, setDeptName] = useState("");
   const [deptShortName, setDeptShortName] = useState("");
   const [deptProgramme, setDeptProgramme] = useState("");
 
   const { data } = useGetProgrammeQuery(undefined);
+  const [deleteDepartment] = useDeleteDepartmentMutation();
 
   const { data: getDepartmentData } = useGetDepartmentQuery(params);
-  const SearchPlaceHolderName = 'Department'
-  const [
-    addDepartment,
-    {
-      isError: isAddDeptError,
-      isSuccess: isAddDeptSuccess,
-      error: AddDeptError,
-    },
-  ] = useAddDepartmentMutation();
+
+  const SearchPlaceHolderName = "Department";
+  const [addDepartment] = useAddDepartmentMutation();
+
 
   const openModal = () => {
     setIsOpen(true);
@@ -43,29 +41,57 @@ const Department = () => {
     shortForm: deptShortName,
     program: deptProgramme,
   };
-  const addDeptButton = () => {
-    addDepartment(departmentData);
+  const addDeptButton = async () => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await addDepartment(departmentData).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
+    setIsOpen(false);
+  };
+  const handleDeleteProgram = async (id) => {
+    try {
+      Swal.fire({
+        title: "wait...",
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+      });
+      const res = await deleteDepartment(id).unwrap();
+      Swal.fire({
+        title: res.message,
+        icon: "success",
+        timer: 1500,
+      });
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: "error",
+      });
+    }
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    if (isAddDeptSuccess) {
-      Swal.fire({
-        icon: "success",
-        title: `Programmed Added Successfully`,
-        showConfirmButton: true,
-      });
-    }
-
-    if (isAddDeptError) {
-      Swal.fire({
-        icon: "error",
-        title: `${AddDeptError.data.message}`,
-        text: `${AddDeptError.data.errorMessage}`,
-        showConfirmButton: true,
-      });
-    }
-  }, [isAddDeptSuccess, isAddDeptError, AddDeptError]);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <DepartmentModel
@@ -80,7 +106,12 @@ const Department = () => {
       />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
-        <SearchName setParams={setParams} SearchPlaceHolderName={SearchPlaceHolderName}/>
+
+        <SearchName
+          setParams={setParams}
+          SearchPlaceHolderName={SearchPlaceHolderName}
+        />
+
         <div>
           <button type="button" onClick={openModal} className="btn-primary">
             Add Department
@@ -123,7 +154,7 @@ const Department = () => {
                 </td>
                 <td className="px-6 py-4">
                   <button
-                    // onClick={() => handleDeleteProgram(result?._id)}
+                    onClick={() => handleDeleteProgram(result?._id)}
                     className={`btn-primary`}
                   >
                     Delete This Department

@@ -1,6 +1,4 @@
-// import React from 'react';
-
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 
 const CSEProgramUi = () => {
   return (

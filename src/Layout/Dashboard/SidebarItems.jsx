@@ -1,6 +1,6 @@
 import { FaHome, FaRegUser } from "react-icons/fa";
 import AcademicCap from "../../Components/AcademicCap/AcademicCap";
-import UserSvg from "../../Components/UserSvg/UserSvg";
+import UserSvg from "../../Components/svg/UserSvg/UserSvg";
 
 export const sidebarItems = [
   { to: "/", label: "Home", icon: <FaHome /> },
