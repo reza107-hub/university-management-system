@@ -1,6 +1,4 @@
-// import React from 'react';
-
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 
 const OneStopServiceUi = () => {
   return (
@@ -41,7 +39,7 @@ const OneStopServiceUi = () => {
         </p>
         <p>
         <a
-            href="/Batch-Transfer-and-Re-admission-Application-Form.pdf" 
+            href="/Batch-Transfer-and-Re-admission-Application-Form.pdf"
             download="Batch-Transfer-and-Re-admission-Application-Form.pdf"
             className="text-blue-500 underline"
           >

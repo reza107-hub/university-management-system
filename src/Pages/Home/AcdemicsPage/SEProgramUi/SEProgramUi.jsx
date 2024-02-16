@@ -1,6 +1,4 @@
-// import React from 'react';
-
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 
 const SEProgramUi = () => {
   return (
@@ -154,7 +152,7 @@ const SEProgramUi = () => {
         Metropolitan University has various scholarship schemes to support the students financially.
         </p>
         <p>A student who has secured A+ in all the courses in three consecutive term examinations can apply for Chairman’s Scholarship. Likewise, Vice Chancellor’s Scholarship also exists for the students of Metropolitan University.</p>
-       
+
         <table className="border-collapse border border-gray-400 w-full">
           <thead>
             <tr>

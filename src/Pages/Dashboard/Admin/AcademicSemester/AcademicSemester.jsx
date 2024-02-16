@@ -16,8 +16,6 @@ import {
   useUpdateAcademicSemesterMutation,
 } from "../../../../Redux/features/AcademicSemester/AcademicSemester.api";
 import SearchName from "../../../../Components/Search/SearchName";
-
-import SearchName from "../../../../Components/Search/SearchName";
 import { useForm } from "react-hook-form";
 const AcademicSemester = () => {
 

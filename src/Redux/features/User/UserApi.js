@@ -59,9 +59,6 @@ const userApi = baseApi.injectEndpoints({
                 body: data,
             }),
         }),
-    })
-})
-
         UpdateUserWithAdditionalInfo: build.mutation({
             query: ({ id, data }) => ({
                 url: `/userAdditionalInfo/${id}`,
@@ -70,8 +67,11 @@ const userApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['user', 'admin-list', 'admin', 'faculty']
         }),
-    })
+    }),
+
 })
 
-export const { useGetUserQuery, useGetPresentUserWithAdditionalInfoQuery, useGetUserWithAdditionalInfoQuery, useGetPresentUserQuery, useCreateUserAdditionalInfoMutation, useCreateUserMutation, useUpdateUserWithAdditionalInfoMutation,useContactByEmailMutation } = userApi
+
+
+export const { useGetUserQuery, useGetPresentUserWithAdditionalInfoQuery, useGetUserWithAdditionalInfoQuery, useGetPresentUserQuery, useCreateUserAdditionalInfoMutation, useCreateUserMutation, useUpdateUserWithAdditionalInfoMutation, useContactByEmailMutation } = userApi
 

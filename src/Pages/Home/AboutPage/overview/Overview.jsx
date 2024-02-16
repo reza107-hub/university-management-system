@@ -1,8 +1,8 @@
 // import React from "react";
 import { Disclosure } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 import { overviewData } from "./overviewData";
+import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
 
 const Overview = () => {
   const text = 'Metropolitan University, a beacon of knowledge and innovation,offers a dynamic learning environment where students thrive. With a commitment to excellence and personal growth, we shape future leaders and empower individuals to make a difference in the world.'

@@ -21,24 +21,21 @@ import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/Academic
 import Batch from "../Pages/Dashboard/Admin/Batch/Batch";
 import AdditionalInfoRequireRoutes from "./AdditionalInfoRequireRoutes";
 import FacultyList from "../Pages/Dashboard/Admin/FacultyList";
-
-import Overview from "../Pages/Home/overview/Overview";
-import HistoryOfMu from "../Pages/Home/HistoryOfMu/HistoryOfMu";
-import VisionAndMission from "../Pages/Home/VissionAndMission/VisionAndMission";
-import CSEProgramUi from "../Pages/Home/CSEProgram/CSEProgramUi";
-import SEProgramUi from "../Pages/Home/SEProgramUi/SEProgramUi";
-import OneStopServiceUi from "../Pages/Home/OneStopServiceUi/OneStopServiceUi";
-import LibraryOfMuUi from "../Pages/Home/LibraryOfMuUi/LibraryOfMuUi";
-import LaboratoryUi from "../Pages/Home/Laboratory/LaboratoryUi";
-import Cafeteria from "../Pages/Home/Cafeteria/Cafeteria";
+import SemesterRegistration from "../Pages/Dashboard/Admin/SemesterRegistration/SemesterRegistration";
+import Overview from "../Pages/Home/AboutPage/overview/Overview";
+import HistoryOfMu from "../Pages/Home/AboutPage/HistoryOfMu/HistoryOfMu";
+import VisionAndMission from "../Pages/Home/AboutPage/VissionAndMission/VisionAndMission";
+import CSEProgramUi from "../Pages/Home/AcdemicsPage/CSEProgram/CSEProgramUi";
+import SEProgramUi from "../Pages/Home/AcdemicsPage/SEProgramUi/SEProgramUi";
+import OneStopServiceUi from "../Pages/Home/facilitiesPages/OneStopServiceUi/OneStopServiceUi";
+import LibraryOfMuUi from "../Pages/Home/facilitiesPages/LibraryOfMuUi/LibraryOfMuUi";
+import LaboratoryUi from "../Pages/Home/facilitiesPages/Laboratory/LaboratoryUi";
+import Cafeteria from "../Pages/Home/facilitiesPages/Cafeteria/Cafeteria";
 import MuSportsClub from "../Pages/Home/Club&Organization/MuSportsClub/MuSportsClub";
 import MuSocialServiceClub from "../Pages/Home/Club&Organization/muSocialServiceClub/muSocialServiceClub";
 import MuCulturalClub from "../Pages/Home/Club&Organization/MuCulturalClab/MuCulturalClub";
 import MuPhotographicSociety from "../Pages/Home/Club&Organization/MuPhotographicSociety/MuPhotographicSociety";
 import MuRoboticsClub from "../Pages/Home/Club&Organization/MuRoboticsClub/MuRoboticsClub";
-
-import SemesterRegistration from "../Pages/Dashboard/Admin/SemesterRegistration/SemesterRegistration";
-
 
 const router = createBrowserRouter([
   {
@@ -51,59 +48,59 @@ const router = createBrowserRouter([
       },
       {
         path: "/overview",
-        element: <Overview />
+        element: <Overview />,
       },
       {
         path: "/history",
-        element: <HistoryOfMu />
+        element: <HistoryOfMu />,
       },
       {
         path: "/vision-mission",
-        element: <VisionAndMission />
+        element: <VisionAndMission />,
       },
       {
         path: "/cse",
-        element: <CSEProgramUi />
+        element: <CSEProgramUi />,
       },
       {
         path: "/software-engineering",
-        element: <SEProgramUi />
+        element: <SEProgramUi />,
       },
       {
         path: "/one-stop",
-        element: <OneStopServiceUi />
+        element: <OneStopServiceUi />,
       },
       {
         path: "/library",
-        element: <LibraryOfMuUi />
+        element: <LibraryOfMuUi />,
       },
       {
         path: "/laboratory",
-        element: <LaboratoryUi />
+        element: <LaboratoryUi />,
       },
       {
         path: "/cafeteria",
-        element: <Cafeteria />
+        element: <Cafeteria />,
       },
       {
         path: "/mu-sports-club",
-        element: <MuSportsClub />
+        element: <MuSportsClub />,
       },
       {
         path: "/mu-social-service",
-        element: <MuSocialServiceClub />
+        element: <MuSocialServiceClub />,
       },
       {
         path: "/mu-cultural-club",
-        element: <MuCulturalClub />
+        element: <MuCulturalClub />,
       },
       {
         path: "/mu-photographic-society",
-        element: <MuPhotographicSociety />
+        element: <MuPhotographicSociety />,
       },
       {
         path: "/mu-robotics-club",
-        element: <MuRoboticsClub />
+        element: <MuRoboticsClub />,
       },
       {
         path: "/getAdmission",
