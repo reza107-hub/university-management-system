@@ -1,7 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import { useGetAdmissionRequestQuery } from "../../../../Redux/features/Admission/Admission.api";
 import { saveAs } from "file-saver";
 import {
   useCreateStudentMutation,
@@ -10,16 +9,17 @@ import {
 import ReUsable from "../../../../Components/Dialog/ReUsableModaal";
 import { denyStudentContent } from "./StudentDeny";
 import { useForm } from "react-hook-form";
+import { useGetSingleAdmissionRequestQuery } from "../../../../Redux/features/Admission/Admission.api";
 
 const AdmissionDetails = () => {
+  const { Id } = useParams();
+  const { data } = useGetSingleAdmissionRequestQuery(Id);
   const [denyStudent] = useDenyStudentMutation();
   const navigate = useNavigate();
   const [createStudent] = useCreateStudentMutation();
   // eslint-disable-next-line no-unused-vars
   const [waiverNumber, setWaiverNumber] = useState();
-  const { email } = useParams();
-  const { data } = useGetAdmissionRequestQuery(email);
-  const details = data?.data.find((result) => result?.email === email);
+  const details = data?.data;
   let [isOpen, setIsOpen] = useState(false);
   let [id, setId] = useState("");
 
@@ -61,6 +61,7 @@ const AdmissionDetails = () => {
             });
             navigate(`/dashboard/students`);
           } catch (error) {
+            console.log(error);
             Swal.fire({
               title: error?.data?.message,
               text: error?.data?.errorMessage,
@@ -85,7 +86,7 @@ const AdmissionDetails = () => {
 
   const onSubmit = async (data) => {
     data.id = id;
-    data.email = email;
+    data.email = details?.email;
     try {
       Swal.fire({
         title: "wait...",

@@ -48,7 +48,7 @@ const AdmissionRequests = () => {
               <td className="px-6 py-4">{list?.department?.shortForm}</td>
               <td className="px-6 py-4 text-primary hover:underline">
                 <Link
-                  to={`/dashboard/admission-requests-lists/details/${list?.email}`}
+                  to={`/dashboard/admission-requests-lists/details/${list._id}`}
                 >
                   See Details
                 </Link>

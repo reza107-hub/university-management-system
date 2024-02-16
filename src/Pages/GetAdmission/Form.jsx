@@ -310,7 +310,7 @@ const Form = ({
               className="form-select w-full text-black"
             >
               {programData?.data.map((program) => (
-                <option key={program?._id} defaultValue={program?._id}>
+                <option key={program?._id} value={program?._id}>
                   {program?.name}
                 </option>
               ))}
@@ -334,7 +334,7 @@ const Form = ({
               className="form-select w-full text-black"
             >
               {getDepartmentData?.data.map((department) => (
-                <option key={department?._id} defaultValue={department?._id}>
+                <option key={department._id} value={department._id}>
                   {department?.name}
                 </option>
               ))}
