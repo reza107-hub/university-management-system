@@ -19,9 +19,10 @@ const studentApi = baseApi.injectEndpoints({
             invalidatesTags: ['user', 'admission']
         }),
         getAllStudents: build.query({
-            query: () => ({
+            query: (params) => ({
                 url: `/students`,
                 method: 'GET',
+                params
             }),
             providesTags: ['user', 'admission']
         })

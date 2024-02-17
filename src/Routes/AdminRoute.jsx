@@ -1,4 +1,4 @@
-import { Navigate, useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import Loader from "../Components/Loader/Loader";
 import useAdmin from "../Hooks/useAdmin";

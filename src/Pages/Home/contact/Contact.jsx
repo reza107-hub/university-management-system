@@ -33,7 +33,7 @@ const [contactUs] = useContactByEmailMutation()
     }
     }
     return (
-        <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg"
+        <div className="max-w-md mx-auto p-6 my-4 bg-white rounded-lg shadow-lg"
          id = 'contact'>
             <h1 className="text-2xl font-bold text-gray-800 mb-4">Contact Us</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
