@@ -11,15 +11,20 @@ const admissionApi = baseApi.injectEndpoints({
             invalidatesTags: ['admission']
         }),
         getAdmissionRequest: build.query({
-            query: (email) => {
-                const params = new URLSearchParams()
-                if (email) {
-                    params.append('email', email)
-                }
+            query: () => {
+
                 return {
                     url: `/admission-request`,
                     method: 'GET',
-                    params,
+                }
+            },
+            providesTags: ['admission']
+        }),
+        getSingleAdmissionRequest: build.query({
+            query: (id) => {
+                return {
+                    url: `/admission-request/${id}`,
+                    method: 'GET',
                 }
             },
             providesTags: ['admission']
@@ -28,4 +33,4 @@ const admissionApi = baseApi.injectEndpoints({
 })
 
 
-export const { useCreateAdmissionRequestMutation, useGetAdmissionRequestQuery } = admissionApi
+export const { useCreateAdmissionRequestMutation, useGetAdmissionRequestQuery, useGetSingleAdmissionRequestQuery } = admissionApi

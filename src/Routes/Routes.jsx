@@ -239,7 +239,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/admission-requests-lists/details/:email",
+        path: "/dashboard/admission-requests-lists/details/:Id",
         element: (
           <PrivateRoute>
             <AdminRoutes>
