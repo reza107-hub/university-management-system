@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import useAuth from "../../../Hooks/useAuth";
+import { Link } from 'react-router-dom'
+import useAuth from '../../../Hooks/useAuth'
 
 const Profile = ({ Menu, Transition, Fragment, user }) => {
-  const { logOut } = useAuth();
+  const { logOut } = useAuth()
 
   const handleLogOut = () => {
-    logOut();
-  };
+    logOut()
+  }
 
   return (
     <>
@@ -28,12 +28,12 @@ const Profile = ({ Menu, Transition, Fragment, user }) => {
           leaveTo="transform opacity-0 scale-95"
         >
           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-primary text-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <Link to={"/dashboard/profile"}>
+            <Link to={'/dashboard/profile'}>
               <Menu.Item>
                 {({ active }) => (
                   <div
                     className={`${
-                      active ? "bg-gray-100 text-primary" : ""
+                      active ? 'bg-gray-100 text-primary' : ''
                     } block px-4 py-2 text-sm`}
                   >
                     Dashboard
@@ -45,7 +45,7 @@ const Profile = ({ Menu, Transition, Fragment, user }) => {
               {({ active }) => (
                 <div
                   className={`${
-                    active ? "bg-gray-100 text-primary" : ""
+                    active ? 'bg-gray-100 text-primary' : ''
                   } block px-4 py-2 text-sm`}
                 >
                   Sign out
@@ -56,7 +56,7 @@ const Profile = ({ Menu, Transition, Fragment, user }) => {
         </Transition>
       </Menu>
     </>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

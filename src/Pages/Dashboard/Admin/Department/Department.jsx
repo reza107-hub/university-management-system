@@ -1,96 +1,95 @@
-import { useState } from "react";
-import DepartmentModel from "../../../../Components/Dialog/DepartmentModel";
+import { useState } from 'react'
+import DepartmentModel from '../../../../Components/Dialog/DepartmentModel'
 
-import Swal from "sweetalert2";
-import { useGetProgrammeQuery } from "../../../../Redux/features/Programme/Programme.api";
+import Swal from 'sweetalert2'
+import { useGetProgrammeQuery } from '../../../../Redux/features/Programme/Programme.api'
 import {
   useAddDepartmentMutation,
   useDeleteDepartmentMutation,
   useGetDepartmentQuery,
-} from "../../../../Redux/features/Department/department.api";
-import SearchName from "../../../../Components/Search/SearchName";
+} from '../../../../Redux/features/Department/department.api'
+import SearchName from '../../../../Components/Search/SearchName'
 
 const Department = () => {
-  let [isOpen, setIsOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState(false)
 
-  const [params, setParams] = useState("");
-  const [deptCode, setDeptCode] = useState("");
-  const [deptName, setDeptName] = useState("");
-  const [deptShortName, setDeptShortName] = useState("");
-  const [deptProgramme, setDeptProgramme] = useState("");
+  const [params, setParams] = useState('')
+  const [deptCode, setDeptCode] = useState('')
+  const [deptName, setDeptName] = useState('')
+  const [deptShortName, setDeptShortName] = useState('')
+  const [deptProgramme, setDeptProgramme] = useState('')
 
-  const { data } = useGetProgrammeQuery(undefined);
-  const [deleteDepartment] = useDeleteDepartmentMutation();
+  const { data } = useGetProgrammeQuery(undefined)
+  const [deleteDepartment] = useDeleteDepartmentMutation()
 
-  const { data: getDepartmentData } = useGetDepartmentQuery(params);
+  const { data: getDepartmentData } = useGetDepartmentQuery(params)
 
-  const SearchPlaceHolderName = "Department";
-  const [addDepartment] = useAddDepartmentMutation();
-
+  const SearchPlaceHolderName = 'Department'
+  const [addDepartment] = useAddDepartmentMutation()
 
   const openModal = () => {
-    setIsOpen(true);
-  };
+    setIsOpen(true)
+  }
   const closeModal = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   const departmentData = {
     code: deptCode,
     name: deptName,
     shortForm: deptShortName,
     program: deptProgramme,
-  };
+  }
   const addDeptButton = async () => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await addDepartment(departmentData).unwrap();
+      })
+      const res = await addDepartment(departmentData).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
   const handleDeleteProgram = async (id) => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await deleteDepartment(id).unwrap();
+      })
+      const res = await deleteDepartment(id).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -163,12 +162,12 @@ const Department = () => {
               </tr>
             ) : (
               <tr key={result._id}></tr>
-            )
+            ),
           )}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default Department;
+export default Department

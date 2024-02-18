@@ -1,9 +1,8 @@
-import { useGetAllStudentsQuery } from "../../../../Redux/features/student/student.api";
+import { useGetAllStudentsQuery } from '../../../../Redux/features/student/student.api'
 
 const StudentsLists = () => {
-  const { data } = useGetAllStudentsQuery();
-  const students = data?.data;
-  console.log(students);
+  const { data } = useGetAllStudentsQuery()
+  const students = data?.data
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
@@ -44,7 +43,7 @@ const StudentsLists = () => {
                 <div className="ps-3">
                   <div className="text-base font-semibold">
                     {student?.admissionRequestId?.name.firstName +
-                      " " +
+                      ' ' +
                       student?.admissionRequestId?.name.lastName}
                   </div>
                 </div>
@@ -61,7 +60,7 @@ const StudentsLists = () => {
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default StudentsLists;
+export default StudentsLists

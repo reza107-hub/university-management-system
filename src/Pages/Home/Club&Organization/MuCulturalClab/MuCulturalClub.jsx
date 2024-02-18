@@ -1,7 +1,7 @@
 // import React from 'react';
 
-import { CiHashtag } from "react-icons/ci";
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import { CiHashtag } from 'react-icons/ci'
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const MuCulturalClub = () => {
   return (
@@ -40,22 +40,22 @@ const MuCulturalClub = () => {
         <p>
           President Jace Saha Senior Lecturer, Dept. of Business <br />
           Vice-President Mashiyath Tahsin, CSE-46, ID:173-115-026 <br />
-          General Secretary Choudhury Labib Yasir, CSE-50, ID- 201-115-150{" "}
+          General Secretary Choudhury Labib Yasir, CSE-50, ID- 201-115-150{' '}
           <br />
           Joint Secretary, Bharoti Roy, BBA -47, ID-191-116-024 <br />
           Joint Secretary, Shreyosi Chowdhury, ENG-43, ID-191-114-011 <br />
-          Organizing Secretary Tajnin Hussain Chowdhury, Eng-43, ID-191-114-002{" "}
+          Organizing Secretary Tajnin Hussain Chowdhury, Eng-43, ID-191-114-002{' '}
           <br />
           Joint Organizing Avichanda Shyam, LLB-44, ID-201-113-019 <br />
           Office Secretary Kuhinur Begum, BBA-47, ID- 191-116-031 <br />
-          Assistant Treasurer Shrabantee Paul Shailee, LLB-44, ID-201-113-012{" "}
+          Assistant Treasurer Shrabantee Paul Shailee, LLB-44, ID-201-113-012{' '}
           <br />
-          Publication Secretary, Md. Hasibul Islam, CSE-50, ID-201-115-126{" "}
+          Publication Secretary, Md. Hasibul Islam, CSE-50, ID-201-115-126{' '}
           <br />
           Publication Secretary, Imitiaz Hussain Chowdhury, BBA- 53,
           ID-211-116-009 <br />
           Music Adviser Poly, Bishwas, CSE-46, ID- 183-115-020 <br />
-          Music Co-Ordinator, Annapurna Debnath Jui, ECO-15. ID-201-111-003{" "}
+          Music Co-Ordinator, Annapurna Debnath Jui, ECO-15. ID-201-111-003{' '}
           <br />
           Dance Adviser, Suvodipa Chowdhury, LLB-41, ID-191-113-017 <br />
           Dance Co-Ordinator, Arpa Paul, ENG-52, ID- 221-114-026 <br />
@@ -64,9 +64,9 @@ const MuCulturalClub = () => {
           Drama Adviser, Aminur Rahman Ruhit, BBA 54, ID-212-116-010 <br />
           Drama Co-Ordinator, Anup Roy Mridul, CES-55, ID- 213-115-001 <br />
           Ramp Advisor, Mahfuz Ahmed Sizan, ENG- 46B, ID-201-114-071 <br />
-          Ramp Co-Ordinator, Nazmus Shakib Al Mahdi, CSE-55, ID-213-115-009{" "}
+          Ramp Co-Ordinator, Nazmus Shakib Al Mahdi, CSE-55, ID-213-115-009{' '}
           <br />
-          Decoration Co-Ordinator, Faria Khanom Sreya, LLB 47, ID-211-113-001{" "}
+          Decoration Co-Ordinator, Faria Khanom Sreya, LLB 47, ID-211-113-001{' '}
           <br />
           Decoration Adviser, Zasia Nur Nuha, BBA-47, ID-191-116-001 <br />
         </p>
@@ -83,7 +83,7 @@ const MuCulturalClub = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MuCulturalClub;
+export default MuCulturalClub

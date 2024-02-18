@@ -1,29 +1,29 @@
 // import React from 'react';
 
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { Disclosure } from "@headlessui/react";
-import { FaUserTimes } from "react-icons/fa";
-import { CiHashtag } from "react-icons/ci";
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
+import { Disclosure } from '@headlessui/react'
+import { FaUserTimes } from 'react-icons/fa'
+import { CiHashtag } from 'react-icons/ci'
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const LaboratoryUi = () => {
   const laboratory = [
     {
-      question: "Innovation Lab",
+      question: 'Innovation Lab',
       answer: [
-        "Metropolitan University Innovation Lab is a place for advanced innovative activities. It was constructed in 2014 with huge amount of electronics & electrical equipment. The University built this lab mainly aiming at research work in Robotics, Drone and Embedded System. From the very beginning of the establishment, the Innovation Lab has introduced some astonishing projects. So far the lab has built sophisticated drones, unmanned submarine, electronic voting machine and some other amazing machine to meet the demand of time.",
-        "The lab also developed Electronic Braille Reader for visually impaired people. Besides students from innovation lab participated in many Robotics as well as Drone competition and achieved first position in some of them.",
-        "The main mission of the Lab is to create up to date electronic devices, educate our students on robotics and embedded system for the welfare of the nation.",
-        "The only Drone Ground Control Centre of the country is located at Metropolitan University Innovation Lab.",
+        'Metropolitan University Innovation Lab is a place for advanced innovative activities. It was constructed in 2014 with huge amount of electronics & electrical equipment. The University built this lab mainly aiming at research work in Robotics, Drone and Embedded System. From the very beginning of the establishment, the Innovation Lab has introduced some astonishing projects. So far the lab has built sophisticated drones, unmanned submarine, electronic voting machine and some other amazing machine to meet the demand of time.',
+        'The lab also developed Electronic Braille Reader for visually impaired people. Besides students from innovation lab participated in many Robotics as well as Drone competition and achieved first position in some of them.',
+        'The main mission of the Lab is to create up to date electronic devices, educate our students on robotics and embedded system for the welfare of the nation.',
+        'The only Drone Ground Control Centre of the country is located at Metropolitan University Innovation Lab.',
       ],
     },
     {
-      question: "Electrical Circuits Lab",
+      question: 'Electrical Circuits Lab',
       answer: [
-        "The Department of Electrical and Electronic Engineering (EEE) has established Electrical Circuits Laboratory. This laboratory is equipped with various types of resistors, variable rheostat, inductor, capacitor, DC and AC power supplies, switches, lamp boards, ammeters, voltmeters, variances, oscilloscopes, etc. The laboratory is well equipped with various types of analog trainer boards, oscilloscopes, DC power sources, function generators, multimeter etc. Besides, in this laboratory there are wide ranges of resistors, capacitors, inductors, diode, transistor, MOSFET, analog ICs, etc. Electrical Circuits Laboratory is featured with state-of-the art laboratory equipment such as digital trainer board, logic probe, IC tester, digital meters, data switches, and wide ranges of digital ICs of TTL and CMOS series. The laboratory is equipped with various types of test and measurement instruments like galvanometer, ammeter, voltmeter, wattmeter, energy meter, different types of transducer, etc. Electrical Circuits Laboratory has been set up with start-of-the art module of communication. At the moment, students are doing experiments on AM, FM, PCM, QPSK, ASK, FSK, OMSK, BER calculation, TDM, TDMA, CDMA, etc. This laboratory is also using ‘Communication Toolbox 1 of MATLAB to verify and develop different communication algorithm.",
+        'The Department of Electrical and Electronic Engineering (EEE) has established Electrical Circuits Laboratory. This laboratory is equipped with various types of resistors, variable rheostat, inductor, capacitor, DC and AC power supplies, switches, lamp boards, ammeters, voltmeters, variances, oscilloscopes, etc. The laboratory is well equipped with various types of analog trainer boards, oscilloscopes, DC power sources, function generators, multimeter etc. Besides, in this laboratory there are wide ranges of resistors, capacitors, inductors, diode, transistor, MOSFET, analog ICs, etc. Electrical Circuits Laboratory is featured with state-of-the art laboratory equipment such as digital trainer board, logic probe, IC tester, digital meters, data switches, and wide ranges of digital ICs of TTL and CMOS series. The laboratory is equipped with various types of test and measurement instruments like galvanometer, ammeter, voltmeter, wattmeter, energy meter, different types of transducer, etc. Electrical Circuits Laboratory has been set up with start-of-the art module of communication. At the moment, students are doing experiments on AM, FM, PCM, QPSK, ASK, FSK, OMSK, BER calculation, TDM, TDMA, CDMA, etc. This laboratory is also using ‘Communication Toolbox 1 of MATLAB to verify and develop different communication algorithm.',
       ],
     },
-  ];
+  ]
   return (
     <div>
       <AboutRouteFirstHalfContent
@@ -33,7 +33,10 @@ const LaboratoryUi = () => {
       <div className="w-[70%] mx-auto border border-gray-700 my-4 p-4 rounded-md space-y-6">
         <div className="bg-slate-600 p-2 rounded-sm mx-auto ">
           <p className="text-left text-white  flex items-center gap-2 font-bold p-2">
-            <span className="text-xl"><CiHashtag /></span>Laboratory Resources
+            <span className="text-xl">
+              <CiHashtag />
+            </span>
+            Laboratory Resources
           </p>
         </div>
         <p>
@@ -73,7 +76,7 @@ const LaboratoryUi = () => {
                       </h1>
                       <ChevronDownIcon
                         className={`w-5 h-5 text-gray-600 transform ${
-                          open && "rotate-180"
+                          open && 'rotate-180'
                         }`}
                       />
                     </Disclosure.Button>
@@ -123,7 +126,7 @@ const LaboratoryUi = () => {
         <p>Mobile phones should not be used inside the Lab.</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LaboratoryUi;
+export default LaboratoryUi

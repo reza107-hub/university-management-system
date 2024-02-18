@@ -1,50 +1,50 @@
-import { useForm } from "react-hook-form";
-import useAuth from "../../../Hooks/useAuth";
-import Swal from "sweetalert2";
+import { useForm } from 'react-hook-form'
+import useAuth from '../../../Hooks/useAuth'
+import Swal from 'sweetalert2'
 import {
   useCreateUserAdditionalInfoMutation,
   useGetPresentUserQuery,
-} from "../../../Redux/features/User/UserApi";
+} from '../../../Redux/features/User/UserApi'
 
 const AdditionalInfoForm = () => {
-  const { user } = useAuth();
-  const { data: presentUser } = useGetPresentUserQuery(user?.email);
-  const [createUserAdditionalInfo] = useCreateUserAdditionalInfoMutation();
+  const { user } = useAuth()
+  const { data: presentUser } = useGetPresentUserQuery(user?.email)
+  const [createUserAdditionalInfo] = useCreateUserAdditionalInfoMutation()
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm()
 
   const onSubmit = async (data) => {
-    data.userId = presentUser?.data?._id;
-    data.name = user?.displayName;
-    data.email = presentUser?.data?.email;
-    data.image = user?.photoURL;
+    data.userId = presentUser?.data?._id
+    data.name = user?.displayName
+    data.email = presentUser?.data?.email
+    data.image = user?.photoURL
 
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await createUserAdditionalInfo(data).unwrap();
+      })
+      const res = await createUserAdditionalInfo(data).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-  };
+  }
   return (
     <div>
       <p className="text-primary text-2xl font-bold">
@@ -60,7 +60,7 @@ const AdditionalInfoForm = () => {
             </label>
             <div className="">
               <input
-                {...register("dateOfBirth", { required: true })}
+                {...register('dateOfBirth', { required: true })}
                 type="date"
                 className="form-control w-full rounded-md text-black"
                 id="dateOfBirth"
@@ -76,7 +76,7 @@ const AdditionalInfoForm = () => {
             </label>
             <div className="">
               <select
-                {...register("gender", { required: true })}
+                {...register('gender', { required: true })}
                 className="form-select w-full text-black"
                 id="gender"
               >
@@ -97,7 +97,7 @@ const AdditionalInfoForm = () => {
             </label>
             <div className="">
               <input
-                {...register("contactNumber", {
+                {...register('contactNumber', {
                   required: true,
                   pattern: /^\+*[0-9]*$/,
                 })}
@@ -119,7 +119,7 @@ const AdditionalInfoForm = () => {
             </label>
             <div className="">
               <textarea
-                {...register("presentAddress", { required: true })}
+                {...register('presentAddress', { required: true })}
                 className="form-control w-full rounded-md text-black"
                 id="presentAddress"
               ></textarea>
@@ -138,7 +138,7 @@ const AdditionalInfoForm = () => {
             </label>
             <div className="">
               <textarea
-                {...register("permanentAddress", { required: true })}
+                {...register('permanentAddress', { required: true })}
                 className="form-control w-full rounded-md text-black"
                 id="permanentAddress"
               ></textarea>
@@ -156,7 +156,7 @@ const AdditionalInfoForm = () => {
             </label>
             <div className="">
               <select
-                {...register("bloodGroup", { required: true })}
+                {...register('bloodGroup', { required: true })}
                 className="form-select w-full text-black"
                 id="bloodGroup"
               >
@@ -187,7 +187,7 @@ const AdditionalInfoForm = () => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default AdditionalInfoForm;
+export default AdditionalInfoForm

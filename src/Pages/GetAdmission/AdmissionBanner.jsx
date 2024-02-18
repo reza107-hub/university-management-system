@@ -1,30 +1,30 @@
-import "./admissionBanner.css";
-import { Tab } from "@headlessui/react";
-import { FaCogs } from "react-icons/fa";
+import './admissionBanner.css'
+import { Tab } from '@headlessui/react'
+import { FaCogs } from 'react-icons/fa'
 const programData = [
   {
     id: 1,
-    name: "B.Sc. in CSE",
+    name: 'B.Sc. in CSE',
     fees: [
-      { type: "Admission Fee (One time)", amount: 20000 },
-      { type: "Registration Fee (Per Semester)", amount: 15000 },
-      { type: "Co-curricular Activities Fee (Per Semester)", amount: 500 },
-      { type: "Campus Activities Fee (Per Month)", amount: 1000 },
-      { type: "Monthly Installment of Credit fees", amount: 5000 },
+      { type: 'Admission Fee (One time)', amount: 20000 },
+      { type: 'Registration Fee (Per Semester)', amount: 15000 },
+      { type: 'Co-curricular Activities Fee (Per Semester)', amount: 500 },
+      { type: 'Campus Activities Fee (Per Month)', amount: 1000 },
+      { type: 'Monthly Installment of Credit fees', amount: 5000 },
     ],
   },
   {
     id: 2,
-    name: "B.Sc. in Software Engineering",
+    name: 'B.Sc. in Software Engineering',
     fees: [
-      { type: "Admission Fee (One time)", amount: 20000 },
-      { type: "Registration Fee (Per Semester)", amount: 15000 },
-      { type: "Co-curricular Activities Fee (Per Semester)", amount: 500 },
-      { type: "Campus Activities Fee (Per Month)", amount: 1000 },
-      { type: "Monthly Installment of Credit fees", amount: 6000 },
+      { type: 'Admission Fee (One time)', amount: 20000 },
+      { type: 'Registration Fee (Per Semester)', amount: 15000 },
+      { type: 'Co-curricular Activities Fee (Per Semester)', amount: 500 },
+      { type: 'Campus Activities Fee (Per Month)', amount: 1000 },
+      { type: 'Monthly Installment of Credit fees', amount: 6000 },
     ],
   },
-];
+]
 
 const AdmissionBanner = () => {
   return (
@@ -46,8 +46,8 @@ const AdmissionBanner = () => {
                     key={index}
                     className={`w-full text-center py-2 px-4 text-gray-600 ${
                       selectedIndex === index
-                        ? "hover:text-gray-800 transition-all duration-300 rounded-full border-b-2 border-blue-500"
-                        : "hover:text-gray-800 transition-all duration-300 rounded-full"
+                        ? 'hover:text-gray-800 transition-all duration-300 rounded-full border-b-2 border-blue-500'
+                        : 'hover:text-gray-800 transition-all duration-300 rounded-full'
                     }`}
                   >
                     {program.name}
@@ -62,7 +62,7 @@ const AdmissionBanner = () => {
                 <div className="p-4 bg-white rounded-md shadow-md">
                   <div className="bg-slate-400 p-3 rounded-md shadow-md">
                     <h3 className="text-2xl font-bold mb-4 text-white">
-                      <span className="text-white">#{program.id}</span>{" "}
+                      <span className="text-white">#{program.id}</span>{' '}
                       Programme Fee Structure
                     </h3>
                   </div>
@@ -103,7 +103,7 @@ const AdmissionBanner = () => {
         </Tab.Group>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default AdmissionBanner;
+export default AdmissionBanner

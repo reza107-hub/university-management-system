@@ -1,5 +1,5 @@
-import { CiHashtag } from "react-icons/ci";
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import { CiHashtag } from 'react-icons/ci'
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const MuRoboticsClub = () => {
   return (
@@ -19,7 +19,7 @@ const MuRoboticsClub = () => {
         </div>
 
         <p>
-          <span className="font-bold">Nawshad Ahmed Chowdhury</span>, Advisor{" "}
+          <span className="font-bold">Nawshad Ahmed Chowdhury</span>, Advisor{' '}
           <br />
           Assistant Professor, Head, Dept. of EEE
         </p>
@@ -34,7 +34,7 @@ const MuRoboticsClub = () => {
         </p>
 
         <p>
-          {" "}
+          {' '}
           <span className="font-bold">Md. Haidar Ontor</span> , General
           Secretary <br />
           201-141-009, Dept. of EEE
@@ -46,12 +46,12 @@ const MuRoboticsClub = () => {
         </p>
 
         <p>
-          <span className="font-bold">Abir Rahman</span> , Organizing Secretary{" "}
+          <span className="font-bold">Abir Rahman</span> , Organizing Secretary{' '}
           <br />
           201-141-010, Dept. of EEE
         </p>
         <p>
-          <span className="font-bold">Sifat Ikbal</span> , Publication Secretary{" "}
+          <span className="font-bold">Sifat Ikbal</span> , Publication Secretary{' '}
           <br />
           201-141-001, Dept. of EEE
         </p>
@@ -80,7 +80,7 @@ const MuRoboticsClub = () => {
         </p>
 
         <p>
-          <span className="font-bold"> Salman Khan</span> , Executive Member{" "}
+          <span className="font-bold"> Salman Khan</span> , Executive Member{' '}
           <br />
           211-141-013, Dept. of EEE
         </p>
@@ -98,7 +98,7 @@ const MuRoboticsClub = () => {
         </p>
 
         <p>
-          <span className="font-bold"> Akash Roy</span> , Executive Member{" "}
+          <span className="font-bold"> Akash Roy</span> , Executive Member{' '}
           <br />
           Dept. of English
         </p>
@@ -116,7 +116,7 @@ const MuRoboticsClub = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MuRoboticsClub;
+export default MuRoboticsClub

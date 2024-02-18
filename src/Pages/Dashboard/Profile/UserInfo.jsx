@@ -1,4 +1,4 @@
-import EditSvg from "../../../Components/svg/EditSvg";
+import EditSvg from '../../../Components/svg/EditSvg'
 
 const UserInfo = ({ presentUser, handleEditProfile }) => {
   return (
@@ -9,14 +9,14 @@ const UserInfo = ({ presentUser, handleEditProfile }) => {
         className="h-48 rounded-full mx-auto mb-4"
       />
       <h2 className="text-2xl font-bold text-center mb-4 text-primary">
-        {presentUser?.data?.name}{" "}
+        {presentUser?.data?.name}{' '}
         <span className="text-xs text-red-600">
           {presentUser?.data?.userId?.role}
         </span>
       </h2>
       {presentUser?.data?.email && (
         <p className="text-sm font-semibold text-center mb-4 text-primary">
-          <span className="font-semibold text-primary text-lg">Email:</span>{" "}
+          <span className="font-semibold text-primary text-lg">Email:</span>{' '}
           {presentUser?.data?.email}
         </p>
       )}
@@ -26,7 +26,7 @@ const UserInfo = ({ presentUser, handleEditProfile }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserInfo;
+export default UserInfo

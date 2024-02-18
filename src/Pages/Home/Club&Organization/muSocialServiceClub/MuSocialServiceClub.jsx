@@ -1,7 +1,7 @@
 // import React from 'react';
 
-import { CiHashtag } from "react-icons/ci";
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import { CiHashtag } from 'react-icons/ci'
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const MuSocialServiceClub = () => {
   return (
@@ -25,12 +25,12 @@ const MuSocialServiceClub = () => {
           <span className="font-bold">President</span>
         </p>
         <p>
-          Mr. Md. Mahfujul Hasan, Assisstant Professor & Head, Dept. of CSE{" "}
+          Mr. Md. Mahfujul Hasan, Assisstant Professor & Head, Dept. of CSE{' '}
           <br />
           <span className="font-bold">Advisor </span>
         </p>
         <p>
-          Mr. Md. Mostafijur Rahman, Lecturer, Dept. of Business Administration{" "}
+          Mr. Md. Mostafijur Rahman, Lecturer, Dept. of Business Administration{' '}
           <br />
           <span className="font-bold">Treasurer </span>
         </p>
@@ -61,7 +61,7 @@ const MuSocialServiceClub = () => {
           Cultural Secretary, Moumita Debnath, CSE 201-115-071 <br />
           Volunteer Coordinator, Md. Moksudur Rohman Riday, EEE (eve)
           201-142-008 <br />
-          Volunteer Coordinator, Nuzhat Tabassum Prokrity, CSE 201-115-018{" "}
+          Volunteer Coordinator, Nuzhat Tabassum Prokrity, CSE 201-115-018{' '}
           <br />
           Blood Wing, Monsuruzzam Sheikh Emon, CSE 201-115-033 <br />
           Blood Wing, Abir Ahmed, EEE 201-141-010
@@ -89,7 +89,7 @@ const MuSocialServiceClub = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MuSocialServiceClub;
+export default MuSocialServiceClub

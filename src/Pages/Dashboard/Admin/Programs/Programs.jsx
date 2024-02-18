@@ -1,86 +1,84 @@
+import { useState } from 'react'
 
-import { useState } from "react";
+import Modal from '../../../../Components/Dialog/Modal'
 
-import Modal from "../../../../Components/Dialog/Modal";
-
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2'
 import {
   useAddProgrammeMutation,
   useDeleteProgramMutation,
   useGetProgrammeQuery,
-} from "../../../../Redux/features/Programme/Programme.api";
-import SearchName from "../../../../Components/Search/SearchName";
+} from '../../../../Redux/features/Programme/Programme.api'
+import SearchName from '../../../../Components/Search/SearchName'
 
 const Programs = () => {
-  const [programmeName, setProgrammeName] = useState("");
-  const [programmeShortName, setProgrammeShortName] = useState("");
+  const [programmeName, setProgrammeName] = useState('')
+  const [programmeShortName, setProgrammeShortName] = useState('')
 
-  const [params, setParams] = useState("");
-  let [isOpen, setIsOpen] = useState(false);
-  const { data } = useGetProgrammeQuery(params);
-  const SearchPlaceHolderName = "program";
-  const [addProgramme] = useAddProgrammeMutation();
-  const [deleteProgramme] = useDeleteProgramMutation();
+  const [params, setParams] = useState('')
+  let [isOpen, setIsOpen] = useState(false)
+  const { data } = useGetProgrammeQuery(params)
+  const SearchPlaceHolderName = 'program'
+  const [addProgramme] = useAddProgrammeMutation()
+  const [deleteProgramme] = useDeleteProgramMutation()
 
-
-  const postData = { name: programmeName, shortName: programmeShortName };
+  const postData = { name: programmeName, shortName: programmeShortName }
 
   const openModal = () => {
-    setIsOpen(true);
-  };
+    setIsOpen(true)
+  }
   const closeModal = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   const addProgButton = async () => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await addProgramme(postData).unwrap();
+      })
+      const res = await addProgramme(postData).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
   const handleDeleteProgram = async (id) => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await deleteProgramme(id).unwrap();
+      })
+      const res = await deleteProgramme(id).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-  };
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -140,12 +138,12 @@ const Programs = () => {
               </tr>
             ) : (
               <tr key={result._id}></tr>
-            )
+            ),
           )}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default Programs;
+export default Programs

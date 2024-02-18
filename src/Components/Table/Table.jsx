@@ -12,7 +12,7 @@ const Table = ({ Content, children }) => {
       </thead>
       <tbody className="text-center">{children}</tbody>
     </table>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table

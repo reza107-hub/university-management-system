@@ -1,75 +1,75 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react'
 import {
   Navigation,
   Pagination,
   Mousewheel,
   Keyboard,
   Autoplay,
-} from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/mousewheel";
-import "swiper/css/keyboard";
-import "./BannerStyle.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import useAuth from "../../../Hooks/useAuth";
+} from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/mousewheel'
+import 'swiper/css/keyboard'
+import './BannerStyle.css'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import useAuth from '../../../Hooks/useAuth'
 
-import Loader from "../../../Components/Loader/Loader";
-import { useGetPresentUserWithAdditionalInfoQuery } from "../../../Redux/features/User/UserApi";
-import { useGetAdmissionRequestQuery } from "../../../Redux/features/Admission/Admission.api";
+import Loader from '../../../Components/Loader/Loader'
+import { useGetPresentUserWithAdditionalInfoQuery } from '../../../Redux/features/User/UserApi'
+import { useGetAdmissionRequestQuery } from '../../../Redux/features/Admission/Admission.api'
 
 const Banner = () => {
-  const { user, loading } = useAuth();
-  const { data } = useGetAdmissionRequestQuery(undefined);
+  const { user, loading } = useAuth()
+  const { data } = useGetAdmissionRequestQuery(undefined)
   const isUserAppliedForAdmission = data?.data?.some(
-    (d) => d?.email === user?.email
-  );
+    (d) => d?.email === user?.email,
+  )
 
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0)
 
   const { data: userData, isLoading: isUserDetailsLoading } =
-    useGetPresentUserWithAdditionalInfoQuery(user?.email);
+    useGetPresentUserWithAdditionalInfoQuery(user?.email)
 
   if (loading || isUserDetailsLoading) {
-    return <Loader />;
+    return <Loader />
   }
 
   const content = [
     {
-      title: "Welcome to Sylhet Metropolitan University!",
-      sub_title: "Empowering Minds, Building Futures",
-      image: "https://i.ibb.co/T8zf4T2/EKbrbk3-UEAAHVF1.jpg",
+      title: 'Welcome to Sylhet Metropolitan University!',
+      sub_title: 'Empowering Minds, Building Futures',
+      image: 'https://i.ibb.co/T8zf4T2/EKbrbk3-UEAAHVF1.jpg',
     },
     {
-      title: "Join a Community of Learning",
-      sub_title: "Transforming Dreams into Reality",
+      title: 'Join a Community of Learning',
+      sub_title: 'Transforming Dreams into Reality',
       image:
-        "https://i.ibb.co/dgQYzGS/Whats-App-Image-2023-08-18-at-7-35-41-PM.jpg",
+        'https://i.ibb.co/dgQYzGS/Whats-App-Image-2023-08-18-at-7-35-41-PM.jpg',
     },
     {
-      title: "Explore a World of Opportunities",
-      sub_title: "Choose Sylhet Metropolitan University",
+      title: 'Explore a World of Opportunities',
+      sub_title: 'Choose Sylhet Metropolitan University',
       image:
-        "https://i.ibb.co/MDyN5XL/323113454-1325448301586663-5004010928649462078-n.jpg",
+        'https://i.ibb.co/MDyN5XL/323113454-1325448301586663-5004010928649462078-n.jpg',
     },
     {
-      title: "Discover Your Opportunities",
-      sub_title: "Admission Season is Here",
-      image: "https://i.ibb.co/BtTGZKF/metropolitan-university.jpg",
+      title: 'Discover Your Opportunities',
+      sub_title: 'Admission Season is Here',
+      image: 'https://i.ibb.co/BtTGZKF/metropolitan-university.jpg',
     },
-  ];
+  ]
 
   const handleSlideChange = (swiper) => {
-    setActiveSlideIndex(swiper.activeIndex);
+    setActiveSlideIndex(swiper.activeIndex)
 
     // Check if it's the last slide
     if (swiper.isEnd) {
       // Reset the active slide index to the first slide
-      setActiveSlideIndex(0);
+      setActiveSlideIndex(0)
     }
-  };
+  }
 
   return (
     <div className="h-screen">
@@ -104,8 +104,8 @@ const Banner = () => {
                   <h2
                     className={`md:text-5xl text-2xl font-black font-raleway ${
                       activeSlideIndex === i
-                        ? "slide-animation slide-animation-left"
-                        : ""
+                        ? 'slide-animation slide-animation-left'
+                        : ''
                     }`}
                   >
                     {c?.title}
@@ -113,8 +113,8 @@ const Banner = () => {
                   <p
                     className={`md:text-lg mt-4 font-sans ${
                       activeSlideIndex === i
-                        ? "slide-animation slide-animation-right"
-                        : ""
+                        ? 'slide-animation slide-animation-right'
+                        : ''
                     }`}
                   >
                     {c?.sub_title}
@@ -122,22 +122,22 @@ const Banner = () => {
                   <Link to="/getAdmission">
                     <button
                       disabled={
-                        (userData?.data?.userId?.role === "admin") |
-                        "student" |
+                        (userData?.data?.userId?.role === 'admin') |
+                        'student' |
                         isUserAppliedForAdmission
                       }
                       className={`m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm ${
                         activeSlideIndex === i
-                          ? "slide-animation slide-animation-down"
-                          : ""
+                          ? 'slide-animation slide-animation-down'
+                          : ''
                       }
                       ${
                         // eslint-disable-next-line no-constant-condition
-                        (userData?.data?.userId?.role === "admin") |
-                        "student" |
+                        (userData?.data?.userId?.role === 'admin') |
+                        'student' |
                         isUserAppliedForAdmission
-                          ? "disabled:opacity-25"
-                          : ""
+                          ? 'disabled:opacity-25'
+                          : ''
                       }
                       `}
                     >
@@ -151,7 +151,7 @@ const Banner = () => {
         ))}
       </Swiper>
     </div>
-  );
-};
+  )
+}
 
-export default Banner;
+export default Banner

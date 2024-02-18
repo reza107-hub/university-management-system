@@ -1,26 +1,26 @@
 // import React from 'react';
-import { CiBank } from "react-icons/ci";
-import { useSpring, animated } from "react-spring";
-import { useInView } from "react-intersection-observer";
+import { CiBank } from 'react-icons/ci'
+import { useSpring, animated } from 'react-spring'
+import { useInView } from 'react-intersection-observer'
 
 const AnimatedNumber = ({ value }) => {
   const [inViewRef, inView] = useInView({
     triggerOnce: true,
-    rootMargin: "-50px 0px",
-  });
+    rootMargin: '-50px 0px',
+  })
 
   const animatedValue = useSpring({
     from: { value: 0 },
     to: { value: inView ? value : 0 },
     config: { duration: 1000 },
-  });
+  })
 
   return (
     <animated.span ref={inViewRef}>
       {animatedValue.value.to((val) => Math.floor(val))}
     </animated.span>
-  );
-};
+  )
+}
 
 const UniversityStatistics = () => {
   return (
@@ -75,7 +75,7 @@ const UniversityStatistics = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UniversityStatistics;
+export default UniversityStatistics
