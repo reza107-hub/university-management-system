@@ -1,4 +1,4 @@
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const SEProgramUi = () => {
   return (
@@ -97,7 +97,7 @@ const SEProgramUi = () => {
           </p>
 
           <p>
-            {" "}
+            {' '}
             The programme improves trading-off theory and practice, to enforce a
             seamless synergy between the academic stakeholder and the industry,
             that assures students’ employability
@@ -146,12 +146,21 @@ const SEProgramUi = () => {
         <div className="bg-gray-400 p-3 rounded-sm"></div>
         <p className="font-bold underline">Fees & Funding</p>
         <p>
-        Metropolitan University provides financial support to the students and there is a caring tuition fee policy available to give financial aid. The students having Golden A+ in both SSC & HSC will be given 80% tuition waiver.
+          Metropolitan University provides financial support to the students and
+          there is a caring tuition fee policy available to give financial aid.
+          The students having Golden A+ in both SSC & HSC will be given 80%
+          tuition waiver.
         </p>
         <p>
-        Metropolitan University has various scholarship schemes to support the students financially.
+          Metropolitan University has various scholarship schemes to support the
+          students financially.
         </p>
-        <p>A student who has secured A+ in all the courses in three consecutive term examinations can apply for Chairman’s Scholarship. Likewise, Vice Chancellor’s Scholarship also exists for the students of Metropolitan University.</p>
+        <p>
+          A student who has secured A+ in all the courses in three consecutive
+          term examinations can apply for Chairman’s Scholarship. Likewise, Vice
+          Chancellor’s Scholarship also exists for the students of Metropolitan
+          University.
+        </p>
 
         <table className="border-collapse border border-gray-400 w-full">
           <thead>
@@ -186,9 +195,8 @@ const SEProgramUi = () => {
         </table>
         <p className="font-bold underline">How to Apply</p>
         <p>
-        The completed Application Form must be submitted to the Admissions Office with the following documents:
-
-
+          The completed Application Form must be submitted to the Admissions
+          Office with the following documents:
         </p>
         <p>Photocopies of Birth Certificate/ National ID/ Passport</p>
         <p>Four (04) copies of Passport size colour photographs</p>
@@ -199,7 +207,7 @@ const SEProgramUi = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SEProgramUi;
+export default SEProgramUi

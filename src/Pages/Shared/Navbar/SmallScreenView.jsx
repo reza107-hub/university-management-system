@@ -1,5 +1,5 @@
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { Link } from 'react-router-dom'
 
 const SmallScreenView = ({ navigation, Disclosure }) => {
   return (
@@ -18,7 +18,7 @@ const SmallScreenView = ({ navigation, Disclosure }) => {
                       {/* accordion arrow sign */}
                       <ChevronDownIcon
                         className={`${
-                          open ? "rotate-180 transform" : ""
+                          open ? 'rotate-180 transform' : ''
                         } h-5 w-5 text-purple-500`}
                       />
                     </>
@@ -56,7 +56,7 @@ const SmallScreenView = ({ navigation, Disclosure }) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default SmallScreenView;
+export default SmallScreenView

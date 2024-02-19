@@ -4,18 +4,18 @@ import Loader from "../Components/Loader/Loader";
 import useAdmin from "../Hooks/useAdmin";
 
 const AdminRoutes = ({ children }) => {
-  const { user, loading } = useAuth();
-  const [isAdmin, isAdminLoading] = useAdmin();
-  const location = useLocation();
+  const { user, loading } = useAuth()
+  const [isAdmin, isAdminLoading] = useAdmin()
+  const location = useLocation()
 
   if (loading || isAdminLoading) {
-    return <Loader />;
+    return <Loader />
   }
 
-  if (user && isAdmin?.data=== true) {
-    return children;
+  if (user && isAdmin?.data === true) {
+    return children
   }
-  return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
-};
+  return <Navigate to="/login" state={{ from: location }} replace></Navigate>
+}
 
-export default AdminRoutes;
+export default AdminRoutes

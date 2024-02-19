@@ -1,56 +1,56 @@
-import { FaHome, FaRegUser } from "react-icons/fa";
-import AcademicCap from "../../Components/AcademicCap/AcademicCap";
-import UserSvg from "../../Components/svg/UserSvg/UserSvg";
+import { FaHome, FaRegUser } from 'react-icons/fa'
+import AcademicCap from '../../Components/AcademicCap/AcademicCap'
+import UserSvg from '../../Components/svg/UserSvg/UserSvg'
 
 export const sidebarItems = [
-  { to: "/", label: "Home", icon: <FaHome /> },
-  { to: "/dashboard/profile", label: "Profile", icon: <FaRegUser /> },
+  { to: '/', label: 'Home', icon: <FaHome /> },
+  { to: '/dashboard/profile', label: 'Profile', icon: <FaRegUser /> },
   {
-    to: "/dashboard/users",
-    label: "Users",
+    to: '/dashboard/users',
+    label: 'Users',
     icon: <UserSvg />,
-    role: "admin",
+    role: 'admin',
   },
   {
-    to: "/dashboard/programs",
-    label: "Programs",
+    to: '/dashboard/programs',
+    label: 'Programs',
     icon: <AcademicCap />,
-    role: "admin",
+    role: 'admin',
   },
   {
-    to: "/dashboard/department",
-    label: "Department",
+    to: '/dashboard/department',
+    label: 'Department',
     icon: <AcademicCap />,
-    role: "admin",
+    role: 'admin',
   },
   {
-    to: "/dashboard/batch",
-    label: "Batch",
+    to: '/dashboard/batch',
+    label: 'Batch',
     icon: <AcademicCap />,
-    role: "admin",
+    role: 'admin',
   },
   {
-    to: "/dashboard/admission-requests-lists",
-    label: "Admission Requests",
+    to: '/dashboard/admission-requests-lists',
+    label: 'Admission Requests',
     icon: <UserSvg />,
-    role: "admin",
+    role: 'admin',
   },
   {
-    to: "/dashboard/admins",
-    label: "Admin List",
+    to: '/dashboard/admins',
+    label: 'Admin List',
     icon: <UserSvg />,
-    role: "admin",
+    role: 'admin',
   },
   {
-    to: "/dashboard/faculties",
-    label: "Faculty List",
+    to: '/dashboard/faculties',
+    label: 'Faculty List',
     icon: <UserSvg />,
-    role: "admin",
+    role: 'admin',
   },
   {
-    to: "/dashboard/students",
-    label: "Students List",
+    to: '/dashboard/students',
+    label: 'Students List',
     icon: <UserSvg />,
-    role: "admin",
+    role: 'admin',
   },
-];
+]

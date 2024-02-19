@@ -1,9 +1,12 @@
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const OneStopServiceUi = () => {
   return (
     <div>
-      <AboutRouteFirstHalfContent title="Facilities" text="⚙️One Stop Service" />
+      <AboutRouteFirstHalfContent
+        title="Facilities"
+        text="⚙️One Stop Service"
+      />
       <div className="w-[70%] mx-auto border border-gray-700 my-4 p-4 rounded-md space-y-6">
         <div className="bg-slate-600 p-2 rounded-sm mx-auto ">
           <p className="text-left text-white font-bold p-2">
@@ -27,9 +30,11 @@ const OneStopServiceUi = () => {
           <p>Apply for Batch Transfer</p>
           <p>Academic Query</p>
         </div>
-        <p className="font-bold underline text-center">Download the important Forms</p>
+        <p className="font-bold underline text-center">
+          Download the important Forms
+        </p>
         <p>
-        <a
+          <a
             href="/Transcript-Application-Form.pdf" // Replace with the actual path to your downloadable file
             download="Transcript-Application-Form.pdf"
             className="text-blue-500 underline"
@@ -38,7 +43,7 @@ const OneStopServiceUi = () => {
           </a>
         </p>
         <p>
-        <a
+          <a
             href="/Batch-Transfer-and-Re-admission-Application-Form.pdf"
             download="Batch-Transfer-and-Re-admission-Application-Form.pdf"
             className="text-blue-500 underline"
@@ -48,7 +53,7 @@ const OneStopServiceUi = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default OneStopServiceUi;
+export default OneStopServiceUi

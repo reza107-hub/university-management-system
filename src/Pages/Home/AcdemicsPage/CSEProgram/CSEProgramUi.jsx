@@ -1,4 +1,4 @@
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const CSEProgramUi = () => {
   return (
@@ -180,10 +180,10 @@ const CSEProgramUi = () => {
         </p>
         <div>
           <p>
-            {" "}
+            {' '}
             1. Software Development, Computer Systems Analysis Software Testing,
             Application Architect. <br />
-            2. Android Apps Development, IOS Development, Game Development{" "}
+            2. Android Apps Development, IOS Development, Game Development{' '}
             <br />
             3. Web Development, UX analysis, UX design, Content Management
             Systems, Ecommerce Development. <br />
@@ -201,7 +201,7 @@ const CSEProgramUi = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CSEProgramUi;
+export default CSEProgramUi

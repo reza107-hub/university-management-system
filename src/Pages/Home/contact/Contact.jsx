@@ -1,36 +1,38 @@
 // import React from 'react';
-import { useForm } from 'react-hook-form';
-import { useContactByEmailMutation } from '../../../Redux/features/User/UserApi';
-import Swal from 'sweetalert2';
+import { useForm } from 'react-hook-form'
+import { useContactByEmailMutation } from '../../../Redux/features/User/UserApi'
+import Swal from 'sweetalert2'
 
 const Contact = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-const [contactUs] = useContactByEmailMutation()
-    const onSubmit = async(data) => {
-
-        try {
-            Swal.fire({
-              title: "plz wait...",
-              allowEscapeKey: false,
-              allowOutsideClick: false,
-              didOpen: () => {
-                Swal.showLoading();
-              },
-            });
-            const res = await contactUs(data).unwrap();
-            console.log(res)
-            Swal.fire({
-              title: res.message,
-              icon: "success",
-              timer: 1500,
-            });
-          } catch (error) {
-            Swal.fire({
-              title: error?.data?.message,
-              text: error?.data?.errorMessage,
-              icon: "error",
-            });
-    }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
+  const [contactUs] = useContactByEmailMutation()
+  const onSubmit = async (data) => {
+    try {
+      Swal.fire({
+        title: 'plz wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      const res = await contactUs(data).unwrap()
+      console.log(res)
+      Swal.fire({
+        title: res.message,
+        icon: 'success',
+        timer: 1500,
+      })
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: 'error',
+      })
     }
     return (
         <div className="max-w-md mx-auto p-6 my-4 bg-white rounded-lg shadow-lg"
@@ -55,7 +57,15 @@ const [contactUs] = useContactByEmailMutation()
                 <button type="submit" className="bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-600">Submit</button>
             </form>
         </div>
-    );
-};
+        <button
+          type="submit"
+          className="bg-blue-900 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  )
+}
 
-export default Contact;
+export default Contact

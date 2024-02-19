@@ -1,109 +1,110 @@
-import { createBrowserRouter } from "react-router-dom";
-import Main from "../Layout/Main/Main";
-import Home from "../Pages/Home/Home";
-import Login from "../Pages/Login/Login";
-import Register from "../Pages/Regester/Register";
-import Dashboard from "../Layout/Dashboard/Dashboard";
-import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
-import GetAdmission from "../Pages/GetAdmission/GetAdmission";
-import AdmissionForm from "../Pages/GetAdmission/AdmissionForm";
-import PrivateRoute from "./PrivateRoute";
-import AdminRoutes from "./AdminRoute";
-import UserProfile from "../Pages/Dashboard/Profile/UserProfile";
-import AdmissionRequests from "../Pages/Dashboard/Admin/AdmissionRequests/AdmissionRequests";
-import AdmissionDetails from "../Pages/Dashboard/Admin/AdmissionDetails/AdmissionDetails";
+import { createBrowserRouter } from 'react-router-dom'
+import Main from '../Layout/Main/Main'
+import Home from '../Pages/Home/Home'
+import Login from '../Pages/Login/Login'
+import Register from '../Pages/Regester/Register'
+import Dashboard from '../Layout/Dashboard/Dashboard'
+import ManageUsers from '../Pages/Dashboard/Admin/ManageUsers'
+import GetAdmission from '../Pages/GetAdmission/GetAdmission'
+import AdmissionForm from '../Pages/GetAdmission/AdmissionForm'
+import PrivateRoute from './PrivateRoute'
+import AdminRoutes from './AdminRoute'
+import UserProfile from '../Pages/Dashboard/Profile/UserProfile'
+import AdmissionRequests from '../Pages/Dashboard/Admin/AdmissionRequests/AdmissionRequests'
+import AdmissionDetails from '../Pages/Dashboard/Admin/AdmissionDetails/AdmissionDetails'
 
-import AdminList from "../Pages/Dashboard/Admin/AdminList";
-import StudentsLists from "../Pages/Dashboard/Admin/StudentsLists/StudentsLists";
-import Programs from "../Pages/Dashboard/Admin/Programs/Programs";
-import Department from "../Pages/Dashboard/Admin/Department/Department";
-import AcademicSemester from "../Pages/Dashboard/Admin/AcademicSemester/AcademicSemester";
-import Batch from "../Pages/Dashboard/Admin/Batch/Batch";
-import AdditionalInfoRequireRoutes from "./AdditionalInfoRequireRoutes";
-import FacultyList from "../Pages/Dashboard/Admin/FacultyList";
-import SemesterRegistration from "../Pages/Dashboard/Admin/SemesterRegistration/SemesterRegistration";
-import Overview from "../Pages/Home/AboutPage/overview/Overview";
-import HistoryOfMu from "../Pages/Home/AboutPage/HistoryOfMu/HistoryOfMu";
-import VisionAndMission from "../Pages/Home/AboutPage/VissionAndMission/VisionAndMission";
-import CSEProgramUi from "../Pages/Home/AcdemicsPage/CSEProgram/CSEProgramUi";
-import SEProgramUi from "../Pages/Home/AcdemicsPage/SEProgramUi/SEProgramUi";
-import OneStopServiceUi from "../Pages/Home/facilitiesPages/OneStopServiceUi/OneStopServiceUi";
-import LibraryOfMuUi from "../Pages/Home/facilitiesPages/LibraryOfMuUi/LibraryOfMuUi";
-import LaboratoryUi from "../Pages/Home/facilitiesPages/Laboratory/LaboratoryUi";
-import Cafeteria from "../Pages/Home/facilitiesPages/Cafeteria/Cafeteria";
-import MuSportsClub from "../Pages/Home/Club&Organization/MuSportsClub/MuSportsClub";
-import MuSocialServiceClub from "../Pages/Home/Club&Organization/muSocialServiceClub/muSocialServiceClub";
-import MuCulturalClub from "../Pages/Home/Club&Organization/MuCulturalClab/MuCulturalClub";
-import MuPhotographicSociety from "../Pages/Home/Club&Organization/MuPhotographicSociety/MuPhotographicSociety";
-import MuRoboticsClub from "../Pages/Home/Club&Organization/MuRoboticsClub/MuRoboticsClub";
+import AdminList from '../Pages/Dashboard/Admin/AdminList'
+import StudentsLists from '../Pages/Dashboard/Admin/StudentsLists/StudentsLists'
+import Programs from '../Pages/Dashboard/Admin/Programs/Programs'
+import Department from '../Pages/Dashboard/Admin/Department/Department'
+import AcademicSemester from '../Pages/Dashboard/Admin/AcademicSemester/AcademicSemester'
+import Batch from '../Pages/Dashboard/Admin/Batch/Batch'
+import AdditionalInfoRequireRoutes from './AdditionalInfoRequireRoutes'
+import FacultyList from '../Pages/Dashboard/Admin/FacultyList'
+import SemesterRegistration from '../Pages/Dashboard/Admin/SemesterRegistration/SemesterRegistration'
+import Overview from '../Pages/Home/AboutPage/overview/Overview'
+import HistoryOfMu from '../Pages/Home/AboutPage/HistoryOfMu/HistoryOfMu'
+import VisionAndMission from '../Pages/Home/AboutPage/VissionAndMission/VisionAndMission'
+import CSEProgramUi from '../Pages/Home/AcdemicsPage/CSEProgram/CSEProgramUi'
+import SEProgramUi from '../Pages/Home/AcdemicsPage/SEProgramUi/SEProgramUi'
+import OneStopServiceUi from '../Pages/Home/facilitiesPages/OneStopServiceUi/OneStopServiceUi'
+import LibraryOfMuUi from '../Pages/Home/facilitiesPages/LibraryOfMuUi/LibraryOfMuUi'
+import LaboratoryUi from '../Pages/Home/facilitiesPages/Laboratory/LaboratoryUi'
+import Cafeteria from '../Pages/Home/facilitiesPages/Cafeteria/Cafeteria'
+import MuSportsClub from '../Pages/Home/Club&Organization/MuSportsClub/MuSportsClub'
+import MuSocialServiceClub from '../Pages/Home/Club&Organization/muSocialServiceClub/muSocialServiceClub'
+import MuCulturalClub from '../Pages/Home/Club&Organization/MuCulturalClab/MuCulturalClub'
+import MuPhotographicSociety from '../Pages/Home/Club&Organization/MuPhotographicSociety/MuPhotographicSociety'
+import MuRoboticsClub from '../Pages/Home/Club&Organization/MuRoboticsClub/MuRoboticsClub'
+import Courses from '../Pages/Dashboard/Admin/Course/Courses'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Main />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
       },
       {
-        path: "/overview",
+        path: '/overview',
         element: <Overview />,
       },
       {
-        path: "/history",
+        path: '/history',
         element: <HistoryOfMu />,
       },
       {
-        path: "/vision-mission",
+        path: '/vision-mission',
         element: <VisionAndMission />,
       },
       {
-        path: "/cse",
+        path: '/cse',
         element: <CSEProgramUi />,
       },
       {
-        path: "/software-engineering",
+        path: '/software-engineering',
         element: <SEProgramUi />,
       },
       {
-        path: "/one-stop",
+        path: '/one-stop',
         element: <OneStopServiceUi />,
       },
       {
-        path: "/library",
+        path: '/library',
         element: <LibraryOfMuUi />,
       },
       {
-        path: "/laboratory",
+        path: '/laboratory',
         element: <LaboratoryUi />,
       },
       {
-        path: "/cafeteria",
+        path: '/cafeteria',
         element: <Cafeteria />,
       },
       {
-        path: "/mu-sports-club",
+        path: '/mu-sports-club',
         element: <MuSportsClub />,
       },
       {
-        path: "/mu-social-service",
+        path: '/mu-social-service',
         element: <MuSocialServiceClub />,
       },
       {
-        path: "/mu-cultural-club",
+        path: '/mu-cultural-club',
         element: <MuCulturalClub />,
       },
       {
-        path: "/mu-photographic-society",
+        path: '/mu-photographic-society',
         element: <MuPhotographicSociety />,
       },
       {
-        path: "/mu-robotics-club",
+        path: '/mu-robotics-club',
         element: <MuRoboticsClub />,
       },
       {
-        path: "/getAdmission",
+        path: '/getAdmission',
         element: (
           <PrivateRoute>
             <GetAdmission />
@@ -113,7 +114,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/getAdmission/admission-form",
+    path: '/getAdmission/admission-form',
     element: (
       <PrivateRoute>
         <AdditionalInfoRequireRoutes>
@@ -123,15 +124,15 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/login",
+    path: '/login',
     element: <Login />,
   },
   {
-    path: "/register",
+    path: '/register',
     element: <Register />,
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
     element: (
       <PrivateRoute>
         <Dashboard></Dashboard>
@@ -139,7 +140,7 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard/users",
+        path: '/dashboard/users',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -149,7 +150,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/admission-requests-lists",
+        path: '/dashboard/admission-requests-lists',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -159,7 +160,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/admins",
+        path: '/dashboard/admins',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -169,7 +170,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/semester-registration",
+        path: '/dashboard/semester-registration',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -179,7 +180,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/faculties",
+        path: '/dashboard/faculties',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -189,7 +190,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/programs",
+        path: '/dashboard/programs',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -199,7 +200,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/department",
+        path: '/dashboard/department',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -209,7 +210,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/batch",
+        path: '/dashboard/batch',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -219,7 +220,17 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/academic-semesters",
+        path: '/dashboard/courses',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <Courses />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/academic-semesters',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -229,7 +240,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/students",
+        path: '/dashboard/students',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -239,7 +250,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/admission-requests-lists/details/:Id",
+        path: '/dashboard/admission-requests-lists/details/:Id',
         element: (
           <PrivateRoute>
             <AdminRoutes>
@@ -249,7 +260,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/profile",
+        path: '/dashboard/profile',
         element: (
           <PrivateRoute>
             <UserProfile />
@@ -258,6 +269,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+])
 
-export default router;
+export default router

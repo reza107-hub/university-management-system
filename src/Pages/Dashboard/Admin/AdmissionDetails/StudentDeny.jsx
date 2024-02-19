@@ -1,8 +1,8 @@
 export const denyStudentContent = [
   {
-    type: "text",
-    inputName: "text",
-    id: "text",
-    name: "Reason",
+    type: 'text',
+    inputName: 'text',
+    id: 'text',
+    name: 'Reason',
   },
-];
+]

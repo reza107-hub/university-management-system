@@ -1,85 +1,91 @@
-import { Link } from "react-router-dom";
-import { FaHome, FaRegUser } from "react-icons/fa";
-import useAuth from "../../Hooks/useAuth";
-import UserSvg from "../../Components/svg/UserSvg/UserSvg";
-import { useGetPresentUserWithAdditionalInfoQuery } from "../../Redux/features/User/UserApi";
-import AcademicCap from "../../Components/svg/AcademicCap/AcademicCap";
+import { Link } from 'react-router-dom'
+import { FaHome, FaRegUser } from 'react-icons/fa'
+import useAuth from '../../Hooks/useAuth'
+import UserSvg from '../../Components/svg/UserSvg/UserSvg'
+import { useGetPresentUserWithAdditionalInfoQuery } from '../../Redux/features/User/UserApi'
+import AcademicCap from '../../Components/svg/AcademicCap/AcademicCap'
 
 const Sidebar = () => {
-  const { user, logOut } = useAuth();
+  const { user, logOut } = useAuth()
   const { data: userData } = useGetPresentUserWithAdditionalInfoQuery(
-    user?.email
-  );
+    user?.email,
+  )
 
   const handleLogOut = () => {
-    logOut();
-  };
+    logOut()
+  }
 
   const menuItems = [
-    { to: "/", label: "Home", icon: <FaHome /> },
-    { to: "/dashboard/profile", label: "Profile", icon: <FaRegUser /> },
+    { to: '/', label: 'Home', icon: <FaHome /> },
+    { to: '/dashboard/profile', label: 'Profile', icon: <FaRegUser /> },
     {
-      to: "/dashboard/users",
-      label: "Users",
+      to: '/dashboard/users',
+      label: 'Users',
       icon: <UserSvg />,
-      role: "admin",
+      role: 'admin',
     },
     {
-      to: "/dashboard/admins",
-      label: "Admin List",
+      to: '/dashboard/admins',
+      label: 'Admin List',
       icon: <UserSvg />,
-      role: "admin",
+      role: 'admin',
     },
     {
-      to: "/dashboard/faculties",
-      label: "Faculty List",
+      to: '/dashboard/faculties',
+      label: 'Faculty List',
       icon: <UserSvg />,
-      role: "admin",
+      role: 'admin',
     },
     {
-      to: "/dashboard/programs",
-      label: "Programs",
+      to: '/dashboard/programs',
+      label: 'Programs',
       icon: <AcademicCap />,
-      role: "admin",
+      role: 'admin',
     },
     {
-      to: "/dashboard/department",
-      label: "Department",
+      to: '/dashboard/department',
+      label: 'Department',
       icon: <AcademicCap />,
-      role: "admin",
+      role: 'admin',
     },
     {
-      to: "/dashboard/batch",
-      label: "Batch",
+      to: '/dashboard/batch',
+      label: 'Batch',
       icon: <AcademicCap />,
-      role: "admin",
+      role: 'admin',
     },
     {
-      to: "/dashboard/academic-semesters",
-      label: "Academic Semesters",
+      to: '/dashboard/academic-semesters',
+      label: 'Academic Semesters',
       icon: <AcademicCap />,
-      role: "admin",
+      role: 'admin',
     },
     {
-      to: "/dashboard/semester-registration",
-      label: "Semester Registration",
+      to: '/dashboard/semester-registration',
+      label: 'Semester Registration',
       icon: <AcademicCap />,
-      role: "admin",
+      role: 'admin',
     },
     {
-      to: "/dashboard/admission-requests-lists",
-      label: "Admission Requests",
+      to: '/dashboard/courses',
+      label: 'Courses',
+      icon: <AcademicCap />,
+      role: 'admin',
+    },
+    {
+      to: '/dashboard/admission-requests-lists',
+      label: 'Admission Requests',
       icon: <UserSvg />,
-      role: "admin",
+      role: 'admin',
     },
 
     {
-      to: "/dashboard/students",
-      label: "Students List",
+      to: '/dashboard/students',
+      label: 'Students List',
       icon: <UserSvg />,
-      role: "admin",
+      role: 'admin',
     },
-  ];
+  ]
 
   return (
     <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
@@ -111,7 +117,7 @@ const Sidebar = () => {
             </li>
           ) : (
             <li key={item.to}></li>
-          )
+          ),
         )}
         <li>
           <a
@@ -125,7 +131,7 @@ const Sidebar = () => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

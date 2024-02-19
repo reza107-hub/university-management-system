@@ -1,59 +1,55 @@
-import Swal from "sweetalert2";
-
+import Swal from 'sweetalert2'
 
 import {
   useDeleteFacultyMutation,
   useGetFacultyListQuery,
-} from "../../../Redux/features/faculty/FacultyApi";
+} from '../../../Redux/features/faculty/FacultyApi'
 
-import { useState } from "react";
-import SearchName from "../../../Components/Search/SearchName";
+import { useState } from 'react'
+import SearchName from '../../../Components/Search/SearchName'
 
 const FacultyList = () => {
-
-  const [params, setParams] = useState("");
-  const { data: facultyListData } = useGetFacultyListQuery(params);
-  const [deleteFaculty] = useDeleteFacultyMutation();
-  const SearchPlaceHolderName = "Faculty";
-  const data = facultyListData?.data;
+  const [params, setParams] = useState('')
+  const { data: facultyListData } = useGetFacultyListQuery(params)
+  const [deleteFaculty] = useDeleteFacultyMutation()
+  const SearchPlaceHolderName = 'Faculty'
+  const data = facultyListData?.data
   // console.log(data)
 
   const handleDeleteFaculty = async (user) => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await deleteFaculty(user).unwrap();
+      })
+      const res = await deleteFaculty(user).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-  };
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
 
-
         <SearchName
           setParams={setParams}
           SearchPlaceHolderName={SearchPlaceHolderName}
         />
-
       </div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -74,7 +70,7 @@ const FacultyList = () => {
         </thead>
         <tbody>
           {data?.map((user) =>
-            user?.userId?.role === "faculty" ? (
+            user?.userId?.role === 'faculty' ? (
               <tr
                 key={user?._id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -105,12 +101,12 @@ const FacultyList = () => {
               </tr>
             ) : (
               <tr key={user?._id}></tr>
-            )
+            ),
           )}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default FacultyList;
+export default FacultyList

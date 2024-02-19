@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
+import { Link } from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link'
 
 const BigScreenView = ({ navigation }) => {
   return (
     <div className="flex space-x-4">
       {navigation.map((item) => (
         <div key={item.name}>
-          <HashLink 
+          <HashLink
             smooth
             to={item?.to}
             key={item.name}
@@ -29,7 +29,7 @@ const BigScreenView = ({ navigation }) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default BigScreenView;
+export default BigScreenView

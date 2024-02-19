@@ -1,7 +1,7 @@
 // import React from 'react';
 
-import { CiHashtag } from "react-icons/ci";
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import { CiHashtag } from 'react-icons/ci'
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const Cafeteria = () => {
   return (
@@ -42,7 +42,7 @@ const Cafeteria = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Cafeteria;
+export default Cafeteria

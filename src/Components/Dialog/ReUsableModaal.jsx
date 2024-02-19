@@ -1,5 +1,5 @@
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
 
 export default function ReUsable({
   isOpen,
@@ -75,7 +75,7 @@ export default function ReUsable({
                             ))}
                           </select>
                         </div>
-                      )
+                      ),
                     )}
                     <button className="btn-primary mt-5" type="submit">
                       Submit
@@ -88,5 +88,5 @@ export default function ReUsable({
         </Dialog>
       </Transition>
     </>
-  );
+  )
 }

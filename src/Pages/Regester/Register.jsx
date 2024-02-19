@@ -1,69 +1,69 @@
-import { Link, useNavigate } from "react-router-dom";
-import "./Register.css";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import useAuth from "../../Hooks/useAuth";
-import GoogleSignIn from "../Shared/GoogleSignIn/GoogleSignIn";
-import Swal from "sweetalert2";
-import GetHostUrl from "../../Components/GetHostUrl/GetHostUrl";
-import { useCreateUserMutation } from "../../Redux/features/User/UserApi";
+import { Link, useNavigate } from 'react-router-dom'
+import './Register.css'
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import useAuth from '../../Hooks/useAuth'
+import GoogleSignIn from '../Shared/GoogleSignIn/GoogleSignIn'
+import Swal from 'sweetalert2'
+import GetHostUrl from '../../Components/GetHostUrl/GetHostUrl'
+import { useCreateUserMutation } from '../../Redux/features/User/UserApi'
 
 const Register = () => {
-  const { createUser, updateUserProfile } = useAuth();
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const navigate = useNavigate();
-  const [createUserToDB] = useCreateUserMutation();
+  const { createUser, updateUserProfile } = useAuth()
+  const [passwordVisible, setPasswordVisible] = useState(false)
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
+  const navigate = useNavigate()
+  const [createUserToDB] = useCreateUserMutation()
 
   const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
+    setPasswordVisible(!passwordVisible)
+  }
 
   const toggleConfirmPasswordVisibility = () => {
-    setConfirmPasswordVisible(!confirmPasswordVisible);
-  };
+    setConfirmPasswordVisible(!confirmPasswordVisible)
+  }
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm();
+  } = useForm()
 
   const onSubmit = async (data) => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const imageUrl = await GetHostUrl(data.photo[0]);
-      const resFromFirebase = await createUser(data.email, data.password);
+      })
+      const imageUrl = await GetHostUrl(data.photo[0])
+      const resFromFirebase = await createUser(data.email, data.password)
       if (resFromFirebase) {
-        updateUserProfile(data.name, imageUrl);
-        const res = await createUserToDB({ email: data.email }).unwrap();
+        updateUserProfile(data.name, imageUrl)
+        const res = await createUserToDB({ email: data.email }).unwrap()
         Swal.fire({
           title: res.message,
-          icon: "success",
+          icon: 'success',
           timer: 1500,
-        });
-        navigate("/");
+        })
+        navigate('/')
       }
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-  };
+  }
 
-  const password = watch("password");
-  const confirmPassword = watch("confirmPassword");
-  const passwordMismatch = password !== confirmPassword;
+  const password = watch('password')
+  const confirmPassword = watch('confirmPassword')
+  const passwordMismatch = password !== confirmPassword
 
   return (
     <div className="py-32 flex justify-center">
@@ -73,7 +73,7 @@ const Register = () => {
           <div className="input-groups">
             <label htmlFor="name">Name</label>
             <input
-              {...register("name", { required: true })}
+              {...register('name', { required: true })}
               type="text"
               name="name"
               id="name"
@@ -86,7 +86,7 @@ const Register = () => {
           <div className="input-groups">
             <label htmlFor="email">Email</label>
             <input
-              {...register("email", { required: true })}
+              {...register('email', { required: true })}
               type="email"
               name="email"
               id="email"
@@ -101,12 +101,12 @@ const Register = () => {
             <label htmlFor="password">Password</label>
             <div className="password-input">
               <input
-                {...register("password", {
+                {...register('password', {
                   required: true,
                   minLength: 6,
                   pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/,
                 })}
-                type={passwordVisible ? "text" : "password"}
+                type={passwordVisible ? 'text' : 'password'}
                 name="password"
                 id="password"
                 placeholder=""
@@ -116,16 +116,16 @@ const Register = () => {
                 className="password-toggle"
                 onClick={togglePasswordVisibility}
               >
-                {passwordVisible ? "Hide" : "Show"}
+                {passwordVisible ? 'Hide' : 'Show'}
               </button>
             </div>
             {errors.password && (
               <span className="text-accent">This field is required</span>
             )}
-            {errors.password?.type === "minLength" && (
+            {errors.password?.type === 'minLength' && (
               <p className="text-accent">Password must be 6 characters</p>
             )}
-            {errors.password?.type === "pattern" && (
+            {errors.password?.type === 'pattern' && (
               <p className="text-red-600">
                 Password must have one Uppercase, and one special character.
               </p>
@@ -135,12 +135,12 @@ const Register = () => {
             <label htmlFor="confirmPassword">Confirm Password</label>
             <div className="password-input">
               <input
-                {...register("confirmPassword", {
+                {...register('confirmPassword', {
                   required: true,
                   validate: (value) =>
-                    value === password || "Passwords do not match",
+                    value === password || 'Passwords do not match',
                 })}
-                type={confirmPasswordVisible ? "text" : "password"}
+                type={confirmPasswordVisible ? 'text' : 'password'}
                 name="confirmPassword"
                 id="confirmPassword"
                 placeholder=""
@@ -150,7 +150,7 @@ const Register = () => {
                 className="password-toggle"
                 onClick={toggleConfirmPasswordVisibility}
               >
-                {confirmPasswordVisible ? "Hide" : "Show"}
+                {confirmPasswordVisible ? 'Hide' : 'Show'}
               </button>
             </div>
             {errors.confirmPassword && (
@@ -163,7 +163,7 @@ const Register = () => {
           <div className="input-groups">
             <label htmlFor="photo">Photo</label>
             <input
-              {...register("photo", { required: true })}
+              {...register('photo', { required: true })}
               className="inpdddut"
               name="photo"
               id="photo"
@@ -187,7 +187,7 @@ const Register = () => {
           Already have an account?
           <Link
             rel="noopener noreferrer"
-            to={"/login"}
+            to={'/login'}
             className="link link-hover link-accent"
           >
             Sign in
@@ -195,7 +195,7 @@ const Register = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
