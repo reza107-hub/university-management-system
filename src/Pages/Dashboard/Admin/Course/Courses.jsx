@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import CourseTable from './CourseTable'
+import CreateOfferCourse from './CreateOfferCourse'
 const Courses = () => {
   let [isOpen, setIsOpen] = useState(false)
   const [preRequisiteCourses, setPreRequisiteCourses] = useState([])
@@ -174,6 +175,12 @@ const Courses = () => {
           <button type="button" onClick={openModal} className="btn-primary">
             Create Course
           </button>
+        </div>
+
+        {/* Offer Course section */}
+        <div>
+          {/*Offer modal  button*/}
+          <CreateOfferCourse />
         </div>
       </div>
 

@@ -1,13 +1,12 @@
-
-import { useState } from "react";
-import { useGetAllStudentsQuery } from "../../../../Redux/features/student/student.api";
-import SearchById from "../../../../Components/Search/SearchById";
+import { useState } from 'react'
+import { useGetAllStudentsQuery } from '../../../../Redux/features/student/student.api'
+import SearchById from '../../../../Components/Search/SearchById'
 
 const StudentsLists = () => {
-  const [params, setParams] = useState("");
-  const { data } = useGetAllStudentsQuery(params);
-  const SearchPlaceHolderName = "Id";
-  const students = data?.data;
+  const [params, setParams] = useState('')
+  const { data } = useGetAllStudentsQuery(params)
+  const SearchPlaceHolderName = 'Id'
+  const students = data?.data
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -18,7 +17,6 @@ const StudentsLists = () => {
           setParams={setParams}
           SearchPlaceHolderName={SearchPlaceHolderName}
         />
-
       </div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
