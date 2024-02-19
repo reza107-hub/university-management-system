@@ -1,31 +1,32 @@
 import { baseApi } from '../../api'
 
 const studentApi = baseApi.injectEndpoints({
-  endpoints: (build) => ({
+  endpoints: build => ({
     createStudent: build.mutation({
-      query: (body) => ({
+      query: body => ({
         url: `/students`,
         method: 'POST',
-        body,
+        body
       }),
-      invalidatesTags: ['user', 'admission'],
+      invalidatesTags: ['user', 'admission']
     }),
     denyStudent: build.mutation({
-      query: (body) => ({
+      query: body => ({
         url: `/students/deny-student`,
         method: 'POST',
-        body,
+        body
       }),
-      invalidatesTags: ['user', 'admission'],
+      invalidatesTags: ['user', 'admission']
     }),
     getAllStudents: build.query({
-      query: () => ({
+      query: (params) => ({
         url: `/students`,
         method: 'GET',
+        params
       }),
-      providesTags: ['user', 'admission'],
-    }),
-  }),
+      providesTags: ['user', 'admission']
+    })
+  })
 })
 
 export const {
