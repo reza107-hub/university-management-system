@@ -14,7 +14,6 @@ const FacultyList = () => {
   const [deleteFaculty] = useDeleteFacultyMutation()
   const SearchPlaceHolderName = 'Faculty'
   const data = facultyListData?.data
-  // console.log(data)
 
   const handleDeleteFaculty = async (user) => {
     try {
@@ -81,14 +80,18 @@ const FacultyList = () => {
                 >
                   <img
                     className="w-10 h-10 rounded-full"
-                    src={user?.image}
-                    alt={`Profile of ${user?.name}`}
+                    src={user?.userAdditionalInfoId?.image}
+                    alt={`Profile of ${user?.userAdditionalInfoId?.name}`}
                   />
                   <div className="ps-3">
-                    <div className="text-base font-semibold">{user?.name}</div>
+                    <div className="text-base font-semibold">
+                      {user?.userAdditionalInfoId?.name}
+                    </div>
                   </div>
                 </th>
-                <td className="px-6 py-4">{user?.email}</td>
+                <td className="px-6 py-4">
+                  {user?.userAdditionalInfoId?.email}
+                </td>
                 <td className="px-6 py-4">{user?.userId?.role}</td>
                 <td className="px-6 py-4">
                   <button

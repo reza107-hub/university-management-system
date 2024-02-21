@@ -2,13 +2,6 @@ import { baseApi } from '../../api'
 
 const facultyApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    // getUserIsAdmin: build.query({
-    //     query: (email) => ({
-    //         url: `/admin/${email}`,
-    //         method: 'GET',
-    //     }),
-    //     providesTags: ['user', 'admin', 'admin-list']
-    // }),
     createFaculty: build.mutation({
       query: (body) => ({
         url: `/faculty/create-faculty`,

@@ -4,9 +4,15 @@ import { useCreateAdminMutation } from '../../../Redux/features/admin/admin.api'
 import { useCreateFacultyMutation } from '../../../Redux/features/faculty/FacultyApi'
 import { useState } from 'react'
 import SearchName from '../../../Components/Search/SearchName'
+import ReUsable from '../../../Components/Dialog/ReUsableModaal'
+import FacultyContent from './FacultyContent'
+import { useForm } from 'react-hook-form'
 
 const ManageUsers = () => {
+  const [facultyContent] = FacultyContent()
+  let [isOpen, setIsOpen] = useState(false)
   const [params, setParams] = useState('')
+  const [user, setUser] = useState({})
 
   const { data: userInfoData } = useGetUserWithAdditionalInfoQuery(params)
   const [createAdmin] = useCreateAdminMutation()
@@ -38,7 +44,8 @@ const ManageUsers = () => {
       })
     }
   }
-  const handleMakeFaculty = async (user) => {
+  const { handleSubmit, register, reset } = useForm()
+  const handleMakeFaculty = async (data) => {
     try {
       Swal.fire({
         title: 'wait...',
@@ -48,7 +55,10 @@ const ManageUsers = () => {
           Swal.showLoading()
         },
       })
-      const res = await crateFaculty(user).unwrap()
+      data.name = user.name
+      data.userId = user.userId._id
+      data.userAdditionalInfoId = user._id
+      const res = await crateFaculty(data).unwrap()
       Swal.fire({
         title: res.message,
         icon: 'success',
@@ -61,9 +71,29 @@ const ManageUsers = () => {
         icon: 'error',
       })
     }
+    reset()
+    setIsOpen(!isOpen)
   }
+
+  const openModal = (user) => {
+    setUser(user)
+    setIsOpen(!isOpen)
+  }
+
+  const closeModal = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <ReUsable
+        isOpen={isOpen}
+        closeModal={closeModal}
+        onSubmit={handleMakeFaculty}
+        Content={facultyContent}
+        handleSubmit={handleSubmit}
+        register={register}
+      />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
         <SearchName
@@ -122,7 +152,7 @@ const ManageUsers = () => {
                         Make Admin
                       </button>
                       <button
-                        onClick={() => handleMakeFaculty(user)}
+                        onClick={() => openModal(user)}
                         className={`btn-primary`}
                       >
                         Make faculty
