@@ -13,7 +13,7 @@ const CreateOfferCourse = () => {
   )
   const { data: departmentData } = useGetDepartmentQuery()
   const { data: batchData } = useGetBatchQuery()
-  console.log(batchData)
+  // console.log(batchData)
   let [isOpen, setIsOpen] = useState(false)
   const { handleSubmit, register, reset } = useForm()
   const openModal = () => {

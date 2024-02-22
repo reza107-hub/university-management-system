@@ -4,9 +4,15 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import CourseTable from './CourseTable'
 import CreateOfferCourse from './CreateOfferCourse'
+import {
+  useCreateCourseMutation,
+  useGetAllCoursesQuery,
+} from '../../../../Redux/features/course/courseApi'
+import Swal from 'sweetalert2'
 const Courses = () => {
+  const { data: allCourses } = useGetAllCoursesQuery()
+  const [createCourse] = useCreateCourseMutation()
   let [isOpen, setIsOpen] = useState(false)
-  const [preRequisiteCourses, setPreRequisiteCourses] = useState([])
   const openModal = () => {
     setIsOpen(!isOpen)
   }
@@ -14,10 +20,30 @@ const Courses = () => {
     setIsOpen(!isOpen)
   }
   const { handleSubmit, register, reset } = useForm()
-  // console.log(watch('preRequisiteCourses'))
   const onSubmit = async (data) => {
-    data.preRequisiteCourses = [...preRequisiteCourses]
-    console.log(data)
+    try {
+      Swal.fire({
+        title: 'wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      data.credits = Number(data.credits)
+      const res = await createCourse(data).unwrap()
+      Swal.fire({
+        title: res.message,
+        icon: 'success',
+        timer: 1500,
+      })
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: 'error',
+      })
+    }
     reset()
     setIsOpen(!isOpen)
   }
@@ -60,7 +86,7 @@ const Courses = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-3">
                       <Dialog.Title
                         as="h3"
@@ -79,25 +105,12 @@ const Courses = () => {
                         as="h3"
                         className="text-lg font-medium leading-6 text-gray-900"
                       >
-                        Prefix
-                      </Dialog.Title>
-                      <input
-                        className="w-full rounded-md"
-                        type="text"
-                        {...register('prefix')}
-                      />
-                    </div>
-                    <div className="space-y-3">
-                      <Dialog.Title
-                        as="h3"
-                        className="text-lg font-medium leading-6 text-gray-900"
-                      >
                         Code
                       </Dialog.Title>
                       <input
                         className="w-full rounded-md"
-                        type="number"
-                        {...register('Code')}
+                        type="text"
+                        {...register('code')}
                       />
                     </div>
                     <div className="space-y-3">
@@ -105,7 +118,7 @@ const Courses = () => {
                         as="h3"
                         className="text-lg font-medium leading-6 text-gray-900"
                       >
-                        credits
+                        Credits
                       </Dialog.Title>
                       <input
                         className="w-full rounded-md"
@@ -113,46 +126,6 @@ const Courses = () => {
                         step=".01"
                         {...register('credits')}
                       />
-                    </div>
-                    <div className="space-y-3 flex flex-col gap-4">
-                      <Dialog.Title
-                        as="h3"
-                        className="text-lg font-medium leading-6 text-gray-900"
-                      >
-                        Select Pre Requisite Courses
-                      </Dialog.Title>
-                      <div>
-                        <input
-                          type="checkbox"
-                          value="January"
-                          onChange={(e) =>
-                            setPreRequisiteCourses((prevCourses) =>
-                              e.target.checked
-                                ? [...prevCourses, e.target.value]
-                                : prevCourses.filter(
-                                    (course) => course !== e.target.value,
-                                  ),
-                            )
-                          }
-                        />{' '}
-                        <label> January</label>
-                      </div>
-                      <div>
-                        <input
-                          type="checkbox"
-                          value="February"
-                          onChange={(e) =>
-                            setPreRequisiteCourses((prevCourses) =>
-                              e.target.checked
-                                ? [...prevCourses, e.target.value]
-                                : prevCourses.filter(
-                                    (course) => course !== e.target.value,
-                                  ),
-                            )
-                          }
-                        />{' '}
-                        <label> February</label>
-                      </div>
                     </div>
 
                     <button
@@ -185,7 +158,7 @@ const Courses = () => {
       </div>
 
       {/* table */}
-      <CourseTable />
+      <CourseTable allCourses={allCourses} />
     </div>
   )
 }
