@@ -9,8 +9,11 @@ import {
   useGetAllCoursesQuery,
 } from '../../../../Redux/features/course/courseApi'
 import Swal from 'sweetalert2'
+import SearchName from './../../../../Components/Search/SearchName';
 const Courses = () => {
-  const { data: allCourses } = useGetAllCoursesQuery()
+  const [params,setParams] = useState('')
+  const { data: allCourses } = useGetAllCoursesQuery(params) 
+   console.log(allCourses)
   const [createCourse] = useCreateCourseMutation()
   let [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
@@ -53,10 +56,11 @@ const Courses = () => {
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
 
-        {/* <SearchName
+        <SearchName
           setParams={setParams}
-          SearchPlaceHolderName={SearchPlaceHolderName}
-        /> */}
+          SearchPlaceHolderName="course name"
+          searchTerm='searchTerm'
+        />
       </div>
 
       {/* modal */}

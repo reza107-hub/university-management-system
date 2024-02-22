@@ -11,10 +11,10 @@ const courseApi = baseApi.injectEndpoints({
             invalidatesTags: ['course']
         }),
         getAllCourses: build.query({
-            query: (body) => ({
+            query: (params) => ({
                 url: `/course`,
                 method: 'GET',
-                body
+                params
             }),
             providesTags: ['course']
         }),
