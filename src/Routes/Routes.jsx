@@ -37,11 +37,13 @@ import MuCulturalClub from '../Pages/Home/Club&Organization/MuCulturalClab/MuCul
 import MuPhotographicSociety from '../Pages/Home/Club&Organization/MuPhotographicSociety/MuPhotographicSociety'
 import MuRoboticsClub from '../Pages/Home/Club&Organization/MuRoboticsClub/MuRoboticsClub'
 import Courses from '../Pages/Dashboard/Admin/Course/Courses'
+import NotFound from '../Pages/NotFoundPage/NotFound'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
+    errorElement:<NotFound />,
     children: [
       {
         path: '/',
