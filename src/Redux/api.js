@@ -16,6 +16,7 @@ export const baseApi = createApi({
     'admin',
     'faculty',
     'admission',
+    'course'
   ],
   endpoints: () => ({}),
 })
