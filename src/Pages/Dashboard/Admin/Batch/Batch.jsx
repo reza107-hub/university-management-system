@@ -15,6 +15,7 @@ const Batch = () => {
   const [batchContent] = batchConstant()
   let [isOpen, setIsOpen] = useState(false)
   const { data: batchData } = useGetBatchQuery(undefined)
+  console.log(batchData)
   const [addBatch] = useAddBatchMutation()
   const [updateBatch] = useUpdateBatchMutation()
   const openModal = () => {
@@ -120,6 +121,9 @@ const Batch = () => {
               Batch No
             </th>
             <th scope="col" className="px-6 py-3 text-center">
+              Department
+            </th>
+            <th scope="col" className="px-6 py-3 text-center">
               Action
             </th>
           </tr>
@@ -133,6 +137,9 @@ const Batch = () => {
               >
                 <td className="px-6 py-4 font-bold text-lg">
                   {result?.batchNumber}
+                </td>
+                <td className="px-6 py-4 font-bold text-lg">
+                  {result?.deptId.shortForm}
                 </td>
 
                 <td className="px-6 py-4">
