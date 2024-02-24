@@ -2,7 +2,7 @@ import { useState } from 'react'
 import ReUsable from '../../../../Components/Dialog/ReUsableModaal'
 import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
-import { useUpdateCourseMutation } from '../../../../Redux/features/course/courseApi'
+import { useDeleteOneCourseMutation, useUpdateCourseMutation } from '../../../../Redux/features/course/courseApi'
 
 const updateContent = [
   {
@@ -31,6 +31,7 @@ const CourseTable = ({ allCourses }) => {
     (course) => course?._id === courseId,
   )
 const [updateCourseData] = useUpdateCourseMutation()
+const [deleteOneCourse] = useDeleteOneCourseMutation()
   const updateModal = (id) => {
     setIsOpen(!isOpen)
     setCourseId(id)
@@ -39,14 +40,12 @@ const [updateCourseData] = useUpdateCourseMutation()
   const closeModal = () => {
     setIsOpen(!isOpen)
   }
-
+//----------------------------------------------------------------
   const updateCourse = async(data) => {
-    
   
-    data.title = data.title === ''?updateCourseInfo.title : data.title
-    data.code = data.code === ''?updateCourseInfo.code : data.code
-    data.credits = data.credits === ''?updateCourseInfo.credits : Number(data.credits)
-  
+    data.title = data.title === ''? updateCourseInfo.title : data.title
+    data.code = data.code === ''? updateCourseInfo.code : data.code
+    data.credits = data.credits === ''? updateCourseInfo.credits : Number(data.credits)
 
     try {
       Swal.fire({
@@ -71,13 +70,37 @@ const [updateCourseData] = useUpdateCourseMutation()
       })
       console.log(error)
     }
-    
-
-
 
     setIsOpen(!isOpen)
     reset()
   }
+//-----------------------------------------------------------------
+const handleDelete = async (id) => {
+  try {
+    Swal.fire({
+      title: 'Deleting course...',
+      allowEscapeKey: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      },
+    })
+    const res = await deleteOneCourse(id).unwrap()
+    console.log(res)
+    Swal.fire({
+      title: res.message,
+      icon: 'success',
+      timer: 1500,
+    })
+  } catch (error) {
+    Swal.fire({
+      title: error?.data?.message,
+      text: error?.data?.errorMessage,
+      icon: 'error',
+    })
+  }
+}
+//----------------------------------------------------------------
 
   return (
     <div>
@@ -126,7 +149,7 @@ const [updateCourseData] = useUpdateCourseMutation()
                         e.target.selectedIndex = 0;
                        
                       } else if (e.target.value === 'delete') {
-                        // Handle delete option if needed
+                        handleDelete(result?._id)
                         e.target.selectedIndex = 0;
                       }
                     }}
