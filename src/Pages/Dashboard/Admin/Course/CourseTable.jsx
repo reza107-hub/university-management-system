@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import ReUsable from '../../../../Components/Dialog/ReUsableModaal'
 import { useForm } from 'react-hook-form'
+import Swal from 'sweetalert2'
+import { useUpdateCourseMutation } from '../../../../Redux/features/course/courseApi'
 
 const updateContent = [
   {
@@ -25,6 +27,10 @@ const CourseTable = ({ allCourses }) => {
   const { handleSubmit, register, reset } = useForm()
   let [courseId, setCourseId] = useState('')
   let [isOpen, setIsOpen] = useState(false)
+  const updateCourseInfo = allCourses?.data?.result?.find(
+    (course) => course?._id === courseId,
+  )
+const [updateCourseData] = useUpdateCourseMutation()
   const updateModal = (id) => {
     setIsOpen(!isOpen)
     setCourseId(id)
@@ -34,8 +40,41 @@ const CourseTable = ({ allCourses }) => {
     setIsOpen(!isOpen)
   }
 
-  const updateCourse = (data) => {
-    console.log({ courseId, data })
+  const updateCourse = async(data) => {
+    
+  
+    data.title = data.title === ''?updateCourseInfo.title : data.title
+    data.code = data.code === ''?updateCourseInfo.code : data.code
+    data.credits = data.credits === ''?updateCourseInfo.credits : Number(data.credits)
+  
+
+    try {
+      Swal.fire({
+        title: 'Updating Course...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      const res = await updateCourseData({ id: courseId, body: data }).unwrap()
+      Swal.fire({
+        title: res.message,
+        icon: 'success',
+        timer: 1500,
+      })
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: 'error',
+      })
+      console.log(error)
+    }
+    
+
+
+
     setIsOpen(!isOpen)
     reset()
   }
@@ -80,11 +119,15 @@ const CourseTable = ({ allCourses }) => {
                 <td className="px-6 py-4">
                   <select
                     className="rounded-md"
+                    id="actions-select"
                     onClick={(e) => {
                       if (e.target.value === 'update') {
                         updateModal(result?._id)
+                        e.target.selectedIndex = 0;
+                       
                       } else if (e.target.value === 'delete') {
                         // Handle delete option if needed
+                        e.target.selectedIndex = 0;
                       }
                     }}
                   >

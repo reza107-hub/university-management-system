@@ -1,9 +1,7 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import CourseTable from './CourseTable'
-import CreateOfferCourse from './CreateOfferCourse'
 import {
   useCreateCourseMutation,
   useGetAllCoursesQuery,
@@ -11,11 +9,12 @@ import {
 import Swal from 'sweetalert2'
 import SearchName from './../../../../Components/Search/SearchName';
 const Courses = () => {
-  const [params,setParams] = useState('')
+  const [params,setParams] = useState("")
   const { data: allCourses } = useGetAllCoursesQuery(params) 
-   console.log(allCourses)
+  //  console.log(allCourses)
   const [createCourse] = useCreateCourseMutation()
   let [isOpen, setIsOpen] = useState(false)
+  //-----------------------------------------------------
   const openModal = () => {
     setIsOpen(!isOpen)
   }
@@ -23,6 +22,10 @@ const Courses = () => {
     setIsOpen(!isOpen)
   }
   const { handleSubmit, register, reset } = useForm()
+  //---------------------------------------------------
+  
+
+  //------------------------------------------------------
   const onSubmit = async (data) => {
     try {
       Swal.fire({
@@ -50,6 +53,7 @@ const Courses = () => {
     reset()
     setIsOpen(!isOpen)
   }
+//....................................................
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -156,8 +160,7 @@ const Courses = () => {
 
         {/* Offer Course section */}
         <div>
-          {/*Offer modal  button*/}
-          <CreateOfferCourse />
+       
         </div>
       </div>
 

@@ -18,7 +18,17 @@ const courseApi = baseApi.injectEndpoints({
             }),
             providesTags: ['course']
         }),
+        updateCourse: build.mutation({
+            query: ({ id, body }) => {
+              return {
+                url: `/course/update-course/${id}`,
+                method: 'PUT',
+                body,
+              }
+            },
+            invalidatesTags: ['course'],
+          }),
     }),
 })
 
-export const { useCreateCourseMutation, useGetAllCoursesQuery } = courseApi
+export const { useCreateCourseMutation, useGetAllCoursesQuery ,useUpdateCourseMutation} = courseApi
