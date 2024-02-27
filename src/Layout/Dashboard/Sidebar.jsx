@@ -73,6 +73,12 @@ const Sidebar = () => {
       role: 'admin',
     },
     {
+      to: '/dashboard/offered-course',
+      label: 'Offered Courses',
+      icon: <AcademicCap />,
+      role: 'admin',
+    },
+    {
       to: '/dashboard/admission-requests-lists',
       label: 'Admission Requests',
       icon: <UserSvg />,

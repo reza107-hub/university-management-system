@@ -95,6 +95,7 @@ const Programs = () => {
         <SearchName
           setParams={setParams}
           SearchPlaceHolderName={SearchPlaceHolderName}
+          searchTerm='name'
         />
 
         <div>

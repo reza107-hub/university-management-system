@@ -38,11 +38,14 @@ import MuPhotographicSociety from '../Pages/Home/Club&Organization/MuPhotographi
 import MuRoboticsClub from '../Pages/Home/Club&Organization/MuRoboticsClub/MuRoboticsClub'
 import Courses from '../Pages/Dashboard/Admin/Course/Courses'
 import AdmissionPaymentSuccess from '../Pages/GetAdmission/AdmissionPaymentSuccess'
+import NotFound from '../Pages/NotFoundPage/NotFound'
+import CreateOfferCourse from '../Pages/Dashboard/Admin/OfferedCourse/CreateOfferCourse'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
+    errorElement:<NotFound />,
     children: [
       {
         path: '/',
@@ -234,6 +237,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <Courses />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/offered-course',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <CreateOfferCourse />
             </AdminRoutes>
           </PrivateRoute>
         ),

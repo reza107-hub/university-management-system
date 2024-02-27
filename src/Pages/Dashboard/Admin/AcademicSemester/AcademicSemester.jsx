@@ -144,6 +144,7 @@ const AcademicSemester = () => {
         <SearchName
           setParams={setParams}
           SearchPlaceHolderName={SearchPlaceHolderName}
+          searchTerm='name'
         />
         <div>
           <button type="button" onClick={openModal} className="btn-primary">

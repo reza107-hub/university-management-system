@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-const SearchName = ({ setParams, SearchPlaceHolderName }) => {
+const SearchName = ({ setParams, SearchPlaceHolderName ,searchTerm}) => {
   const [searchText, setSearch] = useState('')
-  const search = `name=${searchText}`
+  const search = `${searchTerm}=${searchText}`
   useEffect(() => {
     if (search) {
       setParams(search)

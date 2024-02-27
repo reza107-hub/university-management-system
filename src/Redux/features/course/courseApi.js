@@ -11,14 +11,33 @@ const courseApi = baseApi.injectEndpoints({
             invalidatesTags: ['course']
         }),
         getAllCourses: build.query({
-            query: (body) => ({
+            query: (params) => ({
                 url: `/course`,
                 method: 'GET',
-                body
+                params
             }),
             providesTags: ['course']
         }),
+        updateCourse: build.mutation({
+            query: ({ id, body }) => {
+              return {
+                url: `/course/update-course/${id}`,
+                method: 'PUT',
+                body,
+              }
+            },
+            invalidatesTags: ['course'],
+          }),
+          deleteOneCourse: build.mutation({
+            query: (id) => {
+              return {
+                url: `/course/delete-course/${id}`,
+                method: 'DELETE',
+              }
+            },
+            invalidatesTags: ['course'],
+          }),
     }),
 })
 
-export const { useCreateCourseMutation, useGetAllCoursesQuery } = courseApi
+export const { useCreateCourseMutation, useGetAllCoursesQuery ,useUpdateCourseMutation,useDeleteOneCourseMutation} = courseApi
