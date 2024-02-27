@@ -109,6 +109,7 @@ const Department = () => {
         <SearchName
           setParams={setParams}
           SearchPlaceHolderName={SearchPlaceHolderName}
+          searchTerm='name'
         />
 
         <div>

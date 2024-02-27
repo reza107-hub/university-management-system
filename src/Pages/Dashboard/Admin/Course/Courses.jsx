@@ -1,18 +1,20 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import CourseTable from './CourseTable'
-import CreateOfferCourse from './CreateOfferCourse'
 import {
   useCreateCourseMutation,
   useGetAllCoursesQuery,
 } from '../../../../Redux/features/course/courseApi'
 import Swal from 'sweetalert2'
+import SearchName from './../../../../Components/Search/SearchName';
 const Courses = () => {
-  const { data: allCourses } = useGetAllCoursesQuery()
+  const [params,setParams] = useState("")
+  const { data: allCourses } = useGetAllCoursesQuery(params) 
+  //  console.log(allCourses)
   const [createCourse] = useCreateCourseMutation()
   let [isOpen, setIsOpen] = useState(false)
+  //-----------------------------------------------------
   const openModal = () => {
     setIsOpen(!isOpen)
   }
@@ -20,6 +22,10 @@ const Courses = () => {
     setIsOpen(!isOpen)
   }
   const { handleSubmit, register, reset } = useForm()
+  //---------------------------------------------------
+  
+
+  //------------------------------------------------------
   const onSubmit = async (data) => {
     try {
       Swal.fire({
@@ -47,16 +53,18 @@ const Courses = () => {
     reset()
     setIsOpen(!isOpen)
   }
+//....................................................
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
 
-        {/* <SearchName
+        <SearchName
           setParams={setParams}
-          SearchPlaceHolderName={SearchPlaceHolderName}
-        /> */}
+          SearchPlaceHolderName="course name"
+          searchTerm='searchTerm'
+        />
       </div>
 
       {/* modal */}
@@ -152,8 +160,7 @@ const Courses = () => {
 
         {/* Offer Course section */}
         <div>
-          {/*Offer modal  button*/}
-          <CreateOfferCourse />
+       
         </div>
       </div>
 
