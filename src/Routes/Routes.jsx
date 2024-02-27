@@ -37,6 +37,7 @@ import MuCulturalClub from '../Pages/Home/Club&Organization/MuCulturalClab/MuCul
 import MuPhotographicSociety from '../Pages/Home/Club&Organization/MuPhotographicSociety/MuPhotographicSociety'
 import MuRoboticsClub from '../Pages/Home/Club&Organization/MuRoboticsClub/MuRoboticsClub'
 import Courses from '../Pages/Dashboard/Admin/Course/Courses'
+import AdmissionPaymentSuccess from '../Pages/GetAdmission/AdmissionPaymentSuccess'
 
 const router = createBrowserRouter([
   {
@@ -108,6 +109,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <GetAdmission />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/admission-payment/:trans_id',
+        element: (
+          <PrivateRoute>
+            <AdmissionPaymentSuccess />
           </PrivateRoute>
         ),
       },
