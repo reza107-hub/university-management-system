@@ -76,7 +76,7 @@ const AdmissionForm = () => {
       data.sscCertificate = await GetHostUrl(data.sscCertificate[0])
       data.hscCertificate = await GetHostUrl(data.hscCertificate[0])
       const batchArray = batchData?.data?.filter(
-        (batch) => batch?.deptId === data.department,
+        (batch) => batch?.deptId?._id === data.department,
       )
 
       const batch = batchArray?.find((b) => b?.isAdmissionGoing === true)
@@ -89,12 +89,13 @@ const AdmissionForm = () => {
       const { firstName, lastName, ...postData } = data
 
       const res = await createAdmissionRequest(postData).unwrap()
-      Swal.fire({
-        title: res.message,
-        icon: 'success',
-        timer: 2000,
-      })
-      navigate('/')
+      if (!res.url) {
+        Swal.fire({
+          title: 'something went wrong',
+          icon: 'error',
+        })
+      }
+      window.location.replace(res.url)
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
