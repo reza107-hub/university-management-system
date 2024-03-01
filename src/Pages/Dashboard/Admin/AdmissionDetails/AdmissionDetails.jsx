@@ -61,7 +61,6 @@ const AdmissionDetails = () => {
             })
             navigate(`/dashboard/students`)
           } catch (error) {
-            console.log(error)
             Swal.fire({
               title: error?.data?.message,
               text: error?.data?.errorMessage,
@@ -158,7 +157,7 @@ const AdmissionDetails = () => {
         </p>
         <p className="pt-5">
           <span className="font-bold text-primary">Batch: </span>
-          <span className="font-semibold">{details?.batch}</span>
+          <span className="font-semibold">{details?.batch?.batchNumber}</span>
         </p>
         <p className="pt-5">
           <span className="font-bold text-primary">Father Name:</span>{' '}

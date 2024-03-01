@@ -2,7 +2,10 @@ import { useState } from 'react'
 import ReUsable from '../../../../Components/Dialog/ReUsableModaal'
 import { useForm } from 'react-hook-form'
 import Swal from 'sweetalert2'
-import { useDeleteOneCourseMutation, useUpdateCourseMutation } from '../../../../Redux/features/course/courseApi'
+import {
+  useDeleteOneCourseMutation,
+  useUpdateCourseMutation,
+} from '../../../../Redux/features/course/courseApi'
 
 const updateContent = [
   {
@@ -30,8 +33,8 @@ const CourseTable = ({ allCourses }) => {
   const updateCourseInfo = allCourses?.data?.result?.find(
     (course) => course?._id === courseId,
   )
-const [updateCourseData] = useUpdateCourseMutation()
-const [deleteOneCourse] = useDeleteOneCourseMutation()
+  const [updateCourseData] = useUpdateCourseMutation()
+  const [deleteOneCourse] = useDeleteOneCourseMutation()
   const updateModal = (id) => {
     setIsOpen(!isOpen)
     setCourseId(id)
@@ -40,12 +43,12 @@ const [deleteOneCourse] = useDeleteOneCourseMutation()
   const closeModal = () => {
     setIsOpen(!isOpen)
   }
-//----------------------------------------------------------------
-  const updateCourse = async(data) => {
-  
-    data.title = data.title === ''? updateCourseInfo.title : data.title
-    data.code = data.code === ''? updateCourseInfo.code : data.code
-    data.credits = data.credits === ''? updateCourseInfo.credits : Number(data.credits)
+  //----------------------------------------------------------------
+  const updateCourse = async (data) => {
+    data.title = data.title === '' ? updateCourseInfo.title : data.title
+    data.code = data.code === '' ? updateCourseInfo.code : data.code
+    data.credits =
+      data.credits === '' ? updateCourseInfo.credits : Number(data.credits)
 
     try {
       Swal.fire({
@@ -74,33 +77,33 @@ const [deleteOneCourse] = useDeleteOneCourseMutation()
     setIsOpen(!isOpen)
     reset()
   }
-//-----------------------------------------------------------------
-const handleDelete = async (id) => {
-  try {
-    Swal.fire({
-      title: 'Deleting course...',
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading()
-      },
-    })
-    const res = await deleteOneCourse(id).unwrap()
-    console.log(res)
-    Swal.fire({
-      title: res.message,
-      icon: 'success',
-      timer: 1500,
-    })
-  } catch (error) {
-    Swal.fire({
-      title: error?.data?.message,
-      text: error?.data?.errorMessage,
-      icon: 'error',
-    })
+  //-----------------------------------------------------------------
+  const handleDelete = async (id) => {
+    try {
+      Swal.fire({
+        title: 'Deleting course...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      const res = await deleteOneCourse(id).unwrap()
+      console.log(res)
+      Swal.fire({
+        title: res.message,
+        icon: 'success',
+        timer: 1500,
+      })
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: 'error',
+      })
+    }
   }
-}
-//----------------------------------------------------------------
+  //----------------------------------------------------------------
 
   return (
     <div>
@@ -146,15 +149,15 @@ const handleDelete = async (id) => {
                     onClick={(e) => {
                       if (e.target.value === 'update') {
                         updateModal(result?._id)
-                        e.target.selectedIndex = 0;
-                       
+                        e.target.selectedIndex = 0
                       } else if (e.target.value === 'delete') {
                         handleDelete(result?._id)
-                        e.target.selectedIndex = 0;
+                        e.target.selectedIndex = 0
                       }
                     }}
                   >
                     <option>Actions</option>
+                    <option value="offer">Offer The Course</option>
                     <option value="update">Update The Course</option>
                     <option value="delete">Delete The Course</option>
                   </select>

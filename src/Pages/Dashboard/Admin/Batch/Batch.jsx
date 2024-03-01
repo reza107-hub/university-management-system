@@ -15,7 +15,6 @@ const Batch = () => {
   const [batchContent] = batchConstant()
   let [isOpen, setIsOpen] = useState(false)
   const { data: batchData } = useGetBatchQuery(undefined)
-  console.log(batchData)
   const [addBatch] = useAddBatchMutation()
   const [updateBatch] = useUpdateBatchMutation()
   const openModal = () => {
