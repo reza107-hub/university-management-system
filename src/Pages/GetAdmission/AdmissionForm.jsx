@@ -81,13 +81,11 @@ const AdmissionForm = () => {
 
       const batch = batchArray?.find((b) => b?.isAdmissionGoing === true)
 
-      if (batch) {
-        data.batch = batch?.batchNumber
-      }
+      data.batch = batch?._id
       data.semester = semester._id
 
       const { firstName, lastName, ...postData } = data
-
+      // console.log(postData)
       const res = await createAdmissionRequest(postData).unwrap()
       if (!res.url) {
         Swal.fire({
