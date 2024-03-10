@@ -40,6 +40,7 @@ import Courses from '../Pages/Dashboard/Admin/Course/Courses'
 import AdmissionPaymentSuccess from '../Pages/GetAdmission/AdmissionPaymentSuccess'
 import NotFound from '../Pages/NotFoundPage/NotFound'
 import CreateOfferCourse from '../Pages/Dashboard/Admin/OfferedCourse/CreateOfferCourse'
+import AddStudentManually from '../Pages/Dashboard/Admin/AddStudentManually/AddStudentManually'
 
 const router = createBrowserRouter([
   {
@@ -267,6 +268,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <StudentsLists />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/add-students',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <AddStudentManually />
             </AdminRoutes>
           </PrivateRoute>
         ),
