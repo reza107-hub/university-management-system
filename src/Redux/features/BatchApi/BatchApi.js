@@ -29,8 +29,16 @@ const BatchApi = baseApi.injectEndpoints({
       }),
       providesTags: ['batch'],
     }),
+
+    getAllSection: build.query({
+      query: () => ({
+        url: `/batch/get-all-section`,
+        method: 'GET',
+      }),
+
+    })
   }),
 })
 
-export const { useAddBatchMutation, useGetBatchQuery, useUpdateBatchMutation } =
+export const { useAddBatchMutation, useGetBatchQuery, useUpdateBatchMutation, useGetAllSectionQuery } =
   BatchApi

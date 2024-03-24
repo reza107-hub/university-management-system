@@ -39,14 +39,15 @@ import MuRoboticsClub from '../Pages/Home/Club&Organization/MuRoboticsClub/MuRob
 import Courses from '../Pages/Dashboard/Admin/Course/Courses'
 import AdmissionPaymentSuccess from '../Pages/GetAdmission/AdmissionPaymentSuccess'
 import NotFound from '../Pages/NotFoundPage/NotFound'
-import CreateOfferCourse from '../Pages/Dashboard/Admin/OfferedCourse/CreateOfferCourse'
 import AddStudentManually from '../Pages/Dashboard/Admin/AddStudentManually/AddStudentManually'
+import FacultyRoutes from './FacultyRoute'
+import FacultySemesterRoutine from '../Pages/Dashboard/faculty/semester routine/FacultySemesterRoutine'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main />,
-    errorElement:<NotFound />,
+    errorElement: <NotFound />,
     children: [
       {
         path: '/',
@@ -163,6 +164,16 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/dashboard/semester-faculty-routine',
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <FacultySemesterRoutine />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: '/dashboard/admission-requests-lists',
         element: (
           <PrivateRoute>
@@ -247,7 +258,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoutes>
-              <CreateOfferCourse />
+              <div>Hello</div>
             </AdminRoutes>
           </PrivateRoute>
         ),
