@@ -10,6 +10,7 @@ const Home = () => {
       <UniversityStatistics />
       <Contact />
       <Footer />
+      
     </>
   )
 }

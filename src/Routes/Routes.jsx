@@ -39,6 +39,7 @@ import MuRoboticsClub from '../Pages/Home/Club&Organization/MuRoboticsClub/MuRob
 import Courses from '../Pages/Dashboard/Admin/Course/Courses'
 import AdmissionPaymentSuccess from '../Pages/GetAdmission/AdmissionPaymentSuccess'
 import NotFound from '../Pages/NotFoundPage/NotFound'
+import AddStudentManually from '../Pages/Dashboard/Admin/AddStudentManually/AddStudentManually'
 import FacultyRoutes from './FacultyRoute'
 import FacultySemesterRoutine from '../Pages/Dashboard/faculty/semester routine/FacultySemesterRoutine'
 
@@ -278,6 +279,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <StudentsLists />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/add-students',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <AddStudentManually />
             </AdminRoutes>
           </PrivateRoute>
         ),

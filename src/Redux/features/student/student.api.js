@@ -10,6 +10,14 @@ const studentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['user', 'admission'],
     }),
+    createStudentManually: build.mutation({
+      query: (body) => ({
+        url: `/students/add-student`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['user', 'admission'],
+    }),
     denyStudent: build.mutation({
       query: (body) => ({
         url: `/students/deny-student`,
@@ -33,4 +41,5 @@ export const {
   useCreateStudentMutation,
   useDenyStudentMutation,
   useGetAllStudentsQuery,
+  useCreateStudentManuallyMutation
 } = studentApi
