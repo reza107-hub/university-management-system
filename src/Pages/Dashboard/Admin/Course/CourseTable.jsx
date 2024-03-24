@@ -6,6 +6,7 @@ import {
   useDeleteOneCourseMutation,
   useUpdateCourseMutation,
 } from '../../../../Redux/features/course/courseApi'
+import CreateOfferCourse from '../OfferedCourse/CreateOfferCourse'
 
 const updateContent = [
   {
@@ -27,6 +28,7 @@ const updateContent = [
 ]
 
 const CourseTable = ({ allCourses }) => {
+  let [isOpenForOfferCourse, setIsOpenForOfferCourse] = useState(false)
   const { handleSubmit, register, reset } = useForm()
   let [courseId, setCourseId] = useState('')
   let [isOpen, setIsOpen] = useState(false)
@@ -71,7 +73,6 @@ const CourseTable = ({ allCourses }) => {
         text: error?.data?.errorMessage,
         icon: 'error',
       })
-      console.log(error)
     }
 
     setIsOpen(!isOpen)
@@ -89,7 +90,6 @@ const CourseTable = ({ allCourses }) => {
         },
       })
       const res = await deleteOneCourse(id).unwrap()
-      console.log(res)
       Swal.fire({
         title: res.message,
         icon: 'success',
@@ -105,6 +105,11 @@ const CourseTable = ({ allCourses }) => {
   }
   //----------------------------------------------------------------
 
+  const openModalForOfferCourse = (courseId) => {
+    setCourseId(courseId)
+    setIsOpenForOfferCourse(!isOpenForOfferCourse)
+  }
+
   return (
     <div>
       <ReUsable
@@ -114,6 +119,11 @@ const CourseTable = ({ allCourses }) => {
         handleSubmit={handleSubmit}
         register={register}
         Content={updateContent}
+      />
+      <CreateOfferCourse
+        isOpenForOfferCourse={isOpenForOfferCourse}
+        setIsOpenForOfferCourse={setIsOpenForOfferCourse}
+        courseId={courseId}
       />
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mx-auto">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center w-full">
@@ -152,6 +162,9 @@ const CourseTable = ({ allCourses }) => {
                         e.target.selectedIndex = 0
                       } else if (e.target.value === 'delete') {
                         handleDelete(result?._id)
+                        e.target.selectedIndex = 0
+                      } else if (e.target.value === 'offer') {
+                        openModalForOfferCourse(result?._id)
                         e.target.selectedIndex = 0
                       }
                     }}
