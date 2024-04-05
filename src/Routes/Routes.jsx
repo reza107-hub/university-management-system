@@ -42,6 +42,7 @@ import NotFound from '../Pages/NotFoundPage/NotFound'
 import AddStudentManually from '../Pages/Dashboard/Admin/AddStudentManually/AddStudentManually'
 import FacultyRoutes from './FacultyRoute'
 import FacultySemesterRoutine from '../Pages/Dashboard/faculty/semester routine/FacultySemesterRoutine'
+import OfferedCourseTable from '../Pages/Dashboard/Admin/OfferedCourse/OfferedCourseTable'
 
 const router = createBrowserRouter([
   {
@@ -258,7 +259,7 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoutes>
-              <div>Hello</div>
+              <OfferedCourseTable />
             </AdminRoutes>
           </PrivateRoute>
         ),
