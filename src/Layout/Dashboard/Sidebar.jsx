@@ -104,10 +104,10 @@ const Sidebar = () => {
       role: 'faculty',
     },
     {
-      to: '/dashboard/student/testing',
-      label: 'Testing Man',
+      to: '/dashboard/marks-of-students',
+      label: 'Marks',
       icon: <UserSvg />,
-      role: 'student',
+      role: 'faculty',
     },
   ]
 

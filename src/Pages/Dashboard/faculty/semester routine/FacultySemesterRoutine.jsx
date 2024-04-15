@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Loader from '../../../../Components/Loader/Loader'
 import useAuth from '../../../../Hooks/useAuth'
 import { useGetPresentUserWithAdditionalInfoQuery } from '../../../../Redux/features/User/UserApi'
@@ -20,7 +21,7 @@ const FacultySemesterRoutine = () => {
     currentFaculty?._id,
   )
   if (!offeredCourses || !offeredCourses?.data?.length) {
-    return <Loader/>
+    return <Loader />
   }
   const singleCourse = offeredCourses?.data?.find(
     (result) => result?.facultyId === currentFaculty?._id,
@@ -34,9 +35,11 @@ const FacultySemesterRoutine = () => {
 
     routine.forEach((item) => {
       acc.push({
+        offeredCourseId: course._id,
         days: item.days,
         startTime: item.startTime,
         endTime: item.endTime,
+        roomNo: item.roomNo,
         courseTitle: title,
         sectionName: name,
       })
@@ -44,6 +47,21 @@ const FacultySemesterRoutine = () => {
 
     return acc
   }, [])
+  const sortDays = (days) => {
+    const order = {
+      Sat: 0,
+      Sun: 1,
+      Mon: 2,
+      Tue: 3,
+      Wed: 4,
+      Thu: 5,
+      Fri: 6,
+    }
+    return days.sort((a, b) => order[a.days] - order[b.days])
+  }
+
+  // Use this function to sort your reducedData
+  const sortedData = sortDays(reducedData)
   return (
     <div>
       <p className="text-center text-primary font-bold text-2xl mt-3 mb-10">
@@ -64,13 +82,16 @@ const FacultySemesterRoutine = () => {
             <th scope="col" className="px-6 py-3 text-center">
               Batch `(Section)`
             </th>
+            <th scope="col" className="px-6 py-3 text-center">
+              Room No.
+            </th>
           </tr>
         </thead>
         <tbody className="text-center">
-          {reducedData &&
-            reducedData.map((result) => (
+          {sortedData &&
+            sortedData.map((result, i) => (
               <tr
-                key={result?._id}
+                key={i}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="px-6 py-4 font-bold text-lg">{result?.days}</td>
@@ -83,29 +104,17 @@ const FacultySemesterRoutine = () => {
                 <td className="px-6 py-4 font-bold text-lg">
                   {result?.sectionName}
                 </td>
+                <td className="px-6 py-4 font-bold text-lg">
+                  {result?.roomNo}
+                </td>
 
                 <td className="px-6 py-4">
-                  <select
-                    className="rounded-md"
-                    id="actions-select"
-                    // onClick={(e) => {
-                    //   if (e.target.value === 'update') {
-                    //     updateModal(result?._id)
-                    //     e.target.selectedIndex = 0
-                    //   } else if (e.target.value === 'delete') {
-                    //     handleDelete(result?._id)
-                    //     e.target.selectedIndex = 0
-                    //   } else if (e.target.value === 'offer') {
-                    //     openModalForOfferCourse(result?._id)
-                    //     e.target.selectedIndex = 0
-                    //   }
-                    // }}
+                  <Link
+                  className='cursor-pointer text-primary hover:underline'
+                    to={`/dashboard/offered-course/${result.offeredCourseId}`}
                   >
-                    <option>Actions</option>
-                    <option value="offer">Offer The Course</option>
-                    <option value="update">Update The Course</option>
-                    <option value="delete">Delete The Course</option>
-                  </select>
+                    See Details
+                  </Link>
                 </td>
               </tr>
             ))}
