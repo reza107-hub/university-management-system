@@ -34,6 +34,13 @@ const studentApi = baseApi.injectEndpoints({
       }),
       providesTags: ['user', 'admission'],
     }),
+    getUserIsStudent: build.query({
+      query: (email) => ({
+        url: `/users/student/${email}`,
+        method: 'GET',
+      }),
+      providesTags: ['user', 'student'],
+    }),
   }),
 })
 
@@ -41,5 +48,6 @@ export const {
   useCreateStudentMutation,
   useDenyStudentMutation,
   useGetAllStudentsQuery,
-  useCreateStudentManuallyMutation
+  useCreateStudentManuallyMutation,
+  useGetUserIsStudentQuery
 } = studentApi

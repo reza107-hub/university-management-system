@@ -35,6 +35,15 @@ const adminApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['admin-list', 'user', 'admin'],
     }),
+    // send email to faculty
+    sendEmail: build.mutation({
+      query: (body) => ({
+        url: `/admin/send-email`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['admin-list', 'user', 'admin'],
+    }),
   }),
 })
 
@@ -43,4 +52,5 @@ export const {
   useCreateAdminMutation,
   useGetAdminListQuery,
   useDeleteAnAdminMutation,
+  useSendEmailMutation
 } = adminApi

@@ -42,6 +42,8 @@ import NotFound from '../Pages/NotFoundPage/NotFound'
 import AddStudentManually from '../Pages/Dashboard/Admin/AddStudentManually/AddStudentManually'
 import FacultyRoutes from './FacultyRoute'
 import FacultySemesterRoutine from '../Pages/Dashboard/faculty/semester routine/FacultySemesterRoutine'
+import OfferedCourseTable from '../Pages/Dashboard/Admin/OfferedCourse/OfferedCourseTable'
+import StudentRoute from './StudentRoute'
 import OfferedCourseDetails from '../Pages/Dashboard/faculty/offer-course-details/OfferedCourseDetails'
 import Attendance from '../Pages/Dashboard/faculty/make attendance/Attendance'
 import Marks from '../Pages/Dashboard/faculty/Marks/Marks'
@@ -315,8 +317,18 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdminRoutes>
-              <div>Hello</div>
+              <OfferedCourseTable />
             </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/student/testing',
+        element: (
+          <PrivateRoute>
+            <StudentRoute>
+              <h1>Hi antor bhai</h1>
+            </StudentRoute>
           </PrivateRoute>
         ),
       },

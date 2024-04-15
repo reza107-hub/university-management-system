@@ -10,7 +10,34 @@ const offeredCourseApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['course']
         }),
-        getSingleOfferedCourse: build.query({
+          // get offered course endpoint
+    getOfferedCourse: build.query({
+        query: () => ({
+          url: '/offered-course',
+          method: 'GET',
+        }),
+        providesTags: ['course'],
+      }),
+      updateOfferedCourse: build.mutation({
+        query: ({ id, body }) => {
+          return {
+            url: `/offered-course/${id}`,
+            method: 'PUT',
+            body,
+          }
+        },
+        invalidatesTags: ['course'],
+      }),
+      deleteOneOfferedCourse: build.mutation({
+        query: (id) => {
+          return {
+            url: `/offered-course/${id}`,
+            method: 'DELETE',
+          }
+        },
+        invalidatesTags: ['course'],
+      }),
+      getSingleOfferedCourse: build.query({
             query: (id)=>({
                 url: `/offered-course/${id}`,
                 method: 'GET',
@@ -20,4 +47,4 @@ const offeredCourseApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useCreateOfferedCourseMutation, useGetSingleOfferedCourseQuery } =offeredCourseApi
+export const { useCreateOfferedCourseMutation ,useGetOfferedCourseQuery,useDeleteOneOfferedCourseMutation , useUpdateOfferedCourseMutation,useGetSingleOfferedCourseQuery} =offeredCourseApi
