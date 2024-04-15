@@ -103,6 +103,12 @@ const Sidebar = () => {
       icon: <UserSvg />,
       role: 'faculty',
     },
+    {
+      to: '/dashboard/marks-of-students',
+      label: 'Marks',
+      icon: <UserSvg />,
+      role: 'faculty',
+    },
   ]
 
   return (

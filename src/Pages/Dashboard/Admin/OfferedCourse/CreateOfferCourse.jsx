@@ -8,6 +8,7 @@ import { useGetAllSectionQuery } from '../../../../Redux/features/BatchApi/Batch
 import { useGetFacultyListQuery } from '../../../../Redux/features/faculty/FacultyApi'
 import Swal from 'sweetalert2'
 import { useCreateOfferedCourseMutation } from '../../../../Redux/features/offeredCourse/offeredCourse.api'
+import { FaMinusCircle } from 'react-icons/fa'
 
 const CreateOfferCourse = ({
   isOpenForOfferCourse,
@@ -100,7 +101,7 @@ const CreateOfferCourse = ({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <form onSubmit={handleSubmit(onSubmit)}>
                     {/* SEMESTER */}
                     <div className="space-y-3">
@@ -198,7 +199,7 @@ const CreateOfferCourse = ({
                         <div key={field.id} className="flex gap-2 items-center">
                           <select
                             {...register(`routine.${index}.days`)}
-                            className="form-select"
+                            className="w-28"
                           >
                             <option value="Sat">Saturday</option>
                             <option value="Sun">Sunday</option>
@@ -210,18 +211,28 @@ const CreateOfferCourse = ({
                           </select>
                           <input
                             type="time"
-                            min="00:00" max="23:59" pattern="[0-2][0-9]:[0-5][0-9]"
+                            min="00:00"
+                            max="23:59"
+                            pattern="[0-2][0-9]:[0-5][0-9]"
                             {...register(`routine.${index}.startTime`)}
                             className="form-input"
                           />
                           <input
                             type="time"
-                            min="00:00" max="23:59" pattern="[0-2][0-9]:[0-5][0-9]"
+                            min="00:00"
+                            max="23:59"
+                            pattern="[0-2][0-9]:[0-5][0-9]"
                             {...register(`routine.${index}.endTime`)}
                             className="form-input"
                           />
+                          <input
+                            type="number"
+                            {...register(`routine.${index}.roomNo`)}
+                            placeholder='Room No'
+                            className="w-16"
+                          />
                           <button type="button" onClick={() => remove(index)}>
-                            Remove
+                            <FaMinusCircle />
                           </button>
                         </div>
                       ))}
@@ -230,7 +241,12 @@ const CreateOfferCourse = ({
                         className="text-primary cursor-pointer underline hover:text-red-400"
                         type="button"
                         onClick={() =>
-                          append({ days: '', startTime: '', endTime: '' })
+                          append({
+                            days: '',
+                            startTime: '',
+                            endTime: '',
+                            roomNo: '',
+                          })
                         }
                       >
                         Add Routine

@@ -9,8 +9,15 @@ const offeredCourseApi = baseApi.injectEndpoints({
                 body
             }),
             invalidatesTags: ['course']
+        }),
+        getSingleOfferedCourse: build.query({
+            query: (id)=>({
+                url: `/offered-course/${id}`,
+                method: 'GET',
+            }),
+            providesTags: ['course']
         })
     })
 })
 
-export const { useCreateOfferedCourseMutation } =offeredCourseApi
+export const { useCreateOfferedCourseMutation, useGetSingleOfferedCourseQuery } =offeredCourseApi
