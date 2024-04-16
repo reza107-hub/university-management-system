@@ -49,6 +49,7 @@ import Attendance from '../Pages/Dashboard/faculty/make attendance/Attendance'
 import Marks from '../Pages/Dashboard/faculty/Marks/Marks'
 import SectionStudentsMarks from '../Pages/Dashboard/faculty/Marks/SectionStudentsMarks'
 import See60Marks from '../Pages/Dashboard/faculty/Marks/See60Marks'
+import See40Marks from '../Pages/Dashboard/faculty/Marks/See40Marks'
 
 const router = createBrowserRouter([
   {
@@ -207,6 +208,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <FacultyRoutes>
               <See60Marks />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: `/dashboard/marks-of-students/see-40-marks/:id`,
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <See40Marks />
             </FacultyRoutes>
           </PrivateRoute>
         ),
