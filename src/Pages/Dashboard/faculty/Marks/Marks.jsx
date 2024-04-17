@@ -61,6 +61,14 @@ const Marks = () => {
                 <td className="px-6 py-4 font-bold text-lg">
                   <Link
                     className="text-xs hover:underline"
+                    to={`attendance-marks/${result?._id}`}
+                  >
+                    Attendance Marks
+                  </Link>
+                </td>
+                <td className="px-6 py-4 font-bold text-lg">
+                  <Link
+                    className="text-xs hover:underline"
                     to={`${result?._id}`}
                   >
                     Add Marks
