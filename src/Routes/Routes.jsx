@@ -51,6 +51,7 @@ import SectionStudentsMarks from '../Pages/Dashboard/faculty/Marks/SectionStuden
 import See60Marks from '../Pages/Dashboard/faculty/Marks/See60Marks'
 import See40Marks from '../Pages/Dashboard/faculty/Marks/See40Marks'
 import AttendanceMarks from '../Pages/Dashboard/faculty/Marks/AttendanceMarks'
+import StudentSemesterRoutine from '../Pages/Dashboard/student/semester routine/StudentSemesterRoutine'
 
 const router = createBrowserRouter([
   {
@@ -162,6 +163,17 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      //students routes
+      {
+        path: '/dashboard/semester-student-routine',
+        element: (
+          <PrivateRoute>
+            <StudentRoute>
+              <StudentSemesterRoutine />
+            </StudentRoute>
+          </PrivateRoute>
+        ),
+      },
       // faculty
       {
         path: '/dashboard/semester-faculty-routine',

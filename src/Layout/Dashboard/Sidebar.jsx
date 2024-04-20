@@ -109,6 +109,12 @@ const Sidebar = () => {
       icon: <UserSvg />,
       role: 'faculty',
     },
+    {
+      to: '/dashboard/semester-student-routine',
+      label: 'Semester Routine',
+      icon: <UserSvg />,
+      role: 'student',
+    },
   ]
 
   return (
