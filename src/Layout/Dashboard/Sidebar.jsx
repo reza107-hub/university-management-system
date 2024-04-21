@@ -110,6 +110,18 @@ const Sidebar = () => {
       role: 'faculty',
     },
     {
+      to: '/dashboard/marks-of-students',
+      label: 'Marks',
+      icon: <UserSvg />,
+      role: 'faculty',
+    },
+    {
+      to: '/dashboard/semester-student-routine',
+      label: 'Semester Routine',
+      icon: <UserSvg />,
+      role: 'student',
+    },
+    {
       to: '/dashboard/student/payment',
       label: 'Payment',
       icon: <UserSvg />,

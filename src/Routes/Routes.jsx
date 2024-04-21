@@ -47,6 +47,14 @@ import StudentRoute from './StudentRoute'
 import DepartmentWiseStudentFee from '../Pages/Dashboard/Admin/DepartmentWiseStudentFee/DepartmentWiseStudentFee'
 import StudentPayment from '../Pages/Dashboard/Student/StudentPayment/StudentPayment'
 import SemesterPaymentSuccessFull from '../Pages/Dashboard/Student/StudentPayment/SemesterPaymentSuccessFull'
+import OfferedCourseDetails from '../Pages/Dashboard/faculty/offer-course-details/OfferedCourseDetails'
+import Attendance from '../Pages/Dashboard/faculty/make attendance/Attendance'
+import Marks from '../Pages/Dashboard/faculty/Marks/Marks'
+import SectionStudentsMarks from '../Pages/Dashboard/faculty/Marks/SectionStudentsMarks'
+import See60Marks from '../Pages/Dashboard/faculty/Marks/See60Marks'
+import See40Marks from '../Pages/Dashboard/faculty/Marks/See40Marks'
+import AttendanceMarks from '../Pages/Dashboard/faculty/Marks/AttendanceMarks'
+import StudentSemesterRoutine from '../Pages/Dashboard/student/semester routine/StudentSemesterRoutine'
 
 const router = createBrowserRouter([
   {
@@ -166,16 +174,18 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      //students routes
       {
-        path: '/dashboard/users',
+        path: '/dashboard/semester-student-routine',
         element: (
           <PrivateRoute>
-            <AdminRoutes>
-              <ManageUsers />
-            </AdminRoutes>
+            <StudentRoute>
+              <StudentSemesterRoutine />
+            </StudentRoute>
           </PrivateRoute>
         ),
       },
+      // faculty
       {
         path: '/dashboard/semester-faculty-routine',
         element: (
@@ -183,6 +193,87 @@ const router = createBrowserRouter([
             <FacultyRoutes>
               <FacultySemesterRoutine />
             </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: `/dashboard/offered-course/:id`,
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <OfferedCourseDetails />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: `/dashboard/marks-of-students`,
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <Marks />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: `/dashboard/marks-of-students/:id`,
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <SectionStudentsMarks />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: `/dashboard/marks-of-students/see-60-marks/:id`,
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <See60Marks />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: `/dashboard/marks-of-students/see-40-marks/:id`,
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <See40Marks />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: `/dashboard/marks-of-students/attendance-marks/:id`,
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <AttendanceMarks />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: `/dashboard/make-attendance/:id`,
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <Attendance />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+      // admin
+      {
+        path: '/dashboard/users',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <ManageUsers />
+            </AdminRoutes>
           </PrivateRoute>
         ),
       },

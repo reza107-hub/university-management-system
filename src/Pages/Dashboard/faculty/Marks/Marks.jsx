@@ -7,7 +7,7 @@ import {
   useGetFacultySemesterRoutineQuery,
 } from '../../../../Redux/features/faculty/FacultyApi'
 
-const FacultySemesterRoutine = () => {
+const Marks = () => {
   const { user } = useAuth()
   const { data: currentUser } = useGetPresentUserWithAdditionalInfoQuery(
     user?.email,
@@ -23,97 +23,71 @@ const FacultySemesterRoutine = () => {
   if (!offeredCourses || !offeredCourses?.data?.length) {
     return <Loader />
   }
-  const singleCourse = offeredCourses?.data?.find(
-    (result) => result?.facultyId === currentFaculty?._id,
-  )
-  const semesterTitle = singleCourse?.academicSemesterId
-
-  const reducedData = offeredCourses?.data?.reduce((acc, course) => {
-    const { routine, courseId, sectionId } = course
-    const { title } = courseId
-    const { name } = sectionId
-
-    routine.forEach((item) => {
-      acc.push({
-        offeredCourseId: course._id,
-        days: item.days,
-        startTime: item.startTime,
-        endTime: item.endTime,
-        roomNo: item.roomNo,
-        courseTitle: title,
-        sectionName: name,
-      })
-    })
-
-    return acc
-  }, [])
-  const sortDays = (days) => {
-    const order = {
-      Sat: 0,
-      Sun: 1,
-      Mon: 2,
-      Tue: 3,
-      Wed: 4,
-      Thu: 5,
-      Fri: 6,
-    }
-    return days.sort((a, b) => order[a.days] - order[b.days])
-  }
-
-  // Use this function to sort your reducedData
-  const sortedData = sortDays(reducedData)
   return (
     <div>
       <p className="text-center text-primary font-bold text-2xl mt-3 mb-10">
-        Your {semesterTitle?.name} {semesterTitle?.year} routine
+        Your Classes
       </p>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mx-auto">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center w-full">
           <tr>
             <th scope="col" className="px-6 py-3 text-center">
-              Days
+              Course Name
             </th>
             <th scope="col" className="px-6 py-3 text-center">
-              Start Time - End Time
+              Batch
             </th>
             <th scope="col" className="px-6 py-3 text-center">
-              Course
-            </th>
-            <th scope="col" className="px-6 py-3 text-center">
-              Batch `(Section)`
-            </th>
-            <th scope="col" className="px-6 py-3 text-center">
-              Room No.
+              Department
             </th>
           </tr>
         </thead>
         <tbody className="text-center">
-          {sortedData &&
-            sortedData.map((result, i) => (
+          {offeredCourses?.data &&
+            offeredCourses?.data?.map((result, i) => (
               <tr
                 key={i}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
-                <td className="px-6 py-4 font-bold text-lg">{result?.days}</td>
                 <td className="px-6 py-4 font-bold text-lg">
-                  {result?.startTime} - {result?.endTime}
+                  {result?.courseId?.title}
                 </td>
                 <td className="px-6 py-4 font-bold text-lg">
-                  {result?.courseTitle}
+                  {result?.sectionId?.name}
                 </td>
                 <td className="px-6 py-4 font-bold text-lg">
-                  {result?.sectionName}
+                  {result?.departmentId?.name}
                 </td>
                 <td className="px-6 py-4 font-bold text-lg">
-                  {result?.roomNo}
-                </td>
-
-                <td className="px-6 py-4">
                   <Link
-                  className='cursor-pointer text-primary hover:underline'
-                    to={`/dashboard/offered-course/${result.offeredCourseId}`}
+                    className="text-xs hover:underline"
+                    to={`attendance-marks/${result?._id}`}
                   >
-                    See Details
+                    Attendance Marks
+                  </Link>
+                </td>
+                <td className="px-6 py-4 font-bold text-lg">
+                  <Link
+                    className="text-xs hover:underline"
+                    to={`${result?._id}`}
+                  >
+                    Add Marks
+                  </Link>
+                </td>
+                <td className="px-6 py-4 font-bold text-lg">
+                  <Link
+                    className="text-xs hover:underline"
+                    to={`see-60-marks/${result?._id}`}
+                  >
+                    See 60 Marks
+                  </Link>
+                </td>
+                <td className="px-6 py-4 font-bold text-lg">
+                  <Link
+                    className="text-xs hover:underline"
+                    to={`see-40-marks/${result?._id}`}
+                  >
+                    See 40 Marks
                   </Link>
                 </td>
               </tr>
@@ -124,4 +98,4 @@ const FacultySemesterRoutine = () => {
   )
 }
 
-export default FacultySemesterRoutine
+export default Marks

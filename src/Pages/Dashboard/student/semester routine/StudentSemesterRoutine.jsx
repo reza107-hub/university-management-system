@@ -1,37 +1,32 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import Loader from '../../../../Components/Loader/Loader'
 import useAuth from '../../../../Hooks/useAuth'
-import { useGetPresentUserWithAdditionalInfoQuery } from '../../../../Redux/features/User/UserApi'
 import {
-  useGetFacultyListQuery,
-  useGetFacultySemesterRoutineQuery,
-} from '../../../../Redux/features/faculty/FacultyApi'
+  useGetSemesterRoutineQuery,
+  useGetSingleStudentDataFromDbQuery,
+} from '../../../../Redux/features/student/student.api'
+import SeeFacultyInfoModal from './SeeFacultyInfoModal'
 
-const FacultySemesterRoutine = () => {
-  const { user } = useAuth()
-  const { data: currentUser } = useGetPresentUserWithAdditionalInfoQuery(
-    user?.email,
-  )
-  const { data: facultyLists } = useGetFacultyListQuery(undefined)
-  const currentFaculty = facultyLists?.data?.find(
-    (result) => result?.userAdditionalInfoId?._id === currentUser?.data?._id,
+const StudentSemesterRoutine = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [faculty, setFaculty] = useState()
+  const { user, loading } = useAuth()
+  const { data: studentData, isLoading: isStudentDataLoading } =
+    useGetSingleStudentDataFromDbQuery(user?.email, { skip: loading })
+  const { data: Courses } = useGetSemesterRoutineQuery(
+    studentData?.data?.studentId,
+    {
+      skip: isStudentDataLoading,
+    },
   )
 
-  const { data: offeredCourses } = useGetFacultySemesterRoutineQuery(
-    currentFaculty?._id,
-  )
-  if (!offeredCourses || !offeredCourses?.data?.length) {
+  if (!Courses || !Courses?.data?.length) {
     return <Loader />
   }
-  const singleCourse = offeredCourses?.data?.find(
-    (result) => result?.facultyId === currentFaculty?._id,
-  )
-  const semesterTitle = singleCourse?.academicSemesterId
 
-  const reducedData = offeredCourses?.data?.reduce((acc, course) => {
-    const { routine, courseId, sectionId } = course
+  const modifyData = Courses?.data?.reduce((acc, course) => {
+    const { routine, courseId, facultyId } = course
     const { title } = courseId
-    const { name } = sectionId
 
     routine.forEach((item) => {
       acc.push({
@@ -41,12 +36,13 @@ const FacultySemesterRoutine = () => {
         endTime: item.endTime,
         roomNo: item.roomNo,
         courseTitle: title,
-        sectionName: name,
+        faculty: facultyId,
       })
     })
 
     return acc
   }, [])
+
   const sortDays = (days) => {
     const order = {
       Sat: 0,
@@ -59,13 +55,26 @@ const FacultySemesterRoutine = () => {
     }
     return days.sort((a, b) => order[a.days] - order[b.days])
   }
+  const sortedData = sortDays(modifyData)
 
-  // Use this function to sort your reducedData
-  const sortedData = sortDays(reducedData)
+  const openModal = (faculty) => {
+    setFaculty(faculty)
+    setIsOpen(!isOpen)
+  }
+  const closeModal = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <div>
+      <SeeFacultyInfoModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        faculty={faculty}
+      />
       <p className="text-center text-primary font-bold text-2xl mt-3 mb-10">
-        Your {semesterTitle?.name} {semesterTitle?.year} routine
+        Your {Courses?.data[0]?.academicSemesterId?.name}{' '}
+        {Courses?.data[0]?.academicSemesterId?.year} routine
       </p>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mx-auto">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center w-full">
@@ -80,10 +89,10 @@ const FacultySemesterRoutine = () => {
               Course
             </th>
             <th scope="col" className="px-6 py-3 text-center">
-              Batch `(Section)`
+              Room No.
             </th>
             <th scope="col" className="px-6 py-3 text-center">
-              Room No.
+              Faculty Name
             </th>
           </tr>
         </thead>
@@ -102,20 +111,25 @@ const FacultySemesterRoutine = () => {
                   {result?.courseTitle}
                 </td>
                 <td className="px-6 py-4 font-bold text-lg">
-                  {result?.sectionName}
-                </td>
-                <td className="px-6 py-4 font-bold text-lg">
                   {result?.roomNo}
                 </td>
+                <td className="px-6 py-4 font-bold text-lg">
+                  <button
+                    onClick={() => openModal(result?.faculty)}
+                    className="underline"
+                  >
+                    {result?.faculty.name}
+                  </button>
+                </td>
 
-                <td className="px-6 py-4">
+                {/* <td className="px-6 py-4">
                   <Link
-                  className='cursor-pointer text-primary hover:underline'
+                    className="cursor-pointer text-primary hover:underline"
                     to={`/dashboard/offered-course/${result.offeredCourseId}`}
                   >
                     See Details
                   </Link>
-                </td>
+                </td> */}
               </tr>
             ))}
         </tbody>
@@ -124,4 +138,4 @@ const FacultySemesterRoutine = () => {
   )
 }
 
-export default FacultySemesterRoutine
+export default StudentSemesterRoutine
