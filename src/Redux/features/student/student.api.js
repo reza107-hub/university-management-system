@@ -41,6 +41,15 @@ const studentApi = baseApi.injectEndpoints({
       }),
       providesTags: ['user', 'student'],
     }),
+    //-----------------semester pay--------
+    semesterPayment: build.mutation({
+      query: (body) => ({
+        url: `/students/semester-pay`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['user', 'admission'],
+    }),
   }),
 })
 
@@ -49,5 +58,6 @@ export const {
   useDenyStudentMutation,
   useGetAllStudentsQuery,
   useCreateStudentManuallyMutation,
-  useGetUserIsStudentQuery
+  useGetUserIsStudentQuery,
+  useSemesterPaymentMutation
 } = studentApi

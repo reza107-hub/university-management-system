@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDeleteOneOfferedCourseMutation, useGetOfferedCourseQuery, useUpdateOfferedCourseMutation } from "../../../../Redux/features/offeredCourse/offeredCourse.api";
 import SearchName from './../../../../Components/Search/SearchName';
-import ReUsable from "../../../../Components/Dialog/ReUsableModaal";
 import Swal from 'sweetalert2'
 import { useForm } from "react-hook-form";
 import { useGetFacultyListQuery } from "../../../../Redux/features/faculty/FacultyApi";

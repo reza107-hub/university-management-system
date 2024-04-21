@@ -8,7 +8,7 @@ const useStudent = () => {
     user?.email,
     { skip: loading },
   )
-console.log(isStudent)
+// console.log(isStudent)
   return [isStudent, isStudentLoading]
 }
 export default useStudent

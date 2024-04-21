@@ -44,6 +44,9 @@ import FacultyRoutes from './FacultyRoute'
 import FacultySemesterRoutine from '../Pages/Dashboard/faculty/semester routine/FacultySemesterRoutine'
 import OfferedCourseTable from '../Pages/Dashboard/Admin/OfferedCourse/OfferedCourseTable'
 import StudentRoute from './StudentRoute'
+import DepartmentWiseStudentFee from '../Pages/Dashboard/Admin/DepartmentWiseStudentFee/DepartmentWiseStudentFee'
+import StudentPayment from '../Pages/Dashboard/Student/StudentPayment/StudentPayment'
+import SemesterPaymentSuccessFull from '../Pages/Dashboard/Student/StudentPayment/SemesterPaymentSuccessFull'
 
 const router = createBrowserRouter([
   {
@@ -124,6 +127,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AdmissionPaymentSuccess />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/semester-payment/:trans_id',
+        element: (
+          <PrivateRoute>
+            <SemesterPaymentSuccessFull />
           </PrivateRoute>
         ),
       },
@@ -266,11 +277,21 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/student/testing',
+        path: '/dashboard/department-wise-student-fee',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <DepartmentWiseStudentFee />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/student/payment',
         element: (
           <PrivateRoute>
             <StudentRoute>
-              <h1>Hi antor bhai</h1>
+              <StudentPayment />
             </StudentRoute>
           </PrivateRoute>
         ),
