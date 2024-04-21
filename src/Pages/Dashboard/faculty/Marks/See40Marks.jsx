@@ -1,26 +1,26 @@
 import { useParams } from 'react-router-dom'
 import { useGetSingleOfferedCourseQuery } from '../../../../Redux/features/offeredCourse/offeredCourse.api'
 import {
-  useGetCourseMarksOf60Query,
-  useUpdateCourseMarksOf60Mutation,
+  useGetCourseMarksOf40Query,
+  useUpdateCourseMarksOf40Mutation,
 } from '../../../../Redux/features/course marks/courseMarks.api'
 import UpdateMarksModal from './UpdateMarksModal'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 
-const See60Marks = () => {
+const See40Marks = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [updateMarks, setUpdateMarks] = useState(0)
   const [updateMarksId, setUpdateMarksId] = useState('')
   const { id } = useParams()
   const { data: offeredCourse } = useGetSingleOfferedCourseQuery(id)
-  const { data: courseMarksDataOf60Marks } = useGetCourseMarksOf60Query(
+  const { data: courseMarksDataOf40Marks } = useGetCourseMarksOf40Query(
     offeredCourse?.data?.courseId?._id,
   )
-  const [updateCourseMarksOf60] = useUpdateCourseMarksOf60Mutation()
+  const [updateCourseMarksOf40] = useUpdateCourseMarksOf40Mutation()
 
   const allStudentIds = offeredCourse?.data?.sectionId?.student_ids
-  const filteredStudentIds = courseMarksDataOf60Marks?.data?.filter((item) =>
+  const filteredStudentIds = courseMarksDataOf40Marks?.data?.filter((item) =>
     allStudentIds?.includes(item?.studentId),
   )
 
@@ -45,7 +45,7 @@ const See60Marks = () => {
         },
       })
 
-      const res = await updateCourseMarksOf60({
+      const res = await updateCourseMarksOf40({
         _id: updateMarksId,
         marks: Number(updateMarks),
       }).unwrap()
@@ -73,7 +73,7 @@ const See60Marks = () => {
         onSubmit={onSubmit}
       />
       <h2 className="text-2xl font-bold text-center my-4">
-        Course Marks (60 Marks)
+        Course Marks (40 Marks)
       </h2>
       <table className="w-full text-sm text-left text-gray-500">
         <thead className="bg-gray-200">
@@ -88,7 +88,7 @@ const See60Marks = () => {
           {filteredStudentIds?.map((student) => (
             <tr
               key={student._id}
-              className={student.status === 'R' ? 'bg-red-200' : ''}
+              className={student.status === 'S' ? 'bg-red-200' : ''}
             >
               <td className="border px-4 py-2">{student?.courseId?.title}</td>
               <td className="border px-4 py-2">{student?.studentId}</td>
@@ -110,4 +110,4 @@ const See60Marks = () => {
   )
 }
 
-export default See60Marks
+export default See40Marks

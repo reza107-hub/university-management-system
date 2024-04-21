@@ -7,9 +7,17 @@ const attendanceApi = baseApi.injectEndpoints({
                 url: `/attendance/create-attendance`,
                 method: 'POST',
                 body,
-            })
-        })
+            }),
+            invalidatesTags: ['user']
+        }),
+        getAttendanceOfThisCourse: build.query({
+            query: offeredCourseId => ({
+                url: `/attendance/get-attendance/${offeredCourseId}`,
+                method: 'GET',
+            }),
+            providesTags: ['user']
+        }),
     })
 })
 
-export const { useCreateAttendanceMutation } = attendanceApi
+export const { useCreateAttendanceMutation, useGetAttendanceOfThisCourseQuery } = attendanceApi

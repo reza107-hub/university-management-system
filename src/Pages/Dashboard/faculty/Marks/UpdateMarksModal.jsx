@@ -1,7 +1,12 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-export default function Update60MarksModal({ isOpen, closeModal, setUpdateMarks, onSubmit }) {
+export default function UpdateMarksModal({
+  isOpen,
+  closeModal,
+  setUpdateMarks,
+  onSubmit,
+}) {
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
