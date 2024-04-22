@@ -25,6 +25,13 @@ const SemesterRegistration = baseApi.injectEndpoints({
       }),
       providesTags: ['academic-semester'],
     }),
+    getOngoingSemesterRegistration: build.query({
+      query: () => ({
+        url: `/semester-registrations/getOngoingSemesterRegistration`,
+        method: 'GET',
+      }),
+      providesTags: ['academic-semester'],
+    }),
   }),
 })
 
@@ -32,4 +39,5 @@ export const {
   useCreateSemesterRegistrationMutation,
   useGetSemesterRegistrationQuery,
   useUpdateStatusSemesterRegistrationMutation,
+  useGetOngoingSemesterRegistrationQuery
 } = SemesterRegistration
