@@ -34,19 +34,29 @@ const studentApi = baseApi.injectEndpoints({
       }),
       providesTags: ['user', 'admission'],
     }),
-    getSemesterRoutine: build.query({
-      query: (studentId) => ({
-        url: `/students/semester-routine/${studentId}`,
-        method: 'GET',
-      }),
-      providesTags: ['user', 'admission', 'course'],
-    }),
+    
     getUserIsStudent: build.query({
       query: (email) => ({
         url: `/users/student/${email}`,
         method: 'GET',
       }),
       providesTags: ['user', 'student'],
+    }),
+    //-----------------semester pay--------
+    semesterPayment: build.mutation({
+      query: (body) => ({
+        url: `/students/semester-pay`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['user', 'admission'],
+    }),
+    getSemesterRoutine: build.query({
+      query: (studentId) => ({
+        url: `/students/semester-routine/${studentId}`,
+        method: 'GET',
+      }),
+      providesTags: ['user', 'admission', 'course'],
     }),
     getSingleStudentDataFromDb: build.query({
       query: (email) => ({
@@ -64,6 +74,7 @@ export const {
   useGetAllStudentsQuery,
   useCreateStudentManuallyMutation,
   useGetUserIsStudentQuery,
+  useSemesterPaymentMutation,
   useGetSemesterRoutineQuery,
   useGetSingleStudentDataFromDbQuery
 } = studentApi
