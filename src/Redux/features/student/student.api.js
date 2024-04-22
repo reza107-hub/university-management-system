@@ -34,13 +34,7 @@ const studentApi = baseApi.injectEndpoints({
       }),
       providesTags: ['user', 'admission'],
     }),
-    getSemesterRoutine: build.query({
-      query: (studentId) => ({
-        url: `/students/semester-routine/${studentId}`,
-        method: 'GET',
-      }),
-      providesTags: ['user', 'admission', 'course'],
-    }),
+    
     getUserIsStudent: build.query({
       query: (email) => ({
         url: `/users/student/${email}`,
@@ -48,7 +42,6 @@ const studentApi = baseApi.injectEndpoints({
       }),
       providesTags: ['user', 'student'],
     }),
-<<<<<<< HEAD
     //-----------------semester pay--------
     semesterPayment: build.mutation({
       query: (body) => ({
@@ -57,14 +50,20 @@ const studentApi = baseApi.injectEndpoints({
         body,
       }),
       invalidatesTags: ['user', 'admission'],
-=======
+    }),
+    getSemesterRoutine: build.query({
+      query: (studentId) => ({
+        url: `/students/semester-routine/${studentId}`,
+        method: 'GET',
+      }),
+      providesTags: ['user', 'admission', 'course'],
+    }),
     getSingleStudentDataFromDb: build.query({
       query: (email) => ({
         url: `/students/single-student/${email}`,
         method: 'GET',
       }),
       providesTags: ['user', 'student'],
->>>>>>> d5da891081dbd708a76e3db1b6e48d8ef2db98f5
     }),
   }),
 })
@@ -75,10 +74,7 @@ export const {
   useGetAllStudentsQuery,
   useCreateStudentManuallyMutation,
   useGetUserIsStudentQuery,
-<<<<<<< HEAD
-  useSemesterPaymentMutation
-=======
+  useSemesterPaymentMutation,
   useGetSemesterRoutineQuery,
   useGetSingleStudentDataFromDbQuery
->>>>>>> d5da891081dbd708a76e3db1b6e48d8ef2db98f5
 } = studentApi
