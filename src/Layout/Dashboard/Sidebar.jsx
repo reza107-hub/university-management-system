@@ -98,6 +98,12 @@ const Sidebar = () => {
       role: 'admin',
     },
     {
+      to: '/dashboard/department-wise-student-fee',
+      label: 'Add student fee for each dept',
+      icon: <UserSvg />,
+      role: 'admin',
+    },
+    {
       to: '/dashboard/semester-faculty-routine',
       label: 'Faculty Semester Routine',
       icon: <UserSvg />,
@@ -112,6 +118,12 @@ const Sidebar = () => {
     {
       to: '/dashboard/semester-student-routine',
       label: 'Semester Routine',
+      icon: <UserSvg />,
+      role: 'student',
+    },
+    {
+      to: '/dashboard/student/payment',
+      label: 'Payment',
       icon: <UserSvg />,
       role: 'student',
     },
