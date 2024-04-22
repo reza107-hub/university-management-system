@@ -121,15 +121,6 @@ const StudentSemesterRoutine = () => {
                     {result?.faculty.name}
                   </button>
                 </td>
-
-                {/* <td className="px-6 py-4">
-                  <Link
-                    className="cursor-pointer text-primary hover:underline"
-                    to={`/dashboard/offered-course/${result.offeredCourseId}`}
-                  >
-                    See Details
-                  </Link>
-                </td> */}
               </tr>
             ))}
         </tbody>

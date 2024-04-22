@@ -115,6 +115,12 @@ const Sidebar = () => {
       icon: <UserSvg />,
       role: 'student',
     },
+    {
+      to: '/dashboard/60-marks-of-running-semester-courses',
+      label: '60 Marks',
+      icon: <UserSvg />,
+      role: 'student',
+    },
   ]
 
   return (
