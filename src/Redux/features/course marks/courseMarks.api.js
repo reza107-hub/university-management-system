@@ -60,7 +60,14 @@ const courseMarksApi = baseApi.injectEndpoints({
             }),
             providesTags: ['course']
         }),
+        getAcademicRecord: build.query({
+            query: studentId => ({
+                url: `/course-marks/get-marks-of-100/${studentId}`,
+                method: 'GET',
+            }),
+            providesTags: ['course']
+        }),
     })
 })
 
-export const { useCreateCourseMarksOf60Mutation, useGetCourseMarksOf60Query, useCreateCourseMarksOf40Mutation, useUpdateCourseMarksOf60Mutation, useGetCourseMarksOf40Query, useUpdateCourseMarksOf40Mutation, useGetCoursesMarksOf60ForShowingStudentMutation } = courseMarksApi
+export const { useCreateCourseMarksOf60Mutation, useGetCourseMarksOf60Query, useCreateCourseMarksOf40Mutation, useUpdateCourseMarksOf60Mutation, useGetCourseMarksOf40Query, useUpdateCourseMarksOf40Mutation, useGetCoursesMarksOf60ForShowingStudentMutation, useGetAcademicRecordQuery } = courseMarksApi
