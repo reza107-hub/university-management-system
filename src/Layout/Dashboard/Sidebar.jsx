@@ -139,6 +139,12 @@ const Sidebar = () => {
       icon: <UserSvg />,
       role: 'student',
     },
+    {
+      to: '/dashboard/payment-history',
+      label: 'Payment History',
+      icon: <UserSvg />,
+      role: 'student',
+    },
   ]
 
   return (
