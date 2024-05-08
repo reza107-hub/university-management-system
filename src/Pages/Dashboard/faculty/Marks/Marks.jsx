@@ -6,9 +6,12 @@ import {
   useGetFacultyListQuery,
   useGetFacultySemesterRoutineQuery,
 } from '../../../../Redux/features/faculty/FacultyApi'
+import { useGetOngoingSemesterRegistrationQuery } from '../../../../Redux/features/SemesterrRegistration/SemesterrRegistration.api'
 
 const Marks = () => {
   const { user } = useAuth()
+  const { data: ongoingSemester } =
+    useGetOngoingSemesterRegistrationQuery(undefined)
   const { data: currentUser } = useGetPresentUserWithAdditionalInfoQuery(
     user?.email,
   )
@@ -19,6 +22,9 @@ const Marks = () => {
 
   const { data: offeredCourses } = useGetFacultySemesterRoutineQuery(
     currentFaculty?._id,
+  )
+  const ongoingSemesterOfferedCoursesLists = offeredCourses?.data?.filter(
+    (result) => result?.semesterRegistrationId === ongoingSemester?.data?._id,
   )
   if (!offeredCourses || !offeredCourses?.data?.length) {
     return <Loader />
@@ -43,8 +49,8 @@ const Marks = () => {
           </tr>
         </thead>
         <tbody className="text-center">
-          {offeredCourses?.data &&
-            offeredCourses?.data?.map((result, i) => (
+          {ongoingSemesterOfferedCoursesLists &&
+            ongoingSemesterOfferedCoursesLists?.map((result, i) => (
               <tr
                 key={i}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"

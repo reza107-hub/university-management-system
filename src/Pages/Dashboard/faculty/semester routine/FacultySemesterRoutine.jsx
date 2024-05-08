@@ -6,6 +6,7 @@ import {
   useGetFacultyListQuery,
   useGetFacultySemesterRoutineQuery,
 } from '../../../../Redux/features/faculty/FacultyApi'
+import { useGetOngoingSemesterRegistrationQuery } from '../../../../Redux/features/SemesterrRegistration/SemesterrRegistration.api'
 
 const FacultySemesterRoutine = () => {
   const { user } = useAuth()
@@ -13,6 +14,8 @@ const FacultySemesterRoutine = () => {
     user?.email,
   )
   const { data: facultyLists } = useGetFacultyListQuery(undefined)
+  const { data: ongoingSemester } =
+    useGetOngoingSemesterRegistrationQuery(undefined)
   const currentFaculty = facultyLists?.data?.find(
     (result) => result?.userAdditionalInfoId?._id === currentUser?.data?._id,
   )
@@ -23,30 +26,32 @@ const FacultySemesterRoutine = () => {
   if (!offeredCourses || !offeredCourses?.data?.length) {
     return <Loader />
   }
-  const singleCourse = offeredCourses?.data?.find(
-    (result) => result?.facultyId === currentFaculty?._id,
+  const ongoingSemesterOfferedCoursesLists = offeredCourses?.data?.filter(
+    (result) => result?.semesterRegistrationId === ongoingSemester?.data?._id,
   )
-  const semesterTitle = singleCourse?.academicSemesterId
 
-  const reducedData = offeredCourses?.data?.reduce((acc, course) => {
-    const { routine, courseId, sectionId } = course
-    const { title } = courseId
-    const { name } = sectionId
+  const reducedData = ongoingSemesterOfferedCoursesLists?.reduce(
+    (acc, course) => {
+      const { routine, courseId, sectionId } = course
+      const { title } = courseId
+      const { name } = sectionId
 
-    routine.forEach((item) => {
-      acc.push({
-        offeredCourseId: course._id,
-        days: item.days,
-        startTime: item.startTime,
-        endTime: item.endTime,
-        roomNo: item.roomNo,
-        courseTitle: title,
-        sectionName: name,
+      routine.forEach((item) => {
+        acc.push({
+          offeredCourseId: course._id,
+          days: item.days,
+          startTime: item.startTime,
+          endTime: item.endTime,
+          roomNo: item.roomNo,
+          courseTitle: title,
+          sectionName: name,
+        })
       })
-    })
 
-    return acc
-  }, [])
+      return acc
+    },
+    [],
+  )
   const sortDays = (days) => {
     const order = {
       Sat: 0,
@@ -65,7 +70,8 @@ const FacultySemesterRoutine = () => {
   return (
     <div>
       <p className="text-center text-primary font-bold text-2xl mt-3 mb-10">
-        Your {semesterTitle?.name} {semesterTitle?.year} routine
+        Your {ongoingSemester?.data?.academicSemester?.name}{' '}
+        {ongoingSemester?.data?.academicSemester?.year} routine
       </p>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mx-auto">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center w-full">
@@ -110,7 +116,7 @@ const FacultySemesterRoutine = () => {
 
                 <td className="px-6 py-4">
                   <Link
-                  className='cursor-pointer text-primary hover:underline'
+                    className="cursor-pointer text-primary hover:underline"
                     to={`/dashboard/offered-course/${result.offeredCourseId}`}
                   >
                     See Details
