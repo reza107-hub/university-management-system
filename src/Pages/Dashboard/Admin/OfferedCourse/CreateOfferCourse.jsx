@@ -21,7 +21,7 @@ const CreateOfferCourse = ({
   const { data: facultyLists } = useGetFacultyListQuery(undefined)
   const { data: semesterRegistrationData } = useGetSemesterRegistrationQuery()
   const semester = semesterRegistrationData?.data?.filter(
-    (result) => result?.status === 'UPCOMING' || 'ONGOING',
+    (result) => result?.status !== 'ENDED',
   )
   const { data: departmentData } = useGetDepartmentQuery()
   const { handleSubmit, control, register, reset } = useForm({
@@ -228,7 +228,7 @@ const CreateOfferCourse = ({
                           <input
                             type="number"
                             {...register(`routine.${index}.roomNo`)}
-                            placeholder='Room No'
+                            placeholder="Room No"
                             className="w-16"
                           />
                           <button type="button" onClick={() => remove(index)}>

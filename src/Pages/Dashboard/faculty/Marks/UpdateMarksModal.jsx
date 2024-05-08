@@ -39,7 +39,7 @@ export default function UpdateMarksModal({
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Update 60 Marks
+                    Update Marks
                   </Dialog.Title>
                   <div className="mt-2">
                     <input
