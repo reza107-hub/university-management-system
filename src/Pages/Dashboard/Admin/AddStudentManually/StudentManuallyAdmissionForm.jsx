@@ -6,6 +6,7 @@ const StudentManuallyAdmissionForm = ({
     errors,
     programData,
     getDepartmentData,
+    semesterStatus
   }) => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -433,10 +434,16 @@ const StudentManuallyAdmissionForm = ({
           </div>
         </div>
         
-  
+        
         <div className="mb-3">
+          
           <div className=" offset-sm-2 text-center">
-            <button type="submit" className="btn btn-primary ">
+          {semesterStatus !== 'UPCOMING' && (
+          <div className="mb-3">
+            <p className="text-red-700">Semester is not upcoming so you cannot add a student manually.</p>
+          </div>
+        )}
+            <button type="submit"  disabled={semesterStatus !== 'UPCOMING'} className="btn btn-primary ">
               Submit
             </button>
           </div>

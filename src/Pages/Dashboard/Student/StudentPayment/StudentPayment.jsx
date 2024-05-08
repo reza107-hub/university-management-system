@@ -65,7 +65,8 @@ const StudentPayment = () => {
         studentId: currentStudent?._id,
         departmentId: currentStudent?.admissionRequestId?.department?._id,
         semesterRegistrationId: upcomingOrOngoingSemester?._id,
-        contactNumber: currentStudent?.admissionRequestId?.contactNumber
+        contactNumber: currentStudent?.admissionRequestId?.contactNumber,
+        fee:departmentWiseFeeData?.semesterFee
       };
 
       const res = await semesterPayment(payload).unwrap();
@@ -131,7 +132,7 @@ const StudentPayment = () => {
       <SemesterFeeModal 
         isOpen={isOpenSemesterModal}
         closeModal={closeSemesterModal}
-        addPayment={addSemesterPayment}
+        addPayButton={addSemesterPayment}
         upcomingOrOngoingSemester={upcomingOrOngoingSemester}
         departmentWiseFeeData={departmentWiseFeeData}
         isSemesterPaymentDone={isSemesterPaymentDone}
