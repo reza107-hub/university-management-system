@@ -1,14 +1,29 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 
-export default function SemesterFeeModal({
+export default function MonthlyFeeModal({
   isOpen,
   closeModal,
   upcomingOrOngoingSemester,
   addPayButton,
   departmentWiseFeeData,
-  isSemesterPaymentDone
+  currentStudent
 }) {
+  const calculatePendingPayment = () => {
+    let totalPendingPayment = 0;
+    if (departmentWiseFeeData && departmentWiseFeeData.monthlyFees && upcomingOrOngoingSemester) {
+      const departmentMonthlyFee = departmentWiseFeeData?.monthlyFee; 
+      const waiverPercentage = currentStudent?.waiverPercentage || 0; 
+      const unpaidMonths = departmentWiseFeeData.monthlyFees.filter(fee => !fee.paidStatus);
+      totalPendingPayment = unpaidMonths.reduce((total, fee) => {
+        // Calculate fee after applying waiver for each unpaid month
+        const feeAfterWaiver = departmentMonthlyFee - (departmentMonthlyFee * waiverPercentage / 100);
+        return total + feeAfterWaiver;
+      }, 0);
+    }
+    return totalPendingPayment;
+  };
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -45,44 +60,15 @@ export default function SemesterFeeModal({
                        
                   </Dialog.Title>
                   <div className="mt-2">
-                   
-                  </div>
-
-                 {
-                  isSemesterPaymentDone === true ?<>
-                  
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    Your payment is completed
-                  </Dialog.Title>
-                  <div className='my-4'>
-                  <button
-                      className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 mr-4"
-                      type="button"
-                      onClick={closeModal}
-                    >
-                      Close
-                    </button>
-                  </div>
-                  </>:<>
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                    Plz pay the semester fee
-                  </Dialog.Title>
-
-                  <div className="mt-2">
-                    <input
-                      className="w-full rounded-md border border-primary"
-                      type="number"
-                      name="fee"
-                      id="fee"
-                      readOnly
-                      placeholder={`${departmentWiseFeeData?.semesterFee} taka`}
-                    />
+                    <p>Pending Payment:</p>
+                    <ul>
+                      {departmentWiseFeeData?.monthlyFees?.map((fee, index) => (
+                        <li key={index}>
+                          {fee.month} - {fee.year}
+                        </li>
+                      ))}
+                    </ul>
+                    <p>Total Pending Payment: {calculatePendingPayment()} taka</p>
                   </div>
 
                   <div className="mt-4">
@@ -101,8 +87,6 @@ export default function SemesterFeeModal({
                       Pay
                     </button>
                   </div>
-                  </>
-                 }
                 </Dialog.Panel>
               </Transition.Child>
             </div>
