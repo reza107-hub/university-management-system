@@ -18,7 +18,7 @@ const Form = ({
           </label>
           <div className="w-full">
             <input
-              {...register("firstName", { required: true })}
+              {...register('firstName', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
               defaultValue={firstName}
@@ -35,7 +35,7 @@ const Form = ({
           </label>
           <div className="w-full">
             <input
-              {...register("lastName", { required: true })}
+              {...register('lastName', { required: true })}
               type="text"
               className="form-control rounded-md w-full text-black"
               defaultValue={lastName}
@@ -54,7 +54,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("fatherName", { required: true })}
+              {...register('fatherName', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
             />
@@ -70,7 +70,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("fatherOccupation", { required: true })}
+              {...register('fatherOccupation', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
             />
@@ -88,7 +88,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("motherName", { required: true })}
+              {...register('motherName', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
             />
@@ -104,7 +104,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("motherOccupation", { required: true })}
+              {...register('motherOccupation', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
             />
@@ -125,7 +125,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("presentGuardianName", { required: true })}
+              {...register('presentGuardianName', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
             />
@@ -144,7 +144,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("presentGuardianContact", {
+              {...register('presentGuardianContact', {
                 required: true,
                 pattern: /^[0-9]*$/,
               })}
@@ -164,7 +164,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("dateOfBirth", { required: true })}
+              {...register('dateOfBirth', { required: true })}
               defaultValue={userData?.data?.dateOfBirth}
               type="date"
               className="form-control w-full rounded-md text-black"
@@ -180,7 +180,7 @@ const Form = ({
           </label>
           <div className="">
             <select
-              {...register("gender", { required: true })}
+              {...register('gender', { required: true })}
               className="form-select w-full text-black"
             >
               <option defaultValue={userData?.data?.gender}>
@@ -203,7 +203,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("contactNumber", {
+              {...register('contactNumber', {
                 required: true,
               })}
               defaultValue={userData?.data?.contactNumber}
@@ -222,7 +222,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("email", {
+              {...register('email', {
                 required: true,
                 pattern: /^\S+@\S+$/i,
               })}
@@ -245,7 +245,7 @@ const Form = ({
           </label>
           <div className="">
             <textarea
-              {...register("presentAddress", { required: true })}
+              {...register('presentAddress', { required: true })}
               defaultValue={userData?.data?.presentAddress}
               className="form-control w-full rounded-md text-black"
             ></textarea>
@@ -261,7 +261,7 @@ const Form = ({
           </label>
           <div className="">
             <textarea
-              {...register("permanentAddress", { required: true })}
+              {...register('permanentAddress', { required: true })}
               defaultValue={userData?.data?.permanentAddress}
               className="form-control w-full rounded-md text-black"
             ></textarea>
@@ -279,7 +279,7 @@ const Form = ({
           </label>
           <div className="">
             <select
-              {...register("bloodGroup", { required: true })}
+              {...register('bloodGroup', { required: true })}
               className="form-select w-full text-black"
             >
               <option defaultValue={userData?.data?.bloodGroup}>
@@ -306,11 +306,11 @@ const Form = ({
           </label>
           <div className="">
             <select
-              {...register("program", { required: true })}
+              {...register('program', { required: true })}
               className="form-select w-full text-black"
             >
               {programData?.data.map((program) => (
-                <option key={program?._id} defaultValue={program?._id}>
+                <option key={program?._id} value={program?._id}>
                   {program?.name}
                 </option>
               ))}
@@ -330,11 +330,11 @@ const Form = ({
           </label>
           <div className="">
             <select
-              {...register("department", { required: true })}
+              {...register('department', { required: true })}
               className="form-select w-full text-black"
             >
               {getDepartmentData?.data.map((department) => (
-                <option key={department?._id} defaultValue={department?._id}>
+                <option key={department._id} value={department._id}>
                   {department?.name}
                 </option>
               ))}
@@ -354,7 +354,7 @@ const Form = ({
           </label>
           <div className="">
             <select
-              {...register("yearOfRegistration", { required: true })}
+              {...register('yearOfRegistration', { required: true })}
               className="form-select w-full text-black"
             >
               <option defaultValue="2024">2024</option>
@@ -375,7 +375,7 @@ const Form = ({
           <div className="col-sm-10">
             <input
               type="text"
-              {...register("nationality", { required: true })}
+              {...register('nationality', { required: true })}
               className="form-select w-full text-black"
             ></input>
             {errors.nationality && (
@@ -390,7 +390,7 @@ const Form = ({
           </label>
           <div className="col-sm-10">
             <input
-              {...register("profileImage", { required: true })}
+              {...register('profileImage', { required: true })}
               type="file"
               className="form-control w-full"
             />
@@ -409,7 +409,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("sscCertificate")}
+              {...register('sscCertificate')}
               type="file"
               className="form-control rounded-md w-full"
             />
@@ -422,7 +422,7 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("hscCertificate")}
+              {...register('hscCertificate')}
               type="file"
               className="form-control rounded-md w-full"
             />
@@ -438,7 +438,7 @@ const Form = ({
         </div>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

@@ -1,6 +1,4 @@
-// import React from 'react';
-
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const LibraryOfMuUi = () => {
   return (
@@ -73,21 +71,50 @@ const LibraryOfMuUi = () => {
           Students
         </div>
         <p className="text-blue-500 font-semibold">Faculty Members</p>
-        <p>After joining of the University any teacher to be a member by depositing his/her details information with 1 copy of photograph.</p>
+        <p>
+          After joining of the University any teacher to be a member by
+          depositing his/her details information with 1 copy of photograph.
+        </p>
         <p className="text-blue-500 font-semibold">Students</p>
-        <p>Any student to be a member needs to deposit photocopy of student ID Card with 2 copies of stamp size photographs.</p>
+        <p>
+          Any student to be a member needs to deposit photocopy of student ID
+          Card with 2 copies of stamp size photographs.
+        </p>
         <p className="font-bold underline">Rules</p>
-        <p>All personal bags, coats, jackets, briefcases, umbrellas, etc. are to be kept on particular shelves.</p>
-        <p>Group study, gossiping, discussion, eating, drinking, and smoking are strictly prohibited inside the library.</p>
-        <p>All students are requested to handle with care all the fittings, fixtures, furniture, equipment, books, journals, CDs, computers etc. of the library and should leave them neat and tidy after use.</p>
-        <p>Users must not undertake any form of activity, including talking other than to the library staff that disturbs, distracts, or disrupts. Outside users must take due care of all the fittings, fixtures, furniture, equipment, books, journals, catalogues, computers, etc. They must return the borrowed books, journals etc. in due time after use.</p>
+        <p>
+          All personal bags, coats, jackets, briefcases, umbrellas, etc. are to
+          be kept on particular shelves.
+        </p>
+        <p>
+          Group study, gossiping, discussion, eating, drinking, and smoking are
+          strictly prohibited inside the library.
+        </p>
+        <p>
+          All students are requested to handle with care all the fittings,
+          fixtures, furniture, equipment, books, journals, CDs, computers etc.
+          of the library and should leave them neat and tidy after use.
+        </p>
+        <p>
+          Users must not undertake any form of activity, including talking other
+          than to the library staff that disturbs, distracts, or disrupts.
+          Outside users must take due care of all the fittings, fixtures,
+          furniture, equipment, books, journals, catalogues, computers, etc.
+          They must return the borrowed books, journals etc. in due time after
+          use.
+        </p>
         <p>Mobile phones should not be used inside the Library.</p>
         <p className="font-bold underline">Library User Policy</p>
-        <p>Students can borrow one book against their Library Card and return the book within the Library hour.</p>
-        <p>Teachers of the University will be entitled to borrow ten volumes/books for a term.</p>
+        <p>
+          Students can borrow one book against their Library Card and return the
+          book within the Library hour.
+        </p>
+        <p>
+          Teachers of the University will be entitled to borrow ten
+          volumes/books for a term.
+        </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LibraryOfMuUi;
+export default LibraryOfMuUi

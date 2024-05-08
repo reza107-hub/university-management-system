@@ -1,50 +1,50 @@
 // import React from 'react';
 
-import { CiHashtag } from "react-icons/ci";
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import { CiHashtag } from 'react-icons/ci'
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const MuSportsClub = () => {
   const teamMembers = [
     {
-      name: "Dr. Toufique Rahman Chowdhury",
-      position: "Chief Patron",
-      image: "https://i.ibb.co/2Kj4tTn/1699081491.png",
+      name: 'Dr. Toufique Rahman Chowdhury',
+      position: 'Chief Patron',
+      image: 'https://i.ibb.co/2Kj4tTn/1699081491.png',
     },
     {
-      name: "Tanwir MO Rahman Chowdhury",
-      position: "Patron",
-      image: "https://i.ibb.co/qjY6XX5/1704270708.png",
+      name: 'Tanwir MO Rahman Chowdhury',
+      position: 'Patron',
+      image: 'https://i.ibb.co/qjY6XX5/1704270708.png',
     },
     {
-      name: "Professor Dr. Mohammad Jahirul Hoque",
-      position: "Chief Adviser",
-      image: "https://i.ibb.co/rFNMHJW/1704270813.jpg",
+      name: 'Professor Dr. Mohammad Jahirul Hoque',
+      position: 'Chief Adviser',
+      image: 'https://i.ibb.co/rFNMHJW/1704270813.jpg',
     },
     {
-      name: "Tarek Islam",
-      position: "Adviser",
-      image: "https://i.ibb.co/Xk23xKb/1699081627.jpg",
+      name: 'Tarek Islam',
+      position: 'Adviser',
+      image: 'https://i.ibb.co/Xk23xKb/1699081627.jpg',
     },
     {
-      name: "Md. Saidur Rahaman",
-      position: "Adviser",
-      image: "https://i.ibb.co/YkLYqWg/1704272531.png",
+      name: 'Md. Saidur Rahaman',
+      position: 'Adviser',
+      image: 'https://i.ibb.co/YkLYqWg/1704272531.png',
     },
     {
-      name: "Kh. Md. Rajin Saleh Alam",
-      position: "Adviser",
-      image: "https://i.ibb.co/nPdzLYp/1699081585.png",
+      name: 'Kh. Md. Rajin Saleh Alam',
+      position: 'Adviser',
+      image: 'https://i.ibb.co/nPdzLYp/1699081585.png',
     },
-  ];
+  ]
   const executives = [
-    { name: "Md. Monsuruzzaman Sheikh Emon", position: "President" },
-    { name: "Jubayer Ahmed", position: "Vice President" },
-    { name: "Shahriar Jahan", position: "Vice President" },
-    { name: "Riyad Choudhury", position: "General Secretary" },
-    { name: "Mosharof Ahmed Musa", position: "Joint Secretary" },
-    { name: "Sultanul Arifin Emon", position: "Joint Secretary" },
-    { name: "MZ Fozle Rabby", position: "Organizing Secretary" },
-  ];
+    { name: 'Md. Monsuruzzaman Sheikh Emon', position: 'President' },
+    { name: 'Jubayer Ahmed', position: 'Vice President' },
+    { name: 'Shahriar Jahan', position: 'Vice President' },
+    { name: 'Riyad Choudhury', position: 'General Secretary' },
+    { name: 'Mosharof Ahmed Musa', position: 'Joint Secretary' },
+    { name: 'Sultanul Arifin Emon', position: 'Joint Secretary' },
+    { name: 'MZ Fozle Rabby', position: 'Organizing Secretary' },
+  ]
   return (
     <div>
       <AboutRouteFirstHalfContent
@@ -85,7 +85,7 @@ const MuSportsClub = () => {
         <p className="font-bold underline">Mission:</p>
         <p>
           To enhance learning and development through extra-curricular
-          activities, services, and facilities of excellent quality. <br />{" "}
+          activities, services, and facilities of excellent quality. <br />{' '}
           <br />
           To provide diverse educational and recreational schemes that encourage
           learning through competition, and physical activity. <br /> <br />
@@ -169,7 +169,7 @@ const MuSportsClub = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MuSportsClub;
+export default MuSportsClub

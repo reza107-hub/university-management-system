@@ -1,18 +1,17 @@
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { navigation } from "./navigation";
-import NavIcon from "./NavIcon";
-import BigScreenView from "./BigScreenView";
-import SmallScreenView from "./SmallScreenView";
-import MenuIcon from "./MenuIcon";
-import Profile from "./Profile";
-import { Link } from "react-router-dom";
-import useAuth from "../../../Hooks/useAuth";
+import { Fragment } from 'react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { navigation } from './navigation'
+import NavIcon from './NavIcon'
+import BigScreenView from './BigScreenView'
+import SmallScreenView from './SmallScreenView'
+import MenuIcon from './MenuIcon'
+import Profile from './Profile'
+import { Link } from 'react-router-dom'
+import useAuth from '../../../Hooks/useAuth'
 
 const NavigationBar = () => {
-
-  const {user} = useAuth()
+  const { user } = useAuth()
 
   return (
     <Disclosure as="nav" className="fixed bg-primary bg-opacity-40 z-50 w-full">
@@ -29,7 +28,7 @@ const NavigationBar = () => {
               />
               <div className="flex flex-1 sm:flex-initial items-center justify-center sm:items-stretch sm:justify-start">
                 {/* Nav icon image*/}
-                <Link to={"/"}>
+                <Link to={'/'}>
                   <NavIcon />
                 </Link>
               </div>
@@ -49,7 +48,7 @@ const NavigationBar = () => {
                 ) : (
                   <div>
                     <Link
-                      to={"/login"}
+                      to={'/login'}
                       className="px-4 py-2 text-center hover:bg-gray-100 hover:text-primary cursor-pointer text-white font-bold rounded-md"
                     >
                       Login
@@ -72,6 +71,6 @@ const NavigationBar = () => {
         </>
       )}
     </Disclosure>
-  );
-};
-export default NavigationBar;
+  )
+}
+export default NavigationBar

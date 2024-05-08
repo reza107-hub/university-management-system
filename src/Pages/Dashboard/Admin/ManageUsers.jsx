@@ -1,72 +1,106 @@
-import Swal from "sweetalert2";
-import { useGetUserWithAdditionalInfoQuery } from "../../../Redux/features/User/UserApi";
-import { useCreateAdminMutation } from "../../../Redux/features/admin/admin.api";
-import { useCreateFacultyMutation } from "../../../Redux/features/faculty/FacultyApi";
-import { useState } from "react";
-import SearchName from "../../../Components/Search/SearchName";
+import Swal from 'sweetalert2'
+import { useGetUserWithAdditionalInfoQuery } from '../../../Redux/features/User/UserApi'
+import { useCreateAdminMutation } from '../../../Redux/features/admin/admin.api'
+import { useCreateFacultyMutation } from '../../../Redux/features/faculty/FacultyApi'
+import { useState } from 'react'
+import SearchName from '../../../Components/Search/SearchName'
+import ReUsable from '../../../Components/Dialog/ReUsableModaal'
+import FacultyContent from './FacultyContent'
+import { useForm } from 'react-hook-form'
 
 const ManageUsers = () => {
+  const [facultyContent] = FacultyContent()
+  let [isOpen, setIsOpen] = useState(false)
   const [params, setParams] = useState('')
-  
-  const { data: userInfoData } = useGetUserWithAdditionalInfoQuery(params);
-  const [createAdmin] = useCreateAdminMutation();
- const [crateFaculty] = useCreateFacultyMutation()
+  const [user, setUser] = useState({})
 
-const SearchPlaceHolderName = 'users'
+  const { data: userInfoData } = useGetUserWithAdditionalInfoQuery(params)
+  const [createAdmin] = useCreateAdminMutation()
+  const [crateFaculty] = useCreateFacultyMutation()
+
+  const SearchPlaceHolderName = 'users'
 
   const handleMakeAdmin = async (user) => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await createAdmin(user).unwrap();
+      })
+      const res = await createAdmin(user).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-  };
-  const handleMakeFaculty = async (user) => {
+  }
+  const { handleSubmit, register, reset } = useForm()
+  const handleMakeFaculty = async (data) => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await crateFaculty(user).unwrap();
+      })
+      data.name = user.name
+      data.userId = user.userId._id
+      data.userAdditionalInfoId = user._id
+      const res = await crateFaculty(data).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-  };
+    reset()
+    setIsOpen(!isOpen)
+  }
+
+  const openModal = (user) => {
+    setUser(user)
+    setIsOpen(!isOpen)
+  }
+
+  const closeModal = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <ReUsable
+        isOpen={isOpen}
+        closeModal={closeModal}
+        onSubmit={handleMakeFaculty}
+        Content={facultyContent}
+        handleSubmit={handleSubmit}
+        register={register}
+      />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
-        <SearchName setParams={setParams} SearchPlaceHolderName={SearchPlaceHolderName}/>
+        <SearchName
+          setParams={setParams}
+          SearchPlaceHolderName={SearchPlaceHolderName}
+          searchTerm='name'
+        />
       </div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -87,7 +121,7 @@ const SearchPlaceHolderName = 'users'
         </thead>
         <tbody>
           {userInfoData?.data?.map((user) =>
-            user?.userId?.role === "user" ? (
+            user?.userId?.role === 'user' ? (
               <tr
                 key={user?._id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -108,34 +142,34 @@ const SearchPlaceHolderName = 'users'
                 <td className="px-6 py-4">{user?.email}</td>
                 <td className="px-6 py-4">{user?.userId?.role}</td>
                 <td className="px-6 py-4">
-                  {user?.role === "admin" ? (
+                  {user?.role === 'admin' ? (
                     <></>
                   ) : (
                     <>
-                    <button
-                      onClick={() => handleMakeAdmin(user)}
-                      className={`btn-primary`}
-                    >
-                      Make Admin
-                    </button>
-                    <button
-                      onClick={() => handleMakeFaculty(user)}
-                      className={`btn-primary`}
-                    >
-                      Make faculty
-                    </button>
+                      <button
+                        onClick={() => handleMakeAdmin(user)}
+                        className={`btn-primary`}
+                      >
+                        Make Admin
+                      </button>
+                      <button
+                        onClick={() => openModal(user)}
+                        className={`btn-primary`}
+                      >
+                        Make faculty
+                      </button>
                     </>
                   )}
                 </td>
               </tr>
             ) : (
               <tr key={user?._id}></tr>
-            )
+            ),
           )}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default ManageUsers;
+export default ManageUsers

@@ -1,41 +1,41 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2";
-import { useState } from "react";
-import { useGetAdmissionRequestQuery } from "../../../../Redux/features/Admission/Admission.api";
-import { saveAs } from "file-saver";
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { useState } from 'react'
+import { saveAs } from 'file-saver'
 import {
   useCreateStudentMutation,
   useDenyStudentMutation,
-} from "../../../../Redux/features/student/student.api";
-import ReUsable from "../../../../Components/Dialog/ReUsableModaal";
-import { denyStudentContent } from "./StudentDeny";
-import { useForm } from "react-hook-form";
+} from '../../../../Redux/features/student/student.api'
+import ReUsable from '../../../../Components/Dialog/ReUsableModaal'
+import { denyStudentContent } from './StudentDeny'
+import { useForm } from 'react-hook-form'
+import { useGetSingleAdmissionRequestQuery } from '../../../../Redux/features/Admission/Admission.api'
 
 const AdmissionDetails = () => {
-  const [denyStudent] = useDenyStudentMutation();
-  const navigate = useNavigate();
-  const [createStudent] = useCreateStudentMutation();
+  const { Id } = useParams()
+  const { data } = useGetSingleAdmissionRequestQuery(Id)
+  const [denyStudent] = useDenyStudentMutation()
+  const navigate = useNavigate()
+  const [createStudent] = useCreateStudentMutation()
   // eslint-disable-next-line no-unused-vars
-  const [waiverNumber, setWaiverNumber] = useState();
-  const { email } = useParams();
-  const { data } = useGetAdmissionRequestQuery(email);
-  const details = data?.data.find((result) => result?.email === email);
-  let [isOpen, setIsOpen] = useState(false);
-  let [id, setId] = useState("");
+  const [waiverNumber, setWaiverNumber] = useState()
+  const details = data?.data
+  let [isOpen, setIsOpen] = useState(false)
+  let [id, setId] = useState('')
 
   const downloadPhoto = (photoUrl) => {
-    saveAs(photoUrl, "profile.jpg");
-  };
+    saveAs(photoUrl, 'profile.jpg')
+  }
 
   const assignWaiver = () => {
     Swal.fire({
-      title: "Enter Waiver Number:",
-      input: "number",
+      title: 'Enter Waiver Number:',
+      input: 'number',
       showCancelButton: true,
-      confirmButtonText: "Approve",
-      cancelButtonText: "Cancel",
+      confirmButtonText: 'Approve',
+      cancelButtonText: 'Cancel',
       preConfirm: (number) => {
-        setWaiverNumber(number);
+        setWaiverNumber(number)
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -44,75 +44,75 @@ const AdmissionDetails = () => {
           const data = {
             admissionRequestId: details?._id,
             waiver: Number(waiverNumber),
-          };
+          }
           try {
             Swal.fire({
-              title: "wait...",
+              title: 'wait...',
               allowEscapeKey: false,
               allowOutsideClick: false,
               didOpen: () => {
-                Swal.showLoading();
+                Swal.showLoading()
               },
-            });
-            const res = await createStudent(data).unwrap();
+            })
+            const res = await createStudent(data).unwrap()
             Swal.fire({
               title: res.message,
-              icon: "success",
-            });
-            navigate(`/dashboard/students`);
+              icon: 'success',
+            })
+            navigate(`/dashboard/students`)
           } catch (error) {
             Swal.fire({
               title: error?.data?.message,
               text: error?.data?.errorMessage,
-              icon: "error",
-            });
+              icon: 'error',
+            })
           }
-        });
+        })
       }
-    });
-  };
+    })
+  }
 
-  const { handleSubmit, register, reset } = useForm();
+  const { handleSubmit, register, reset } = useForm()
 
   const closeModal = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   const denyStudentModal = (id) => {
-    setId(id);
-    setIsOpen(true);
-  };
+    setId(id)
+    setIsOpen(true)
+  }
 
   const onSubmit = async (data) => {
-    data.id = id;
-    data.email = email;
+    data.id = id
+    data.email = details?.email
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await denyStudent(data).unwrap();
+      })
+      const res = await denyStudent(data).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
-      navigate(`/dashboard/admission-requests-lists`);
+      })
+      navigate(`/dashboard/admission-requests-lists`)
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
 
-    setIsOpen(false);
-    reset();
-  };
+    setIsOpen(false)
+    reset()
+  }
 
   return (
     <div className="w-4/5 mx-auto">
@@ -150,81 +150,81 @@ const AdmissionDetails = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <p className="pt-5">
-          <span className="font-bold text-primary">Name:</span>{" "}
+          <span className="font-bold text-primary">Name:</span>{' '}
           <span className="font-semibold">
-            {details?.name?.firstName + " " + details?.name?.lastName}
+            {details?.name?.firstName + ' ' + details?.name?.lastName}
           </span>
         </p>
         <p className="pt-5">
           <span className="font-bold text-primary">Batch: </span>
-          <span className="font-semibold">{details?.batch}</span>
+          <span className="font-semibold">{details?.batch?.batchNumber}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Father Name:</span>{" "}
+          <span className="font-bold text-primary">Father Name:</span>{' '}
           <span className="font-semibold">{details?.fatherName}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Father Occupation:</span>{" "}
+          <span className="font-bold text-primary">Father Occupation:</span>{' '}
           <span className="font-semibold">{details?.fatherOccupation}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Mother Name:</span>{" "}
+          <span className="font-bold text-primary">Mother Name:</span>{' '}
           <span className="font-semibold">{details?.motherName}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Mother Occupation:</span>{" "}
+          <span className="font-bold text-primary">Mother Occupation:</span>{' '}
           <span className="font-semibold">{details?.motherOccupation}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Present Guardian Name:</span>{" "}
+          <span className="font-bold text-primary">Present Guardian Name:</span>{' '}
           <span className="font-semibold">{details?.presentGuardianName}</span>
         </p>
         <p className="pt-5">
           <span className="font-bold text-primary">
             Present Guardian Contact No:
-          </span>{" "}
+          </span>{' '}
           <span className="font-semibold">
             {details?.presentGuardianContact}
           </span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Date of Birth:</span>{" "}
+          <span className="font-bold text-primary">Date of Birth:</span>{' '}
           <span className="font-semibold">{details?.dateOfBirth}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Gender:</span>{" "}
+          <span className="font-bold text-primary">Gender:</span>{' '}
           <span className="font-semibold">{details?.gender}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Contact Number:</span>{" "}
+          <span className="font-bold text-primary">Contact Number:</span>{' '}
           <span className="font-semibold">{details?.contactNumber}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Email:</span>{" "}
+          <span className="font-bold text-primary">Email:</span>{' '}
           <span className="font-semibold">{details?.email}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Present Address:</span>{" "}
+          <span className="font-bold text-primary">Present Address:</span>{' '}
           <span className="font-semibold">{details?.presentAddress}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Permanent Address:</span>{" "}
+          <span className="font-bold text-primary">Permanent Address:</span>{' '}
           <span className="font-semibold">{details?.permanentAddress}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Blood Group:</span>{" "}
+          <span className="font-bold text-primary">Blood Group:</span>{' '}
           <span className="font-semibold">{details?.bloodGroup}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Applied Department:</span>{" "}
+          <span className="font-bold text-primary">Applied Department:</span>{' '}
           <span className="font-semibold">{details?.department?.name}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">Nationality:</span>{" "}
+          <span className="font-bold text-primary">Nationality:</span>{' '}
           <span className="font-semibold">{details?.nationality}</span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">SSC Certificate:</span>{" "}
+          <span className="font-bold text-primary">SSC Certificate:</span>{' '}
           <span className="font-semibold underline hover:text-red-500">
             <Link to={details?.sscCertificate} target="_blank">
               See Pdf
@@ -232,7 +232,7 @@ const AdmissionDetails = () => {
           </span>
         </p>
         <p className="pt-5">
-          <span className="font-bold text-primary">HSC Certificate:</span>{" "}
+          <span className="font-bold text-primary">HSC Certificate:</span>{' '}
           <span className="font-semibold underline hover:text-red-500">
             <Link to={details?.hscCertificate} target="_blank">
               See Pdf
@@ -241,7 +241,7 @@ const AdmissionDetails = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdmissionDetails;
+export default AdmissionDetails

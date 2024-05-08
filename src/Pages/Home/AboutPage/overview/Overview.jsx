@@ -1,14 +1,15 @@
 // import React from "react";
-import { Disclosure } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
-import { overviewData } from "./overviewData";
+import { Disclosure } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
+import { overviewData } from './overviewData'
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const Overview = () => {
-  const text = 'Metropolitan University, a beacon of knowledge and innovation,offers a dynamic learning environment where students thrive. With a commitment to excellence and personal growth, we shape future leaders and empower individuals to make a difference in the world.'
+  const text =
+    'Metropolitan University, a beacon of knowledge and innovation,offers a dynamic learning environment where students thrive. With a commitment to excellence and personal growth, we shape future leaders and empower individuals to make a difference in the world.'
   return (
     <div>
-      <AboutRouteFirstHalfContent title='University Overview'text={text}/>
+      <AboutRouteFirstHalfContent title="University Overview" text={text} />
       <div className="w-[70%] mx-auto border border-gray-700 my-4 p-4 rounded-md">
         <div className="bg-slate-600 p-2 rounded-sm mx-auto ">
           <p className="text-left text-white font-bold">
@@ -27,7 +28,7 @@ const Overview = () => {
                       </h1>
                       <ChevronDownIcon
                         className={`w-5 h-5 text-gray-600 transform ${
-                          open && "rotate-180"
+                          open && 'rotate-180'
                         }`}
                       />
                     </Disclosure.Button>
@@ -49,7 +50,7 @@ const Overview = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Overview;
+export default Overview

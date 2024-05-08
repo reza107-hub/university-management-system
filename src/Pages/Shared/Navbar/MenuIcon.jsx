@@ -11,7 +11,7 @@ const MenuIcon = ({ Disclosure, open, XMarkIcon, Bars3Icon }) => {
         )}
       </Disclosure.Button>
     </div>
-  );
-};
+  )
+}
 
-export default MenuIcon;
+export default MenuIcon

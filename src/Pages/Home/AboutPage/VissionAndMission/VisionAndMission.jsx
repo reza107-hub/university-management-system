@@ -1,8 +1,8 @@
 // import React from 'react';
 
-import { FaEye, FaPaperPlane } from "react-icons/fa";
-import AboutRouteFirstHalfContent from "../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
-import { TbArrowsShuffle } from "react-icons/tb";
+import { FaEye, FaPaperPlane } from 'react-icons/fa'
+import { TbArrowsShuffle } from 'react-icons/tb'
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const VisionAndMission = () => {
   return (
@@ -93,7 +93,7 @@ const VisionAndMission = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default VisionAndMission;
+export default VisionAndMission

@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
-import { useGetAdmissionRequestQuery } from "../../../../Redux/features/Admission/Admission.api";
+import { Link } from 'react-router-dom'
+import { useGetAdmissionRequestQuery } from '../../../../Redux/features/Admission/Admission.api'
 
 const AdmissionRequests = () => {
-  const { data } = useGetAdmissionRequestQuery();
-  const lists = data?.data?.filter((result) => result.isApproved === false);
+  const { data } = useGetAdmissionRequestQuery()
+  const lists = data?.data?.filter((result) => result.isApproved === false)
   return (
     <div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -40,7 +40,7 @@ const AdmissionRequests = () => {
                 />
                 <div className="ps-3">
                   <div className="text-base font-semibold">
-                    {list?.name?.firstName + " " + list?.name?.lastName}
+                    {list?.name?.firstName + ' ' + list?.name?.lastName}
                   </div>
                 </div>
               </th>
@@ -48,7 +48,7 @@ const AdmissionRequests = () => {
               <td className="px-6 py-4">{list?.department?.shortForm}</td>
               <td className="px-6 py-4 text-primary hover:underline">
                 <Link
-                  to={`/dashboard/admission-requests-lists/details/${list?.email}`}
+                  to={`/dashboard/admission-requests-lists/details/${list._id}`}
                 >
                   See Details
                 </Link>
@@ -58,7 +58,7 @@ const AdmissionRequests = () => {
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default AdmissionRequests;
+export default AdmissionRequests

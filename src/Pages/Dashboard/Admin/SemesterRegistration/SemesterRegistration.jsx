@@ -1,65 +1,65 @@
-import { useState } from "react";
-import ReUsable from "../../../../Components/Dialog/ReUsableModaal";
-import { useForm } from "react-hook-form";
-import SemesterRegistrationContent from "./SemesterRegistranContent";
+import { useState } from 'react'
+import ReUsable from '../../../../Components/Dialog/ReUsableModaal'
+import { useForm } from 'react-hook-form'
+import SemesterRegistrationContent from './SemesterRegistranContent'
 import {
   useCreateSemesterRegistrationMutation,
   useGetSemesterRegistrationQuery,
   useUpdateStatusSemesterRegistrationMutation,
-} from "../../../../Redux/features/SemesterrRegistration/SemesterrRegistration.api";
-import Swal from "sweetalert2";
-import Table from "../../../../Components/Table/Table";
+} from '../../../../Redux/features/SemesterrRegistration/SemesterrRegistration.api'
+import Swal from 'sweetalert2'
+import Table from '../../../../Components/Table/Table'
 
 const SemesterRegistration = () => {
-  const [updateStatus] = useUpdateStatusSemesterRegistrationMutation();
+  const [updateStatus] = useUpdateStatusSemesterRegistrationMutation()
   const { data: semesterRegistrationData } =
-    useGetSemesterRegistrationQuery(undefined);
-  const [createSemesterRegistration] = useCreateSemesterRegistrationMutation();
-  const [semesterRegistrationContent] = SemesterRegistrationContent();
-  let [isOpen, setIsOpen] = useState(false);
+    useGetSemesterRegistrationQuery(undefined)
+  const [createSemesterRegistration] = useCreateSemesterRegistrationMutation()
+  const [semesterRegistrationContent] = SemesterRegistrationContent()
+  let [isOpen, setIsOpen] = useState(false)
   const openModal = () => {
-    setIsOpen(true);
-  };
+    setIsOpen(true)
+  }
   const closeModal = () => {
-    setIsOpen(false);
-  };
-  const { handleSubmit, register, reset } = useForm();
+    setIsOpen(false)
+  }
+  const { handleSubmit, register, reset } = useForm()
 
   const onSubmit = async (data) => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      data.minCredit = Number(data.minCredit);
-      data.maxCredit = Number(data.maxCredit);
-      const res = await createSemesterRegistration(data).unwrap();
+      })
+      data.minCredit = Number(data.minCredit)
+      data.maxCredit = Number(data.maxCredit)
+      const res = await createSemesterRegistration(data).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-    reset();
-    closeModal();
-  };
+    reset()
+    closeModal()
+  }
 
   const handleStatus = (id, status) => {
-    if (status !== "") {
-      const body = { status };
-      updateStatus({ id, body });
+    if (status !== '') {
+      const body = { status }
+      updateStatus({ id, body })
     }
-  };
+  }
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <ReUsable
@@ -87,14 +87,14 @@ const SemesterRegistration = () => {
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
             >
               <td className="px-6 py-4 font-bold text-lg">
-                {semester?.academicSemester?.name}{" "}
+                {semester?.academicSemester?.name}{' '}
                 <span
                   className={`text-xs font-semibold ${
-                    semester?.status === "UPCOMING"
-                      ? "text-green-700"
-                      : semester?.status === "ONGOING"
-                      ? "text-yellow-600"
-                      : "text-red-600"
+                    semester?.status === 'UPCOMING'
+                      ? 'text-green-700'
+                      : semester?.status === 'ONGOING'
+                        ? 'text-yellow-600'
+                        : 'text-red-600'
                   }`}
                 >
                   ({semester?.status})
@@ -122,7 +122,7 @@ const SemesterRegistration = () => {
         </Table>
       }
     </div>
-  );
-};
+  )
+}
 
-export default SemesterRegistration;
+export default SemesterRegistration

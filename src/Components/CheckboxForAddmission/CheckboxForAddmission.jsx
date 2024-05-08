@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const CheckboxForAddmission = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false)
 
   return (
     <div className="flex flex-col items-center mt-10 h-screen">
@@ -19,7 +19,7 @@ const CheckboxForAddmission = () => {
       <Link to="/getAdmission/admission-form">
         <button
           className={`mt-4 px-4 py-2 btn-primary ${
-            isChecked ? "" : "opacity-50 cursor-not-allowed"
+            isChecked ? '' : 'opacity-50 cursor-not-allowed'
           }`}
           disabled={!isChecked}
         >
@@ -27,7 +27,7 @@ const CheckboxForAddmission = () => {
         </button>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default CheckboxForAddmission;
+export default CheckboxForAddmission

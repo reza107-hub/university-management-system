@@ -1,7 +1,7 @@
 // import React from 'react';
 
-import { CiHashtag } from "react-icons/ci";
-import AboutRouteFirstHalfContent from "../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent";
+import { CiHashtag } from 'react-icons/ci'
+import AboutRouteFirstHalfContent from '../../../../Components/AboutRouteFirstHalfContent/AboutRouteFirstHalfContent'
 
 const MuPhotographicSociety = () => {
   return (
@@ -31,13 +31,13 @@ const MuPhotographicSociety = () => {
           <p className="font-bold"> Objectives of MUPS</p>
           1. To Promote photography throughout the campus. <br />
           2. To facilitate a training program, a seminar on Photography. <br />
-          3. To hold internal competitions and exhibitions on photography.{" "}
+          3. To hold internal competitions and exhibitions on photography.{' '}
           <br />
           4. To organize field trips on photographic interests.
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MuPhotographicSociety;
+export default MuPhotographicSociety
