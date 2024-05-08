@@ -1,70 +1,96 @@
-import { useEffect, useState } from "react";
-import DepartmentModel from "../../../../Components/Dialog/DepartmentModel";
-import SearchSvg from "../../../../Components/SearchSvg/SearchSvg";
+import { useState } from 'react'
+import DepartmentModel from '../../../../Components/Dialog/DepartmentModel'
 
-import Swal from "sweetalert2";
-import { useGetProgrammeQuery } from "../../../../Redux/features/Programme/Programme.api";
+import Swal from 'sweetalert2'
+import { useGetProgrammeQuery } from '../../../../Redux/features/Programme/Programme.api'
 import {
   useAddDepartmentMutation,
+  useDeleteDepartmentMutation,
   useGetDepartmentQuery,
-} from "../../../../Redux/features/Department/department.api";
+} from '../../../../Redux/features/Department/department.api'
+import SearchName from '../../../../Components/Search/SearchName'
 
 const Department = () => {
-  let [isOpen, setIsOpen] = useState(false);
-  const [deptCode, setDeptCode] = useState("");
-  const [deptName, setDeptName] = useState("");
-  const [deptShortName, setDeptShortName] = useState("");
-  const [deptProgramme, setDeptProgramme] = useState("");
+  let [isOpen, setIsOpen] = useState(false)
 
-  const { data } = useGetProgrammeQuery(undefined);
+  const [params, setParams] = useState('')
+  const [deptCode, setDeptCode] = useState('')
+  const [deptName, setDeptName] = useState('')
+  const [deptShortName, setDeptShortName] = useState('')
+  const [deptProgramme, setDeptProgramme] = useState('')
 
-  const { data: getDepartmentData } = useGetDepartmentQuery(undefined);
+  const { data } = useGetProgrammeQuery(undefined)
+  const [deleteDepartment] = useDeleteDepartmentMutation()
 
-  const [
-    addDepartment,
-    {
-      isError: isAddDeptError,
-      isSuccess: isAddDeptSuccess,
-      error: AddDeptError,
-    },
-  ] = useAddDepartmentMutation();
+  const { data: getDepartmentData } = useGetDepartmentQuery(params)
+
+  const SearchPlaceHolderName = 'Department'
+  const [addDepartment] = useAddDepartmentMutation()
 
   const openModal = () => {
-    setIsOpen(true);
-  };
+    setIsOpen(true)
+  }
   const closeModal = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   const departmentData = {
     code: deptCode,
     name: deptName,
     shortForm: deptShortName,
     program: deptProgramme,
-  };
-  const addDeptButton = () => {
-    addDepartment(departmentData);
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
-    if (isAddDeptSuccess) {
+  }
+  const addDeptButton = async () => {
+    try {
       Swal.fire({
-        icon: "success",
-        title: `Programmed Added Successfully`,
-        showConfirmButton: true,
-      });
-    }
-
-    if (isAddDeptError) {
+        title: 'wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      const res = await addDepartment(departmentData).unwrap()
       Swal.fire({
-        icon: "error",
-        title: `${AddDeptError.data.message}`,
-        text: `${AddDeptError.data.errorMessage}`,
-        showConfirmButton: true,
-      });
+        title: res.message,
+        icon: 'success',
+        timer: 1500,
+      })
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: 'error',
+      })
     }
-  }, [isAddDeptSuccess, isAddDeptError, AddDeptError]);
+    setIsOpen(false)
+  }
+  const handleDeleteProgram = async (id) => {
+    try {
+      Swal.fire({
+        title: 'wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      const res = await deleteDepartment(id).unwrap()
+      Swal.fire({
+        title: res.message,
+        icon: 'success',
+        timer: 1500,
+      })
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: 'error',
+      })
+    }
+    setIsOpen(false)
+  }
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <DepartmentModel
@@ -79,17 +105,13 @@ const Department = () => {
       />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
-        <div className="relative">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <SearchSvg />
-          </div>
-          <input
-            type="text"
-            id="table-search-users"
-            className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search for users"
-          />
-        </div>
+
+        <SearchName
+          setParams={setParams}
+          SearchPlaceHolderName={SearchPlaceHolderName}
+          searchTerm='name'
+        />
+
         <div>
           <button type="button" onClick={openModal} className="btn-primary">
             Add Department
@@ -132,7 +154,7 @@ const Department = () => {
                 </td>
                 <td className="px-6 py-4">
                   <button
-                    // onClick={() => handleDeleteProgram(result?._id)}
+                    onClick={() => handleDeleteProgram(result?._id)}
                     className={`btn-primary`}
                   >
                     Delete This Department
@@ -141,12 +163,12 @@ const Department = () => {
               </tr>
             ) : (
               <tr key={result._id}></tr>
-            )
+            ),
           )}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default Department;
+export default Department

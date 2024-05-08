@@ -1,92 +1,97 @@
-import { useState } from "react";
+import { useState } from 'react'
 import {
   useAddBatchMutation,
   useGetBatchQuery,
   useUpdateBatchMutation,
-} from "../../../../Redux/features/BatchApi/BatchApi";
-import Modal from "../../../../Components/Dialog/BatchModal";
-import SearchSvg from "../../../../Components/SearchSvg/SearchSvg";
-import Swal from "sweetalert2";
+} from '../../../../Redux/features/BatchApi/BatchApi'
+
+import SearchSvg from '../../../../Components/svg/SearchSvg/SearchSvg'
+import Swal from 'sweetalert2'
+import ReUsable from '../../../../Components/Dialog/ReUsableModaal'
+import batchConstant from './batch.constant'
+import { useForm } from 'react-hook-form'
 
 const Batch = () => {
-  const [batchNumber, setBatchNumber] = useState(null);
-  let [isOpen, setIsOpen] = useState(false);
-  const { data: batchData } = useGetBatchQuery(undefined);
-  // console.log(batchData?.data);
-  const [addBatch] = useAddBatchMutation();
-  const [updateBatch] = useUpdateBatchMutation();
-  // const [isAdmissionGoing, setIsAdmissionGoing] = useState(false);
-  const postData = { batchNumber: Number(batchNumber)};
-  // console.log(postData)
+  const [batchContent] = batchConstant()
+  let [isOpen, setIsOpen] = useState(false)
+  const { data: batchData } = useGetBatchQuery(undefined)
+  const [addBatch] = useAddBatchMutation()
+  const [updateBatch] = useUpdateBatchMutation()
   const openModal = () => {
-    setIsOpen(true);
-  };
+    setIsOpen(true)
+  }
   const closeModal = () => {
-    setIsOpen(false);
-  };
-  const addBatchButton = async () => {
+    setIsOpen(false)
+  }
+
+  const { handleSubmit, register, reset } = useForm()
+
+  const onSubmit = async (data) => {
+    data.batchNumber = Number(data.batchNumber)
     try {
       Swal.fire({
-        title: "plz wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await addBatch(postData).unwrap();
-      // console.log(res)
+      })
+      const res = await addBatch(data).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
-      // console.log(error);
+        icon: 'error',
+      })
     }
-    setIsOpen(false);
-  };
-  const handleToggleAdmissionGoing = async(currentAdmissionStatus, batchId) => {
-    const updatedAdmissionStatus = !currentAdmissionStatus;
-    const data = {isAdmissionGoing:updatedAdmissionStatus}
-    console.log(data)
-   try {
-    Swal.fire({
-      title: "plz wait...",
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      },
-    });
-    const res = await updateBatch({ id: batchId, body: data }).unwrap()
-    console.log(res)
-    Swal.fire({
-      title: res.message,
-      icon: "success",
-      timer: 1500,
-    });
-   } catch (error) {
-    Swal.fire({
-      title: error?.data?.message,
-      text: error?.data?.errorMessage,
-      icon: "error",
-    });
-   }
-  };
+    reset()
+    setIsOpen(false)
+  }
+  const handleToggleAdmissionGoing = async (
+    currentAdmissionStatus,
+    batchId,
+  ) => {
+    const updatedAdmissionStatus = !currentAdmissionStatus
+    const data = { isAdmissionGoing: updatedAdmissionStatus }
+    try {
+      Swal.fire({
+        title: 'wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      const res = await updateBatch({ id: batchId, body: data }).unwrap()
+      Swal.fire({
+        title: res.message,
+        icon: 'success',
+        timer: 1500,
+      })
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: 'error',
+      })
+    }
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <Modal
+      <ReUsable
+        onSubmit={onSubmit}
         isOpen={isOpen}
-        addBatchButton={addBatchButton}
         closeModal={closeModal}
-        setBatchNumber={setBatchNumber}
+        Content={batchContent}
+        handleSubmit={handleSubmit}
+        register={register}
       />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
@@ -115,6 +120,9 @@ const Batch = () => {
               Batch No
             </th>
             <th scope="col" className="px-6 py-3 text-center">
+              Department
+            </th>
+            <th scope="col" className="px-6 py-3 text-center">
               Action
             </th>
           </tr>
@@ -129,31 +137,34 @@ const Batch = () => {
                 <td className="px-6 py-4 font-bold text-lg">
                   {result?.batchNumber}
                 </td>
+                <td className="px-6 py-4 font-bold text-lg">
+                  {result?.deptId.shortForm}
+                </td>
 
                 <td className="px-6 py-4">
                   <button
                     onClick={() =>
                       handleToggleAdmissionGoing(
                         result?.isAdmissionGoing,
-                        result?._id
+                        result?._id,
                       )
                     }
                     className={`btn-primary`}
                   >
                     {result?.isAdmissionGoing
-                      ? "Admission Going"
-                      : "Admission Closed"}
+                      ? 'Admission Going'
+                      : 'Admission Closed'}
                   </button>
                 </td>
               </tr>
             ) : (
               <tr key={result._id}></tr>
-            )
+            ),
           )}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default Batch;
+export default Batch

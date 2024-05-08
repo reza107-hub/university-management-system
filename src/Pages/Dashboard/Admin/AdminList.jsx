@@ -1,56 +1,56 @@
-import Swal from "sweetalert2";
-import SearchSvg from "../../../Components/SearchSvg/SearchSvg";
+import Swal from 'sweetalert2'
+
 import {
   useDeleteAnAdminMutation,
   useGetAdminListQuery,
-} from "../../../Redux/features/admin/admin.api";
+} from '../../../Redux/features/admin/admin.api'
+import { useState } from 'react'
+import SearchName from '../../../Components/Search/SearchName'
 
 const AdminList = () => {
-  const { data: adminListData } = useGetAdminListQuery(undefined);
-  const [deleteAdmin] = useDeleteAnAdminMutation();
+  const [params, setParams] = useState('')
 
-  const data = adminListData?.data;
+  const { data: adminListData } = useGetAdminListQuery(params)
+  const [deleteAdmin] = useDeleteAnAdminMutation()
+  const SearchPlaceHolderName = 'Admin'
+
+  const data = adminListData?.data
 
   const handleDeleteAdmin = async (user) => {
     try {
       Swal.fire({
-        title: "wait...",
+        title: 'wait...',
         allowEscapeKey: false,
         allowOutsideClick: false,
         didOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
-      const res = await deleteAdmin(user).unwrap();
+      })
+      const res = await deleteAdmin(user).unwrap()
       Swal.fire({
         title: res.message,
-        icon: "success",
+        icon: 'success',
         timer: 1500,
-      });
+      })
     } catch (error) {
       Swal.fire({
         title: error?.data?.message,
         text: error?.data?.errorMessage,
-        icon: "error",
-      });
+        icon: 'error',
+      })
     }
-  };
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
-        <div className="relative">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <SearchSvg />
-          </div>
-          <input
-            type="text"
-            id="table-search-users"
-            className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search for users"
-          />
-        </div>
+
+        <SearchName
+          setParams={setParams}
+          SearchPlaceHolderName={SearchPlaceHolderName}
+          searchTerm='name'
+        />
       </div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -71,7 +71,7 @@ const AdminList = () => {
         </thead>
         <tbody>
           {data?.map((user) =>
-            user?.userId?.role === "admin" ? (
+            user?.userId?.role === 'admin' ? (
               <tr
                 key={user?._id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
@@ -102,12 +102,12 @@ const AdminList = () => {
               </tr>
             ) : (
               <tr key={user?._id}></tr>
-            )
+            ),
           )}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default AdminList;
+export default AdminList

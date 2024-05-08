@@ -1,6 +1,6 @@
-import CheckboxForAddmission from "../../Components/CheckboxForAddmission/CheckboxForAddmission";
-import AdmissionBanner from "./AdmissionBanner";
-import ScholarshipsAndAid from "./ScholarshipsAndAid";
+import CheckboxForAddmission from '../../Components/CheckboxForAddmission/CheckboxForAddmission'
+import AdmissionBanner from './AdmissionBanner'
+import ScholarshipsAndAid from './ScholarshipsAndAid'
 
 const GetAdmission = () => {
   return (
@@ -9,7 +9,7 @@ const GetAdmission = () => {
       <ScholarshipsAndAid />
       <CheckboxForAddmission />
     </>
-  );
-};
+  )
+}
 
-export default GetAdmission;
+export default GetAdmission

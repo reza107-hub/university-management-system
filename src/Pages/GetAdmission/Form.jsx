@@ -18,11 +18,10 @@ const Form = ({
           </label>
           <div className="w-full">
             <input
-              {...register("firstName", { required: true })}
+              {...register('firstName', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
-              id="firstName"
-              value={firstName}
+              defaultValue={firstName}
             />
             {errors.firstName && (
               <span className="text-red-700">This field is required</span>
@@ -36,11 +35,10 @@ const Form = ({
           </label>
           <div className="w-full">
             <input
-              {...register("lastName", { required: true })}
+              {...register('lastName', { required: true })}
               type="text"
               className="form-control rounded-md w-full text-black"
-              id="lastName"
-              value={lastName}
+              defaultValue={lastName}
             />
             {errors.lastName && (
               <span className="text-red-700">This field is required</span>
@@ -56,10 +54,9 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("fatherName", { required: true })}
+              {...register('fatherName', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
-              id="fatherName"
             />
             {errors.fatherName && (
               <span className="text-red-700">This field is required</span>
@@ -73,10 +70,9 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("fatherOccupation", { required: true })}
+              {...register('fatherOccupation', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
-              id="fatherOccupation"
             />
             {errors.fatherOccupation && (
               <span className="text-red-700">This field is required</span>
@@ -92,10 +88,9 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("motherName", { required: true })}
+              {...register('motherName', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
-              id="motherName"
             />
             {errors.motherName && (
               <span className="text-red-700">This field is required</span>
@@ -109,10 +104,9 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("motherOccupation", { required: true })}
+              {...register('motherOccupation', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
-              id="motherOccupation"
             />
             {errors.motherOccupation && (
               <span className="text-red-700">This field is required</span>
@@ -131,10 +125,9 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("presentGuardianName", { required: true })}
+              {...register('presentGuardianName', { required: true })}
               type="text"
               className="form-control w-full rounded-md text-black"
-              id="presentGuardianName"
             />
             {errors.presentGuardianName && (
               <span className="text-red-700">This field is required</span>
@@ -151,13 +144,12 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("presentGuardianContact", {
+              {...register('presentGuardianContact', {
                 required: true,
                 pattern: /^[0-9]*$/,
               })}
               type="tel"
               className="form-control w-full rounded-md text-black"
-              id="presentGuardianContact"
             />
             {errors.presentGuardianContact && (
               <span className="text-red-700">This field is required</span>
@@ -172,11 +164,10 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("dateOfBirth", { required: true })}
-              value={userData?.data?.dateOfBirth}
+              {...register('dateOfBirth', { required: true })}
+              defaultValue={userData?.data?.dateOfBirth}
               type="date"
               className="form-control w-full rounded-md text-black"
-              id="dateOfBirth"
             />
             {errors.dateOfBirth && (
               <span className="text-red-700">This field is required</span>
@@ -189,15 +180,14 @@ const Form = ({
           </label>
           <div className="">
             <select
-              {...register("gender", { required: true })}
+              {...register('gender', { required: true })}
               className="form-select w-full text-black"
-              id="gender"
             >
-              <option value={userData?.data?.gender}>
+              <option defaultValue={userData?.data?.gender}>
                 {userData?.data?.gender}
               </option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option defaultValue="male">Male</option>
+              <option defaultValue="female">Female</option>
             </select>
             {errors.gender && (
               <span className="text-red-700">This field is required</span>
@@ -213,13 +203,12 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("contactNumber", {
+              {...register('contactNumber', {
                 required: true,
               })}
-              value={userData?.data?.contactNumber}
+              defaultValue={userData?.data?.contactNumber}
               type="tel"
               className="form-control w-full rounded-md text-black"
-              id="contactNumber"
             />
             {errors.contactNumber && (
               <span className="text-red-700">This field is required</span>
@@ -233,15 +222,14 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("email", {
+              {...register('email', {
                 required: true,
                 pattern: /^\S+@\S+$/i,
               })}
               readOnly
-              value={userData?.data?.email}
+              defaultValue={userData?.data?.email}
               type="email"
               className="form-control w-full rounded-md text-black"
-              id="email"
             />
             {errors.email && (
               <span className="text-red-700">Invalid email address</span>
@@ -257,10 +245,9 @@ const Form = ({
           </label>
           <div className="">
             <textarea
-              {...register("presentAddress", { required: true })}
-              value={userData?.data?.presentAddress}
+              {...register('presentAddress', { required: true })}
+              defaultValue={userData?.data?.presentAddress}
               className="form-control w-full rounded-md text-black"
-              id="presentAddress"
             ></textarea>
             {errors.presentAddress && (
               <span className="text-red-700">This field is required</span>
@@ -274,10 +261,9 @@ const Form = ({
           </label>
           <div className="">
             <textarea
-              {...register("permanentAddress", { required: true })}
-              value={userData?.data?.permanentAddress}
+              {...register('permanentAddress', { required: true })}
+              defaultValue={userData?.data?.permanentAddress}
               className="form-control w-full rounded-md text-black"
-              id="permanentAddress"
             ></textarea>
             {errors.permanentAddress && (
               <span className="text-red-700">This field is required</span>
@@ -293,21 +279,20 @@ const Form = ({
           </label>
           <div className="">
             <select
-              {...register("bloodGroup", { required: true })}
+              {...register('bloodGroup', { required: true })}
               className="form-select w-full text-black"
-              id="bloodGroup"
             >
-              <option value={userData?.data?.bloodGroup}>
+              <option defaultValue={userData?.data?.bloodGroup}>
                 {userData?.data?.bloodGroup}
               </option>
-              <option value="A+">A+</option>
-              <option value="A-">A-</option>
-              <option value="B+">B+</option>
-              <option value="B-">B-</option>
-              <option value="O+">O+</option>
-              <option value="O-">O-</option>
-              <option value="AB+">AB+</option>
-              <option value="AB-">AB-</option>
+              <option defaultValue="A+">A+</option>
+              <option defaultValue="A-">A-</option>
+              <option defaultValue="B+">B+</option>
+              <option defaultValue="B-">B-</option>
+              <option defaultValue="O+">O+</option>
+              <option defaultValue="O-">O-</option>
+              <option defaultValue="AB+">AB+</option>
+              <option defaultValue="AB-">AB-</option>
             </select>
             {errors.bloodGroup && (
               <span className="text-red-700">This field is required</span>
@@ -316,14 +301,13 @@ const Form = ({
         </div>
 
         <div className="mb-3 w-[20%]">
-          <label htmlFor="Programme" className="col-sm-2 col-form-label">
-            Programme
+          <label htmlFor="Program" className="col-sm-2 col-form-label">
+            Program
           </label>
           <div className="">
             <select
-              {...register("programme", { required: true })}
+              {...register('program', { required: true })}
               className="form-select w-full text-black"
-              id="programme"
             >
               {programData?.data.map((program) => (
                 <option key={program?._id} value={program?._id}>
@@ -332,7 +316,7 @@ const Form = ({
               ))}
               {/* Add more options as needed */}
             </select>
-            {errors.programme && (
+            {errors.program && (
               <span className="text-red-700">This field is required</span>
             )}
           </div>
@@ -346,12 +330,11 @@ const Form = ({
           </label>
           <div className="">
             <select
-              {...register("department", { required: true })}
+              {...register('department', { required: true })}
               className="form-select w-full text-black"
-              id="department"
             >
               {getDepartmentData?.data.map((department) => (
-                <option key={department?._id} value={department?._id}>
+                <option key={department._id} value={department._id}>
                   {department?.name}
                 </option>
               ))}
@@ -371,11 +354,10 @@ const Form = ({
           </label>
           <div className="">
             <select
-              {...register("yearOfRegistration", { required: true })}
+              {...register('yearOfRegistration', { required: true })}
               className="form-select w-full text-black"
-              id="yearOfRegistration"
             >
-              <option value="2024">2024</option>
+              <option defaultValue="2024">2024</option>
               {/* Add more options as needed */}
             </select>
             {errors.yearOfRegistration && (
@@ -393,9 +375,8 @@ const Form = ({
           <div className="col-sm-10">
             <input
               type="text"
-              {...register("nationality", { required: true })}
+              {...register('nationality', { required: true })}
               className="form-select w-full text-black"
-              id="nationality"
             ></input>
             {errors.nationality && (
               <span className="text-red-700">This field is required</span>
@@ -409,10 +390,9 @@ const Form = ({
           </label>
           <div className="col-sm-10">
             <input
-              {...register("profileImage", { required: true })}
+              {...register('profileImage', { required: true })}
               type="file"
               className="form-control w-full"
-              id="profileImage"
             />
             {errors.profileImage && (
               <span className="text-red-700">This field is required</span>
@@ -429,10 +409,9 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("sscCertificate")}
+              {...register('sscCertificate')}
               type="file"
               className="form-control rounded-md w-full"
-              id="sscCertificate"
             />
           </div>
         </div>
@@ -443,10 +422,9 @@ const Form = ({
           </label>
           <div className="">
             <input
-              {...register("hscCertificate")}
+              {...register('hscCertificate')}
               type="file"
               className="form-control rounded-md w-full"
-              id="hscCertificate"
             />
           </div>
         </div>
@@ -460,7 +438,7 @@ const Form = ({
         </div>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

@@ -1,98 +1,84 @@
-import { useEffect, useState } from "react";
-import SearchSvg from "../../../../Components/SearchSvg/SearchSvg";
-import Modal from "../../../../Components/Dialog/Modal";
+import { useState } from 'react'
 
-import Swal from "sweetalert2";
+import Modal from '../../../../Components/Dialog/Modal'
+
+import Swal from 'sweetalert2'
 import {
   useAddProgrammeMutation,
   useDeleteProgramMutation,
   useGetProgrammeQuery,
-} from "../../../../Redux/features/Programme/Programme.api";
+} from '../../../../Redux/features/Programme/Programme.api'
+import SearchName from '../../../../Components/Search/SearchName'
 
 const Programs = () => {
-  const [programmeName, setProgrammeName] = useState("");
-  const [programmeShortName, setProgrammeShortName] = useState("");
-  let [isOpen, setIsOpen] = useState(false);
-  const { data } = useGetProgrammeQuery(undefined);
-  const [
-    addProgramme,
-    {
-      isLoading,
-      isError: isAddProgError,
-      isSuccess: isAddProgSuccess,
-      error: addProgrammeError,
-    },
-  ] = useAddProgrammeMutation();
-  const [
-    deleteProgramme,
-    {
-      isLoading: isDeleteProgrammeLoading,
-      isSuccess: isDeleteProgrammeSuccess,
-      isError: isDeleteProgrammeError,
-      error: deleteProgrammeError,
-    },
-  ] = useDeleteProgramMutation();
+  const [programmeName, setProgrammeName] = useState('')
+  const [programmeShortName, setProgrammeShortName] = useState('')
 
-  const postData = { name: programmeName, shortName: programmeShortName };
+  const [params, setParams] = useState('')
+  let [isOpen, setIsOpen] = useState(false)
+  const { data } = useGetProgrammeQuery(params)
+  const SearchPlaceHolderName = 'program'
+  const [addProgramme] = useAddProgrammeMutation()
+  const [deleteProgramme] = useDeleteProgramMutation()
+
+  const postData = { name: programmeName, shortName: programmeShortName }
 
   const openModal = () => {
-    setIsOpen(true);
-  };
+    setIsOpen(true)
+  }
   const closeModal = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
-  const addProgButton = () => {
-    addProgramme(postData);
-    setIsOpen(false);
-  };
-  const handleDeleteProgram = (id) => {
-    deleteProgramme(id);
-  };
-
-  useEffect(() => {
-    if (isAddProgSuccess) {
+  const addProgButton = async () => {
+    try {
       Swal.fire({
-        icon: "success",
-        title: `Programmed Added Successfully`,
-        showConfirmButton: true,
-      });
-    }
-    if (isAddProgError) {
+        title: 'wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      const res = await addProgramme(postData).unwrap()
       Swal.fire({
-        icon: "error",
-        title: `${addProgrammeError.data.message}`,
-        text: `${addProgrammeError.data.errorMessage}`,
-        showConfirmButton: true,
-      });
-    }
-
-    if (isDeleteProgrammeError) {
+        title: res.message,
+        icon: 'success',
+        timer: 1500,
+      })
+    } catch (error) {
       Swal.fire({
-        icon: "error",
-        title: `${deleteProgrammeError.data.message}`,
-        text: `${deleteProgrammeError.data.errorMessage}`,
-        showConfirmButton: true,
-      });
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: 'error',
+      })
     }
-
-    if (isDeleteProgrammeSuccess) {
+    setIsOpen(false)
+  }
+  const handleDeleteProgram = async (id) => {
+    try {
       Swal.fire({
-        icon: "success",
-        title: `Programmed Deleted Successfully`,
-        showConfirmButton: true,
-      });
+        title: 'wait...',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+      })
+      const res = await deleteProgramme(id).unwrap()
+      Swal.fire({
+        title: res.message,
+        icon: 'success',
+        timer: 1500,
+      })
+    } catch (error) {
+      Swal.fire({
+        title: error?.data?.message,
+        text: error?.data?.errorMessage,
+        icon: 'error',
+      })
     }
-  }, [
-    isAddProgSuccess,
-    isAddProgError,
-    addProgrammeError,
-    isDeleteProgrammeError,
-    isDeleteProgrammeSuccess,
-    isLoading,
-    isDeleteProgrammeLoading,
-    deleteProgrammeError,
-  ]);
+  }
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -105,17 +91,13 @@ const Programs = () => {
       />
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
-        <div className="relative">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-            <SearchSvg />
-          </div>
-          <input
-            type="text"
-            id="table-search-users"
-            className="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search for users"
-          />
-        </div>
+
+        <SearchName
+          setParams={setParams}
+          SearchPlaceHolderName={SearchPlaceHolderName}
+          searchTerm='name'
+        />
+
         <div>
           <button type="button" onClick={openModal} className="btn-primary">
             Add Program
@@ -157,12 +139,12 @@ const Programs = () => {
               </tr>
             ) : (
               <tr key={result._id}></tr>
-            )
+            ),
           )}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default Programs;
+export default Programs

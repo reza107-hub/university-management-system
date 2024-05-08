@@ -44,7 +44,7 @@
 }
 
 .login:before {
-  content: "";
+  content: '';
   position: absolute;
   z-index: -1;
   background: var(--color);

@@ -1,41 +1,41 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import "./Login.css";
-import { useForm } from "react-hook-form";
-import useAuth from "../../Hooks/useAuth";
-import GoogleSignIn from "../Shared/GoogleSignIn/GoogleSignIn";
-import Swal from "sweetalert2";
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import './Login.css'
+import { useForm } from 'react-hook-form'
+import useAuth from '../../Hooks/useAuth'
+import GoogleSignIn from '../Shared/GoogleSignIn/GoogleSignIn'
+import Swal from 'sweetalert2'
 const Login = () => {
-  const navigate = useNavigate();
-  const { signIn } = useAuth();
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigate = useNavigate()
+  const { signIn } = useAuth()
+  const [passwordVisible, setPasswordVisible] = useState(false)
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm()
   const onSubmit = (data) => {
     signIn(data.email, data.password)
       .then((result) => {
         Swal.fire({
           title: `Welcome Back ${result.user.displayName}`,
-          icon: "success",
-          confirmButtonText: "OK",
-        });
+          icon: 'success',
+          confirmButtonText: 'OK',
+        })
         navigate('/')
       })
       .catch((err) => {
         Swal.fire({
           title: `${err.message}`,
-          icon: "error",
-          confirmButtonText: "OK",
-        });
-      });
-  };
+          icon: 'error',
+          confirmButtonText: 'OK',
+        })
+      })
+  }
 
   const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
+    setPasswordVisible(!passwordVisible)
+  }
   return (
     <div className="py-32 flex justify-center">
       <div className="bg-primary rounded-lg p-8 text-white w-[90%] md:w-[30%]">
@@ -44,7 +44,7 @@ const Login = () => {
           <div className="input-groups">
             <label htmlFor="username">Email</label>
             <input
-              {...register("email", { required: true })}
+              {...register('email', { required: true })}
               type="email"
               name="email"
               id="username"
@@ -56,8 +56,8 @@ const Login = () => {
             <label htmlFor="password">Password</label>
             <div className="password-input">
               <input
-                {...register("password", { required: true })}
-                type={passwordVisible ? "text" : "password"}
+                {...register('password', { required: true })}
+                type={passwordVisible ? 'text' : 'password'}
                 name="password"
                 id="password"
                 placeholder=""
@@ -68,7 +68,7 @@ const Login = () => {
                 className="password-toggle"
                 onClick={togglePasswordVisibility}
               >
-                {passwordVisible ? "Hide" : "Show"}
+                {passwordVisible ? 'Hide' : 'Show'}
               </button>
             </div>
           </div>
@@ -87,7 +87,7 @@ const Login = () => {
           Do not have an account?
           <Link
             rel="noopener noreferrer"
-            to={"/register"}
+            to={'/register'}
             className="hover:underline pl-4"
           >
             Sign up
@@ -95,7 +95,7 @@ const Login = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
+import { Outlet } from 'react-router-dom'
+import Sidebar from './Sidebar'
 
 const Dashboard = () => {
   return (
@@ -43,7 +43,7 @@ const Dashboard = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard
