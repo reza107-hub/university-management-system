@@ -49,7 +49,7 @@ const AddStudentManually = () => {
         data.batch = batch?._id
         data.semester = semester._id
         data.waiver = Number(data.waiver)
-        // console.log(data)
+        console.log(data)
         const res = await createStudentManually(data).unwrap()
         Swal.fire({
           title: res.message,
@@ -59,6 +59,7 @@ const AddStudentManually = () => {
         navigate('/dashboard/students')
       
       } catch (error) {
+        console.log(error)
         Swal.fire({
           title: error?.data?.message,
           text: error?.data?.errorMessage,

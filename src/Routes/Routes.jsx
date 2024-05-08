@@ -56,6 +56,7 @@ import See40Marks from '../Pages/Dashboard/faculty/Marks/See40Marks'
 import AttendanceMarks from '../Pages/Dashboard/faculty/Marks/AttendanceMarks'
 import StudentSemesterRoutine from '../Pages/Dashboard/student/semester routine/StudentSemesterRoutine'
 import SixtyMarksOfRunningSemesterCourse from '../Pages/Dashboard/student/course marks/SixtyMarksOfRunningSemesterCourse'
+import MonthlyPaymentSuccessFull from '../Pages/Dashboard/Student/StudentPayment/MonthlyPayment/MonthlyPaymentSuccessfull'
 import AcademicHistory from '../Pages/Dashboard/student/academic history/AcademicHistory'
 import PaymentHistory from '../Pages/Dashboard/student/payment history/PaymentHistory'
 
@@ -146,6 +147,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <SemesterPaymentSuccessFull />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/monthly-payment/:trans_id',
+        element: (
+          <PrivateRoute>
+            <MonthlyPaymentSuccessFull />
           </PrivateRoute>
         ),
       },

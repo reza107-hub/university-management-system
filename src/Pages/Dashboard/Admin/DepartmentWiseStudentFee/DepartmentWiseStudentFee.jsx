@@ -23,8 +23,9 @@ const DepartmentWiseStudentFee = () => {
     const updateDeptFeeInfo = data?.data?.find(
       (fee) => fee?.departmentId === departmentId,
     )
-   
-    const postData = { departmentId:departmentId , monthlyFee: monthlyFee,semesterFee:semesterFee }
+  
+   const postData = { departmentId:departmentId , monthlyFee: monthlyFee,semesterFee:semesterFee }
+
     const openModal = () => {
       setIsOpen(true)
     }
@@ -53,7 +54,7 @@ const DepartmentWiseStudentFee = () => {
               Swal.showLoading()
             },
           })
-          const res = await updateFee({ departmentId: departmentId, body: data }).unwrap()
+          const res = await updateFee({ departmentId: departmentId._id, body: data }).unwrap()
           Swal.fire({
             title: res.message,
             icon: 'success',
@@ -168,12 +169,12 @@ const DepartmentWiseStudentFee = () => {
             </tr>
           </thead>
           <tbody className="text-center">
-            {data?.data.map((result) =>
-              data.data ? (
+            {data?.data?.map((result) =>
+              data?.data ? (
                 <tr
                   key={result?._id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                >
+                > 
                   <td className="px-6 py-4 font-bold text-lg">{result?.departmentId?.shortForm}</td>
                   <td className="px-6 py-4 font-bold text-lg">
                     {result?.monthlyFee} $

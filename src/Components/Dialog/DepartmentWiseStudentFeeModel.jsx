@@ -52,6 +52,7 @@ export default function DepartmentWiseStudentFeeModel({
                     <select
                       name="programme"
                       id="programme"
+                      
                       onChange={(e) => setDepartmentId(e.target.value)}
                     >
                       {data?.data.map((result) => (
