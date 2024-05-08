@@ -29,7 +29,6 @@ const monthNames = [
 ]
 const currentMonthName = monthNames[currentMonth]
 const currentYear = currentDate.getFullYear()
-console.log(currentYear)
 const StudentPayment = () => {
   const { user } = useAuth()
   const [isOpenSemesterModal, setIsOpenSemesterModal] = useState(false)
@@ -42,7 +41,7 @@ const StudentPayment = () => {
   const { data: departmentWiseStudentFeeData } =
     useGetDepartmentWiseStudentFeeQuery(undefined)
   const upcomingOrOngoingSemester = semesterRegistrationData?.data?.find(
-    (i) => (i.status === 'UPCOMING') | 'ONGOING',
+    (result) => result.status !== 'ENDED',
   )
   const currentStudent = AllStudentsData?.data?.find(
     (i) => i.admissionRequestId.email === user.email,
