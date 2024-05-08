@@ -10,6 +10,14 @@ const courseMarksApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ['course']
         }),
+        getCoursesMarksOf60ForShowingStudent: build.mutation({
+            query: body => ({
+                url: `/course-marks/get-marks-of-60`,
+                method: 'POST',
+                body,
+            }),
+            providesTags: ['course']
+        }),
         updateCourseMarksOf60: build.mutation({
             query: ({ _id, marks }) => {
                 return {
@@ -52,7 +60,14 @@ const courseMarksApi = baseApi.injectEndpoints({
             }),
             providesTags: ['course']
         }),
+        getAcademicRecord: build.query({
+            query: studentId => ({
+                url: `/course-marks/get-marks-of-100/${studentId}`,
+                method: 'GET',
+            }),
+            providesTags: ['course']
+        }),
     })
 })
 
-export const { useCreateCourseMarksOf60Mutation, useGetCourseMarksOf60Query, useCreateCourseMarksOf40Mutation, useUpdateCourseMarksOf60Mutation, useGetCourseMarksOf40Query, useUpdateCourseMarksOf40Mutation } = courseMarksApi
+export const { useCreateCourseMarksOf60Mutation, useGetCourseMarksOf60Query, useCreateCourseMarksOf40Mutation, useUpdateCourseMarksOf60Mutation, useGetCourseMarksOf40Query, useUpdateCourseMarksOf40Mutation, useGetCoursesMarksOf60ForShowingStudentMutation, useGetAcademicRecordQuery } = courseMarksApi

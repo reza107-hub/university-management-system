@@ -57,6 +57,8 @@ import AttendanceMarks from '../Pages/Dashboard/faculty/Marks/AttendanceMarks'
 import StudentSemesterRoutine from '../Pages/Dashboard/student/semester routine/StudentSemesterRoutine'
 import SixtyMarksOfRunningSemesterCourse from '../Pages/Dashboard/student/course marks/SixtyMarksOfRunningSemesterCourse'
 import MonthlyPaymentSuccessFull from '../Pages/Dashboard/Student/StudentPayment/MonthlyPayment/MonthlyPaymentSuccessfull'
+import AcademicHistory from '../Pages/Dashboard/student/academic history/AcademicHistory'
+import PaymentHistory from '../Pages/Dashboard/student/payment history/PaymentHistory'
 
 const router = createBrowserRouter([
   {
@@ -191,6 +193,26 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <StudentRoute>
               <StudentSemesterRoutine />
+            </StudentRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/academic-records',
+        element: (
+          <PrivateRoute>
+            <StudentRoute>
+              <AcademicHistory />
+            </StudentRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/payment-history',
+        element: (
+          <PrivateRoute>
+            <StudentRoute>
+              <PaymentHistory />
             </StudentRoute>
           </PrivateRoute>
         ),
