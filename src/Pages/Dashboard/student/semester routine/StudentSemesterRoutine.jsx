@@ -20,8 +20,12 @@ const StudentSemesterRoutine = () => {
     },
   )
 
-  if (!Courses || !Courses?.data?.length) {
+  if (isStudentDataLoading) {
     return <Loader />
+  }
+
+  if (!Courses || !Courses?.data?.length) {
+    return <p className="text-center text-primary font-bold text-2xl mt-3">There are no courses found, so no section is available for you.</p>
   }
 
   const modifyData = Courses?.data?.reduce((acc, course) => {

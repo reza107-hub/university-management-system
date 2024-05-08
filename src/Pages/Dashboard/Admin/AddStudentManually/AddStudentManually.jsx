@@ -77,6 +77,7 @@ const AddStudentManually = () => {
           errors={errors}
           programData={programData}
           getDepartmentData={getDepartmentData}
+          semesterStatus={semester?.status}
         />
         </div>
     );
