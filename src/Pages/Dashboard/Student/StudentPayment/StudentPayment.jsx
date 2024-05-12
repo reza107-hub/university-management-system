@@ -194,17 +194,27 @@ const StudentPayment = () => {
         </div>
 
         <div>
-          <button
-            type="button"
-            className="btn-primary"
-            onClick={openSemesterModal}
-          >
-            Semester Fee
-          </button>
-          <p className="text-sm text-gray-600 mt-2">
-            Pay for the entire semester in one transaction and save time!
-          </p>
-        </div>
+  <button
+    type="button"
+    className="btn-primary relative"
+    onClick={openSemesterModal}
+  >
+    Semester Fee
+    {isSemesterPaymentDone ? (
+      <span className="absolute top-[-5px] right-[-1px] inline-flex items-center justify-center px-2 py-1 text-xs font-medium bg-green-50 text-green-700 rounded-md ring-1 ring-green-600/20">
+        Paid
+      </span>
+    ) : (
+      <span className="absolute top-[-5px] right-[-1px] inline-flex items-center justify-center px-2 py-1 text-xs font-medium bg-red-50 text-red-700 rounded-md ring-1 ring-red-600/10">
+        Pending
+      </span>
+    )}
+  </button>
+  <p className="text-sm text-gray-600 mt-2">
+    Pay for the entire semester in one transaction and save time!
+  </p>
+</div>
+
       </div>
     </div>
   )
