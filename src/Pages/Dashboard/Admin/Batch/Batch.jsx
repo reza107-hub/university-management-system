@@ -59,28 +59,40 @@ const Batch = () => {
   ) => {
     const updatedAdmissionStatus = !currentAdmissionStatus
     const data = { isAdmissionGoing: updatedAdmissionStatus }
-    try {
-      Swal.fire({
-        title: 'wait...',
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading()
-        },
-      })
-      const res = await updateBatch({ id: batchId, body: data }).unwrap()
-      Swal.fire({
-        title: res.message,
-        icon: 'success',
-        timer: 1500,
-      })
-    } catch (error) {
-      Swal.fire({
-        title: error?.data?.message,
-        text: error?.data?.errorMessage,
-        icon: 'error',
-      })
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          Swal.fire({
+            title: 'wait...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading()
+            },
+          })
+          const res = await updateBatch({ id: batchId, body: data }).unwrap()
+          Swal.fire({
+            title: res.message,
+            icon: 'success',
+            timer: 1500,
+          })
+        } catch (error) {
+          Swal.fire({
+            title: error?.data?.message,
+            text: error?.data?.errorMessage,
+            icon: 'error',
+          })
+        }
+      }
+    })
   }
 
   return (
@@ -149,10 +161,13 @@ const Batch = () => {
                         result?._id,
                       )
                     }
-                    className={`btn-primary`}
+                    disabled={!result?.isAdmissionGoing}
+                    className={`${
+                      result?.isAdmissionGoing ? 'btn-primary' : ''
+                    }`}
                   >
                     {result?.isAdmissionGoing
-                      ? 'Admission Going'
+                      ? 'Close Admission'
                       : 'Admission Closed'}
                   </button>
                 </td>
