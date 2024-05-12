@@ -9,8 +9,11 @@ import {
   useGetCourseMarksOf60Query,
 } from '../../../../Redux/features/course marks/courseMarks.api'
 import { useEffect, useState } from 'react'
+import { useGetOngoingSemesterRegistrationQuery } from '../../../../Redux/features/SemesterrRegistration/SemesterrRegistration.api'
 
 const SectionStudentsMarks = () => {
+  const { data: ongoingSemester } =
+    useGetOngoingSemesterRegistrationQuery(undefined)
   const [createCourseMarksOf60] = useCreateCourseMarksOf60Mutation()
   const [createCourseMarksOf40] = useCreateCourseMarksOf40Mutation()
   const { id } = useParams()
@@ -18,6 +21,11 @@ const SectionStudentsMarks = () => {
   const { data: courseMarksDataOf60Marks } = useGetCourseMarksOf60Query(
     offeredCourse?.data?.courseId?._id,
   )
+
+  const ongoingSemesterCourseMarksDataOf60Marks =
+    courseMarksDataOf60Marks?.data?.filter(
+      (result) => result?.semesterRegistrationId === ongoingSemester?.data?._id,
+    )
 
   const { handleSubmit, control } = useForm()
 
@@ -45,7 +53,7 @@ const SectionStudentsMarks = () => {
       })
 
       let res
-      if (courseMarksDataOf60Marks?.data.length > 0) {
+      if (ongoingSemesterCourseMarksDataOf60Marks.length > 0) {
         res = await createCourseMarksOf40(formattedData).unwrap()
       } else {
         res = await createCourseMarksOf60(formattedData).unwrap()
@@ -67,10 +75,9 @@ const SectionStudentsMarks = () => {
 
   useEffect(() => {
     const allStudentIds = offeredCourse?.data?.sectionId?.student_ids
-    const NRStudentIds = courseMarksDataOf60Marks?.data
+    const NRStudentIds = ongoingSemesterCourseMarksDataOf60Marks
       ?.filter((item) => item.status === 'NR')
       ?.map((item) => item.studentId)
-
     const filteredStudentIds = allStudentIds?.filter((studentId) =>
       NRStudentIds?.includes(studentId),
     )
@@ -82,7 +89,11 @@ const SectionStudentsMarks = () => {
       setFilteredStudentIds(allStudentIds)
       setTitle('Enter your final 60 marks')
     }
-  }, [courseMarksDataOf60Marks, offeredCourse])
+  }, [
+    courseMarksDataOf60Marks,
+    offeredCourse,
+    ongoingSemesterCourseMarksDataOf60Marks,
+  ])
 
   if (!offeredCourse || !offeredCourse.data) {
     return <Loader />
