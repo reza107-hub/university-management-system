@@ -28,6 +28,23 @@ const facultyApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['admin-list', 'user', 'admin', 'faculty'],
     }),
+    //  faculty delete
+    removeFacultyAsStudyLeave: build.mutation({
+      query: (body) => ({
+        url: `/faculty/remove-faculty-for-study-leave`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['admin-list', 'user', 'admin', 'faculty'],
+    }),
+    makeStudyLeaveFalse: build.mutation({
+      query: (body) => ({
+        url: `/faculty/makeStudyLeaveFalse`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['admin-list', 'user', 'admin', 'faculty'],
+    }),
     // get is user is faculty
     getUserIsFaculty: build.query({
       query: (email) => ({
@@ -52,5 +69,7 @@ export const {
   useGetFacultyListQuery,
   useDeleteFacultyMutation,
   useGetUserIsFacultyQuery,
-  useGetFacultySemesterRoutineQuery
+  useGetFacultySemesterRoutineQuery,
+  useRemoveFacultyAsStudyLeaveMutation,
+  useMakeStudyLeaveFalseMutation
 } = facultyApi

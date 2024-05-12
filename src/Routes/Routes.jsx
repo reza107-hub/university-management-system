@@ -59,6 +59,7 @@ import SixtyMarksOfRunningSemesterCourse from '../Pages/Dashboard/student/course
 import MonthlyPaymentSuccessFull from '../Pages/Dashboard/Student/StudentPayment/MonthlyPayment/MonthlyPaymentSuccessfull'
 import AcademicHistory from '../Pages/Dashboard/student/academic history/AcademicHistory'
 import PaymentHistory from '../Pages/Dashboard/student/payment history/PaymentHistory'
+import FacultyStudyLeaveLists from '../Pages/Dashboard/Admin/FacultyStudyLeaveLists'
 
 const router = createBrowserRouter([
   {
@@ -355,6 +356,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <FacultyList />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/faculties-list-those-in-study-leave',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <FacultyStudyLeaveLists />
             </AdminRoutes>
           </PrivateRoute>
         ),

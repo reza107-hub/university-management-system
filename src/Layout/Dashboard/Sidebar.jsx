@@ -37,6 +37,12 @@ const Sidebar = () => {
       role: 'admin',
     },
     {
+      to: '/dashboard/faculties-list-those-in-study-leave',
+      label: 'Faculty Study Leave List',
+      icon: <UserSvg />,
+      role: 'admin',
+    },
+    {
       to: '/dashboard/programs',
       label: 'Programs',
       icon: <AcademicCap />,
