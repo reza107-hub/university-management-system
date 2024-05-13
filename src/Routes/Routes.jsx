@@ -60,6 +60,7 @@ import MonthlyPaymentSuccessFull from '../Pages/Dashboard/Student/StudentPayment
 import AcademicHistory from '../Pages/Dashboard/student/academic history/AcademicHistory'
 import PaymentHistory from '../Pages/Dashboard/student/payment history/PaymentHistory'
 import FacultyStudyLeaveLists from '../Pages/Dashboard/Admin/FacultyStudyLeaveLists'
+import BatchDetails from '../Pages/Dashboard/Admin/Batch/BatchDetails'
 
 const router = createBrowserRouter([
   {
@@ -396,6 +397,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <Batch />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/batch/batch-details/:id',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <BatchDetails />
             </AdminRoutes>
           </PrivateRoute>
         ),

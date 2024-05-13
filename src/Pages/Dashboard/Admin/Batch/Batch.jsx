@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 import ReUsable from '../../../../Components/Dialog/ReUsableModaal'
 import batchConstant from './batch.constant'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 const Batch = () => {
   const [batchContent] = batchConstant()
@@ -137,6 +138,7 @@ const Batch = () => {
             <th scope="col" className="px-6 py-3 text-center">
               Action
             </th>
+            <th scope="col" className="px-6 py-3 text-center"></th>
           </tr>
         </thead>
         <tbody className="text-center">
@@ -169,6 +171,13 @@ const Batch = () => {
                     {result?.isAdmissionGoing
                       ? 'Close Admission'
                       : 'Admission Closed'}
+                  </button>
+                </td>
+                <td className="px-6 py-4">
+                  <button className="underline underline-offset-4 hover:text-primary hover:underline-offset-1">
+                    <Link to={`/dashboard/batch/batch-details/${result?._id}`}>
+                      See Details
+                    </Link>
                   </button>
                 </td>
               </tr>
