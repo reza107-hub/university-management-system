@@ -3,6 +3,7 @@ import { useGetSingleSectionQuery, useMergeSectionMutation } from '../../../../R
 import { useState } from 'react'
 import SectionMargeModal from './SectionMargeModal'
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom'
 
 const BatchDetails = () => {
   const { id } = useParams()
@@ -37,7 +38,6 @@ const BatchDetails = () => {
             timer: 1500,
           })
         } catch (error) {
-          console.log(error)
           Swal.fire({
             title: error?.data?.message,
             text: error?.data?.errorMessage,
@@ -82,6 +82,10 @@ const BatchDetails = () => {
             >
               Students
             </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            ></th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -90,6 +94,11 @@ const BatchDetails = () => {
               <td className="px-6 py-4 whitespace-nowrap">{section.name}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 {section.student_ids.length}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <Link to={`/dashboard/batch/batch-details/section-students/${section?._id}`}>
+                  See Students
+                </Link>
               </td>
             </tr>
           ))}

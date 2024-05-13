@@ -90,13 +90,6 @@ const Sidebar = () => {
       icon: <UserSvg />,
       role: 'admin',
     },
-
-    {
-      to: '/dashboard/students',
-      label: 'Students List',
-      icon: <UserSvg />,
-      role: 'admin',
-    },
     {
       to: '/dashboard/add-students',
       label: 'Add Student Manually',

@@ -462,7 +462,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/students',
+        path: '/dashboard/batch/batch-details/section-students/:id',
         element: (
           <PrivateRoute>
             <AdminRoutes>
