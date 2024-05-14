@@ -6,7 +6,10 @@ import Swal from 'sweetalert2'
 import useAuth from '../../../../Hooks/useAuth'
 import {
   useGetAllStudentsQuery,
+  useIsMonthlyFeeCompleteQuery,
   useIsSemesterFeeCompleteQuery,
+  useMonthlyFeeOfCurrentStudentQuery,
+  useMonthlyFeePreviousDueOfCurrentStudentQuery,
   useMonthlyPaymentMutation,
   useSemesterPaymentMutation,
 } from '../../../../Redux/features/student/student.api'
@@ -51,7 +54,7 @@ const StudentPayment = () => {
       i?.departmentId?._id ===
       currentStudent?.admissionRequestId?.department?._id,
   )
-
+  //--------------------------------------------------------------
   const fullName =
     currentStudent?.admissionRequestId?.name?.firstName +
     ' ' +
@@ -61,7 +64,13 @@ const StudentPayment = () => {
     semesterRegistrationId: upcomingOrOngoingSemester?._id,
   })
   const isSemesterPaymentDone = data?.data
-
+const {data:isMonthlyPaymentCompleteData} = useIsMonthlyFeeCompleteQuery({studentId: currentStudent?._id, departmentId: currentStudent?.admissionRequestId?.department?._id,month: currentMonthName,year: currentYear,})
+const isMonthlyFeeDone = isMonthlyPaymentCompleteData?.data
+const {data:monthlyFeeOFCurrentStudentData} = useMonthlyFeeOfCurrentStudentQuery({studentId: currentStudent?._id, departmentId: currentStudent?.admissionRequestId?.department?._id})
+const monthlyFeeOfCurrentStudent = monthlyFeeOFCurrentStudentData?.data
+const {data:monthlyFeePreviousDueOFCurrentStudentData} = useMonthlyFeePreviousDueOfCurrentStudentQuery({studentId: currentStudent?._id})
+const monthlyFeePreviousDueOFCurrentStudent= monthlyFeePreviousDueOFCurrentStudentData?.data
+//---------------------------------------------------------------------
   const openSemesterModal = () => {
     setIsOpenSemesterModal(true)
   }
@@ -116,8 +125,9 @@ const StudentPayment = () => {
     }
     setIsOpenSemesterModal(false)
   }
-
+ 
   const addMonthlyPayment = async () => {
+
     try {
       Swal.fire({
         title: 'wait...',
@@ -127,7 +137,6 @@ const StudentPayment = () => {
           Swal.showLoading()
         },
       })
-
       const payload = {
         name: fullName,
         email: currentStudent?.admissionRequestId?.email,
@@ -136,7 +145,7 @@ const StudentPayment = () => {
         semesterRegistrationId: upcomingOrOngoingSemester?._id,
         contactNumber: currentStudent?.admissionRequestId?.contactNumber,
         month: currentMonthName,
-        year: currentYear,
+        year: currentYear, 
       }
 
       const res = await monthlyPayment(payload).unwrap()
@@ -174,6 +183,11 @@ const StudentPayment = () => {
         upcomingOrOngoingSemester={upcomingOrOngoingSemester}
         departmentWiseFeeData={departmentWiseFeeData}
         currentStudent={currentStudent}
+        isMonthlyFeeDone={isMonthlyFeeDone}
+        currentMonthName={currentMonthName}
+        currentYear={currentYear}
+        monthlyFeeOfCurrentStudent={monthlyFeeOfCurrentStudent}
+        monthlyFeePreviousDueOFCurrentStudent={monthlyFeePreviousDueOFCurrentStudent}
       />
       <div className="max-w-md mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
         <h2 className="text-xl font-semibold text-center mb-6">
@@ -183,10 +197,19 @@ const StudentPayment = () => {
         <div className="mb-4">
           <button
             type="button"
-            className="btn-primary"
+            className="btn-primary relative"
             onClick={openMonthlyModal}
           >
             Monthly Fee
+            {isMonthlyFeeDone ? (
+      <span className="absolute top-[-5px] right-[-1px] inline-flex items-center justify-center px-2 py-1 text-xs font-medium bg-green-50 text-green-700 rounded-md ring-1 ring-green-600/20">
+        Paid
+      </span>
+    ) : (
+      <span className="absolute top-[-5px] right-[-1px] inline-flex items-center justify-center px-2 py-1 text-xs font-medium bg-red-50 text-red-700 rounded-md ring-1 ring-red-600/10">
+        Pending
+      </span>
+    )}
           </button>
           <p className="text-sm text-gray-600 mt-2">
             Pay your monthly tuition fee securely and conveniently.
