@@ -30,7 +30,7 @@ const AcademicHistory = () => {
     let totalCGPA = 0
     let coursesCounted = 0
 
-    if (academicRecordData && academicRecordData.success) {
+    if (academicRecordData && academicRecordData.data) {
       academicRecordData.data.forEach((record) => {
         if (record.grade !== 'F') {
           totalCGPA += record.cgpa
