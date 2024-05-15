@@ -386,12 +386,13 @@ const Form = ({
 
         <div className="mb-3 row w-[20%]">
           <label htmlFor="profileImage" className="col-sm-2 col-form-label">
-            Profile Image
+            Passport Size Photo
           </label>
           <div className="col-sm-10">
             <input
               {...register('profileImage', { required: true })}
               type="file"
+              accept=".png, .jpg, .jpeg"
               className="form-control w-full"
             />
             {errors.profileImage && (
@@ -411,6 +412,7 @@ const Form = ({
             <input
               {...register('sscCertificate')}
               type="file"
+              accept=".pdf"
               className="form-control rounded-md w-full"
             />
           </div>
@@ -424,6 +426,23 @@ const Form = ({
             <input
               {...register('hscCertificate')}
               type="file"
+              accept=".pdf"
+              className="form-control rounded-md w-full"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-center">
+        <div className="mb-3">
+          <label htmlFor="hscCertificate" className="col-sm-2 col-form-label">
+            Transcript
+          </label>
+          <div className="">
+            <input
+              {...register('transcript')}
+              type="file"
+              accept=".pdf"
               className="form-control rounded-md w-full"
             />
           </div>

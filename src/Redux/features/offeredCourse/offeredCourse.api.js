@@ -37,6 +37,16 @@ const offeredCourseApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ['course'],
     }),
+    addClassroomCodeInOfferedCourse: build.mutation({
+      query: (body) => {
+        return {
+          url: `/offered-course/add-classroom-code`,
+          method: 'PATCH',
+          body
+        }
+      },
+      invalidatesTags: ['course'],
+    }),
     getSingleOfferedCourse: build.query({
       query: (id) => ({
         url: `/offered-course/${id}`,
@@ -54,4 +64,4 @@ const offeredCourseApi = baseApi.injectEndpoints({
   })
 })
 
-export const { useCreateOfferedCourseMutation, useGetOfferedCourseQuery, useDeleteOneOfferedCourseMutation, useUpdateOfferedCourseMutation, useGetSingleOfferedCourseQuery, useGetOngoingSemesterOfferedCoursesQuery } = offeredCourseApi
+export const { useCreateOfferedCourseMutation, useGetOfferedCourseQuery, useDeleteOneOfferedCourseMutation, useUpdateOfferedCourseMutation, useGetSingleOfferedCourseQuery, useGetOngoingSemesterOfferedCoursesQuery, useAddClassroomCodeInOfferedCourseMutation } = offeredCourseApi

@@ -9,7 +9,7 @@ const StudentManuallyAdmissionForm = ({
     semesterStatus
   }) => {
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%]">
             <label htmlFor="firstName" className="col-sm-2 col-form-label">
@@ -20,14 +20,13 @@ const StudentManuallyAdmissionForm = ({
                 {...register('firstName', { required: true })}
                 type="text"
                 className="form-control w-full rounded-md text-black"
-               
               />
               {errors.firstName && (
                 <span className="text-red-700">This field is required</span>
               )}
             </div>
           </div>
-  
+
           <div className="mb-3 w-[20%]">
             <label htmlFor="lastName" className="col-sm-2 col-form-label">
               Last Name
@@ -44,7 +43,7 @@ const StudentManuallyAdmissionForm = ({
             </div>
           </div>
         </div>
-  
+
         <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%]">
             <label htmlFor="fatherName" className="col-sm-2 col-form-label">
@@ -61,9 +60,12 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-  
+
           <div className="mb-3  w-[20%]">
-            <label htmlFor="fatherOccupation" className="col-sm-2 col-form-label">
+            <label
+              htmlFor="fatherOccupation"
+              className="col-sm-2 col-form-label"
+            >
               {`Father's Occupation`}
             </label>
             <div className="">
@@ -78,7 +80,7 @@ const StudentManuallyAdmissionForm = ({
             </div>
           </div>
         </div>
-  
+
         <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%]">
             <label htmlFor="motherName" className="col-sm-2 col-form-label">
@@ -95,9 +97,12 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-  
+
           <div className="mb-3 w-[20%]">
-            <label htmlFor="motherOccupation" className="col-sm-2 col-form-label">
+            <label
+              htmlFor="motherOccupation"
+              className="col-sm-2 col-form-label"
+            >
               {`Mother's Occupation`}
             </label>
             <div className="">
@@ -112,7 +117,7 @@ const StudentManuallyAdmissionForm = ({
             </div>
           </div>
         </div>
-  
+
         <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%]">
             <label
@@ -132,7 +137,7 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-  
+
           <div className="mb-3 w-[20%]">
             <label
               htmlFor="presentGuardianContact"
@@ -189,7 +194,7 @@ const StudentManuallyAdmissionForm = ({
             </div>
           </div>
         </div>
-  
+
         <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%]">
             <label htmlFor="contactNumber" className="col-sm-2 col-form-label">
@@ -208,7 +213,7 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-  
+
           <div className="mb-3 w-[20%]">
             <label htmlFor="email" className="col-sm-2 col-form-label">
               Email
@@ -228,7 +233,7 @@ const StudentManuallyAdmissionForm = ({
             </div>
           </div>
         </div>
-  
+
         <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%]">
             <label htmlFor="presentAddress" className="col-sm-2 col-form-label">
@@ -244,9 +249,12 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-  
+
           <div className="mb-3 w-[20%]">
-            <label htmlFor="permanentAddress" className="col-sm-2 col-form-label">
+            <label
+              htmlFor="permanentAddress"
+              className="col-sm-2 col-form-label"
+            >
               Permanent Address
             </label>
             <div className="">
@@ -260,7 +268,7 @@ const StudentManuallyAdmissionForm = ({
             </div>
           </div>
         </div>
-  
+
         <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%]">
             <label htmlFor="bloodGroup" className="col-sm-2 col-form-label">
@@ -285,7 +293,7 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-  
+
           <div className="mb-3 w-[20%]">
             <label htmlFor="Program" className="col-sm-2 col-form-label">
               Program
@@ -308,7 +316,7 @@ const StudentManuallyAdmissionForm = ({
             </div>
           </div>
         </div>
-  
+
         <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%]">
             <label htmlFor="department" className="col-sm-2 col-form-label">
@@ -330,7 +338,7 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-  
+
           <div className="mb-3 w-[20%]">
             <label
               htmlFor="yearOfRegistration"
@@ -369,15 +377,16 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-  
+
           <div className="mb-3 row w-[20%]">
             <label htmlFor="profileImage" className="col-sm-2 col-form-label">
-              Profile Image
+              Passport Size Photo
             </label>
             <div className="col-sm-10">
               <input
                 {...register('profileImage', { required: true })}
                 type="file"
+                accept=".png, .jpg, .jpeg"
                 className="form-control w-full"
               />
               {errors.profileImage && (
@@ -387,8 +396,6 @@ const StudentManuallyAdmissionForm = ({
           </div>
         </div>
 
-      
-  
         {/* ------------ */}
         <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%] ">
@@ -399,11 +406,12 @@ const StudentManuallyAdmissionForm = ({
               <input
                 {...register('sscCertificate')}
                 type="file"
+                accept=".pdf"
                 className="form-control rounded-md w-full"
               />
             </div>
           </div>
-  
+
           <div className="mb-3 w-[20%]">
             <label htmlFor="hscCertificate" className="col-sm-2 col-form-label">
               HSC Certificate
@@ -412,15 +420,16 @@ const StudentManuallyAdmissionForm = ({
               <input
                 {...register('hscCertificate')}
                 type="file"
+                accept=".pdf"
                 className="form-control rounded-md w-full"
               />
             </div>
           </div>
         </div>
-          {/* ----------------- */}
-        
-          <div className="flex justify-center">
-        <div className="mb-3 w-[20%]">
+        {/* ----------------- */}
+
+        <div className="flex justify-center">
+          <div className="mb-3 w-[20%]">
             <label htmlFor="waiver" className="col-sm-2 col-form-label">
               Waiver
             </label>
@@ -433,23 +442,27 @@ const StudentManuallyAdmissionForm = ({
             </div>
           </div>
         </div>
-        
-        
+
         <div className="mb-3">
-          
           <div className=" offset-sm-2 text-center">
-          {semesterStatus !== 'UPCOMING' && (
-          <div className="mb-3">
-            <p className="text-red-700">Semester is not upcoming so you cannot add a student manually.</p>
-          </div>
-        )}
-            <button type="submit"  disabled={semesterStatus !== 'UPCOMING'} className="btn btn-primary ">
+            {semesterStatus !== 'UPCOMING' && (
+              <div className="mb-3">
+                <p className="text-red-700">
+                  Semester is not upcoming so you cannot add a student manually.
+                </p>
+              </div>
+            )}
+            <button
+              type="submit"
+              disabled={semesterStatus !== 'UPCOMING'}
+              className="btn btn-primary "
+            >
               Submit
             </button>
           </div>
         </div>
       </form>
-    );
+    )
 };
 
 export default StudentManuallyAdmissionForm;

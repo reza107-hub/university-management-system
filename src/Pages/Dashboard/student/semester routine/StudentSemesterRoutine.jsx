@@ -6,6 +6,7 @@ import {
   useGetSingleStudentDataFromDbQuery,
 } from '../../../../Redux/features/student/student.api'
 import SeeFacultyInfoModal from './SeeFacultyInfoModal'
+import { useGetOngoingSemesterRegistrationQuery } from '../../../../Redux/features/SemesterrRegistration/SemesterrRegistration.api'
 
 const StudentSemesterRoutine = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -20,7 +21,10 @@ const StudentSemesterRoutine = () => {
     },
   )
 
-  if (isStudentDataLoading) {
+  const { data: ongoingSemester, isLoading: isOngoingSemesterLoading } =
+    useGetOngoingSemesterRegistrationQuery(undefined)
+
+  if (isStudentDataLoading || isOngoingSemesterLoading) {
     return <Loader />
   }
 
@@ -28,24 +32,32 @@ const StudentSemesterRoutine = () => {
     return <p className="text-center text-primary font-bold text-2xl mt-3">There are no courses found, so no section is available for you.</p>
   }
 
-  const modifyData = Courses?.data?.reduce((acc, course) => {
-    const { routine, courseId, facultyId } = course
-    const { title } = courseId
+  const ongoingSemesterOfferedCoursesLists = Courses?.data?.filter(
+    (result) =>
+      result?.semesterRegistrationId?._id === ongoingSemester?.data?._id,
+  )
 
-    routine.forEach((item) => {
-      acc.push({
-        offeredCourseId: course._id,
-        days: item.days,
-        startTime: item.startTime,
-        endTime: item.endTime,
-        roomNo: item.roomNo,
-        courseTitle: title,
-        faculty: facultyId,
+  const modifyData = ongoingSemesterOfferedCoursesLists?.reduce(
+    (acc, course) => {
+      const { routine, courseId, facultyId } = course
+      const { title } = courseId
+
+      routine.forEach((item) => {
+        acc.push({
+          offeredCourseId: course._id,
+          days: item.days,
+          startTime: item.startTime,
+          endTime: item.endTime,
+          roomNo: item.roomNo,
+          courseTitle: title,
+          faculty: facultyId,
+        })
       })
-    })
 
-    return acc
-  }, [])
+      return acc
+    },
+    [],
+  )
 
   const sortDays = (days) => {
     const order = {
@@ -77,8 +89,8 @@ const StudentSemesterRoutine = () => {
         faculty={faculty}
       />
       <p className="text-center text-primary font-bold text-2xl mt-3 mb-10">
-        Your {Courses?.data[0]?.academicSemesterId?.name}{' '}
-        {Courses?.data[0]?.academicSemesterId?.year} routine
+        Your {ongoingSemester?.data?.academicSemester?.name}{' '}
+        {ongoingSemester?.data?.academicSemester?.year} routine
       </p>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mx-auto">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center w-full">

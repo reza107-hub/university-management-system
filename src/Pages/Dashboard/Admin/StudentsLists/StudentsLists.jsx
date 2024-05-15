@@ -1,12 +1,20 @@
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { useGetAllStudentsQuery } from '../../../../Redux/features/student/student.api'
 import SearchById from '../../../../Components/Search/SearchById'
+import { useGetAllSectionQuery } from '../../../../Redux/features/BatchApi/BatchApi'
 
 const StudentsLists = () => {
+  const { id } = useParams()
   const [params, setParams] = useState('')
   const { data } = useGetAllStudentsQuery(params)
+  const { data: section } = useGetAllSectionQuery()
+  const singleSection = section?.data?.find((result) => result?._id === id)
   const SearchPlaceHolderName = 'Id'
   const students = data?.data
+  const sectionWiseStudents = students?.filter((result) =>
+    singleSection?.student_ids?.includes(result?.studentId),
+  )
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -36,7 +44,7 @@ const StudentsLists = () => {
           </tr>
         </thead>
         <tbody>
-          {students?.map((student) => (
+          {sectionWiseStudents?.map((student) => (
             <tr
               key={student?._id}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
