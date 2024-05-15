@@ -37,7 +37,15 @@ const courseApi = baseApi.injectEndpoints({
             },
             invalidatesTags: ['course'],
           }),
+          departmentWiseCourses: build.query({
+            query: (params) => ({
+                url: `/course/department-wise-courses`,
+                method: 'GET',
+                params
+            }),
+            providesTags: ['course']
+        }),
     }),
 })
 
-export const { useCreateCourseMutation, useGetAllCoursesQuery ,useUpdateCourseMutation,useDeleteOneCourseMutation} = courseApi
+export const { useCreateCourseMutation, useGetAllCoursesQuery ,useUpdateCourseMutation,useDeleteOneCourseMutation,useDepartmentWiseCoursesQuery} = courseApi

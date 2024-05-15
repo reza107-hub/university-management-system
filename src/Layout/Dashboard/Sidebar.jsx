@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link,useLocation } from 'react-router-dom'
 import { FaHome, FaRegUser } from 'react-icons/fa'
 import useAuth from '../../Hooks/useAuth'
 import UserSvg from '../../Components/svg/UserSvg/UserSvg'
@@ -10,6 +10,7 @@ const Sidebar = () => {
   const { data: userData } = useGetPresentUserWithAdditionalInfoQuery(
     user?.email,
   )
+  const location = useLocation(); // Import useLocation hook from react-router-dom
 
   const handleLogOut = () => {
     logOut()
@@ -163,27 +164,23 @@ const Sidebar = () => {
       <ul className="space-y-2 font-medium">
         {menuItems.map((item) =>
           !item.role ? (
-            <li key={item.to}>
+            <li key={item.to} className={location.pathname === item.to ? 'bg-gray-200' : ''}>
               <Link
                 to={item.to}
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group"
               >
                 {item.icon}
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  {item.label}
-                </span>
+                <span className="flex-1 ms-3 whitespace-nowrap">{item.label}</span>
               </Link>
             </li>
           ) : item.role && item.role === userData?.data?.userId?.role ? (
-            <li key={item.to}>
+            <li key={item.to} className={location.pathname === item.to ? 'bg-gray-200' : ''}>
               <Link
                 to={item.to}
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group"
               >
                 {item.icon}
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  {item.label}
-                </span>
+                <span className="flex-1 ms-3 whitespace-nowrap">{item.label}</span>
               </Link>
             </li>
           ) : (
@@ -194,7 +191,7 @@ const Sidebar = () => {
           <a
             onClick={handleLogOut}
             href="/login"
-            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white group"
           >
             <UserSvg />
             <span className="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
