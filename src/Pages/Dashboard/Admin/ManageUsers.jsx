@@ -145,7 +145,7 @@ const ManageUsers = () => {
                   {user?.role === 'admin' ? (
                     <></>
                   ) : (
-                    <>
+                    <div className='space-x-2'>
                       <button
                         onClick={() => handleMakeAdmin(user)}
                         className={`btn-primary`}
@@ -158,7 +158,7 @@ const ManageUsers = () => {
                       >
                         Make faculty
                       </button>
-                    </>
+                    </div>
                   )}
                 </td>
               </tr>

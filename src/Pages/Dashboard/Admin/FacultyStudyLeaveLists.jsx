@@ -1,62 +1,21 @@
-import Swal from 'sweetalert2'
-
-import {
-  useDeleteFacultyMutation,
-  useGetFacultyListQuery,
-  useRemoveFacultyAsStudyLeaveMutation,
-} from '../../../Redux/features/faculty/FacultyApi'
-
 import { useState } from 'react'
 import SearchName from '../../../Components/Search/SearchName'
-import EmailModal from '../../../Components/Dialog/EmailModal'
-import { useSendEmailMutation } from '../../../Redux/features/admin/admin.api'
+import {
+  useGetFacultyListQuery,
+  useMakeStudyLeaveFalseMutation,
+} from '../../../Redux/features/faculty/FacultyApi'
+import Swal from 'sweetalert2'
 
-const FacultyList = () => {
+const FacultyStudyLeaveLists = () => {
+  const [makeStudyLeaveFalse] = useMakeStudyLeaveFalseMutation()
+
   const [params, setParams] = useState('')
-  const [emailText, setEmailText] = useState('')
-  const [emailSubject, setEmailSubject] = useState('')
-  const [selectedUser, setSelectedUser] = useState(null)
-  let [isOpen, setIsOpen] = useState(false)
   const { data: facultyListData } = useGetFacultyListQuery(params)
-  const [deleteFaculty] = useDeleteFacultyMutation()
-  const [removeFacultyAsStudyLeave] = useRemoveFacultyAsStudyLeaveMutation()
-  const [sendEmailMutation] = useSendEmailMutation()
   const SearchPlaceHolderName = 'Faculty'
   const data = facultyListData?.data?.filter(
-    (result) => result?.studyLeave === false,
+    (result) => result?.studyLeave === true,
   )
-  const openModal = (user) => {
-    setIsOpen(true)
-    setSelectedUser(user)
-  }
-  const closeModal = () => {
-    setIsOpen(false)
-    setSelectedUser(null)
-  }
-  const handleDeleteFaculty = async (user) => {
-    try {
-      Swal.fire({
-        title: 'wait...',
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading()
-        },
-      })
-      const res = await deleteFaculty(user).unwrap()
-      Swal.fire({
-        title: res.message,
-        icon: 'success',
-        timer: 1500,
-      })
-    } catch (error) {
-      Swal.fire({
-        title: error?.data?.message,
-        text: error?.data?.errorMessage,
-        icon: 'error',
-      })
-    }
-  }
+
   const handleRemoveFacultyAsStudyLeave = async (user) => {
     try {
       Swal.fire({
@@ -67,43 +26,11 @@ const FacultyList = () => {
           Swal.showLoading()
         },
       })
-      const res = await removeFacultyAsStudyLeave(user).unwrap()
+      const res = await makeStudyLeaveFalse(user).unwrap()
       Swal.fire({
         title: res.message,
         icon: 'success',
         timer: 1500,
-      })
-    } catch (error) {
-      Swal.fire({
-        title: error?.data?.message,
-        text: error?.data?.errorMessage,
-        icon: 'error',
-      })
-    }
-  }
-  const emailSendButton = async (userDetails) => {
-    const email = userDetails?.userId?.email
-    const payload = {
-      email,
-      emailSubject,
-      emailText,
-    }
-    try {
-      Swal.fire({
-        title: 'wait...',
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading()
-        },
-      })
-      const res = await sendEmailMutation(payload).unwrap()
-      Swal.fire({
-        title: res.message,
-        icon: 'success',
-        timer: 1500,
-      }).then(() => {
-        closeModal()
       })
     } catch (error) {
       Swal.fire({
@@ -114,15 +41,7 @@ const FacultyList = () => {
     }
   }
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <EmailModal
-        isOpen={isOpen}
-        emailSendButton={emailSendButton}
-        closeModal={closeModal}
-        setEmailText={setEmailText}
-        selectedUser={selectedUser}
-        setEmailSubject={setEmailSubject}
-      />
+    <div>
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
 
@@ -174,30 +93,22 @@ const FacultyList = () => {
                 <td className="px-6 py-4">
                   {user?.userAdditionalInfoId?.email}
                 </td>
-                <td className="px-6 py-4">{user?.userId?.role}</td>
+                <td className="px-6 py-4">
+                  {user?.userId?.role} {`(Study Leave)`}
+                </td>
                 <td className="px-6 py-4 space-x-2">
                   <select
                     className="rounded-md"
                     id="actions-select"
                     onClick={(e) => {
-                      if (e.target.value === 'removeFaculty') {
-                        handleDeleteFaculty(user)
-                        e.target.selectedIndex = 0
-                      } else if (e.target.value === 'studyLeave') {
+                      if (e.target.value === 'removeStudyLeave') {
                         handleRemoveFacultyAsStudyLeave(user)
-                        e.target.selectedIndex = 0
-                      } else if (e.target.value === 'sendMail') {
-                        openModal(user)
                         e.target.selectedIndex = 0
                       }
                     }}
                   >
                     <option>Actions</option>
-                    <option value="studyLeave">
-                      Remove Faculty as study leave
-                    </option>
-                    <option value="removeFaculty">Remove Faculty</option>
-                    <option value="sendMail">Send email</option>
+                    <option value="removeStudyLeave">Give access again</option>
                   </select>
                 </td>
               </tr>
@@ -211,4 +122,4 @@ const FacultyList = () => {
   )
 }
 
-export default FacultyList
+export default FacultyStudyLeaveLists

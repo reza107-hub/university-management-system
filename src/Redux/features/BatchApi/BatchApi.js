@@ -11,6 +11,14 @@ const BatchApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['batch'],
     }),
+    mergeSection: build.mutation({
+      query: (body) => ({
+        url: `/batch/mergeSection`,
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['batch'],
+    }),
     // update batch endpoint
     updateBatch: build.mutation({
       query: ({ id, body }) => ({
@@ -35,10 +43,18 @@ const BatchApi = baseApi.injectEndpoints({
         url: `/batch/get-all-section`,
         method: 'GET',
       }),
+      providesTags: ['batch'],
+    }),
 
+    getSingleSection: build.query({
+      query: (id) => ({
+        url: `/batch/get-single-section/${id}`,
+        method: 'GET',
+      }),
+      providesTags: ['batch'],
     })
   }),
 })
 
-export const { useAddBatchMutation, useGetBatchQuery, useUpdateBatchMutation, useGetAllSectionQuery } =
+export const { useAddBatchMutation, useGetBatchQuery, useUpdateBatchMutation, useGetAllSectionQuery, useGetSingleSectionQuery, useMergeSectionMutation } =
   BatchApi

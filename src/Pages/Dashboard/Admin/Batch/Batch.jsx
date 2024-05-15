@@ -10,11 +10,24 @@ import Swal from 'sweetalert2'
 import ReUsable from '../../../../Components/Dialog/ReUsableModaal'
 import batchConstant from './batch.constant'
 import { useForm } from 'react-hook-form'
+import DepartmentTab from './DepartmentTab'
+import { useGetDepartmentQuery } from '../../../../Redux/features/Department/department.api'
 
 const Batch = () => {
   const [batchContent] = batchConstant()
   let [isOpen, setIsOpen] = useState(false)
+  let [selectedDept, setSelectedDept] = useState(0)
   const { data: batchData } = useGetBatchQuery(undefined)
+  const { data: department } = useGetDepartmentQuery(undefined)
+  const departmentData = department?.data
+
+  const activeDept = departmentData?.find(
+    (dept, index) => selectedDept === index,
+  )
+
+  const activeDeptBatchData = batchData?.data?.filter(
+    (data) => data?.deptId?._id === activeDept?._id,
+  )
   const [addBatch] = useAddBatchMutation()
   const [updateBatch] = useUpdateBatchMutation()
   const openModal = () => {
@@ -59,28 +72,40 @@ const Batch = () => {
   ) => {
     const updatedAdmissionStatus = !currentAdmissionStatus
     const data = { isAdmissionGoing: updatedAdmissionStatus }
-    try {
-      Swal.fire({
-        title: 'wait...',
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading()
-        },
-      })
-      const res = await updateBatch({ id: batchId, body: data }).unwrap()
-      Swal.fire({
-        title: res.message,
-        icon: 'success',
-        timer: 1500,
-      })
-    } catch (error) {
-      Swal.fire({
-        title: error?.data?.message,
-        text: error?.data?.errorMessage,
-        icon: 'error',
-      })
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          Swal.fire({
+            title: 'wait...',
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading()
+            },
+          })
+          const res = await updateBatch({ id: batchId, body: data }).unwrap()
+          Swal.fire({
+            title: res.message,
+            icon: 'success',
+            timer: 1500,
+          })
+        } catch (error) {
+          Swal.fire({
+            title: error?.data?.message,
+            text: error?.data?.errorMessage,
+            icon: 'error',
+          })
+        }
+      }
+    })
   }
 
   return (
@@ -113,56 +138,12 @@ const Batch = () => {
         </div>
       </div>
 
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mx-auto">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center w-full">
-          <tr>
-            <th scope="col" className="px-6 py-3 text-center">
-              Batch No
-            </th>
-            <th scope="col" className="px-6 py-3 text-center">
-              Department
-            </th>
-            <th scope="col" className="px-6 py-3 text-center">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody className="text-center">
-          {batchData?.data.map((result) =>
-            batchData.data ? (
-              <tr
-                key={result?._id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                <td className="px-6 py-4 font-bold text-lg">
-                  {result?.batchNumber}
-                </td>
-                <td className="px-6 py-4 font-bold text-lg">
-                  {result?.deptId.shortForm}
-                </td>
-
-                <td className="px-6 py-4">
-                  <button
-                    onClick={() =>
-                      handleToggleAdmissionGoing(
-                        result?.isAdmissionGoing,
-                        result?._id,
-                      )
-                    }
-                    className={`btn-primary`}
-                  >
-                    {result?.isAdmissionGoing
-                      ? 'Admission Going'
-                      : 'Admission Closed'}
-                  </button>
-                </td>
-              </tr>
-            ) : (
-              <tr key={result._id}></tr>
-            ),
-          )}
-        </tbody>
-      </table>
+      <DepartmentTab
+        departmentData={departmentData}
+        setSelectedDept={setSelectedDept}
+        activeDeptBatchData={activeDeptBatchData}
+        handleToggleAdmissionGoing={handleToggleAdmissionGoing}
+      />
     </div>
   )
 }

@@ -168,6 +168,7 @@ const Register = () => {
               name="photo"
               id="photo"
               type="file"
+              accept=".png, .jpg, .jpeg"
             />
             {errors.photo && (
               <span className="text-accent">This field is required</span>
