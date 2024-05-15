@@ -81,6 +81,27 @@ const studentApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['user', 'admission'],
     }),
+    isMonthlyFeeComplete: build.query({
+      query: ({ studentId, departmentId,month,year }) => ({
+        url: `/students/is-monthly-fee-complete/${studentId}/${departmentId}/${month}/${year}`,
+        method: 'GET',
+      }),
+    })
+    ,
+    monthlyFeeOfCurrentStudent: build.query({
+      query: ({ studentId, departmentId }) => ({
+        url: `/students/monthly-fee-of-current-student/${studentId}/${departmentId}`,
+        method: 'GET',
+      }),
+    })
+    ,
+    monthlyFeePreviousDueOfCurrentStudent: build.query({
+      query: ({ studentId }) => ({
+        url: `/students/monthly-fee-previous-due-current-student/${studentId}`,
+        method: 'GET',
+      }),
+    })
+    ,
   }),
 })
 
@@ -94,5 +115,8 @@ export const {
   useGetSemesterRoutineQuery,
   useGetSingleStudentDataFromDbQuery,
   useIsSemesterFeeCompleteQuery,
-  useMonthlyPaymentMutation
+  useMonthlyPaymentMutation,
+  useIsMonthlyFeeCompleteQuery,
+  useMonthlyFeeOfCurrentStudentQuery,
+  useMonthlyFeePreviousDueOfCurrentStudentQuery
 } = studentApi
