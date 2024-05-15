@@ -433,6 +433,22 @@ const Form = ({
         </div>
       </div>
 
+      <div className="flex justify-center">
+        <div className="mb-3">
+          <label htmlFor="hscCertificate" className="col-sm-2 col-form-label">
+            Transcript
+          </label>
+          <div className="">
+            <input
+              {...register('transcript')}
+              type="file"
+              accept=".pdf"
+              className="form-control rounded-md w-full"
+            />
+          </div>
+        </div>
+      </div>
+
       <div className="mb-3">
         <div className=" offset-sm-2 text-center">
           <button type="submit" className="btn btn-primary ">
