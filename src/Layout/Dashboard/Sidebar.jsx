@@ -103,21 +103,33 @@ const Sidebar = () => {
       role: 'admin',
     },
     {
+      to: '/dashboard/classroom-code-assigning',
+      label: 'Assign classroom code',
+      icon: <AcademicCap />,
+      role: 'faculty',
+    },
+    {
       to: '/dashboard/semester-faculty-routine',
       label: 'Faculty Semester Routine',
-      icon: <UserSvg />,
+      icon: <AcademicCap />,
       role: 'faculty',
     },
     {
       to: '/dashboard/marks-of-students',
       label: 'Marks',
-      icon: <UserSvg />,
+      icon: <AcademicCap />,
       role: 'faculty',
+    },
+    {
+      to: '/dashboard/offered-courses',
+      label: 'Offered Courses',
+      icon: <AcademicCap />,
+      role: 'student',
     },
     {
       to: '/dashboard/semester-student-routine',
       label: 'Semester Routine',
-      icon: <UserSvg />,
+      icon: <AcademicCap />,
       role: 'student',
     },
     {

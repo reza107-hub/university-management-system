@@ -50,7 +50,8 @@ const facultyApi = baseApi.injectEndpoints({
       query: (email) => ({
         url: `/faculty/${email}`,
         method: 'GET',
-      })
+      }),
+      providesTags: ['admin-list', 'user', 'faculty', 'admin'],
     }),
     // faculty class routine
     getFacultySemesterRoutine: build.query({
@@ -59,7 +60,8 @@ const facultyApi = baseApi.injectEndpoints({
           url: `/offered-course/facultyRoutine/${facultyId}`,
           method: 'GET',
         }
-      }
+      },
+      providesTags: ['admin-list', 'user', 'faculty', 'admin', 'course'],
     })
   }),
 })

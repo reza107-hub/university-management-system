@@ -61,6 +61,8 @@ import AcademicHistory from '../Pages/Dashboard/student/academic history/Academi
 import PaymentHistory from '../Pages/Dashboard/student/payment history/PaymentHistory'
 import FacultyStudyLeaveLists from '../Pages/Dashboard/Admin/FacultyStudyLeaveLists'
 import BatchDetails from '../Pages/Dashboard/Admin/Batch/BatchDetails'
+import ClassroomCodeAssign from '../Pages/Dashboard/faculty/ClassroomCodeAssign/ClassroomCodeAssign'
+import OfferedCourses from '../Pages/Dashboard/student/offered courses for ongoing semester/OfferedCourses'
 
 const router = createBrowserRouter([
   {
@@ -200,6 +202,16 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/dashboard/offered-courses',
+        element: (
+          <PrivateRoute>
+            <StudentRoute>
+              <OfferedCourses />
+            </StudentRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: '/dashboard/academic-records',
         element: (
           <PrivateRoute>
@@ -230,6 +242,16 @@ const router = createBrowserRouter([
         ),
       },
       // faculty
+      {
+        path: '/dashboard/classroom-code-assigning',
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <ClassroomCodeAssign />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
       {
         path: '/dashboard/semester-faculty-routine',
         element: (
