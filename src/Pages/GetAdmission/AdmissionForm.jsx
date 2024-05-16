@@ -27,7 +27,6 @@ const AdmissionForm = () => {
   const { data: programData } = useGetProgrammeQuery(undefined)
   const { data: getDepartmentData } = useGetDepartmentQuery(undefined)
   const { data: batchData } = useGetBatchQuery()
-
   const name = userData?.data?.name?.split(' ')
   let lastName
   let firstName
@@ -71,10 +70,13 @@ const AdmissionForm = () => {
         firstName: data.firstName,
         lastName: data.lastName,
       }
+      const selectedDepartment = getDepartmentData?.data?.find((r)=>r._id===data.department)
       data.userId = userData?.data?.userId?._id
       data.profileImage = await GetHostUrl(data.profileImage[0])
       data.sscCertificate = await GetHostUrl(data.sscCertificate[0])
       data.hscCertificate = await GetHostUrl(data.hscCertificate[0])
+      data.transcript = await GetHostUrl(data.transcript[0])
+      data.program = selectedDepartment?.program._id
       const batchArray = batchData?.data?.filter(
         (batch) => batch?.deptId?._id === data.department,
       )
@@ -82,10 +84,8 @@ const AdmissionForm = () => {
       const batch = batchArray?.find((b) => b?.isAdmissionGoing === true)
 
       data.batch = batch?._id
-      data.semester = semester._id
-
+      data.semester = semester?._id
       const { firstName, lastName, ...postData } = data
-      // console.log(postData)
       const res = await createAdmissionRequest(postData).unwrap()
       if (!res.url) {
         Swal.fire({
@@ -123,6 +123,7 @@ const AdmissionForm = () => {
           userData={userData}
           programData={programData}
           getDepartmentData={getDepartmentData}
+          semesterStatus={semester?.status}
         />
       </div>
     </div>

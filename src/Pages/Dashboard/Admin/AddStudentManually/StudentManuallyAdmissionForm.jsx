@@ -4,7 +4,6 @@ const StudentManuallyAdmissionForm = ({
     onSubmit,
     register,
     errors,
-    programData,
     getDepartmentData,
     semesterStatus
   }) => {
@@ -295,30 +294,6 @@ const StudentManuallyAdmissionForm = ({
           </div>
 
           <div className="mb-3 w-[20%]">
-            <label htmlFor="Program" className="col-sm-2 col-form-label">
-              Program
-            </label>
-            <div className="">
-              <select
-                {...register('program', { required: true })}
-                className="form-select w-full text-black"
-              >
-                {programData?.data.map((program) => (
-                  <option key={program?._id} value={program?._id}>
-                    {program?.name}
-                  </option>
-                ))}
-                {/* Add more options as needed */}
-              </select>
-              {errors.program && (
-                <span className="text-red-700">This field is required</span>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-center gap-7">
-          <div className="mb-3 w-[20%]">
             <label htmlFor="department" className="col-sm-2 col-form-label">
               Department
             </label>
@@ -338,6 +313,10 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
+        </div>
+
+        <div className="flex justify-center gap-7">
+         
 
           <div className="mb-3 w-[20%]">
             <label
@@ -359,9 +338,6 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-        </div>
-        {/* --------------------- */}
-        <div className="flex justify-center gap-7">
           <div className="mb-3 row w-[20%]">
             <label htmlFor="nationality" className="col-sm-2 col-form-label">
               Nationality
@@ -377,6 +353,10 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
+        </div>
+        {/* --------------------- */}
+        <div className="flex justify-center gap-7">
+          
 
           <div className="mb-3 row w-[20%]">
             <label htmlFor="profileImage" className="col-sm-2 col-form-label">
@@ -394,10 +374,6 @@ const StudentManuallyAdmissionForm = ({
               )}
             </div>
           </div>
-        </div>
-
-        {/* ------------ */}
-        <div className="flex justify-center gap-7">
           <div className="mb-3 w-[20%] ">
             <label htmlFor="sscCertificate" className="col-sm-2 col-form-label">
               SSC Certificate
@@ -411,6 +387,11 @@ const StudentManuallyAdmissionForm = ({
               />
             </div>
           </div>
+        </div>
+
+        {/* ------------ */}
+        <div className="flex justify-center gap-7">
+         
 
           <div className="mb-3 w-[20%]">
             <label htmlFor="hscCertificate" className="col-sm-2 col-form-label">
@@ -425,6 +406,19 @@ const StudentManuallyAdmissionForm = ({
               />
             </div>
           </div>
+          <div className="mb-3 w-[20%]">
+          <label htmlFor="hscCertificate" className="col-sm-2 col-form-label">
+            Transcript
+          </label>
+          <div className="">
+            <input
+              {...register('transcript')}
+              type="file"
+              accept=".pdf"
+              className="form-control rounded-md w-full"
+            />
+          </div>
+        </div>
         </div>
         {/* ----------------- */}
 

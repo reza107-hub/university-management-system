@@ -59,7 +59,7 @@ const AdmissionDetails = () => {
               title: res.message,
               icon: 'success',
             })
-            navigate(`/dashboard/students`)
+          
           } catch (error) {
             Swal.fire({
               title: error?.data?.message,
@@ -235,6 +235,14 @@ const AdmissionDetails = () => {
           <span className="font-bold text-primary">HSC Certificate:</span>{' '}
           <span className="font-semibold underline hover:text-red-500">
             <Link to={details?.hscCertificate} target="_blank">
+              See Pdf
+            </Link>
+          </span>
+        </p>
+        <p className="pt-5">
+          <span className="font-bold text-primary">Transcript</span>{' '}
+          <span className="font-semibold underline hover:text-red-500">
+            <Link to={details?.transcript} target="_blank">
               See Pdf
             </Link>
           </span>
