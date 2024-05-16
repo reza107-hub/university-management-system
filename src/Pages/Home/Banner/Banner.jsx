@@ -122,8 +122,9 @@ const Banner = () => {
                   <Link to="/getAdmission">
                     <button
                       disabled={
-                        (userData?.data?.userId?.role === 'admin') |
-                        'student' |
+                        userData?.data?.userId?.role === 'admin' ||
+                        userData?.data?.userId?.role === 'student' ||
+                        userData?.data?.userId?.role === 'faculty' ||
                         isUserAppliedForAdmission
                       }
                       className={`m-[10px] px-[20px] py-[10px] bg-primary text-bold rounded-sm ${
@@ -132,9 +133,9 @@ const Banner = () => {
                           : ''
                       }
                       ${
-                        // eslint-disable-next-line no-constant-condition
-                        (userData?.data?.userId?.role === 'admin') |
-                        'student' |
+                        userData?.data?.userId?.role === 'admin' ||
+                        userData?.data?.userId?.role === 'student' ||
+                        userData?.data?.userId?.role === 'faculty' ||
                         isUserAppliedForAdmission
                           ? 'disabled:opacity-25'
                           : ''

@@ -19,6 +19,9 @@ const CreateOfferCourse = ({
   const [createCourseOffer] = useCreateOfferedCourseMutation()
   const { data: sectionsData } = useGetAllSectionQuery(undefined)
   const { data: facultyLists } = useGetFacultyListQuery(undefined)
+  const notInStudyLeaveFacultyLists = facultyLists?.data?.filter(
+    (result) => result?.studyLeave === false,
+  )
   const { data: semesterRegistrationData } = useGetSemesterRegistrationQuery()
   const semester = semesterRegistrationData?.data?.filter(
     (result) => result?.status !== 'ENDED',
@@ -156,7 +159,7 @@ const CreateOfferCourse = ({
                         className="w-full rounded-md"
                         {...register('facultyId')}
                       >
-                        {facultyLists?.data?.map((res) => (
+                        {notInStudyLeaveFacultyLists?.map((res) => (
                           <option key={res?._id} value={res?._id}>
                             {res?.departmentId?.shortForm} {res?.designation}{' '}
                             {res?.name}

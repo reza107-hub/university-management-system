@@ -59,6 +59,10 @@ import SixtyMarksOfRunningSemesterCourse from '../Pages/Dashboard/student/course
 import MonthlyPaymentSuccessFull from '../Pages/Dashboard/Student/StudentPayment/MonthlyPayment/MonthlyPaymentSuccessfull'
 import AcademicHistory from '../Pages/Dashboard/student/academic history/AcademicHistory'
 import PaymentHistory from '../Pages/Dashboard/student/payment history/PaymentHistory'
+import FacultyStudyLeaveLists from '../Pages/Dashboard/Admin/FacultyStudyLeaveLists'
+import BatchDetails from '../Pages/Dashboard/Admin/Batch/BatchDetails'
+import ClassroomCodeAssign from '../Pages/Dashboard/faculty/ClassroomCodeAssign/ClassroomCodeAssign'
+import OfferedCourses from '../Pages/Dashboard/student/offered courses for ongoing semester/OfferedCourses'
 
 const router = createBrowserRouter([
   {
@@ -198,6 +202,16 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/dashboard/offered-courses',
+        element: (
+          <PrivateRoute>
+            <StudentRoute>
+              <OfferedCourses />
+            </StudentRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: '/dashboard/academic-records',
         element: (
           <PrivateRoute>
@@ -228,6 +242,16 @@ const router = createBrowserRouter([
         ),
       },
       // faculty
+      {
+        path: '/dashboard/classroom-code-assigning',
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <ClassroomCodeAssign />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
       {
         path: '/dashboard/semester-faculty-routine',
         element: (
@@ -360,6 +384,16 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/dashboard/faculties-list-those-in-study-leave',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <FacultyStudyLeaveLists />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: '/dashboard/programs',
         element: (
           <PrivateRoute>
@@ -385,6 +419,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <AdminRoutes>
               <Batch />
+            </AdminRoutes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/dashboard/batch/batch-details/:id',
+        element: (
+          <PrivateRoute>
+            <AdminRoutes>
+              <BatchDetails />
             </AdminRoutes>
           </PrivateRoute>
         ),
@@ -440,7 +484,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard/students',
+        path: '/dashboard/batch/batch-details/section-students/:id',
         element: (
           <PrivateRoute>
             <AdminRoutes>

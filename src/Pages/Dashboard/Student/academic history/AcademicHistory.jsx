@@ -26,10 +26,30 @@ const AcademicHistory = () => {
     return totalCredits
   }
 
+  const calculateOverallCGPA = () => {
+    let totalCGPA = 0
+    let coursesCounted = 0
+
+    if (academicRecordData && academicRecordData.data) {
+      academicRecordData.data.forEach((record) => {
+        if (record.grade !== 'F') {
+          totalCGPA += record.cgpa
+          coursesCounted += 1
+        }
+      })
+    }
+
+    // Avoid division by zero
+    return coursesCounted > 0 ? (totalCGPA / coursesCounted).toFixed(2) : 'N/A'
+  }
+
   return (
     <div>
       <div className="mb-4">
-        Total Completed Credits (Regular): {calculateTotalCompletedCredits()}
+        <p>
+          Total Completed Credits (Regular): {calculateTotalCompletedCredits()}
+        </p>
+        <p>Overall CGPA: {calculateOverallCGPA()}</p>
       </div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mx-auto">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center w-full">

@@ -6,8 +6,8 @@ const Form = ({
   firstName,
   lastName,
   userData,
-  programData,
   getDepartmentData,
+  semesterStatus
 }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -301,30 +301,6 @@ const Form = ({
         </div>
 
         <div className="mb-3 w-[20%]">
-          <label htmlFor="Program" className="col-sm-2 col-form-label">
-            Program
-          </label>
-          <div className="">
-            <select
-              {...register('program', { required: true })}
-              className="form-select w-full text-black"
-            >
-              {programData?.data.map((program) => (
-                <option key={program?._id} value={program?._id}>
-                  {program?.name}
-                </option>
-              ))}
-              {/* Add more options as needed */}
-            </select>
-            {errors.program && (
-              <span className="text-red-700">This field is required</span>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex justify-center gap-7">
-        <div className="mb-3 w-[20%]">
           <label htmlFor="department" className="col-sm-2 col-form-label">
             Department
           </label>
@@ -344,6 +320,11 @@ const Form = ({
             )}
           </div>
         </div>
+        
+      </div>
+
+      <div className="flex justify-center gap-7">
+        
 
         <div className="mb-3 w-[20%]">
           <label
@@ -365,9 +346,6 @@ const Form = ({
             )}
           </div>
         </div>
-      </div>
-      {/* --------------------- */}
-      <div className="flex justify-center gap-7">
         <div className="mb-3 row w-[20%]">
           <label htmlFor="nationality" className="col-sm-2 col-form-label">
             Nationality
@@ -383,15 +361,20 @@ const Form = ({
             )}
           </div>
         </div>
+      </div>
+      {/* --------------------- */}
+      <div className="flex justify-center gap-7">
+        
 
         <div className="mb-3 row w-[20%]">
           <label htmlFor="profileImage" className="col-sm-2 col-form-label">
-            Profile Image
+            Passport Size Photo
           </label>
           <div className="col-sm-10">
             <input
               {...register('profileImage', { required: true })}
               type="file"
+              accept=".png, .jpg, .jpeg"
               className="form-control w-full"
             />
             {errors.profileImage && (
@@ -399,10 +382,6 @@ const Form = ({
             )}
           </div>
         </div>
-      </div>
-
-      {/* ------------ */}
-      <div className="flex justify-center gap-7">
         <div className="mb-3 w-[20%] ">
           <label htmlFor="sscCertificate" className="col-sm-2 col-form-label">
             SSC Certificate
@@ -411,10 +390,16 @@ const Form = ({
             <input
               {...register('sscCertificate')}
               type="file"
+              accept=".pdf"
               className="form-control rounded-md w-full"
             />
           </div>
         </div>
+      </div>
+
+      {/* ------------ */}
+      <div className="flex justify-center gap-7">
+        
 
         <div className="mb-3 w-[20%]">
           <label htmlFor="hscCertificate" className="col-sm-2 col-form-label">
@@ -424,6 +409,20 @@ const Form = ({
             <input
               {...register('hscCertificate')}
               type="file"
+              accept=".pdf"
+              className="form-control rounded-md w-full"
+            />
+          </div>
+        </div>
+        <div className="mb-3 w-[20%]">
+          <label htmlFor="hscCertificate" className="col-sm-2 col-form-label">
+            Transcript
+          </label>
+          <div className="">
+            <input
+              {...register('transcript')}
+              type="file"
+              accept=".pdf"
               className="form-control rounded-md w-full"
             />
           </div>
@@ -432,7 +431,14 @@ const Form = ({
 
       <div className="mb-3">
         <div className=" offset-sm-2 text-center">
-          <button type="submit" className="btn btn-primary ">
+        {semesterStatus !== 'UPCOMING' && (
+              <div className="mb-3">
+                <p className="text-red-700">
+                  Semester is not upcoming so registration is off now
+                </p>
+              </div>
+            )}
+          <button type="submit" disabled={semesterStatus !== 'UPCOMING'} className="btn btn-primary ">
             Submit
           </button>
         </div>
