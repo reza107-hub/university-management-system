@@ -48,12 +48,7 @@ import DepartmentWiseStudentFee from '../Pages/Dashboard/Admin/DepartmentWiseStu
 import StudentPayment from '../Pages/Dashboard/Student/StudentPayment/StudentPayment'
 import SemesterPaymentSuccessFull from '../Pages/Dashboard/Student/StudentPayment/SemesterPaymentSuccessFull'
 import OfferedCourseDetails from '../Pages/Dashboard/faculty/offer-course-details/OfferedCourseDetails'
-import Attendance from '../Pages/Dashboard/faculty/make attendance/Attendance'
-import Marks from '../Pages/Dashboard/faculty/Marks/Marks'
-import SectionStudentsMarks from '../Pages/Dashboard/faculty/Marks/SectionStudentsMarks'
-import See60Marks from '../Pages/Dashboard/faculty/Marks/See60Marks'
-import See40Marks from '../Pages/Dashboard/faculty/Marks/See40Marks'
-import AttendanceMarks from '../Pages/Dashboard/faculty/Marks/AttendanceMarks'
+import Attendance from '../Pages/Dashboard/faculty/attendance/Attendance'
 import StudentSemesterRoutine from '../Pages/Dashboard/student/semester routine/StudentSemesterRoutine'
 import SixtyMarksOfRunningSemesterCourse from '../Pages/Dashboard/student/course marks/SixtyMarksOfRunningSemesterCourse'
 import MonthlyPaymentSuccessFull from '../Pages/Dashboard/Student/StudentPayment/MonthlyPayment/MonthlyPaymentSuccessfull'
@@ -63,6 +58,9 @@ import FacultyStudyLeaveLists from '../Pages/Dashboard/Admin/FacultyStudyLeaveLi
 import BatchDetails from '../Pages/Dashboard/Admin/Batch/BatchDetails'
 import ClassroomCodeAssign from '../Pages/Dashboard/faculty/ClassroomCodeAssign/ClassroomCodeAssign'
 import OfferedCourses from '../Pages/Dashboard/student/offered courses for ongoing semester/OfferedCourses'
+import MakeAttendance from '../Pages/Dashboard/faculty/attendance/MakeAttendance'
+import ManageMarks from '../Pages/Dashboard/faculty/manage marks/ManageMarks'
+import MarksTable from '../Pages/Dashboard/faculty/manage marks/MarksTable'
 
 const router = createBrowserRouter([
   {
@@ -273,51 +271,32 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: `/dashboard/marks-of-students`,
+        path: `/dashboard/make-attendance`,
         element: (
           <PrivateRoute>
             <FacultyRoutes>
-              <Marks />
+              <MakeAttendance />
+            </FacultyRoutes>
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: `/dashboard/manage-marks`,
+        element: (
+          <PrivateRoute>
+            <FacultyRoutes>
+              <ManageMarks />
             </FacultyRoutes>
           </PrivateRoute>
         ),
       },
       {
-        path: `/dashboard/marks-of-students/:id`,
+        path: `/dashboard/manage-marks/:id`,
         element: (
           <PrivateRoute>
             <FacultyRoutes>
-              <SectionStudentsMarks />
-            </FacultyRoutes>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: `/dashboard/marks-of-students/see-60-marks/:id`,
-        element: (
-          <PrivateRoute>
-            <FacultyRoutes>
-              <See60Marks />
-            </FacultyRoutes>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: `/dashboard/marks-of-students/see-40-marks/:id`,
-        element: (
-          <PrivateRoute>
-            <FacultyRoutes>
-              <See40Marks />
-            </FacultyRoutes>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: `/dashboard/marks-of-students/attendance-marks/:id`,
-        element: (
-          <PrivateRoute>
-            <FacultyRoutes>
-              <AttendanceMarks />
+              <MarksTable />
             </FacultyRoutes>
           </PrivateRoute>
         ),
