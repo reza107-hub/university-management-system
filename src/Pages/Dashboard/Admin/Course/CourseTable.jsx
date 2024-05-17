@@ -109,7 +109,6 @@ const CourseTable = ({ courses }) => {
     setCourseId(courseId)
     setIsOpenForOfferCourse(!isOpenForOfferCourse)
   }
-
   return (
     <div>
       <ReUsable
@@ -124,8 +123,9 @@ const CourseTable = ({ courses }) => {
         isOpenForOfferCourse={isOpenForOfferCourse}
         setIsOpenForOfferCourse={setIsOpenForOfferCourse}
         courseId={courseId}
+        courses={courses}
       />
-     {courses && courses.length > 0 ? (
+      {courses && courses.length > 0 ? (
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mx-auto">
           {/* Table header */}
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center w-full">
@@ -149,8 +149,12 @@ const CourseTable = ({ courses }) => {
                   key={result?._id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
                 >
-                  <td className="px-6 py-4 font-bold text-lg">{result?.title}</td>
-                  <td className="px-6 py-4 font-bold text-lg">{result?.code}</td>
+                  <td className="px-6 py-4 font-bold text-lg">
+                    {result?.title}
+                  </td>
+                  <td className="px-6 py-4 font-bold text-lg">
+                    {result?.code}
+                  </td>
                   <td className="px-6 py-4 font-bold text-lg">
                     {result?.credits}
                   </td>
@@ -161,14 +165,14 @@ const CourseTable = ({ courses }) => {
                       id="actions-select"
                       onClick={(e) => {
                         if (e.target.value === 'update') {
-                          updateModal(result?._id);
-                          e.target.selectedIndex = 0;
+                          updateModal(result?._id)
+                          e.target.selectedIndex = 0
                         } else if (e.target.value === 'delete') {
-                          handleDelete(result?._id);
-                          e.target.selectedIndex = 0;
+                          handleDelete(result?._id)
+                          e.target.selectedIndex = 0
                         } else if (e.target.value === 'offer') {
-                          openModalForOfferCourse(result?._id);
-                          e.target.selectedIndex = 0;
+                          openModalForOfferCourse(result?._id)
+                          e.target.selectedIndex = 0
                         }
                       }}
                     >
@@ -181,7 +185,7 @@ const CourseTable = ({ courses }) => {
                 </tr>
               ) : (
                 <tr key={result._id}></tr>
-              )
+              ),
             )}
           </tbody>
         </table>
