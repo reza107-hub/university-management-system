@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom'
 import { useGetSingleOfferedCourseQuery } from '../../../../Redux/features/offeredCourse/offeredCourse.api'
 import Loader from '../../../../Components/Loader/Loader'
 import { useGetAllStudentsQuery } from '../../../../Redux/features/student/student.api'
-import { Link } from 'react-router-dom'
 
 const OfferedCourseDetails = () => {
   const { id } = useParams()
@@ -18,11 +17,6 @@ const OfferedCourseDetails = () => {
   }
   return (
     <div>
-      <div>
-        <Link to={`/dashboard/make-attendance/${id}`}>
-          <button className="btn-primary">Make Attendance</button>
-        </Link>
-      </div>
       <p className="text-2xl text-primary font-bold text-center">
         Students List Of {offeredCourse?.data?.sectionId?.name}
       </p>

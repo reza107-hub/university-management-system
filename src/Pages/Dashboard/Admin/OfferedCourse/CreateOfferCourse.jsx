@@ -14,8 +14,10 @@ const CreateOfferCourse = ({
   isOpenForOfferCourse,
   setIsOpenForOfferCourse,
   courseId,
+  courses,
 }) => {
   const navigate = useNavigate()
+  const course = courses.find((result) => result._id === courseId)
   const [createCourseOffer] = useCreateOfferedCourseMutation()
   const { data: sectionsData } = useGetAllSectionQuery(undefined)
   const { data: facultyLists } = useGetFacultyListQuery(undefined)
@@ -139,11 +141,9 @@ const CreateOfferCourse = ({
                         className="w-full rounded-md"
                         {...register('departmentId')}
                       >
-                        {departmentData?.data?.map((result) => (
-                          <option key={result?._id} value={result?._id}>
-                            {result?.shortForm}
-                          </option>
-                        ))}
+                        <option value={course?.departmentId?._id}>
+                          {course?.departmentId?.shortForm}
+                        </option>
                       </select>
                     </div>
 
