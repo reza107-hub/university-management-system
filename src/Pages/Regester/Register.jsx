@@ -9,7 +9,7 @@ import GetHostUrl from '../../Components/GetHostUrl/GetHostUrl'
 import { useCreateUserMutation } from '../../Redux/features/User/UserApi'
 
 const Register = () => {
-  const { createUser, updateUserProfile } = useAuth()
+  const { createUser, updateUserProfile, verifyEmail } = useAuth()
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
   const navigate = useNavigate()
@@ -44,13 +44,13 @@ const Register = () => {
       const resFromFirebase = await createUser(data.email, data.password)
       if (resFromFirebase) {
         updateUserProfile(data.name, imageUrl)
+        verifyEmail()
         const res = await createUserToDB({ email: data.email }).unwrap()
         Swal.fire({
-          title: res.message,
+          title: res.message + ' ' + 'Check your email for verification email address',
           icon: 'success',
-          timer: 1500,
         })
-        navigate('/')
+        navigate('/dashboard/profile')
       }
     } catch (error) {
       Swal.fire({
@@ -60,6 +60,8 @@ const Register = () => {
       })
     }
   }
+
+
 
   const password = watch('password')
   const confirmPassword = watch('confirmPassword')
@@ -157,7 +159,7 @@ const Register = () => {
               <span className="text-accent">This field is required</span>
             )}
             {passwordMismatch && (
-              <span className="text-accent">Passwords do not match</span>
+              <span className="text-red-600">Passwords do not match</span>
             )}
           </div>
           <div className="input-groups">

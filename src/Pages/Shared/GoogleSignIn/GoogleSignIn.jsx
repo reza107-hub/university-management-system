@@ -29,7 +29,7 @@ const GoogleSignIn = () => {
           icon: 'success',
           timer: 1500,
         })
-        navigate('/')
+        navigate('/dashboard/profile')
       }
     } catch (error) {
       if (error?.data?.message === 'User Already exists') {

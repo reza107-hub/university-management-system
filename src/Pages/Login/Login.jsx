@@ -22,7 +22,7 @@ const Login = () => {
           icon: 'success',
           confirmButtonText: 'OK',
         })
-        navigate('/')
+        navigate('/dashboard/profile')
       })
       .catch((err) => {
         Swal.fire({
