@@ -61,6 +61,7 @@ import OfferedCourses from '../Pages/Dashboard/student/offered courses for ongoi
 import MakeAttendance from '../Pages/Dashboard/faculty/attendance/MakeAttendance'
 import ManageMarks from '../Pages/Dashboard/faculty/manage marks/ManageMarks'
 import MarksTable from '../Pages/Dashboard/faculty/manage marks/MarksTable'
+import VerifyEmail from '../Pages/Verify Email/VerifyEmail'
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/verify-email',
+        element: <VerifyEmail />,
       },
       {
         path: '/overview',

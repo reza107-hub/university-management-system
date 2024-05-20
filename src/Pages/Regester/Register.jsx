@@ -47,10 +47,12 @@ const Register = () => {
         verifyEmail()
         const res = await createUserToDB({ email: data.email }).unwrap()
         Swal.fire({
-          title: res.message + ' ' + 'Check your email for verification email address',
+          title: `${res.message}
+          Check your email for verification email address
+          `,
           icon: 'success',
         })
-        navigate('/dashboard/profile')
+        navigate('/login')
       }
     } catch (error) {
       Swal.fire({
@@ -60,8 +62,6 @@ const Register = () => {
       })
     }
   }
-
-
 
   const password = watch('password')
   const confirmPassword = watch('confirmPassword')
