@@ -38,7 +38,7 @@ const GoogleSignIn = () => {
           icon: 'success',
           timer: 1500,
         })
-        navigate('/')
+        navigate('/dashboard/profile')
         return
       }
       Swal.fire({
