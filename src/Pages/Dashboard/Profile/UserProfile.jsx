@@ -83,7 +83,7 @@ const UserProfile = () => {
       />
       {!user?.emailVerified ? (
         <>
-          <p className='text-red-600 text-bold text-2xl'>Check your Email, an email sent to your email and verify it</p>
+          <p className='text-red-600 text-bold text-2xl'>Your Email id not verified yet!</p>
         </>
       ) : userInfoData?.data?.userId?.hasAdditionalInfo === true ? (
         <>
