@@ -10,7 +10,7 @@ const PrivateRoute = ({ children }) => {
     return <Loader />
   }
 
-  if (!user?.emailVerified){
+  if (user && !user?.emailVerified){
     verifyEmail()
     return (
       <p className="text-red-600 text-bold text-2xl flex justify-center items-center">
