@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  sendEmailVerification,
 } from 'firebase/auth'
 import app from '../firebase/firebasee.init'
 
@@ -23,6 +24,10 @@ const AuthProvider = ({ children }) => {
   const createUser = (email, password) => {
     setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password)
+  }
+
+  const verifyEmail = () => {
+    return sendEmailVerification(auth.currentUser)
   }
 
   const signIn = (email, password) => {
@@ -51,12 +56,16 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
 
+      if (!currentUser?.emailVerified) {
+        verifyEmail()
+      }
       setLoading(false)
     })
     return () => {
       return unsubscribe()
     }
   }, [])
+
 
   const authInfo = {
     user,
@@ -66,6 +75,7 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     logOut,
     updateUserProfile,
+    verifyEmail,
   }
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

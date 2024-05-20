@@ -5,16 +5,12 @@ import CourseTable from './CourseTable'
 import {
   useCreateCourseMutation,
   useDepartmentWiseCoursesQuery,
-  useGetAllCoursesQuery,
 } from '../../../../Redux/features/course/courseApi'
 import Swal from 'sweetalert2'
-import SearchName from './../../../../Components/Search/SearchName';
 import { useGetDepartmentQuery } from '../../../../Redux/features/Department/department.api'
 const Courses = () => {
-  const [params,setParams] = useState("")
-  const { data: allCourses } = useGetAllCoursesQuery(params) 
   const {data:departmentWiseCoursesData} = useDepartmentWiseCoursesQuery()
-   console.log(departmentWiseCoursesData)
+
   const { data: departmentData } = useGetDepartmentQuery()
 // console.log(departmentData)
   const [createCourse] = useCreateCourseMutation()
@@ -28,7 +24,7 @@ const Courses = () => {
   }
   const { handleSubmit, register, reset } = useForm()
   //---------------------------------------------------
-  
+
 
   //------------------------------------------------------
   const onSubmit = async (data) => {
@@ -59,22 +55,18 @@ const Courses = () => {
     setIsOpen(!isOpen)
   }
 //....................................................
-const [activeDepartment, setActiveDepartment] = useState(null);
 
-  const handleTabClick = (departmentId) => {
-    setActiveDepartment(departmentId);
-  };
- 
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
         <label className="sr-only">Search</label>
 
-        <SearchName
-          setParams={setParams}
+        {/* <SearchName
+          // setParams={setParams}
           SearchPlaceHolderName="course name"
           searchTerm='searchTerm'
-        />
+        /> */}
       </div>
 
       {/* modal */}
@@ -188,7 +180,7 @@ const [activeDepartment, setActiveDepartment] = useState(null);
 
         {/* Offer Course section */}
         <div>
-       
+
         </div>
       </div>
 
@@ -202,7 +194,6 @@ const [activeDepartment, setActiveDepartment] = useState(null);
               className={({ selected }) =>
                 `${selected ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'} px-4 py-2 rounded-md cursor-pointer`
               }
-              onClick={() => handleTabClick(department._id)}
             >
               {department.shortForm}
             </Tab>

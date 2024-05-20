@@ -81,7 +81,11 @@ const UserProfile = () => {
         Content={profileEditContent}
         onSubmit={onSubmit}
       />
-      {userInfoData?.data?.userId?.hasAdditionalInfo === true ? (
+      {!user?.emailVerified ? (
+        <>
+          <p className='text-red-600 text-bold text-2xl'>Check your Email, an email sent to your email and verify it</p>
+        </>
+      ) : userInfoData?.data?.userId?.hasAdditionalInfo === true ? (
         <>
           <UserInfo
             presentUser={userInfoData}
