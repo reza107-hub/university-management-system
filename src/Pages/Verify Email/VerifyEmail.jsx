@@ -2,13 +2,18 @@ import useAuth from '../../Hooks/useAuth'
 import { useState } from 'react'
 
 const VerifyEmail = () => {
-  const { verifyEmail } = useAuth()
+  const { verifyEmail, logOut } = useAuth()
   const [emailSent, setEmailSent] = useState(false)
 
   const handleVerifyEmail = () => {
     verifyEmail().then(() => {
       setEmailSent(true)
     })
+  }
+
+  const handleLogOut = () => {
+    logOut()
+    window.location.replace('/login')
   }
 
   return (
@@ -23,6 +28,11 @@ const VerifyEmail = () => {
           If you have not received the email yet,
           <button onClick={handleVerifyEmail} className="text-red underline">
             Click Here
+          </button>
+        </p>
+        <p className='mt-3'>
+          <button onClick={handleLogOut} className="btn-primary">
+            Sign Out
           </button>
         </p>
         {emailSent && (
